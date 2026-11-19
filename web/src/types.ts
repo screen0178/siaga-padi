@@ -28,6 +28,21 @@ export interface KecProps {
   stressed_stage_ha: Record<string, number>;
   action: Action | null;
   rank: number;
+  /** Stage 1: per-period stats + scoring, keyed by Period.id (optional). */
+  series?: Record<string, PeriodStats>;
+}
+
+/** The per-period part of KecProps (everything that changes over time). */
+export type PeriodStats = Omit<KecProps, "id" | "name" | "area_ha" | "n_desa" | "label_lon" | "label_lat" | "series">;
+
+export interface Period {
+  id: string;
+  start: string;
+  end: string; // exclusive
+  label: string;
+  layers_dir: string;
+  source: { scenes?: string[] } & Record<string, unknown>;
+  totals: { class_ha: Record<string, number>; active_ha: number };
 }
 
 export interface KecFeature {
@@ -67,6 +82,9 @@ export interface Meta {
   status_levels: Status[];
   totals: { class_ha: Record<string, number>; active_ha: number };
   notes: string[];
+  /** Stage 1 time series (optional; absent in single-period data). */
+  periods?: Period[];
+  current_period?: string;
 }
 
 export const STATUS_COLOR: Record<string, string> = {

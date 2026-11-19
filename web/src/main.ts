@@ -1,6 +1,7 @@
 import "./style.css";
 import { createMap, type MapApi } from "./map";
 import { composeMessage } from "./message";
+import { renderStrip, renderTrend, shortLabel } from "./timeline";
 import { STAGE_COLOR, STATUS_COLOR, type KecFeature, type KecProps, type Meta } from "./types";
 import { FEEDBACK, STEPS, addFeedback, advance, getState, initStore, resetStep } from "./workflow";
 
@@ -14,6 +15,8 @@ let meta: Meta;
 let feats: KecFeature[];
 let api: MapApi;
 let selected: string | null = null;
+let periodId: string | null = null; // null = single-period data (no time series)
+let playTimer: number | null = null;
 
 async function boot() {
   const [m, kec, desa] = await Promise.all([
@@ -23,11 +26,17 @@ async function boot() {
   ]);
   meta = m;
   feats = (kec.features as KecFeature[]).slice().sort((a, b) => a.properties.rank - b.properties.rank);
+  // Action log stays tied to the run's current period, not the period being viewed
   initStore(`${meta.region.id}:${meta.period.start}`);
+  if (meta.periods?.length) {
+    periodId = meta.current_period ?? meta.periods[meta.periods.length - 1].id;
+    document.body.classList.add("has-periods");
+  }
 
   renderTopbar();
   renderRanking();
   renderLayerbar();
+  renderTimeline();
 
   api = await createMap($("#map"), meta, kec, desa, DATA);
   api.onSelect((id) => openDetail(id, false));
@@ -39,6 +48,68 @@ async function boot() {
 }
 
 const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+
+// ---------------------------------------------------------------- periods
+async function setPeriod(id: string) {
+  const p = meta.periods?.find((x) => x.id === id);
+  if (!p || id === periodId) return;
+  periodId = id;
+  meta.period = { start: p.start, end: p.end, label: p.label };
+  meta.totals = p.totals;
+  for (const f of feats) {
+    const s = f.properties.series?.[id];
+    if (s) Object.assign(f.properties, s);
+  }
+  feats.sort((a, b) => a.properties.rank - b.properties.rank);
+  renderTopbar();
+  renderRanking();
+  renderTimeline();
+  const f = selected ? feats.find((x) => x.properties.id === selected) : null;
+  if (f) renderDetail(f.properties, false);
+  await api.setPeriod(p.layers_dir);
+}
+
+function stepPeriod(dir: 1 | -1) {
+  const ps = meta.periods;
+  if (!ps || !periodId) return false;
+  const i = ps.findIndex((p) => p.id === periodId) + dir;
+  if (i < 0 || i >= ps.length) return false;
+  void setPeriod(ps[i].id);
+  return true;
+}
+
+function togglePlay() {
+  if (playTimer != null) {
+    clearInterval(playTimer);
+    playTimer = null;
+  } else {
+    const ps = meta.periods!;
+    if (periodId === ps[ps.length - 1].id) void setPeriod(ps[0].id);
+    playTimer = window.setInterval(() => {
+      if (!stepPeriod(1)) togglePlay();
+    }, 1400);
+  }
+  renderTimeline();
+}
+
+function renderTimeline() {
+  const el = $("#timeline");
+  if (!meta.periods?.length || !periodId) return;
+  el.hidden = false;
+  renderStrip(el, meta, periodId, (id) => void setPeriod(id), togglePlay, playTimer != null);
+}
+
+/** Change in ha-at-risk versus the previous period, for the ranking list. */
+function deltaHtml(p: KecProps) {
+  const ps = meta.periods;
+  if (!ps || !periodId || !p.series) return "";
+  const i = ps.findIndex((x) => x.id === periodId);
+  const prev = i > 0 ? p.series[ps[i - 1].id] : undefined;
+  if (!prev) return "";
+  const d = p.ha_at_risk - prev.ha_at_risk;
+  if (Math.abs(d) < 0.5) return `<span class="delta">= vs ${shortLabel(ps[i - 1])}</span>`;
+  return `<span class="delta ${d > 0 ? "up" : "down"}">${d > 0 ? "▲" : "▼"} ${fmt(Math.abs(d))} vs ${shortLabel(ps[i - 1])}</span>`;
+}
 
 // ---------------------------------------------------------------- top bar
 function renderTopbar() {
@@ -83,7 +154,7 @@ function renderRanking() {
           <div class="r-top"><span class="r-name">${esc(p.name)}</span>
             <span class="pill" style="--c:${STATUS_COLOR[p.status]}">${p.status}</span></div>
           ${classBar(p)}
-          <div class="r-meta"><span><b>${fmt(p.ha_at_risk)}</b> ha berisiko</span>
+          <div class="r-meta"><span><b>${fmt(p.ha_at_risk)}</b> ha berisiko ${deltaHtml(p)}</span>
             <span class="r-step ${st.step}">${stepLabel}</span></div>
           ${p.action ? `<div class="r-act">${esc(p.action.headline)}</div>` : ""}
         </div>
@@ -114,7 +185,7 @@ function closeDetail() {
   try { history.replaceState(null, "", location.pathname); } catch { /* sandboxed */ }
 }
 
-function renderDetail(p: KecProps) {
+function renderDetail(p: KecProps, resetScroll = true) {
   const el = $("#detail");
   const st = getState(p.id);
   const stepIdx = STEPS.findIndex((s) => s.id === st.step);
@@ -143,6 +214,12 @@ function renderDetail(p: KecProps) {
       <div><span>Berisiko (terbobot)</span><b>${fmt(p.ha_at_risk)} <small>ha</small></b></div>
       <div><span>NDVI / NDMI</span><b>${fmt(p.mean_ndvi, 2)} / ${fmt(p.mean_ndmi, 2)}</b></div>
     </div>
+
+    ${periodId && p.series ? `
+    <section>
+      <h3>Tren NDDI rata-rata <span class="h3-note">titik bawah = status</span></h3>
+      <div id="d-trend" class="trend"></div>
+    </section>` : ""}
 
     <section>
       <h3>Sebaran kelas kekeringan</h3>
@@ -211,7 +288,9 @@ function renderDetail(p: KecProps) {
     </details>`;
 
   el.classList.add("open");
-  el.scrollTop = 0;
+  if (resetScroll) el.scrollTop = 0;
+  const trend = document.getElementById("d-trend");
+  if (trend && periodId) renderTrend(trend, p, meta, periodId, (id) => void setPeriod(id));
   $("#d-close").onclick = closeDetail;
   const adv = document.getElementById("d-advance");
   if (adv) adv.onclick = () => { advance(p.id); renderDetail(p); renderRanking(); };
@@ -290,6 +369,11 @@ function renderLegend(layerId: string) {
 
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && selected) closeDetail();
+  const typing = (e.target as HTMLElement).closest("input, textarea, select");
+  if (!typing && (e.key === "ArrowLeft" || e.key === "ArrowRight") && periodId) {
+    e.preventDefault();
+    stepPeriod(e.key === "ArrowRight" ? 1 : -1);
+  }
 });
 
 boot().catch((err) => {

@@ -15,11 +15,15 @@ Setup (once):
 Run:
   python pipeline/gee_export.py --project YOUR_GCP_PROJECT
   python pipeline/gee_export.py --project X --start 2026-08-01 --end 2026-08-31
+  python pipeline/gee_export.py --project X --last-months 6   # operational: rolling 6 months to today
+  python pipeline/gee_export.py --project X --series 2024-05:2024-10   # fixed monthly series
 """
 
 import argparse
 import json
+import shutil
 import urllib.request
+from datetime import date, timedelta
 
 import ee
 
@@ -151,8 +155,7 @@ def zonal_stats(fc, L):
     return stats
 
 
-def export_layers(L, bbox):
-    out = WEB_DATA_DIR / "layers"
+def export_layers(L, bbox, out):
     out.mkdir(parents=True, exist_ok=True)
     region = ee.Geometry.Rectangle(bbox, proj="EPSG:4326", geodesic=False)
 
@@ -177,11 +180,70 @@ def export_layers(L, bbox):
         print(f"  layer {name}.png")
 
 
+BULAN = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli",
+         "Agustus", "September", "Oktober", "November", "Desember"]
+
+
+def month_periods(spec):
+    """'2024-05:2024-10' -> [(id, start, end_exclusive, label), ...]"""
+    a, b = spec.split(":")
+    y, m = map(int, a.split("-"))
+    y2, m2 = map(int, b.split("-"))
+    out = []
+    while (y, m) <= (y2, m2):
+        ny, nm = (y + 1, 1) if m == 12 else (y, m + 1)
+        out.append((f"{y}-{m:02d}", f"{y}-{m:02d}-01", f"{ny}-{nm:02d}-01",
+                    f"{BULAN[m - 1]} {y}"))
+        y, m = ny, nm
+    return out
+
+
+def last_months(n, today=None):
+    """Rolling window: the last n calendar months up to and including the
+    current (partial) month. The partial month ends tomorrow and is labelled
+    as running ("berjalan")."""
+    today = today or date.today()
+    y, m = today.year, today.month - (n - 1)
+    while m < 1:
+        y, m = y - 1, m + 12
+    out = month_periods(f"{y}-{m:02d}:{today.year}-{today.month:02d}")
+    pid, start, _, label = out[-1]
+    out[-1] = (pid, start, (today + timedelta(days=1)).isoformat(),
+               f"{label} (s.d. {today.day} {BULAN[today.month - 1][:3]}, berjalan)")
+    return out
+
+
+def run_period(fc, aoi, bbox, start, end, layers_out):
+    """Compute one composite: zonal stats + PNG layers. None if no scenes."""
+    L = build(aoi, start, end)
+    n = L["collection"].size().getInfo()
+    if n == 0:
+        return None
+    dates = sorted(set(L["collection"].aggregate_array("DATE_ACQUIRED").getInfo()))
+    print(f"  {n} scenes: {dates}")
+    print("  zonal statistics ...")
+    stats = zonal_stats(fc, L)
+    print("  raster layers ...")
+    export_layers(L, bbox, layers_out)
+    source = {"imagery": f"Landsat 8/9 TOA C2, {n} scene, awan <{MAX_CLOUD_PCT}%",
+              "scenes": dates,
+              "landcover": "ESA WorldCover v200 (peta 2021), kelas 40 Cropland",
+              "boundaries": "BPS 2020 via HDX"}
+    return stats, source
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--project", required=True, help="Earth Engine Cloud project id")
     ap.add_argument("--start", default=DEFAULT_START)
     ap.add_argument("--end", default=DEFAULT_END)
+    ap.add_argument("--series", help="monthly series YYYY-MM:YYYY-MM, e.g. 2024-05:2024-10 "
+                                     "(overrides --start/--end)")
+    ap.add_argument("--last-months", type=int, metavar="N",
+                    help="rolling monthly series: the last N months up to today "
+                         "(operational mode; overrides --series and --start/--end)")
+    ap.add_argument("--current", help="period id shown by default (series mode; "
+                                      "default: last period with data)")
     args = ap.parse_args()
 
     ee.Initialize(project=args.project)
@@ -189,17 +251,44 @@ def main():
     aoi = fc.geometry()
     bbox = local_bbox()  # [west, south, east, north]
 
-    L = build(aoi, args.start, args.end)
-    n = L["collection"].size().getInfo()
-    if n == 0:
-        raise SystemExit("No Landsat scenes match; widen --start/--end or the cloud limit.")
-    dates = L["collection"].aggregate_array("DATE_ACQUIRED").getInfo()
-    print(f"{n} scenes: {sorted(set(dates))}")
-
-    print("zonal statistics ...")
-    stats = zonal_stats(fc, L)
-    print("raster layers ...")
-    export_layers(L, bbox)
+    periods = None
+    current_id = None
+    if args.last_months or args.series:
+        plan = last_months(args.last_months) if args.last_months else month_periods(args.series)
+        periods = []
+        for pid, start, end, label in plan:
+            print(f"{label} ({start} .. {end})")
+            layers_dir = f"periods/{pid}/layers"
+            res = run_period(fc, aoi, bbox, start, end, WEB_DATA_DIR / layers_dir)
+            if res is None:
+                print("  no scenes, skipped")
+                continue
+            stats_p, source_p = res
+            periods.append({"id": pid, "start": start, "end": end, "label": label,
+                            "layers_dir": layers_dir, "source": source_p, "stats": stats_p})
+        if not periods:
+            raise SystemExit("No Landsat scenes in any period of the series.")
+        cur = next((p for p in periods if p["id"] == args.current), periods[-1])
+        current_id = cur["id"]
+        # Mirror the current period at the top level (contract v1 readers)
+        top = WEB_DATA_DIR / "layers"
+        top.mkdir(parents=True, exist_ok=True)
+        for png in (WEB_DATA_DIR / cur["layers_dir"]).glob("*.png"):
+            shutil.copyfile(png, top / png.name)
+        stats, source = cur["stats"], cur["source"]
+        period = {"start": cur["start"], "end": cur["end"], "label": cur["label"]}
+        # Retention: drop raster folders of periods outside this run
+        keep = {p["id"] for p in periods}
+        for d in (WEB_DATA_DIR / "periods").glob("*"):
+            if d.is_dir() and d.name not in keep:
+                shutil.rmtree(d)
+                print(f"  removed old period {d.name}")
+    else:
+        res = run_period(fc, aoi, bbox, args.start, args.end, WEB_DATA_DIR / "layers")
+        if res is None:
+            raise SystemExit("No Landsat scenes match; widen --start/--end or the cloud limit.")
+        stats, source = res
+        period = {"start": args.start, "end": args.end, "label": f"{args.start} s.d. {args.end}"}
 
     layers = [
         {"id": "nddi_class", "file": "layers/nddi_class.png", "label": "Kelas kekeringan (NDDI)", "legend": "nddi_classes"},
@@ -209,19 +298,21 @@ def main():
         {"id": "stage", "file": "layers/stage.png", "label": "Fase tumbuh padi", "legend": "stage_classes"},
     ]
     meta = write_run(
-        mode="gee",
-        period={"start": args.start, "end": args.end, "label": f"{args.start} s.d. {args.end}"},
-        source={"imagery": f"Landsat 8/9 TOA C2, {n} scene, awan <{MAX_CLOUD_PCT}%",
-                "scenes": sorted(set(dates)),
-                "landcover": "ESA WorldCover v200 (peta 2021), kelas 40 Cropland",
-                "boundaries": "BPS 2020 via HDX"},
+        mode="gee", period=period, source=source,
         bounds=bbox, layers=layers, stats=stats,
         notes=["Ambang fase tumbuh (NDVI) masih provisional, lihat config.py.",
                "Lahan pertanian ESA tidak membedakan padi sawah dan palawija."],
+        periods=periods, current_period=current_id,
     )
+    if periods:
+        print("\nPeriods:", ", ".join(f"{p['id']} ({len(p['source']['scenes'])} dates)" for p in periods),
+              f"| current {current_id}")
 
-    # Verification against the video's published numbers
-    print("\nTotal ha per class:", meta["totals"]["class_ha"],
+    print("\nTotal ha per class:", meta["totals"]["class_ha"])
+    if period["start"][:7] != "2024-08":
+        return
+    # Verification against the video's published numbers (Aug 2024 only)
+    print("Video reference:",
           "(video: Kuat ~11,000 ha, Normal ~19 ha)")
     kec = json.loads((WEB_DATA_DIR / "kecamatan.json").read_text())
     for f in kec["features"]:

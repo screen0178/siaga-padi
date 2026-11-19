@@ -5,6 +5,16 @@ Contract (version 1):
   kecamatan.json        boundaries + per-kecamatan statistics + scoring
   layers/<name>.png     colourised rasters, georeferenced by meta.bounds
 
+Optional time series (Stage 1, backward compatible: old readers ignore it):
+  meta.periods          [{id, start, end, label, layers_dir, source, totals}]
+  meta.current_period   id of the period mirrored in the top-level fields
+  kecamatan.json        properties.series = {period_id: {stats + scoring}}
+  periods/<id>/layers/<name>.png
+
+Top-level meta.period / meta.totals / layers/ and the per-kecamatan top-level
+properties always describe the current period, so a reader that knows nothing
+about periods still sees a complete single-period dataset.
+
 Both make_placeholder.py and gee_export.py call write_run(), so the frontend
 never needs to know which one produced the data.
 """
@@ -23,27 +33,54 @@ def _inf(v):
     return None if v in (float("inf"), float("-inf")) else v
 
 
-def write_run(*, mode: str, period: dict, source: dict, bounds: list,
-              layers: list[dict], stats: dict[str, dict], notes: list[str]):
-    """stats: kec_id -> {"joint_ha": {...}, "mean_nddi": float,
-    "mean_ndvi": float, "mean_ndmi": float, "cropland_ha": float}"""
-    WEB_DATA_DIR.mkdir(parents=True, exist_ok=True)
-    kec = json.loads((BOUNDARY_DIR / "pati_kecamatan.geojson").read_text())
-
-    for f in kec["features"]:
-        p = f["properties"]
-        s = stats.get(p["id"], {})
-        p.update({
+def score_period(kec_features: list[dict], stats: dict[str, dict]) -> dict[str, dict]:
+    """kec_id -> stats + scoring + rank for one period."""
+    out = {}
+    for f in kec_features:
+        kid = f["properties"]["id"]
+        s = stats.get(kid, {})
+        out[kid] = {
             "mean_nddi": s.get("mean_nddi"),
             "mean_ndvi": s.get("mean_ndvi"),
             "mean_ndmi": s.get("mean_ndmi"),
             "cropland_ha": s.get("cropland_ha"),
             **score(s.get("joint_ha", {})),
-        })
+        }
+    for i, kid in enumerate(sorted(out, key=lambda k: -out[k]["ha_at_risk"]), 1):
+        out[kid]["rank"] = i
+    return out
 
-    ranked = sorted(kec["features"], key=lambda f: -f["properties"]["ha_at_risk"])
-    for i, f in enumerate(ranked, 1):
-        f["properties"]["rank"] = i
+
+def totals(scored: dict[str, dict]) -> dict:
+    return {
+        "class_ha": {
+            str(c): round(sum(float(p["class_ha"].get(str(c), 0)) for p in scored.values()), 1)
+            for c in range(1, 6)
+        },
+        "active_ha": round(sum(p["active_ha"] for p in scored.values()), 1),
+    }
+
+
+def write_run(*, mode: str, period: dict, source: dict, bounds: list,
+              layers: list[dict], stats: dict[str, dict], notes: list[str],
+              periods: list[dict] | None = None, current_period: str | None = None):
+    """stats: kec_id -> {"joint_ha": {...}, "mean_nddi": float,
+    "mean_ndvi": float, "mean_ndmi": float, "cropland_ha": float}
+
+    periods (optional): [{"id", "start", "end", "label", "layers_dir",
+    "source", "stats"}], where stats has the same shape as above. When given,
+    `period`, `source` and `stats` must describe `current_period`.
+    """
+    WEB_DATA_DIR.mkdir(parents=True, exist_ok=True)
+    kec = json.loads((BOUNDARY_DIR / "pati_kecamatan.geojson").read_text())
+
+    current = score_period(kec["features"], stats)
+    series = {p["id"]: score_period(kec["features"], p["stats"]) for p in periods or []}
+    for f in kec["features"]:
+        kid = f["properties"]["id"]
+        f["properties"].update(current[kid])
+        if series:
+            f["properties"]["series"] = {pid: s[kid] for pid, s in series.items()}
 
     meta = {
         "contract_version": CONTRACT_VERSION,
@@ -63,15 +100,16 @@ def write_run(*, mode: str, period: dict, source: dict, bounds: list,
             for c, lo, hi, lab, act in PHENOLOGY_CLASSES
         ],
         "status_levels": [s for _, s in STATUS_THRESHOLDS],
-        "totals": {
-            "class_ha": {
-                str(c): round(sum(float(f["properties"]["class_ha"].get(str(c), 0)) for f in kec["features"]), 1)
-                for c in range(1, 6)
-            },
-            "active_ha": round(sum(f["properties"]["active_ha"] for f in kec["features"]), 1),
-        },
+        "totals": totals(current),
         "notes": notes,
     }
+    if periods:
+        meta["periods"] = [
+            {k: p[k] for k in ("id", "start", "end", "label", "layers_dir", "source")}
+            | {"totals": totals(series[p["id"]])}
+            for p in periods
+        ]
+        meta["current_period"] = current_period
     (WEB_DATA_DIR / "meta.json").write_text(json.dumps(meta, indent=1))
     (WEB_DATA_DIR / "kecamatan.json").write_text(json.dumps(kec))
     # Village outlines double as the offline basemap

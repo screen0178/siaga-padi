@@ -59,6 +59,14 @@ cd web && npm install && npm run dev                   # http://localhost:5173
    (defaults to 1–31 Aug 2024 to reproduce the video; use `--start/--end` for other dates)
 4. The script prints a check against the video's numbers
    (Kuat ~11,000 ha; Tambakromo mean NDDI ~2.647; Cluwak ~0.3).
+5. **Operational run (Stage 1): rolling 6 months up to today**, one composite per
+   month (~90 s each; the current month is partial and labelled "berjalan"):
+   `python pipeline/gee_export.py --project ID --last-months 6`
+   Folders of months that fall out of the window are deleted (retention).
+   The web app shows a month slider (← / → keys, play button) and an NDDI trend
+   per kecamatan. A fixed range also works: `--series 2024-05:2024-10`.
+   Single-period runs (`--start/--end`, used for the Aug 2024 video check) still
+   work; the slider just hides.
 
 ## Method
 
@@ -74,7 +82,12 @@ cd web && npm install && npm run dev                   # http://localhost:5173
 
 ## Known limitations (state these in the presentation)
 
-- **Growth-stage NDVI thresholds are provisional** (`config.py`, TODO verify vs. Adinda 2020).
+- **Growth-stage NDVI thresholds are provisional** (`config.py`; Adinda 2020 full text
+  not yet read). They do not change drought hectares, but they do change which stage
+  stressed fields are assigned to.
+- **Single-date NDVI cannot tell young rice from stressed mature rice** (both have low
+  NDVI), so stressed reproductive rice is under-counted. The monthly series is the
+  first step toward per-pixel phenology from the NDVI trajectory.
 - **Cropland ≠ wetland rice.** ESA class 40 includes corn, sugarcane, cassava, which
   read as false extreme drought. Southern Pati (Tambakromo, Winong, Pucakwangi) may
   be affected. Field feedback is the planned fix.
@@ -87,7 +100,7 @@ cd web && npm install && npm run dev                   # http://localhost:5173
 | Stage | Adds |
 |---|---|
 | 0 ✅ | Map, layers, ranked actions, recommendation, WhatsApp text, action log (local) |
-| 1 | Time slider: dry-season series, NDDI trend per kecamatan |
+| 1 ✅ | Time slider: monthly dry-season series, NDDI trend per kecamatan |
 | 2 | Rainfall forecast (Open-Meteo) + what-if scenarios (no rain for N dasarian) |
 | 3 | Backend (FastAPI): shared action log, officer field reports, scheduled pipeline |
 | 4 | ML: rice vs. dryland classifier from field reports; NDDI 1–2 dasarian forecast |

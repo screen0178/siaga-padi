@@ -12,6 +12,9 @@ export interface MapApi {
   map: MLMap;
   setLayer(id: string): Promise<void>;
   setOpacity(v: number): void;
+  /** Switch raster folder (null = top-level layers/) and redraw kecamatan
+   *  styling from the (already mutated) feature properties. */
+  setPeriod(layersDir: string | null): Promise<void>;
   select(id: string | null, fly?: boolean): void;
   onSelect(cb: (id: string) => void): void;
 }
@@ -121,12 +124,16 @@ export async function createMap(
   // Raster overlay via a canvas source (works without network fetch)
   let opacity = 0.9;
   let current = "status";
+  let layersDir: string | null = null;
   const imgCache = new Map<string, HTMLImageElement>();
 
   async function setLayer(id: string) {
     current = id;
-    if (map.getLayer("overlay")) map.removeLayer("overlay");
-    if (map.getSource("overlay")) map.removeSource("overlay");
+    const dir = layersDir;
+    if (id === "status") {
+      if (map.getLayer("overlay")) map.removeLayer("overlay");
+      if (map.getSource("overlay")) map.removeSource("overlay");
+    }
     map.setPaintProperty("kec-status", "fill-opacity",
       id === "status"
         ? ["case", ["boolean", ["feature-state", "hover"], false], 0.72, 0.55]
@@ -135,12 +142,16 @@ export async function createMap(
 
     const def = meta.layers.find((l) => l.id === id);
     if (!def) return;
-    let img = imgCache.get(id);
+    const src = dir ? `${dataBase}/${dir}/${def.file.split("/").pop()}` : `${dataBase}/${def.file}`;
+    let img = imgCache.get(src);
     if (!img) {
-      img = await loadImage(`${dataBase}/${def.file}`);
-      imgCache.set(id, img);
+      img = await loadImage(src);
+      imgCache.set(src, img);
     }
-    if (current !== id) return; // user switched while loading
+    if (current !== id || layersDir !== dir) return; // user switched while loading
+    // Swap after the new image is ready, so the map never flashes empty
+    if (map.getLayer("overlay")) map.removeLayer("overlay");
+    if (map.getSource("overlay")) map.removeSource("overlay");
     const canvas = document.createElement("canvas");
     canvas.width = img.naturalWidth;
     canvas.height = img.naturalHeight;
@@ -155,6 +166,12 @@ export async function createMap(
       id: "overlay", type: "raster", source: "overlay",
       paint: { "raster-opacity": opacity, "raster-resampling": "nearest", "raster-fade-duration": 0 },
     }, "kec-line");
+  }
+
+  async function setPeriod(dir: string | null) {
+    layersDir = dir;
+    (map.getSource("kec") as maplibregl.GeoJSONSource).setData(kec);
+    if (current !== "status") await setLayer(current);
   }
 
   function setOpacity(v: number) {
@@ -214,5 +231,5 @@ export async function createMap(
     }
   }
 
-  return { map, setLayer, setOpacity, select, onSelect: (cb) => selectCbs.push(cb) };
+  return { map, setLayer, setOpacity, setPeriod, select, onSelect: (cb) => selectCbs.push(cb) };
 }

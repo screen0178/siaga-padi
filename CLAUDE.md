@@ -26,7 +26,9 @@ Ventusky is only the visual inspiration, not the product.
 
 ## Study area and method
 
-- Kabupaten Pati, Aug 2024 first (reproduces NgabubuGIS #2), then 2026 El Niño.
+- Kabupaten Pati. **Operational view = rolling last 6 months up to today**
+  (`gee_export.py --last-months 6`). Aug 2024 is only a verification run
+  against the NgabubuGIS #2 video, not the product's default (user's call).
 - Method from NgabubuGIS #2 (Izzuddin Muhammad, 2026): Landsat 8/9 TOA → NDVI,
   NDMI, NDDI via `.expression()`; ESA WorldCover class 40 mask; NDVI growth
   stage mask (keep stages 2–4); |NDDI| < 100 guard; Artikanur 2022 classes.
@@ -42,6 +44,11 @@ Ventusky is only the visual inspiration, not the product.
 - `web/` TypeScript + Vite + MapLibre, Indonesian UI. Reads only
   `web/public/data/` (contract v1: `meta.json`, `kecamatan.json`, `desa.json`,
   `layers/*.png`). Sample and real data share the contract.
+- Stage 1 contract extension (optional, backward compatible): `meta.periods[]`
+  + `meta.current_period`, `properties.series[period_id]` per kecamatan,
+  rasters in `periods/<id>/layers/`. Top-level fields mirror the current
+  period. Frontend: `web/src/timeline.ts` (month strip + trend chart); period
+  switching mutates feature props in place and calls `api.setPeriod()`.
 - Data files are `.json` (not `.geojson`): the claude.ai preview host refuses `.geojson`.
 - Raster layers are drawn through a MapLibre canvas source; labels are HTML
   markers (no glyph server). Both keep the app working offline / sandboxed.
@@ -84,8 +91,8 @@ Ventusky is only the visual inspiration, not the product.
 2. Read Adinda (2020) full text (PDF from the user, or once the journal site
    is fixed) and set `PHENOLOGY_CLASSES` from its table. Sensitivity already
    tested (see Status).
-3. Stage 1: time slider over a dry-season series + NDDI trend per kecamatan
-   (extend contract with a `periods` list; keep backward compatible).
+3. Stage 1 follow-ups: per-pixel phenology from the NDVI trajectory (fixes the
+   young-vs-stressed confusion); 2026 El Niño season series.
 4. Stage 2: Open-Meteo rainfall forecast + what-if scenario (no rain for N
    dasarian → hectares shifting class).
 5. Stage 3: FastAPI backend for shared action log + field reports; scheduled
