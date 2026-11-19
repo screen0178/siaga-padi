@@ -28,7 +28,8 @@ from datetime import date, timedelta
 import ee
 
 from config import (BOUNDARY_DIR, DEFAULT_END, DEFAULT_START, MAX_CLOUD_PCT,
-                    NDDI_ABS_GUARD, NDDI_CLASSES, PHENOLOGY_CLASSES, WEB_DATA_DIR)
+                    NDDI_ABS_GUARD, NDDI_CLASSES, PHENOLOGY_CLASSES, TRAJECTORY,
+                    TRAJECTORY_CLASSES, WEB_DATA_DIR)
 from outputs import write_run
 
 SCALE = 30
@@ -84,12 +85,57 @@ def local_bbox(pad=0.005):
             round(max(xs) + pad, 6), round(max(ys) + pad, 6)]
 
 
-def build(aoi, start, end):
-    col = (ee.ImageCollection("LANDSAT/LC08/C02/T1_TOA")
-           .merge(ee.ImageCollection("LANDSAT/LC09/C02/T1_TOA"))
-           .filterBounds(aoi)
-           .filterDate(start, end)
-           .filter(ee.Filter.lt("CLOUD_COVER", MAX_CLOUD_PCT)))
+def landsat(aoi, start, end):
+    return (ee.ImageCollection("LANDSAT/LC08/C02/T1_TOA")
+            .merge(ee.ImageCollection("LANDSAT/LC09/C02/T1_TOA"))
+            .filterBounds(aoi)
+            .filterDate(start, end)
+            .filter(ee.Filter.lt("CLOUD_COVER", MAX_CLOUD_PCT)))
+
+
+def month_ndvi(aoi, start, end):
+    """Monthly median NDVI; fully masked if the month has no usable scene."""
+    col = landsat(aoi, start, end).map(cloud_mask_l89_toa)
+    empty = ee.Image.constant(0).toFloat().updateMask(0).rename("NDVI")
+    ndvi = col.median().normalizedDifference(["B5", "B4"]).rename("NDVI").toFloat()
+    return ee.Image(ee.Algorithms.If(col.size().gt(0), ndvi, empty))
+
+
+def trajectory_stage(ndvi, history):
+    """Growth stage from the NDVI trajectory (see config.TRAJECTORY).
+    history: monthly NDVI images before this period, oldest first."""
+    t = TRAJECTORY
+    win = [*history, ndvi.toFloat()]
+    peak = ee.ImageCollection(win).max()
+    # Which month held the peak (0 .. len(win)-1)
+    peak_idx = ee.ImageCollection(
+        [w.addBands(ee.Image.constant(k).toFloat().rename("k")) for k, w in enumerate(win)]
+    ).qualityMosaic("NDVI").select("k")
+    prev = history[-1].unmask(ndvi)  # no data last month -> treat as flat
+    delta = ndvi.subtract(prev)
+    rising = delta.gte(t["trend_eps"])
+    falling = delta.lte(-t["trend_eps"]).And(peak.gte(t["harvest_peak_min"]))
+
+    stage = (ee.Image(2)
+             .where(ndvi.gte(0.30), 3)
+             .where(ndvi.gte(0.50), 4)
+             .where(ndvi.gte(0.50).And(rising), 3)
+             .where(falling, 4))
+    harvested = (peak.gte(t["harvest_peak_min"])
+                 .And(peak_idx.lt(len(win) - 1))
+                 .And(ndvi.lte(peak.subtract(t["harvest_drop"])))
+                 .And(ndvi.lt(t["harvest_ndvi_max"])))
+    stage = (stage.where(harvested, 7)
+             .where(peak.lt(t["fallow_peak_max"]), 6)
+             .where(ndvi.lt(-0.03), 1))  # open water / flooded, as in single-date mode
+    return stage.updateMask(ndvi.mask()).rename("class").toByte()
+
+
+def build(aoi, start, end, history=None):
+    """history: previous monthly NDVI images (oldest first). When given, the
+    growth stage comes from the NDVI trajectory; otherwise from single-date
+    NDVI thresholds (the video's method, used for the Aug 2024 check)."""
+    col = landsat(aoi, start, end)
     mosaic = col.map(cloud_mask_l89_toa).median().clip(aoi)
 
     ndvi = mosaic.normalizedDifference(["B5", "B4"]).rename("NDVI")
@@ -100,7 +146,8 @@ def build(aoi, start, end):
     nddi = nddi.updateMask(nddi.abs().lt(NDDI_ABS_GUARD))  # null guard
 
     cropland = ee.ImageCollection("ESA/WorldCover/v200").first().eq(40)
-    stage = classify(ndvi, PHENOLOGY_CLASSES).updateMask(cropland).rename("stage")
+    stage = (trajectory_stage(ndvi, history) if history else classify(ndvi, PHENOLOGY_CLASSES))
+    stage = stage.updateMask(cropland).rename("stage")
     active = stage.gte(2).And(stage.lte(4))
 
     dclass = classify(nddi, NDDI_CLASSES).rename("dclass")
@@ -130,6 +177,11 @@ def zonal_stats(fc, L):
             .reduceRegions(collection=fc, reducer=ee.Reducer.sum(),
                            scale=SCALE, tileScale=4)).getInfo()
 
+    # Cropland area per growth stage, incl. non-active ones (fallow, harvested)
+    by_stage = area_ha.updateMask(L["stage"].mask()).addBands(L["stage"]).reduceRegions(
+        collection=fc, reducer=ee.Reducer.sum().group(groupField=1, groupName="stage"),
+        scale=SCALE, tileScale=4).getInfo()
+
     stats = {}
     for f in joint["features"]:
         p = f["properties"]
@@ -152,6 +204,10 @@ def zonal_stats(fc, L):
     for f in crop["features"]:
         p = f["properties"]
         stats[p["kec_id"]]["cropland_ha"] = round(float(p.get("sum") or 0), 1)
+    for f in by_stage["features"]:
+        p = f["properties"]
+        stats[p["kec_id"]]["cropland_stage_ha"] = {
+            str(int(g["stage"])): round(float(g["sum"]), 1) for g in p.get("groups", [])}
     return stats
 
 
@@ -160,7 +216,8 @@ def export_layers(L, bbox, out):
     region = ee.Geometry.Rectangle(bbox, proj="EPSG:4326", geodesic=False)
 
     class_palette = [c[5].lstrip("#") for c in NDDI_CLASSES]
-    stage_palette = ["c7e9a0", "6cc04a", "f2c94c", "a0785a"]
+    # stages 2..7: veg awal, veg akhir, reproduktif, pematangan, bera, panen
+    stage_palette = ["c7e9a0", "6cc04a", "f2c94c", "a0785a", "5b6170", "d4b483"]
     vis = {
         "nddi_class": L["dclass"].visualize(min=1, max=5, palette=class_palette),
         "nddi": L["nddi"].updateMask(L["active"]).visualize(
@@ -170,7 +227,7 @@ def export_layers(L, bbox, out):
         "ndmi": L["ndmi"].updateMask(L["cropland"]).visualize(
             min=-0.8, max=0.6, palette=["8c3b1a", "e0a050", "f2efc7", "5bb0d9", "1f4e9c"]),
         "stage": L["stage"].updateMask(L["stage"].gte(2)).visualize(
-            min=2, max=5, palette=stage_palette),
+            min=2, max=7, palette=stage_palette),
     }
     for name, img in vis.items():
         url = img.getThumbURL({"region": region, "dimensions": THUMB_PX,
@@ -213,9 +270,9 @@ def last_months(n, today=None):
     return out
 
 
-def run_period(fc, aoi, bbox, start, end, layers_out):
+def run_period(fc, aoi, bbox, start, end, layers_out, history=None):
     """Compute one composite: zonal stats + PNG layers. None if no scenes."""
-    L = build(aoi, start, end)
+    L = build(aoi, start, end, history)
     n = L["collection"].size().getInfo()
     if n == 0:
         return None
@@ -256,10 +313,20 @@ def main():
     if args.last_months or args.series:
         plan = last_months(args.last_months) if args.last_months else month_periods(args.series)
         periods = []
-        for pid, start, end, label in plan:
+        # Monthly NDVI for the trajectory window: context months before the
+        # first period (not exported) + every period in the plan
+        n_ctx = TRAJECTORY["window_months"] - 1
+        y, m = map(int, plan[0][0].split("-"))
+        m -= n_ctx
+        while m < 1:
+            y, m = y - 1, m + 12
+        ctx = month_periods(f"{y}-{m:02d}:{plan[0][0]}")[:-1]
+        ndvi_by_month = [month_ndvi(aoi, s, e) for _, s, e, _ in ctx + plan]
+        for i, (pid, start, end, label) in enumerate(plan):
             print(f"{label} ({start} .. {end})")
             layers_dir = f"periods/{pid}/layers"
-            res = run_period(fc, aoi, bbox, start, end, WEB_DATA_DIR / layers_dir)
+            history = ndvi_by_month[i:i + n_ctx]
+            res = run_period(fc, aoi, bbox, start, end, WEB_DATA_DIR / layers_dir, history)
             if res is None:
                 print("  no scenes, skipped")
                 continue
@@ -301,8 +368,12 @@ def main():
         mode="gee", period=period, source=source,
         bounds=bbox, layers=layers, stats=stats,
         notes=["Ambang fase tumbuh (NDVI) masih provisional, lihat config.py.",
+               *(["Fase tumbuh dari lintasan NDVI 4 bulan: lahan yang tidak pernah hijau dihitung "
+                  "sebagai bera, yang sudah turun ke tanah terbuka setelah puncak sebagai panen. "
+                  "Keduanya tidak dihitung sebagai padi aktif; mohon cek lapangan."] if periods else []),
                "Lahan pertanian ESA tidak membedakan padi sawah dan palawija."],
         periods=periods, current_period=current_id,
+        extra_stage_classes=TRAJECTORY_CLASSES if periods else None,
     )
     if periods:
         print("\nPeriods:", ", ".join(f"{p['id']} ({len(p['source']['scenes'])} dates)" for p in periods),

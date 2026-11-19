@@ -73,7 +73,12 @@ cd web && npm install && npm run dev                   # http://localhost:5173
 1. Landsat 8/9 TOA (C2), cloud cover < 30 %, QA_PIXEL cloud/shadow mask, median mosaic.
 2. NDVI = ND(B5, B4); NDMI = ND(B5, B6); NDDI = (NDVI − NDMI)/(NDVI + NDMI) via `.expression()`.
 3. Cropland mask: ESA WorldCover v200, class 40.
-4. Growth stage from NDVI; keep active stages (early veg, late veg, reproductive).
+4. Growth stage, keep active stages (early veg, late veg, reproductive):
+   - single-period run (video check): single-date NDVI thresholds;
+   - series run (operational): each pixel's monthly NDVI over a 4-month window.
+     Never greened → *bera / tidak tumbuh*; dropped to near-bare after a peak →
+     *panen / pasca-panen*; both excluded from active rice and shown separately
+     for field checking. Rules and thresholds in `config.TRAJECTORY`.
 5. NDDI guard |NDDI| < 100, then 5 classes (Artikanur et al., 2022).
 6. Per kecamatan: hectares by class × stage (`pixelArea`, 30 m).
 7. Impact scoring (`scoring.py`), H-MHEWS-style: hazard combined with exposure.
@@ -85,9 +90,10 @@ cd web && npm install && npm run dev                   # http://localhost:5173
 - **Growth-stage NDVI thresholds are provisional** (`config.py`; Adinda 2020 full text
   not yet read). They do not change drought hectares, but they do change which stage
   stressed fields are assigned to.
-- **Single-date NDVI cannot tell young rice from stressed mature rice** (both have low
-  NDVI), so stressed reproductive rice is under-counted. The monthly series is the
-  first step toward per-pixel phenology from the NDVI trajectory.
+- **Fallow vs. failed crop.** In series mode a field that never greened is labelled
+  fallow, but it may be rice that failed to establish because of drought. The UI
+  says so and asks for a field report. Single-period runs still use single-date
+  NDVI, which confuses young rice with stressed mature rice.
 - **Cropland ≠ wetland rice.** ESA class 40 includes corn, sugarcane, cassava, which
   read as false extreme drought. Southern Pati (Tambakromo, Winong, Pucakwangi) may
   be affected. Field feedback is the planned fix.

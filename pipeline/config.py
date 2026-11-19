@@ -53,6 +53,37 @@ PHENOLOGY_CLASSES = [
     (5, 0.65, float("inf"), "Pematangan", False),
 ]
 
+# --- Growth stage from the NDVI trajectory (series mode) --------------------
+# A single NDVI value cannot tell young rice from stressed mature rice, or a
+# fallow field from either. In series mode each pixel's monthly NDVI medians
+# over a 4-month window (about one rice cycle) decide the stage instead:
+#   fallow      peak NDVI in the window < fallow_peak_max: never greened
+#               (fallow, not planted, or failed to establish) -> stage 6
+#   harvested   peaked >= harvest_peak_min in an earlier month, now at least
+#               harvest_drop below the peak AND near-bare (< harvest_ndvi_max)
+#               -> stage 7
+#   otherwise active: NDVI < 0.30 -> 2, < 0.50 -> 3, >= 0.50 -> 4; rising and
+#               >= 0.50 -> 3 (still growing); falling after a real peak -> 4
+#               (grain filling or stressed reproductive rice).
+# Deliberately conservative: a stressed crop that is still standing stays
+# active, because hiding real drought is worse than a false alarm. Officers
+# correct the rest with the "Sudah panen / bera" field report.
+# Effect on Kuat+Ekstrem area, 2026 (prototype test): Aug 14.2k -> 11.5k ha,
+# Oct 34.8k -> 18.8k, Nov 35.6k -> 14.5k (Nov: 49% fallow, 10% harvested).
+TRAJECTORY = {
+    "window_months": 4,
+    "fallow_peak_max": 0.35,
+    "harvest_peak_min": 0.45,
+    "harvest_drop": 0.25,
+    "harvest_ndvi_max": 0.25,
+    "trend_eps": 0.05,
+}
+# Extra, non-active stage classes that only exist in series mode
+TRAJECTORY_CLASSES = [
+    (6, None, None, "Bera / tidak tumbuh", False),
+    (7, None, None, "Panen / pasca-panen", False),
+]
+
 # --- Impact scoring (rule-based, Stage 0) -----------------------------------
 # Inspired by the H-MHEWS impact index (Susandi et al., 2018): hazard is
 # combined with exposure before a status is assigned. Weights are provisional

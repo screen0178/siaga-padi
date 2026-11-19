@@ -64,10 +64,16 @@ Ventusky is only the visual inspiration, not the product.
   in the browser. `make_placeholder.py` regenerates sample data if needed.
 - 2026 season: Kuat+Ekstrem 5.3k ha (Jun) → 14.3k (Aug) → 28.8k (Sep) →
   34.9k (Oct) → 35.7k (Nov). Winong mean NDDI 0.82 → 7.93, Pucakwangi
-  0.87 → 4.75. **Caveat:** in Oct–Nov ~64% of Kuat+Ekstrem pixels have NDVI
-  0.15–0.25 (Jun: 5%), i.e. likely harvested/fallow sawah counted as
-  "vegetatif awal". Late-season totals are probably inflated. Needs the
-  NDVI-trajectory phenology fix before trusting Oct–Nov numbers.
+  0.87 → 4.75 (single-date stages, before the trajectory fix).
+- Trajectory stages (2026-11-20, `config.TRAJECTORY`, series mode only):
+  4-month NDVI window per pixel; never greened (peak < 0.35) → 6 bera,
+  dropped ≥ 0.25 from an earlier peak ≥ 0.45 to NDVI < 0.25 → 7 panen.
+  Both excluded from active rice, shown in UI ("Sawah tidak dihitung aktif",
+  top-bar chip). Conservative on purpose: stressed standing crops stay active.
+  Effect on Kuat+Ekstrem: Nov 35.6k → ~14.5k ha (21k ha bera, 6.3k panen).
+  Reproductive stage now detected (Nov 4.4k ha; was ≈ 0). The looser harvest
+  rule (no near-bare condition) relabelled 55–75% of Jun–Aug stress as
+  harvest, too aggressive.
 - Aug 2024 video-check run (single period) was done first; its data is in
   git history (commit 1d21c4f), not on disk.
 - Verification vs video (Aug 2024): Kuat 12,637 ha (video ≈ 11,000, OK);
@@ -99,9 +105,9 @@ Ventusky is only the visual inspiration, not the product.
 2. Read Adinda (2020) full text (PDF from the user, or once the journal site
    is fixed) and set `PHENOLOGY_CLASSES` from its table. Sensitivity already
    tested (see Status).
-3. Phenology from the NDVI trajectory (rising = young rice, falling after a
-   peak = stressed/harvest, flat low = fallow): fixes the young-vs-stressed
-   confusion and the late-season fallow inflation.
+3. Calibrate `TRAJECTORY` thresholds with field reports ("Sudah panen / bera"
+   answers); consider 16-day periods so harvest (abrupt) and drought
+   (gradual) can be told apart.
 4. Stage 2: Open-Meteo rainfall forecast + what-if scenario (no rain for N
    dasarian → hectares shifting class).
 5. Stage 3: FastAPI backend for shared action log + field reports; scheduled

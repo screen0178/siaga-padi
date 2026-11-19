@@ -19,6 +19,8 @@ export interface KecProps {
   mean_ndvi: number | null;
   mean_ndmi: number | null;
   cropland_ha: number | null;
+  /** Cropland ha per growth stage incl. non-active ("6" bera, "7" panen). */
+  cropland_stage_ha?: Record<string, number>;
   active_ha: number;
   hazard_index: number;
   ha_at_risk: number;
@@ -35,6 +37,12 @@ export interface KecProps {
 /** The per-period part of KecProps (everything that changes over time). */
 export type PeriodStats = Omit<KecProps, "id" | "name" | "area_ha" | "n_desa" | "label_lon" | "label_lat" | "series">;
 
+export interface Totals {
+  class_ha: Record<string, number>;
+  active_ha: number;
+  cropland_stage_ha?: Record<string, number>;
+}
+
 export interface Period {
   id: string;
   start: string;
@@ -42,7 +50,7 @@ export interface Period {
   label: string;
   layers_dir: string;
   source: { scenes?: string[] } & Record<string, unknown>;
-  totals: { class_ha: Record<string, number>; active_ha: number };
+  totals: Totals;
 }
 
 export interface KecFeature {
@@ -80,7 +88,7 @@ export interface Meta {
   nddi_classes: LegendClass[];
   stage_classes: LegendClass[];
   status_levels: Status[];
-  totals: { class_ha: Record<string, number>; active_ha: number };
+  totals: Totals;
   notes: string[];
   /** Stage 1 time series (optional; absent in single-period data). */
   periods?: Period[];
@@ -100,4 +108,6 @@ export const STAGE_COLOR: Record<string, string> = {
   "3": "#6cc04a",
   "4": "#f2c94c",
   "5": "#a0785a",
+  "6": "#5b6170",
+  "7": "#d4b483",
 };

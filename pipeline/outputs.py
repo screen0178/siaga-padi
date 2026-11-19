@@ -44,6 +44,8 @@ def score_period(kec_features: list[dict], stats: dict[str, dict]) -> dict[str, 
             "mean_ndvi": s.get("mean_ndvi"),
             "mean_ndmi": s.get("mean_ndmi"),
             "cropland_ha": s.get("cropland_ha"),
+            # cropland ha per growth stage incl. non-active (6 bera, 7 panen)
+            "cropland_stage_ha": s.get("cropland_stage_ha", {}),
             **score(s.get("joint_ha", {})),
         }
     for i, kid in enumerate(sorted(out, key=lambda k: -out[k]["ha_at_risk"]), 1):
@@ -58,12 +60,17 @@ def totals(scored: dict[str, dict]) -> dict:
             for c in range(1, 6)
         },
         "active_ha": round(sum(p["active_ha"] for p in scored.values()), 1),
+        "cropland_stage_ha": {
+            k: round(sum(float(p["cropland_stage_ha"].get(k, 0)) for p in scored.values()), 1)
+            for k in sorted({k for p in scored.values() for k in p["cropland_stage_ha"]})
+        },
     }
 
 
 def write_run(*, mode: str, period: dict, source: dict, bounds: list,
               layers: list[dict], stats: dict[str, dict], notes: list[str],
-              periods: list[dict] | None = None, current_period: str | None = None):
+              periods: list[dict] | None = None, current_period: str | None = None,
+              extra_stage_classes: list[tuple] | None = None):
     """stats: kec_id -> {"joint_ha": {...}, "mean_nddi": float,
     "mean_ndvi": float, "mean_ndmi": float, "cropland_ha": float}
 
@@ -97,7 +104,7 @@ def write_run(*, mode: str, period: dict, source: dict, bounds: list,
         ],
         "stage_classes": [
             {"id": c, "min": _inf(lo), "max": _inf(hi), "label": lab, "active": act}
-            for c, lo, hi, lab, act in PHENOLOGY_CLASSES
+            for c, lo, hi, lab, act in [*PHENOLOGY_CLASSES, *(extra_stage_classes or [])]
         ],
         "status_levels": [s for _, s in STATUS_THRESHOLDS],
         "totals": totals(current),

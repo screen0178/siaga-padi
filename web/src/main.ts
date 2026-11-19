@@ -115,11 +115,14 @@ function deltaHtml(p: KecProps) {
 function renderTopbar() {
   const t = meta.totals.class_ha;
   const stressed = (t["4"] ?? 0) + (t["5"] ?? 0);
+  const cs = meta.totals.cropland_stage_ha;
+  const inactive = cs && ("6" in cs || "7" in cs) ? (cs["6"] ?? 0) + (cs["7"] ?? 0) : null;
   const count = (s: string) => feats.filter((f) => f.properties.status === s).length;
   $("#region").textContent = `${meta.region.name} · ${meta.period.label}`;
   $("#summary").innerHTML = `
     <div class="chip"><span class="k">Padi aktif</span><span class="v">${fmt(meta.totals.active_ha)} ha</span></div>
     <div class="chip"><span class="k">Cekaman kuat–ekstrem</span><span class="v" style="color:#ff8a7a">${fmt(stressed)} ha</span></div>
+    ${inactive != null ? `<div class="chip" title="Sawah yang tidak dihitung sebagai padi aktif (bera / tidak tumbuh, atau sudah panen). Perlu cek lapangan."><span class="k">Bera / pasca-panen</span><span class="v">${fmt(inactive)} ha</span></div>` : ""}
     <div class="chip"><span class="k">Kecamatan</span><span class="v">
       <i style="--c:${STATUS_COLOR.Awas}"></i>${count("Awas")}
       <i style="--c:${STATUS_COLOR.Siaga}"></i>${count("Siaga")}
@@ -167,6 +170,21 @@ function renderRanking() {
 }
 
 // ---------------------------------------------------------------- detail
+/** Sawah not counted as active rice (series mode): fallow and harvested. */
+function inactiveSection(p: KecProps) {
+  const cs = p.cropland_stage_ha;
+  if (!cs || !("6" in cs || "7" in cs)) return "";
+  const rows = meta.stage_classes.filter((s) => s.id === 6 || s.id === 7);
+  return `
+    <section>
+      <h3>Sawah tidak dihitung aktif</h3>
+      <ul class="legend-rows">${rows
+        .map((s) => `<li><i style="--c:${STAGE_COLOR[String(s.id)]}"></i>${s.label}<span>${fmt(cs[String(s.id)] ?? 0)} ha</span></li>`)
+        .join("")}</ul>
+      <p class="fine">Dari lintasan NDVI 4 bulan: <b>bera</b> = tidak pernah hijau, <b>panen</b> = sudah turun ke tanah terbuka setelah puncak. Bera bisa juga padi yang gagal tumbuh karena kering: mohon cek lapangan dan kirim laporan di bawah.</p>
+    </section>`;
+}
+
 function openDetail(id: string, fly: boolean) {
   selected = id;
   const f = feats.find((x) => x.properties.id === id);
@@ -229,6 +247,8 @@ function renderDetail(p: KecProps, resetScroll = true) {
         .join("")}</ul>
     </section>
 
+    ${inactiveSection(p)}
+
     <section>
       <h3>Fase tumbuh pada lahan tercekam kuat</h3>
       <div class="cbar">${["2", "3", "4"]
@@ -285,6 +305,7 @@ function renderDetail(p: KecProps, resetScroll = true) {
     <details class="fine">
       <summary>Bagaimana status dihitung?</summary>
       <p>H = rata-rata bobot bahaya kelas NDDI pada padi aktif (Normal 0, Ringan 0,1, Sedang 0,5, Kuat 0,85, Ekstrem 1). Status: H &lt; 0,40 Normal, &lt; 0,60 Waspada, &lt; 0,75 Siaga, selebihnya Awas. Peringkat memakai ha berisiko = luas × bobot bahaya × kerentanan fase (reproduktif 1,0; vegetatif akhir 0,7; vegetatif awal 0,5). Bobot bersifat provisional, mengikuti logika indeks H-MHEWS, dan dikalibrasi dengan laporan lapangan.</p>
+      ${meta.notes.length ? `<p><b>Catatan data</b></p><ul>${meta.notes.map((n) => `<li>${esc(n)}</li>`).join("")}</ul>` : ""}
     </details>`;
 
   el.classList.add("open");
@@ -354,7 +375,8 @@ function renderLegend(layerId: string) {
       .join("");
   } else if (def.legend === "stage_classes") {
     el.innerHTML = meta.stage_classes
-      .filter((s) => s.id >= 2)
+      // Series mode has no single-date ripening class (5); harvest (7) replaces it
+      .filter((s) => s.id >= 2 && !(s.id === 5 && meta.stage_classes.some((c) => c.id === 7)))
       .map((s) => `<span class="sw"><i style="--c:${STAGE_COLOR[String(s.id)]}"></i>${s.label}${s.active ? "" : " <em>(dikecualikan)</em>"}</span>`)
       .join("");
   } else {
