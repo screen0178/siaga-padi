@@ -70,7 +70,12 @@ Ventusky is only the visual inspiration, not the product.
   dropped ≥ 0.25 from an earlier peak ≥ 0.45 to NDVI < 0.25 → 7 panen.
   Both excluded from active rice, shown in UI ("Sawah tidak dihitung aktif",
   top-bar chip). Conservative on purpose: stressed standing crops stay active.
-  Effect on Kuat+Ekstrem: Nov 35.6k → ~14.5k ha (21k ha bera, 6.3k panen).
+  Exported Jun–Nov 2026 with it: active rice 56.9k → 31.6k ha; Kuat+Ekstrem
+  4.9k (Jun) → 11.5k (Aug) → 19.0k (Sep) → 18.8k (Oct) → 14.5k (Nov);
+  bera 1.5k → 21.1k, panen peaks Oct 13.1k. Bera clusters in the east/SE
+  (Pucakwangi, Jaken, Winong, Batangan): likely rainfed sawah left fallow,
+  or failed crop. Top priorities in Nov now Kayen, Sukolilo, Jaken
+  (Winong is Awas but has only 1.5k ha active rice left).
   Reproductive stage now detected (Nov 4.4k ha; was ≈ 0). The looser harvest
   rule (no near-bare condition) relabelled 55–75% of Jun–Aug stress as
   harvest, too aggressive.
