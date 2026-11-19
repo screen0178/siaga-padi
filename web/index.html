@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SIAGA-Padi · Respons Kekeringan Padi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="map"></div>
+
+    <header class="topbar">
+      <div class="brand">
+        <span class="logo">SIAGA<b>·</b>Padi</span>
+        <span id="region" class="region"></span>
+      </div>
+      <div id="summary" class="summary"></div>
+    </header>
+    <div id="banner" class="banner" hidden></div>
+
+    <aside id="rank" class="panel left">
+      <div class="p-head">
+        <h1>Prioritas tindakan</h1>
+        <p>Kecamatan diurutkan menurut luas padi berisiko (cekaman × fase tumbuh), bukan sekadar nilai NDDI.</p>
+      </div>
+      <ol id="rank-list"></ol>
+    </aside>
+
+    <aside id="detail" class="panel right"></aside>
+
+    <footer class="layerbar">
+      <div id="layers" class="layers"></div>
+      <div class="lb-bottom">
+        <div id="legend" class="legend"></div>
+        <label id="opacity-wrap" class="opacity" hidden>Opasitas <input id="opacity" type="range" min="10" max="100" value="90" /></label>
+      </div>
+    </footer>
+
+    <div id="loading" class="loading">Memuat data…</div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
