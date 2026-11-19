@@ -1,28 +1,22 @@
 {
  "contract_version": 1,
  "mode": "gee",
- "generated_at": "2026-11-19T20:03:45+00:00",
+ "generated_at": "2026-11-19T20:29:57+00:00",
  "region": {
   "id": "id3318",
   "name": "Kabupaten Pati",
   "province": "Jawa Tengah"
  },
  "period": {
-  "start": "2024-08-01",
-  "end": "2024-08-31",
-  "label": "2024-08-01 s.d. 2024-08-31"
+  "start": "2026-11-01",
+  "end": "2026-11-21",
+  "label": "November 2026 (s.d. 20 Nov, berjalan)"
  },
  "source": {
-  "imagery": "Landsat 8/9 TOA C2, 14 scene, awan <30%",
+  "imagery": "Landsat 8/9 TOA C2, 2 scene, awan <30%",
   "scenes": [
-   "2024-08-01",
-   "2024-08-02",
-   "2024-08-09",
-   "2024-08-10",
-   "2024-08-17",
-   "2024-08-18",
-   "2024-08-25",
-   "2024-08-26"
+   "2026-11-03",
+   "2026-11-04"
   ],
   "landcover": "ESA WorldCover v200 (peta 2021), kelas 40 Cropland",
   "boundaries": "BPS 2020 via HDX"
@@ -152,16 +146,201 @@
  ],
  "totals": {
   "class_ha": {
-   "1": 123.6,
-   "2": 23473.7,
-   "3": 14460.8,
-   "4": 12636.7,
-   "5": 3472.9
+   "1": 462.1,
+   "2": 13514.7,
+   "3": 7732.7,
+   "4": 13977.2,
+   "5": 21721.6
   },
-  "active_ha": 54167.5
+  "active_ha": 57408.1
  },
  "notes": [
   "Ambang fase tumbuh (NDVI) masih provisional, lihat config.py.",
   "Lahan pertanian ESA tidak membedakan padi sawah dan palawija."
- ]
+ ],
+ "periods": [
+  {
+   "id": "2026-06",
+   "start": "2026-06-01",
+   "end": "2026-07-01",
+   "label": "Juni 2026",
+   "layers_dir": "periods/2026-06/layers",
+   "source": {
+    "imagery": "Landsat 8/9 TOA C2, 15 scene, awan <30%",
+    "scenes": [
+     "2026-06-04",
+     "2026-06-05",
+     "2026-06-12",
+     "2026-06-13",
+     "2026-06-20",
+     "2026-06-21",
+     "2026-06-28",
+     "2026-06-29"
+    ],
+    "landcover": "ESA WorldCover v200 (peta 2021), kelas 40 Cropland",
+    "boundaries": "BPS 2020 via HDX"
+   },
+   "totals": {
+    "class_ha": {
+     "1": 4.9,
+     "2": 29454.7,
+     "3": 14590.0,
+     "4": 5227.9,
+     "5": 66.4
+    },
+    "active_ha": 49343.7
+   }
+  },
+  {
+   "id": "2026-07",
+   "start": "2026-07-01",
+   "end": "2026-08-01",
+   "label": "Juli 2026",
+   "layers_dir": "periods/2026-07/layers",
+   "source": {
+    "imagery": "Landsat 8/9 TOA C2, 16 scene, awan <30%",
+    "scenes": [
+     "2026-07-06",
+     "2026-07-07",
+     "2026-07-14",
+     "2026-07-15",
+     "2026-07-22",
+     "2026-07-23",
+     "2026-07-30",
+     "2026-07-31"
+    ],
+    "landcover": "ESA WorldCover v200 (peta 2021), kelas 40 Cropland",
+    "boundaries": "BPS 2020 via HDX"
+   },
+   "totals": {
+    "class_ha": {
+     "1": 8.6,
+     "2": 28945.3,
+     "3": 15400.9,
+     "4": 7550.2,
+     "5": 474.7
+    },
+    "active_ha": 52379.4
+   }
+  },
+  {
+   "id": "2026-08",
+   "start": "2026-08-01",
+   "end": "2026-09-01",
+   "label": "Agustus 2026",
+   "layers_dir": "periods/2026-08/layers",
+   "source": {
+    "imagery": "Landsat 8/9 TOA C2, 14 scene, awan <30%",
+    "scenes": [
+     "2026-08-07",
+     "2026-08-08",
+     "2026-08-15",
+     "2026-08-16",
+     "2026-08-23",
+     "2026-08-24",
+     "2026-08-31"
+    ],
+    "landcover": "ESA WorldCover v200 (peta 2021), kelas 40 Cropland",
+    "boundaries": "BPS 2020 via HDX"
+   },
+   "totals": {
+    "class_ha": {
+     "1": 8.6,
+     "2": 27266.4,
+     "3": 17004.1,
+     "4": 12817.6,
+     "5": 1435.8
+    },
+    "active_ha": 58531.9
+   }
+  },
+  {
+   "id": "2026-09",
+   "start": "2026-09-01",
+   "end": "2026-10-01",
+   "label": "September 2026",
+   "layers_dir": "periods/2026-09/layers",
+   "source": {
+    "imagery": "Landsat 8/9 TOA C2, 13 scene, awan <30%",
+    "scenes": [
+     "2026-09-01",
+     "2026-09-08",
+     "2026-09-09",
+     "2026-09-16",
+     "2026-09-17",
+     "2026-09-24",
+     "2026-09-25"
+    ],
+    "landcover": "ESA WorldCover v200 (peta 2021), kelas 40 Cropland",
+    "boundaries": "BPS 2020 via HDX"
+   },
+   "totals": {
+    "class_ha": {
+     "1": 74.9,
+     "2": 16779.8,
+     "3": 13374.3,
+     "4": 21780.4,
+     "5": 7069.1
+    },
+    "active_ha": 59078.3
+   }
+  },
+  {
+   "id": "2026-10",
+   "start": "2026-10-01",
+   "end": "2026-11-01",
+   "label": "Oktober 2026",
+   "layers_dir": "periods/2026-10/layers",
+   "source": {
+    "imagery": "Landsat 8/9 TOA C2, 11 scene, awan <30%",
+    "scenes": [
+     "2026-10-02",
+     "2026-10-03",
+     "2026-10-10",
+     "2026-10-11",
+     "2026-10-18",
+     "2026-10-19"
+    ],
+    "landcover": "ESA WorldCover v200 (peta 2021), kelas 40 Cropland",
+    "boundaries": "BPS 2020 via HDX"
+   },
+   "totals": {
+    "class_ha": {
+     "1": 175.0,
+     "2": 13806.3,
+     "3": 10064.2,
+     "4": 20236.9,
+     "5": 14657.8
+    },
+    "active_ha": 58939.5
+   }
+  },
+  {
+   "id": "2026-11",
+   "start": "2026-11-01",
+   "end": "2026-11-21",
+   "label": "November 2026 (s.d. 20 Nov, berjalan)",
+   "layers_dir": "periods/2026-11/layers",
+   "source": {
+    "imagery": "Landsat 8/9 TOA C2, 2 scene, awan <30%",
+    "scenes": [
+     "2026-11-03",
+     "2026-11-04"
+    ],
+    "landcover": "ESA WorldCover v200 (peta 2021), kelas 40 Cropland",
+    "boundaries": "BPS 2020 via HDX"
+   },
+   "totals": {
+    "class_ha": {
+     "1": 462.1,
+     "2": 13514.7,
+     "3": 7732.7,
+     "4": 13977.2,
+     "5": 21721.6
+    },
+    "active_ha": 57408.1
+   }
+  }
+ ],
+ "current_period": "2026-11"
 }

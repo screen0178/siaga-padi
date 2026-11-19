@@ -64,10 +64,10 @@ export function renderTrend(el: HTMLElement, p: KecProps, meta: Meta, selected: 
   const periods = meta.periods!;
   const vals = periods.map((pp) => p.series?.[pp.id]?.mean_nddi ?? null);
   const nums = vals.filter((v): v is number => v != null);
-  const W = 364, H = 136, L = 30, R = 64, T = 8, B = 30;
+  const W = 364, H = 136, L = 30, R = 64, T = 8, B = 30, PAD = 12; // PAD keeps end points off the band labels
   const lo = Math.min(0, Math.floor(Math.min(...nums, 0) * 2) / 2);
   const hi = Math.max(3.25, Math.ceil((Math.max(...nums, 0) + 0.15) * 4) / 4);
-  const x = (i: number) => L + ((W - L - R) * (periods.length === 1 ? 0.5 : i / (periods.length - 1)));
+  const x = (i: number) => L + PAD + ((W - L - R - 2 * PAD) * (periods.length === 1 ? 0.5 : i / (periods.length - 1)));
   const y = (v: number) => T + (H - T - B) * (1 - (v - lo) / (hi - lo));
   const classOf = (v: number) =>
     meta.nddi_classes.find((c) => (c.min == null || v >= c.min) && (c.max == null || v < c.max));
@@ -79,7 +79,7 @@ export function renderTrend(el: HTMLElement, p: KecProps, meta: Meta, selected: 
       if (b <= a) return "";
       const y1 = y(b), y2 = y(a);
       return `<rect x="${L}" y="${y1}" width="${W - L - R}" height="${y2 - y1}" fill="${c.color}" opacity="0.10"/>
-        ${y2 - y1 >= 11 ? `<text x="${W - R + 6}" y="${(y1 + y2) / 2 + 3.5}" class="t-band">${c.label}</text>` : ""}`;
+        ${y2 - y1 >= 11 ? `<text x="${W - R + 5}" y="${(y1 + y2) / 2 + 3.5}" class="t-band">${c.label}</text>` : ""}`;
     })
     .join("");
   const ticks = [];
@@ -109,7 +109,7 @@ export function renderTrend(el: HTMLElement, p: KecProps, meta: Meta, selected: 
         <circle cx="${x(i)}" cy="${H - B + 23}" r="3.5" fill="${STATUS_COLOR[st]}"/>`;
     })
     .join("");
-  const step = periods.length > 1 ? (W - L - R) / (periods.length - 1) : W - L - R;
+  const step = periods.length > 1 ? (W - L - R - 2 * PAD) / (periods.length - 1) : W - L - R;
   const hits = periods
     .map((_, i) => `<rect x="${x(i) - step / 2}" y="0" width="${step}" height="${H}" fill="transparent" data-i="${i}" class="t-hit"/>`)
     .join("");

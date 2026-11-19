@@ -369,7 +369,7 @@ function renderLegend(layerId: string) {
 
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && selected) closeDetail();
-  const typing = (e.target as HTMLElement).closest("input, textarea, select");
+  const typing = e.target instanceof Element && e.target.closest("input, textarea, select");
   if (!typing && (e.key === "ArrowLeft" || e.key === "ArrowRight") && periodId) {
     e.preventDefault();
     stepPeriod(e.key === "ArrowRight" ? 1 : -1);

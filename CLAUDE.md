@@ -57,9 +57,19 @@ Ventusky is only the visual inspiration, not the product.
 
 - Stage 0 done: map, 6 layers, ranked action list, detail panel, recommendation,
   WhatsApp text, action workflow + field report form (localStorage only).
-- `gee_export.py` **runs** (EE project `scourge-earth`, 2026-11-20): Aug 2024,
-  14 Landsat 8/9 scenes, ~85 s. `web/public/data/` now holds real data (`mode: gee`).
-  `make_placeholder.py` regenerates sample data if needed.
+- Stage 1 done (2026-11-20): `web/public/data/` holds the rolling series
+  Jun–Nov 2026 (`--last-months 6`, EE project `scourge-earth`, ~90 s/month),
+  default view Nov 2026 (partial, 2 dates: 3–4 Nov). Month strip, play,
+  ←/→ keys, NDDI trend chart, ha-at-risk delta vs previous month all verified
+  in the browser. `make_placeholder.py` regenerates sample data if needed.
+- 2026 season: Kuat+Ekstrem 5.3k ha (Jun) → 14.3k (Aug) → 28.8k (Sep) →
+  34.9k (Oct) → 35.7k (Nov). Winong mean NDDI 0.82 → 7.93, Pucakwangi
+  0.87 → 4.75. **Caveat:** in Oct–Nov ~64% of Kuat+Ekstrem pixels have NDVI
+  0.15–0.25 (Jun: 5%), i.e. likely harvested/fallow sawah counted as
+  "vegetatif awal". Late-season totals are probably inflated. Needs the
+  NDVI-trajectory phenology fix before trusting Oct–Nov numbers.
+- Aug 2024 video-check run (single period) was done first; its data is in
+  git history (commit 1d21c4f), not on disk.
 - Verification vs video (Aug 2024): Kuat 12,637 ha (video ≈ 11,000, OK);
   Normal 124 ha (video ≈ 19; tiny class, sensitive); Cluwak lowest at 0.39
   (video 0.3, OK). Top mean NDDI: Batangan 2.43, Pucakwangi 2.06, Jaken,
@@ -85,14 +95,13 @@ Ventusky is only the visual inspiration, not the product.
 
 ## Next steps
 
-1. Run `earthengine authenticate`, then
-   `python pipeline/gee_export.py --project <EE project id>`, fix errors,
-   compare with the video reference values.
+1. Show limitations in the UI: `meta.notes` exists but is not rendered yet.
 2. Read Adinda (2020) full text (PDF from the user, or once the journal site
    is fixed) and set `PHENOLOGY_CLASSES` from its table. Sensitivity already
    tested (see Status).
-3. Stage 1 follow-ups: per-pixel phenology from the NDVI trajectory (fixes the
-   young-vs-stressed confusion); 2026 El Niño season series.
+3. Phenology from the NDVI trajectory (rising = young rice, falling after a
+   peak = stressed/harvest, flat low = fallow): fixes the young-vs-stressed
+   confusion and the late-season fallow inflation.
 4. Stage 2: Open-Meteo rainfall forecast + what-if scenario (no rain for N
    dasarian → hectares shifting class).
 5. Stage 3: FastAPI backend for shared action log + field reports; scheduled
