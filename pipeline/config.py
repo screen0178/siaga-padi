@@ -37,9 +37,14 @@ NDDI_CLASSES = [
 NDDI_ABS_GUARD = 100
 
 # --- Rice growth-stage classes from NDVI (Adinda, 2020) ---------------------
-# TODO(verify): only the class-1 bound (-0.03) is confirmed from the video
-# notes. The other bounds are provisional and must be checked against the
-# video / Adinda (2020) before results are reported.
+# Source: Riska Adinda (2020), Jurnal Ilmiah Mahasiswa Pertanian 5(2):301-309,
+# doi:10.17969/jimfp.v5i2.14873. Full text not yet read (journal site's TLS
+# certificate expired on 2026-11-20), so only the class-1 bound (-0.03, from
+# the video) is confirmed; the rest are provisional.
+# Sensitivity test on Aug 2024 data (bounds shifted by +/-0.05, see CLAUDE.md):
+#  - drought hectares per NDDI class: unchanged (stressed pixels have low NDVI);
+#  - priority ranking: top 2 unchanged, ranks 3-7 swap;
+#  - stage of stressed fields (and thus the recommendation text) swings a lot.
 PHENOLOGY_CLASSES = [
     (1, float("-inf"), -0.03, "Bera / terbuka / air", False),
     (2, -0.03, 0.25, "Vegetatif awal", True),

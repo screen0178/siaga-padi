@@ -61,14 +61,29 @@ Ventusky is only the visual inspiration, not the product.
   no QA mask, L8/L9 only, latest mosaic): Tambakromo stays 1.3–1.8 and the top
   group is stable, so the gap likely comes from the video's boundaries or
   dates, not our method. Open question.
+- Growth-stage thresholds (2026-11-20): source is Riska Adinda (2020),
+  JIM Pertanian 5(2):301-309, doi:10.17969/jimfp.v5i2.14873. Full text not
+  read (jim.usk.ac.id certificate expired). Sensitivity test with bounds
+  shifted ±0.05 on Aug 2024 data:
+  - Drought ha per class: unchanged (Kuat 12,613 in every variant).
+  - Priority ranking: Pucakwangi > Winong always top 2; ranks 3–7 swap.
+  - Stressed (Kuat+) ha by stage swings hard: stage 2 from 1.6k to 11.9k ha,
+    stage 3 from 4.2k to 14.5k ha, stage 4 ≈ 0. So the recommendation text
+    depends on the thresholds.
+  - Structural limitation: high NDDI implies low NDVI, so a stressed
+    reproductive crop gets labelled as early vegetative. Single-date NDVI
+    cannot tell young plants from stressed mature plants. Stage 1 time series
+    (NDVI trajectory per pixel) is the real fix.
+  - Cropland NDVI in Aug 2024: 80% of pixels between 0.20 and 0.65.
 
 ## Next steps
 
 1. Run `earthengine authenticate`, then
    `python pipeline/gee_export.py --project <EE project id>`, fix errors,
    compare with the video reference values.
-2. Verify growth-stage NDVI thresholds (`PHENOLOGY_CLASSES`, only −0.03 is
-   confirmed) against the video / Adinda (2020).
+2. Read Adinda (2020) full text (PDF from the user, or once the journal site
+   is fixed) and set `PHENOLOGY_CLASSES` from its table. Sensitivity already
+   tested (see Status).
 3. Stage 1: time slider over a dry-season series + NDDI trend per kecamatan
    (extend contract with a `periods` list; keep backward compatible).
 4. Stage 2: Open-Meteo rainfall forecast + what-if scenario (no rain for N
