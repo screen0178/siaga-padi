@@ -124,6 +124,28 @@ Ventusky is only the visual inspiration, not the product.
   detail panel was checked before the last two text tweaks (tooltip for
   corrected desa, chip renamed "Sawah tidak aktif"); those were type-checked
   only. No real reports yet, so committed data has no feedback.json.
+- v2 Phase 0 (2026-11-20):
+  - 0.1 race fixed: workflow writes use `BEGIN IMMEDIATE` (`store.conn(write=True)`);
+    test fires two simultaneous identical steps → exactly one 200, one 409
+    (failed with two 200s before the fix).
+  - 0.2 stage 9 "panen atau puso? (perlu cek)": a harvest-like drop (rule 7)
+    where NDDI ≥ 1.25 in a month from the peak on while the crop still stood
+    (NDVI ≥ 0.25; bare months skipped because bare soil reads as high NDDI),
+    or the drop came ≤ 1 month after green-up. Monthly NDDI history added to
+    `month_ndvi`. Not active, not ranked; shown as "Perlu verifikasi" in the
+    detail panel, a ⚠ badge on the priority list (≥ 25 ha), orange in the
+    stage layer, and a new report answer "Puso / gagal panen karena kering"
+    (feedback.py checks it against the map's puso share). Re-export Jun–Nov:
+    7+9 equals the old 7 exactly; active and Kuat+Ekstrem unchanged.
+    Share of drops flagged 9: Jun 1 %, Jul 12 %, Aug 26 %, Sep 35 %,
+    Oct 46 %, Nov 49 % (6.0k ha in Oct). Highest in the dry south/east (Oct:
+    Tambakromo 65 %, Winong 68 %), lowest in the wetter north (Gembong,
+    Cluwak, Margoyoso ~10 %). June's 1 % suggests normal ripening rarely
+    triggers it, but senescence does raise NDDI: it is a check flag, not a
+    puso estimate. Nov top: Sukolilo 780 ha, Gabus 673, Kayen 543.
+    Stage 10 "gagal tanam?" waits for the Phase 3 irrigation layer.
+  - Browser: priority-list badges verified; the detail section was only
+    type-checked (pane hidden, map never loaded).
 - Aug 2024 video-check run (single period) was done first; its data is in
   git history (commit 1d21c4f), not on disk.
 - Verification vs video (Aug 2024): Kuat 12,637 ha (video ≈ 11,000, OK);

@@ -124,7 +124,10 @@ python -m pytest server/tests -q                     # role / step / conflict ru
    - series run (operational): each pixel's monthly NDVI over a 4-month window.
      Never greened → *bera / tidak tumbuh*; dropped to near-bare after a peak →
      *panen / pasca-panen*; both excluded from active rice and shown separately
-     for field checking. Rules and thresholds in `config.TRAJECTORY`.
+     for field checking. A harvest-like drop after strong stress (or too soon
+     after green-up) is *panen atau puso? (perlu cek)*: a drought-killed crop
+     looks like a harvest, so it is flagged for a field check instead of
+     silently leaving the priorities. Rules and thresholds in `config.TRAJECTORY`.
 5. NDDI guard |NDDI| < 100, then 5 classes (Artikanur et al., 2022).
 6. Per kecamatan: hectares by class × stage (`pixelArea`, 30 m).
 7. Impact scoring (`scoring.py`), H-MHEWS-style: hazard combined with exposure.

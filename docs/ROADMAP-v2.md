@@ -16,6 +16,10 @@ Guiding ideas (from the course and the lecturer's reference app ARNANTARA):
 ---------------------------------------------------------------------------
 ## Phase 0: required fixes
 
+Status 2026-11-20: 0.1 and 0.3 done; 0.2 done for stage 9 (results in
+CLAUDE.md); stage 10 "gagal tanam?" moved to after Phase 3 (needs the
+irrigation layer).
+
 0.1 Race condition in server/store.py
   - Python sqlite3 opens the transaction only at the INSERT, so the step check
     (SELECT) runs outside it; two simultaneous clicks can both pass from_step.
