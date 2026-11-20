@@ -67,6 +67,16 @@ Ventusky is only the visual inspiration, not the product.
   Frontend `web/src/workflow.ts` falls back to localStorage when `/api` fails
   (4 s timeout); polls state 15 s, status 60 s. Vite proxies `/api` → :8000.
   No auth: name + role typed by the user.
+- v2 Phase 2 forecast: `pipeline/ml_dataset.py` (EE, desa × Landsat date,
+  git-ignored `data/ml/obs_*.csv`, `rain_daily.csv`, `desa_static.csv`),
+  `ml_common.py` (features, shared), `ml_train.py` (→ committed
+  `data/ml/models/<run>/model.pkl` + metrics + MODEL_CARD, `LATEST`),
+  `forecast.py` (→ `forecast.json`: steps now/+7/+14, per kecamatan
+  share/ha/hazard P10-P50-P90, status, confidence, reasons, model metrics).
+  Server: `forecast_reviews` table, GET/POST `/api/forecast/reviews` (Dinas
+  only, 409 if the forecast changed). Frontend `web/src/forecast.ts` (card,
+  model page, message sentence); forecast view mutates props like the
+  scenario (status, H, rank) and is exclusive with it.
 - Reports → pipeline: `pipeline/feedback.py` (rules in `config.FEEDBACK`).
   gee_export loads reports (server/siaga.db or `--reports csv`), paints
   corrected desa to stage 8 in `build(exclude=)` for all periods, checks
@@ -195,6 +205,34 @@ Ventusky is only the visual inspiration, not the product.
     on/off, Hari ini jump). Phone width not verified: the pane's mobile
     emulation misrenders and headless Chrome cannot go below ~500 px; the
     timeline already overflowed phones before (Phase 5.3).
+- v2 Phase 2 (2026-11-20), ML forecast:
+  - Data: 664 Landsat dates Apr 2013 – 4 Nov 2026 (cloud < 70 %, 4 path/rows),
+    631 with usable desa, 396 desa, 114k desa-dates; 22 min with 6 workers.
+    Rain from the Open-Meteo archive per kecamatan (not CHIRPS: inference uses
+    Open-Meteo too). Pairs h = 8–40 days: train 79k (≤ 2022), val 45k (2023),
+    test 92k (2024–Nov 2026); recent years have more because of Landsat 9.
+  - Model: scikit-learn HistGradientBoosting quantile (LightGBM needs a
+    system libomp on macOS), 400 trees chosen on validation, refit on all
+    years for production; metrics from the held-out model.
+  - Test: desa share MAE 6.8 vs persistence 8.5 vs climatology 9.9 points;
+    kecamatan Kuat+Ekstrem MAE 89 vs 124 vs 143 ha; status match 89 % vs
+    85 %; Siaga/Awas hit rate 77 % vs 58 %, false alarm ratio 10 % vs 16 %;
+    P10-P90 coverage desa 84 %, kecamatan 90 % (summed quantiles are
+    conservative). Future rain replaced by climatology: kec MAE 97 ha (lower
+    bound). Gain over persistence grows with horizon (8–16 d: 5.5 vs 5.9;
+    29–40 d: 8.2 vs 11.2 points). Importance: NDDI state ≫ past rain >
+    irrigation > future rain > season.
+  - First forecast (20 Nov, from 3–4 Nov scenes, 383 desa): wet season has
+    started (230–290 mm to 4 Dec), Kuat+Ekstrem 12.1k ha now → 7.3k (+7) →
+    6.0k (+14) vs 14.5k on the Nov map; no Awas by +14. P10 = 0 everywhere
+    and confidence mostly Rendah: checked, real — after ≥ 150 mm in ~2 weeks
+    past desa at ≥ 60 % stress ended at median 48 %, P10 3 % (only 127 such
+    pairs, so the onset regime is thin in training).
+  - Verified in the browser: forecast steps on the timeline, map/ranking/top
+    bar switch, detail card, model page, Terima/Tolak against the real
+    server (message sentence appears after Terima, disappears after Tolak;
+    test reviews deleted), tour step 4 of 9. The scheduler's weather job ran
+    forecast.py by itself. 11 server + 13 pipeline tests pass.
 - Aug 2024 video-check run (single period) was done first; its data is in
   git history (commit 1d21c4f), not on disk.
 - Verification vs video (Aug 2024): Kuat 12,637 ha (video ≈ 11,000, OK);

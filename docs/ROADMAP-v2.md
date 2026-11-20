@@ -76,6 +76,13 @@ CLAUDE.md.
 ---------------------------------------------------------------------------
 ## Phase 2: ML forecast, 14 days ahead
 
+Status 2026-11-20: 2.1-2.4 done, results in CLAUDE.md. Deviations: scikit-learn
+quantile boosting instead of LightGBM (no system libomp), Open-Meteo archive
+instead of CHIRPS (same source as inference), occlusion per feature group
+instead of SHAP for the reasons, kecamatan colouring only (no desa choropleth).
+Also done from 1.1: forecast steps on the timeline, P10-P90 in panel and
+timeline, forecast sentence in messages when confident or accepted.
+
 2.1 Training data export (pipeline/ml_dataset.py)
   - Landsat 8 (2013-) + 9 (2021-) TOA C2, same masks and indices as
     gee_export. Unit: desa (~400) x Landsat observation date (per-date

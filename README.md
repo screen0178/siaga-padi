@@ -31,6 +31,10 @@ pipeline/                 Python: data + scoring (single source of truth)
   weather.py              Stage 2: Open-Meteo rainfall per dasarian + forecast
   scenario.py             Stage 2: "no rain for N dasarian" what-if (Earth Engine)
   feedback.py             Stage 3: field reports -> desa corrections + map-vs-report check
+  ml_dataset.py           v2 Phase 2: desa x Landsat-date training data since 2013 (Earth Engine)
+  ml_common.py            features shared by training and inference
+  ml_train.py             quantile forecast, time split, baselines, model card
+  forecast.py             today / +7 / +14 day forecast -> forecast.json
   tests/                  rule tests (no Earth Engine)
   outputs.py              writes the web data contract
 server/                   Stage 3: FastAPI backend (shared action log, field reports, scheduler)
@@ -81,6 +85,13 @@ cd web && npm install && npm run dev                   # http://localhost:5173
    `python pipeline/weather.py` (no Earth Engine; safe to run daily) and
    `python pipeline/scenario.py --project ID` (~1 min). Both files are optional:
    without them the rain section and the scenario slider simply do not appear.
+7. **ML forecast (v2 Phase 2)**, optional:
+   `python pipeline/ml_dataset.py --project ID` (~25 min once, resumable; writes
+   git-ignored `data/ml/*.csv`), `python pipeline/ml_train.py` (~3 min; writes
+   `data/ml/models/<run>/` with `MODEL_CARD.md`), then `python pipeline/forecast.py`
+   (seconds; `--project ID` first adds new Landsat dates). The committed model can
+   forecast once `data/ml/obs_*.csv` exists. Without `forecast.json` the forecast
+   steps, card and model page do not appear.
 
 ### Backend (Stage 3)
 
@@ -109,8 +120,12 @@ python -m pytest server/tests -q                     # role / step / conflict ru
     `TRAJECTORY` (not auto-tuned yet: too few reports).
   `python pipeline/feedback.py` is a dry run; `gee_export.py --reports file.csv`
   uses a CSV export instead of `server/siaga.db`.
-- The scheduler reruns `weather.py` every 6 h and, when `SIAGA_EE_PROJECT` is set,
-  `gee_export.py --last-months 6` + `scenario.py` weekly. Open pages see a
+- The scheduler reruns `weather.py` (then `forecast.py` once a model and
+  observations exist) every 6 h and, when `SIAGA_EE_PROJECT` is set,
+  `gee_export.py --last-months 6` + `scenario.py` + `forecast.py --project` weekly.
+- Dinas can **Terima / Tolak** the forecast per kecamatan (`/api/forecast/reviews`,
+  tied to one forecast run). A forecast sentence goes into the Gapoktan message only
+  when its confidence is Tinggi or Dinas accepted it, never after a rejection. Open pages see a
   "data baru" prompt. Dinas can trigger a refresh from the user dialog.
 - Without the server (static hosting) the app falls back to browser storage and says so.
 
@@ -155,6 +170,14 @@ python -m pytest server/tests -q                     # role / step / conflict ru
    (`water_access.py`, Spearman 0.62–0.67). Ranking = ha at risk × (1 − 0.3 ×
    irrigated share); recommendations split by water source. Never-greened land
    surrounded by green fields is flagged *gagal tanam? (perlu cek)*.
+12. Forecast (v2 Phase 2, `ml_*.py`, `forecast.py`): per desa, the Kuat+Ekstrem share
+   of active rice and the hazard index H 8–40 days after a Landsat date, as
+   P10/P50/P90 (gradient-boosted quantile trees, scikit-learn). Features: NDDI state
+   and trend, stage shares, rain before and during the window (Open-Meteo), official
+   irrigation, season, horizon. Trained ≤ 2022, validated 2023, tested 2024–Nov 2026
+   against persistence and climatology (results in `MODEL_CARD.md` and the app's
+   "Tentang model" page). Kecamatan values aggregate desa by active rice; ha = share ×
+   the map's active rice; status from H with the map's thresholds.
 
 ## Known limitations (state these in the presentation)
 
@@ -175,6 +198,10 @@ python -m pytest server/tests -q                     # role / step / conflict ru
   in-sample in time. The raster layers keep showing the last image.
 - **Rainfall is model data at one point per kecamatan** (Open-Meteo best-match
   NWP / ERA5), not rain gauges; BMKG station or CHIRPS data would be better.
+- **The forecast is trained on single-date stages**, not the map's 4-month trajectory,
+  and on observed rain; at run time the rain is a forecast. Wet-season onset after a
+  drought is rare in the training data, so ranges are wide then. It forecasts an NDDI
+  class, not crop loss.
 - **No login yet.** Users type a name and pick a role; the server enforces what each
   role may do, but anyone can claim either role. Accountability, not security.
 
@@ -186,7 +213,8 @@ python -m pytest server/tests -q                     # role / step / conflict ru
 | 1 ✅ | Time slider: monthly dry-season series, NDDI trend per kecamatan |
 | 2 ✅ | Rainfall per dasarian + 16-day forecast (Open-Meteo); calibrated what-if "no rain for N dasarian" |
 | 3 ✅ | Backend (FastAPI + SQLite): shared action log with roles, field reports per desa, scheduled pipeline |
-| 4 | ML: rice vs. dryland classifier from field reports; NDDI 1–2 dasarian forecast |
+| v2 | Phases 0, 1, 2, 3 ✅ (see docs/ROADMAP-v2.md): puso/gagal tanam flags, timeline + tour + freshness, ML forecast with Dinas review, irrigation capacity |
+| next | Phase 4 (tonnes / rupiah, action options, Dinas cockpit), Phase 5 (verification, NDDI anomaly, mobile) |
 
 ## Sources
 
