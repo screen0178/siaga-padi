@@ -501,3 +501,17 @@ button.link:hover { text-decoration: underline; }
 .anom.wet b { color: #7fb3d5; }
 .anom-key { font-size: 11px; color: var(--muted); white-space: nowrap; }
 .anom-key b { color: #ff8a7a; font-weight: 500; }
+.fresh.clickable { cursor: pointer; }
+.fresh.clickable:hover { border-color: var(--accent); }
+.vchip { font-size: 11px; font-weight: 600; border-radius: 999px; padding: 1px 8px; white-space: nowrap; }
+.vchip.ok { color: #3fb27f; background: rgba(63, 178, 127, 0.14); }
+.vchip.part { color: #f2c94c; background: rgba(242, 201, 76, 0.14); }
+.vchip.no { color: #ff8a7a; background: rgba(232, 85, 61, 0.14); }
+.vchip.wait { color: var(--muted); background: rgba(255, 255, 255, 0.07); }
+.vsum td:last-child { text-align: right; }
+.mt tr.vnote td { color: var(--muted); font-size: 11px; border-bottom: 1px solid var(--line); padding-top: 0; white-space: normal; font-family: var(--sans); }
+.mt tr:has(+ tr.vnote) td { border-bottom: 0; }
+.vgrid { display: grid; grid-template-columns: 300px 1fr; gap: 16px; align-items: start; }
+.vgrid p { margin: 0 0 8px; }
+.vdot { fill: #8fc3ff; stroke: var(--panel-solid); stroke-width: 2; }
+@media (max-width: 700px) { .vgrid { grid-template-columns: 1fr; } }

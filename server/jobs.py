@@ -54,6 +54,7 @@ def job_specs():
                 [py, "weather.py"],
                 # Adds the new Landsat dates to the training observations, then forecasts
                 *([[py, "forecast.py", "--project", str(project)], [py, "anomaly.py"]] if fc else []),
+                [py, "verification.py"],
             ],
         },
     }

@@ -1,0 +1,301 @@
+{
+ "generated_at": "2026-11-20T14:37:10+00:00",
+ "video": [
+  {
+   "what": "Luas kelas Kuat",
+   "video": 11000,
+   "ours": 12637,
+   "unit": "ha",
+   "matched": true,
+   "note": "selisih +15 %"
+  },
+  {
+   "what": "Luas kelas Normal",
+   "video": 19,
+   "ours": 124,
+   "unit": "ha",
+   "matched": false,
+   "note": "kelas sangat kecil, peka terhadap masker"
+  },
+  {
+   "what": "NDDI rata-rata terendah: Cluwak",
+   "video": 0.3,
+   "ours": 0.39,
+   "unit": "",
+   "matched": true,
+   "note": "kecamatan terendah sama"
+  },
+  {
+   "what": "NDDI rata-rata tertinggi: Tambakromo",
+   "video": 2.647,
+   "ours": 1.57,
+   "unit": "",
+   "matched": false,
+   "note": "kami: Batangan 2,43 tertinggi; Tambakromo 1,3-1,8 pada semua variasi masker dan komposit; kemungkinan beda batas wilayah atau tanggal citra"
+  }
+ ],
+ "capacity": {
+  "n": 21,
+  "spearman_irrigated": 0.62,
+  "spearman_rice3x": 0.67,
+  "pearson_cropland_sawah": 0.97,
+  "cropland_total": 59339,
+  "sawah_total": 57384,
+  "points": [
+   {
+    "name": "Batangan",
+    "proxy": 0.032,
+    "official": 0.106
+   },
+   {
+    "name": "Pucakwangi",
+    "proxy": 0.045,
+    "official": 0.079
+   },
+   {
+    "name": "Winong",
+    "proxy": 0.058,
+    "official": 0.535
+   },
+   {
+    "name": "Tambakromo",
+    "proxy": 0.12,
+    "official": 0.479
+   },
+   {
+    "name": "Juwana",
+    "proxy": 0.141,
+    "official": 0.225
+   },
+   {
+    "name": "Jaken",
+    "proxy": 0.181,
+    "official": 0.135
+   },
+   {
+    "name": "Dukuhseti",
+    "proxy": 0.208,
+    "official": 0.659
+   },
+   {
+    "name": "Jakenan",
+    "proxy": 0.209,
+    "official": 0.753
+   },
+   {
+    "name": "Gembong",
+    "proxy": 0.223,
+    "official": 1.0
+   },
+   {
+    "name": "Trangkil",
+    "proxy": 0.277,
+    "official": 1.0
+   },
+   {
+    "name": "Wedarijaksa",
+    "proxy": 0.312,
+    "official": 1.0
+   },
+   {
+    "name": "Tlogowungu",
+    "proxy": 0.323,
+    "official": 0.956
+   },
+   {
+    "name": "Sukolilo",
+    "proxy": 0.427,
+    "official": 0.848
+   },
+   {
+    "name": "Margoyoso",
+    "proxy": 0.45,
+    "official": 0.96
+   },
+   {
+    "name": "Kayen",
+    "proxy": 0.471,
+    "official": 0.725
+   },
+   {
+    "name": "Gabus",
+    "proxy": 0.485,
+    "official": 0.555
+   },
+   {
+    "name": "Margorejo",
+    "proxy": 0.5,
+    "official": 0.679
+   },
+   {
+    "name": "Cluwak",
+    "proxy": 0.51,
+    "official": 1.0
+   },
+   {
+    "name": "Tayu",
+    "proxy": 0.587,
+    "official": 1.0
+   },
+   {
+    "name": "Pati",
+    "proxy": 0.632,
+    "official": 0.946
+   },
+   {
+    "name": "Gunung Wungkal",
+    "proxy": 0.708,
+    "official": 0.808
+   }
+  ]
+ },
+ "scenario": [
+  {
+   "pair": "2026-06>2026-07",
+   "rain_mm": 8.4,
+   "kec_mae_ha": 134,
+   "persist_mae_ha": 166,
+   "kec_bias_ha": 19
+  },
+  {
+   "pair": "2026-07>2026-08",
+   "rain_mm": 15.7,
+   "kec_mae_ha": 153,
+   "persist_mae_ha": 261,
+   "kec_bias_ha": 24
+  },
+  {
+   "pair": "2026-08>2026-09",
+   "rain_mm": 24.4,
+   "kec_mae_ha": 225,
+   "persist_mae_ha": 507,
+   "kec_bias_ha": 28
+  }
+ ],
+ "forecast": {
+  "run_id": "20261120-1302",
+  "test_period": [
+   "2024-01-06",
+   "2026-11-04"
+  ],
+  "n_pairs": {
+   "train": 79399,
+   "val": 45431,
+   "test": 91614
+  },
+  "test": {
+   "desa": {
+    "n": 91614,
+    "mae_share": {
+     "model": 0.06752295257780346,
+     "persistence": 0.08481758722543632,
+     "climatology": 0.0989527583326491
+    },
+    "pinball": {
+     "p10": 0.019069090885068873,
+     "p50": 0.03376147628890173,
+     "p90": 0.01821862875009808
+    },
+    "coverage_p10_p90": 0.8441067959045561,
+    "mean_width_p10_p90": 0.26687003063030706
+   },
+   "kecamatan": {
+    "n": 9136,
+    "mae_ha": {
+     "model": 89.00405575163452,
+     "persistence": 123.8761402252703,
+     "climatology": 143.34521866663152
+    },
+    "coverage_p10_p90": 0.9038966725043783,
+    "status_match": {
+     "model": 0.8892294220665499,
+     "persistence": 0.853984238178634
+    },
+    "siaga_or_awas": {
+     "model": {
+      "events": 745,
+      "hit_rate": 0.7718120805369127,
+      "false_alarm_ratio": 0.0959119496855346
+     },
+     "persistence": {
+      "events": 745,
+      "hit_rate": 0.5771812080536913,
+      "false_alarm_ratio": 0.15520628683693516
+     }
+    }
+   }
+  },
+  "test_rain_climatology": {
+   "desa": {
+    "n": 91614,
+    "mae_share": {
+     "model": 0.07124895793931829,
+     "persistence": 0.08481758722543632,
+     "climatology": 0.0989527583326491
+    },
+    "pinball": {
+     "p10": 0.019069090885068873,
+     "p50": 0.035624478969659146,
+     "p90": 0.019730162834232418
+    },
+    "coverage_p10_p90": 0.818794070775209,
+    "mean_width_p10_p90": 0.2587798031794822
+   },
+   "kecamatan": {
+    "n": 9136,
+    "mae_ha": {
+     "model": 96.57005988546507,
+     "persistence": 123.8761402252703,
+     "climatology": 143.34521866663152
+    },
+    "coverage_p10_p90": 0.8728108581436077,
+    "status_match": {
+     "model": 0.8794877408056042,
+     "persistence": 0.853984238178634
+    },
+    "siaga_or_awas": {
+     "model": {
+      "events": 745,
+      "hit_rate": 0.7449664429530202,
+      "false_alarm_ratio": 0.10628019323671498
+     },
+     "persistence": {
+      "events": 745,
+      "hit_rate": 0.5771812080536913,
+      "false_alarm_ratio": 0.15520628683693516
+     }
+    }
+   }
+  },
+  "test_by_horizon": {
+   "8-16": {
+    "n": 35694,
+    "mae_model": 0.05512780580416484,
+    "mae_persistence": 0.059232482095231916
+   },
+   "17-28": {
+    "n": 21595,
+    "mae_model": 0.06568624336767258,
+    "mae_persistence": 0.08410823370273678
+   },
+   "29-40": {
+    "n": 34325,
+    "mae_model": 0.08156799567557575,
+    "mae_persistence": 0.11186939296003834
+   }
+  }
+ },
+ "reports": {
+  "n": 1,
+  "generated_at": "2026-11-20T10:07:11+00:00",
+  "summary": {
+   "ok": {
+    "label": "Sesuai: padi tercekam kering",
+    "n": 1,
+    "agree": 1,
+    "judged": 1
+   }
+  },
+  "excluded_desa": 0
+ }
+}

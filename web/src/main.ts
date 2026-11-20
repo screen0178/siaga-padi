@@ -2,6 +2,7 @@ import "./style.css";
 import { createMap, type MapApi } from "./map";
 import { cockpitHtml } from "./cockpit";
 import { impactSection } from "./impact";
+import { verificationPage, type Verification } from "./verify";
 import { forecastCard, forecastSentence, modelPage, tgl } from "./forecast";
 import { daysSince, freshness, latestScene, renderFresh } from "./fresh";
 import { composeMessage } from "./message";
@@ -39,13 +40,14 @@ let fcStep: string | null = null; // forecast step on the map/ranking (null = ob
 let reviews: Record<string, Review> = {}; // Dinas verdicts on the current forecast
 let anomaly: Anomaly | null = null; // v2 5.2, optional
 let layerId = "status";
+let verification: Verification | null = null; // v2 5.1, optional
 
 /** Optional data file: null when missing or malformed. */
 const optional = <T,>(file: string) =>
   fetch(`${DATA}/${file}`).then((r) => (r.ok ? (r.json() as Promise<T>) : null)).catch(() => null);
 
 async function boot() {
-  const [m, kec, desa, w, sc, f, fc, an] = await Promise.all([
+  const [m, kec, desa, w, sc, f, fc, an, ver] = await Promise.all([
     fetch(`${DATA}/meta.json`).then((r) => r.json()),
     fetch(`${DATA}/kecamatan.json`).then((r) => r.json()),
     fetch(`${DATA}/desa.json`).then((r) => r.json()),
@@ -54,8 +56,10 @@ async function boot() {
     optional<Feedback>("feedback.json"),
     optional<Forecast>("forecast.json"),
     optional<Anomaly>("anomaly.json"),
+    optional<Verification>("verification.json"),
   ]);
   anomaly = an;
+  verification = ver;
   fb = f;
   meta = m;
   forecast = fc && meta.periods?.length ? fc : null;
@@ -96,6 +100,14 @@ async function boot() {
   if (fromHash) openDetail(fromHash.properties.id, true);
   $("#tour-btn").onclick = runTour;
   $("#cockpit-btn").onclick = openCockpit;
+  if (verification) {
+    $("#fresh").classList.add("clickable");
+    $("#fresh").onclick = openVerification;
+  }
+  // Links rendered inside panels and dialogs
+  document.addEventListener("click", (e) => {
+    if ((e.target as Element).closest?.("[data-open=verify]")) { e.preventDefault(); openVerification(); }
+  });
   // First visit: start the tour, unless the link points at a kecamatan
   if (!fromHash && !tourSeen()) runTour();
 }
@@ -114,7 +126,7 @@ function runTour() {
     },
     {
       title: "Peta dan lapisan",
-      body: "Warna kecamatan = status kekeringan. Lapisan lain berasal dari citra Landsat: kelas kekeringan (NDDI), kehijauan (NDVI), kelembapan (NDMI), dan fase tumbuh padi. Klik kecamatan di peta untuk melihat detailnya.",
+      body: `Warna kecamatan = status kekeringan. Lapisan lain berasal dari citra Landsat: kelas kekeringan (NDDI), kehijauan (NDVI), kelembapan (NDMI), dan fase tumbuh padi. Klik kecamatan di peta untuk melihat detailnya.${anomaly ? " <b>Anomali vs biasanya</b> membandingkan tiap desa dengan bulan yang sama 2013–2025: merah = lebih kering dari biasanya." : ""}`,
       target: q(".layers"),
     },
     {
@@ -129,7 +141,7 @@ function runTour() {
     }] : []),
     {
       title: "Ringkasan dan kesegaran data",
-      body: `Luas padi aktif, luas tercekam, sawah yang tidak dihitung aktif (bera, panen, perlu cek), dan jumlah kecamatan per status: <b>Normal, Waspada, Siaga, Awas</b>. Titik hijau / kuning / merah di kanan menunjukkan umur citra, data hujan${forecast ? ", dan prakiraan model" : ""}.`,
+      body: `Luas padi aktif, luas tercekam, sawah yang tidak dihitung aktif (bera, panen, perlu cek), dan jumlah kecamatan per status: <b>Normal, Waspada, Siaga, Awas</b>. Titik hijau / kuning / merah di kanan menunjukkan umur citra, data hujan${forecast ? ", dan prakiraan model" : ""}${verification ? "; klik untuk halaman <b>Verifikasi</b>: semua uji metode, model, dan laporan, termasuk yang belum lolos" : ""}.`,
       target: () => [document.querySelector("#summary"), document.querySelector("#fresh")],
     },
     {
@@ -694,6 +706,7 @@ function renderDetail(p: KecProps, resetScroll = true) {
       <p>H = rata-rata bobot bahaya kelas NDDI pada padi aktif (Normal 0, Ringan 0,1, Sedang 0,5, Kuat 0,85, Ekstrem 1). Status: H &lt; 0,40 Normal, &lt; 0,60 Waspada, &lt; 0,75 Siaga, selebihnya Awas. Ha berisiko = luas × bobot bahaya × kerentanan fase (reproduktif 1,0; vegetatif akhir 0,7; vegetatif awal 0,5). Peringkat memakai ha berisiko × (1 − 0,3 × pangsa sawah irigasi): kapasitas air menurunkan prioritas, bukan status. Bobot bersifat provisional, mengikuti logika indeks H-MHEWS, dan dikalibrasi dengan laporan lapangan.</p>
       ${scenario ? `<p><b>Skenario tanpa hujan</b></p><p>Distribusi NDDI tiap kecamatan digeser mengikuti perubahan persentil NDDI padi aktif pada bulan kering 2026 (${scenario.calibration.months.map((m) => `${m.pair.split(">").map(monthName).join("→")}, hujan ${fmt(m.rain_mm)} mm`).join("; ")}), lalu dinilai ulang dengan aturan yang sama. Uji balik per kecamatan: galat rata-rata ${scenario.calibration.months.map((m) => `${fmt(m.kec_mae_ha)} ha`).join(" / ")} vs ${scenario.calibration.months.map((m) => `${fmt(m.persist_mae_ha)} ha`).join(" / ")} bila diasumsikan tidak berubah. Fase tumbuh, luas padi aktif, dan irigasi dianggap tetap.</p>` : ""}
       ${feedbackExplainer()}
+      ${verification ? `<p><button class="link" data-open="verify">Verifikasi data dan model: semua uji, termasuk yang belum lolos →</button></p>` : ""}
       ${meta.notes.length ? `<p><b>Catatan data</b></p><ul>${meta.notes.map((n) => `<li>${esc(n)}</li>`).join("")}</ul>` : ""}
     </details>`;
 
@@ -783,6 +796,15 @@ function openCockpit() {
   };
   draw();
   dlg.showModal();
+}
+
+function openVerification() {
+  if (!verification) return;
+  const dlg = $("#verify-dlg") as HTMLDialogElement;
+  dlg.innerHTML = verificationPage(verification);
+  for (const d of document.querySelectorAll<HTMLDialogElement>("dialog[open]")) if (d !== dlg) d.close();
+  dlg.showModal();
+  dlg.scrollTop = 0;
 }
 
 function openModelPage() {

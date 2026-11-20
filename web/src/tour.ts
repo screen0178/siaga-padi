@@ -11,7 +11,7 @@ export interface TourStep {
 }
 
 // Bump when the steps change materially, so returning users see the new tour once
-const SEEN_KEY = "siaga.tour.v3";
+const SEEN_KEY = "siaga.tour.v4";
 
 export function tourSeen() {
   try { return localStorage.getItem(SEEN_KEY) === "1"; } catch { return true; } // no storage: never auto-start

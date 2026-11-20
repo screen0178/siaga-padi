@@ -231,3 +231,16 @@ ACTION_OPTIONS = {
     "delay": {"stages": ["6", "10"]},
     "min_ha": 25,  # options below this many target ha are not shown
 }
+
+# --- Verification against the NgabubuGIS #2 video, Aug 2024 (v2 Phase 5.1) ---
+# Our single-period run of 2024-08 (commit 1d21c4f) vs the values read off the
+# video. Shown on the app's verification page as-is, including the miss.
+VIDEO_CHECK = [
+    # (what, video, ours, unit, matched, note)
+    ("Luas kelas Kuat", 11000, 12637, "ha", True, "selisih +15 %"),
+    ("Luas kelas Normal", 19, 124, "ha", False, "kelas sangat kecil, peka terhadap masker"),
+    ("NDDI rata-rata terendah: Cluwak", 0.3, 0.39, "", True, "kecamatan terendah sama"),
+    ("NDDI rata-rata tertinggi: Tambakromo", 2.647, 1.57, "", False,
+     "kami: Batangan 2,43 tertinggi; Tambakromo 1,3-1,8 pada semua variasi masker dan komposit; "
+     "kemungkinan beda batas wilayah atau tanggal citra"),
+]

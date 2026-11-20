@@ -92,6 +92,7 @@ export function cockpitHtml(c: CockpitInput) {
       <h4>Perlu perhatian <span class="fine">${rows.length} kecamatan: Siaga/Awas sekarang atau dalam prakiraan, atau tindakan sedang berjalan</span></h4>
       ${rows.length ? `<table class="alerts"><thead><tr><th>Kecamatan</th><th>Status → prakiraan</th><th class="r">Nilai terancam</th><th>Tindakan</th><th>Pemilik</th><th class="r">Umur</th><th>Perlu</th></tr></thead>
         <tbody>${list}</tbody></table>` : `<p class="fine">Tidak ada kecamatan Siaga/Awas dan tidak ada tindakan yang berjalan.</p>`}
+      <p class="fine"><button class="link" data-open="verify">Verifikasi data dan model →</button></p>
       <p class="fine">Klik baris untuk membuka detail kecamatan. "Umur" = sejak langkah terakhir pada alur tindakan, atau sejak data citra diproses bila belum ditindak. Nilai terancam = perkiraan tengah; rentang di panel detail.</p>
     </form>`;
 }
