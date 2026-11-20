@@ -112,17 +112,17 @@ function runTour() {
     },
     {
       title: "Garis waktu",
-      body: "Enam bulan terakhir; tinggi batang = ha padi tercekam kuat–ekstrem. <b>Hari ini</b> mengingatkan bahwa peta memakai citra terakhir, bukan kondisi hari ini. ▶ memutar urutan bulan; tombol panah ← → juga bisa.",
+      body: `Enam bulan terakhir; tinggi batang = ha padi tercekam kuat–ekstrem. Peta bulan berjalan memakai citra terakhir, jadi selalu tertinggal dari hari ini: kotak <b>Hari ini</b> menunjukkan umur citra itu${forecast ? "" : " dan kembali ke bulan berjalan bila diklik"}. ▶ memutar urutan bulan; tombol panah ← → juga bisa.`,
       target: q("#timeline"),
     },
     ...(forecast ? [{
       title: "Prakiraan 14 hari",
-      body: "<b>Hari ini</b>, <b>+7h</b>, dan <b>+14h</b> adalah prakiraan model (pembelajaran mesin, dilatih pada citra Landsat sejak 2013 dan hujan harian): peta dan peringkat berganti ke status prakiraan, dengan kisaran P10–P90, tingkat keyakinan, dan alasan utama di panel detail. Dinas dapat <b>Terima</b> atau <b>Tolak</b> prakiraan per kecamatan.",
+      body: "<b>Hari ini · model</b>, <b>+7h</b>, dan <b>+14h</b> adalah prakiraan pembelajaran mesin (dilatih pada citra Landsat sejak 2013 dan hujan harian): citra terakhir diproyeksikan ke depan dengan hujan teramati dan prakiraan. Peta dan peringkat berganti ke status prakiraan, ditandai <b>PRAKIRAAN</b> dan arsiran. Klik bulan mana pun untuk kembali ke data teramati.",
       target: () => [document.querySelector("#timeline .tl-now"), document.querySelector("#timeline .tl-fc")],
     }] : []),
     {
       title: "Ringkasan dan kesegaran data",
-      body: "Luas padi aktif, luas tercekam, sawah yang tidak dihitung aktif (bera, panen, perlu cek), dan jumlah kecamatan per status: <b>Normal, Waspada, Siaga, Awas</b>. Titik hijau / kuning / merah di kanan menunjukkan umur citra dan data hujan.",
+      body: `Luas padi aktif, luas tercekam, sawah yang tidak dihitung aktif (bera, panen, perlu cek), dan jumlah kecamatan per status: <b>Normal, Waspada, Siaga, Awas</b>. Titik hijau / kuning / merah di kanan menunjukkan umur citra, data hujan${forecast ? ", dan prakiraan model" : ""}.`,
       target: () => [document.querySelector("#summary"), document.querySelector("#fresh")],
     },
     {
@@ -132,10 +132,16 @@ function runTour() {
     },
     {
       title: `Detail kecamatan: ${top ? esc(top.name) : ""}`,
-      body: "Status dan alasannya, tren NDDI, hujan per dasarian, kapasitas air, dan rekomendasi untuk penyuluh. <b>Uji skenario</b> menunjukkan apa yang terjadi bila hujan berhenti; pesan ke petani tetap memakai data teramati.",
+      body: "Status peta dan alasannya, tren NDDI, hujan per dasarian, kapasitas air, sawah yang perlu verifikasi, dan rekomendasi untuk penyuluh. <b>Uji skenario</b> menunjukkan apa yang terjadi bila hujan berhenti sama sekali: uji tekanan, bukan prakiraan.",
       target: q("#detail"),
       before: openTop,
     },
+    ...(forecast ? [{
+      title: "Kartu prakiraan dan tinjauan Dinas",
+      body: "Per langkah: status prakiraan, kisaran P10–P90 (batang), dan keyakinan. <span class='tag model'>Model</span> dibandingkan dengan <span class='tag rule'>Aturan</span> (status peta), lalu tiga alasan utama. Dinas memilih <b>Terima</b> atau <b>Tolak</b>; pesan ke Gapoktan hanya memuat prakiraan bila keyakinannya tinggi atau sudah diterima. <b>Tentang model</b> menjelaskan data, hasil uji, dan batasannya.",
+      target: section("#detail .fc-rows"),
+      before: openTop,
+    }] : []),
     {
       title: "Alur tindakan",
       body: "Penyuluh <b>mengusulkan</b>, Dinas <b>menyetujui</b>, penyuluh <b>mengirim</b> pesan WhatsApp ke Gapoktan dan menandai <b>selesai</b>. Setiap langkah dicatat dengan nama, peran, dan waktu.",

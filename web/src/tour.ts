@@ -10,7 +10,8 @@ export interface TourStep {
   before?: () => void | Promise<void>;
 }
 
-const SEEN_KEY = "siaga.tour.v1";
+// Bump when the steps change materially, so returning users see the new tour once
+const SEEN_KEY = "siaga.tour.v2";
 
 export function tourSeen() {
   try { return localStorage.getItem(SEEN_KEY) === "1"; } catch { return true; } // no storage: never auto-start

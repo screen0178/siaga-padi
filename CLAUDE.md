@@ -199,8 +199,12 @@ Ventusky is only the visual inspiration, not the product.
   - 1.2 guided tour (`web/src/tour.ts`): 8 steps (welcome, layers, timeline,
     summary + freshness, priorities, detail, workflow, reports + identity),
     auto-starts on first visit unless the URL has a kecamatan hash, "Pemandu"
-    button in the top bar, ←/→/Esc, localStorage `siaga.tour.v1`. Add a
-    forecast step in Phase 2.
+    button in the top bar, ←/→/Esc. Updated after Phase 2: 10 steps when
+    forecast.json exists (+ "Prakiraan 14 hari" on the timeline, + "Kartu
+    prakiraan dan tinjauan Dinas" in the detail panel; timeline, summary and
+    detail texts revised). Seen flag `siaga.tour.v2`: bump the key whenever
+    the steps change materially, so returning users see the new tour once.
+    Rule: any UI phase that adds a visible feature updates the tour.
   - Verified in the app's browser pane at 1440×900 (all 8 steps, scenario
     on/off, Hari ini jump). Phone width not verified: the pane's mobile
     emulation misrenders and headless Chrome cannot go below ~500 px; the
