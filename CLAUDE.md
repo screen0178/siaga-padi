@@ -151,6 +151,8 @@ Ventusky is only the visual inspiration, not the product.
 
 ## Next steps
 
+**Active plan: docs/ROADMAP-v2.md (phases 0-5). It supersedes the list below where they overlap.**
+
 1. Show limitations in the UI: `meta.notes` exists but is not rendered yet.
 2. Read Adinda (2020) full text (PDF from the user, or once the journal site
    is fixed) and set `PHENOLOGY_CLASSES` from its table. Sensitivity already
