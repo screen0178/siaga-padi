@@ -1,5 +1,6 @@
 import "./style.css";
 import { createMap, type MapApi } from "./map";
+import { freshness, renderFresh } from "./fresh";
 import { composeMessage } from "./message";
 import { renderStrip, renderTrend, shortLabel } from "./timeline";
 import { STAGE_COLOR, STATUS_COLOR, type KecFeature, type KecProps, type Meta, type Feedback, type Scenario, type Weather } from "./types";
@@ -60,6 +61,7 @@ async function boot() {
   }
 
   renderTopbar();
+  renderFresh($("#fresh"), freshness(meta, weather));
   renderScenarioControl();
   renderRanking();
   renderLayerbar();
@@ -70,6 +72,7 @@ async function boot() {
   $("#loading").remove();
   renderWho();
   startSync();
+  startFreshClock();
 
   const hash = location.hash.slice(1);
   const fromHash = feats.find((f) => slug(f.properties.name) === hash);
@@ -717,6 +720,11 @@ function startSync() {
     } catch { /* server went away; keep the last state */ }
   }, 15000);
   setInterval(() => { if (!document.hidden) void pollStatus(); }, 60000);
+}
+
+// Ages tick on even without a server
+function startFreshClock() {
+  setInterval(() => { if (!document.hidden) renderFresh($("#fresh"), freshness(meta, weather)); }, 60000);
 }
 
 // ---------------------------------------------------------------- layer bar
