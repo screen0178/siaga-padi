@@ -49,6 +49,13 @@ Ventusky is only the visual inspiration, not the product.
   rasters in `periods/<id>/layers/`. Top-level fields mirror the current
   period. Frontend: `web/src/timeline.ts` (month strip + trend chart); period
   switching mutates feature props in place and calls `api.setPeriod()`.
+- Stage 2 contract extension (optional): `weather.json` (per kecamatan
+  dasarian rain obs/forecast, HTH, forecast sum; `pipeline/weather.py`) and
+  `scenario.json` (per kecamatan score for N = 0..9 dasarian without rain,
+  calibration diagnostics; `pipeline/scenario.py`). Frontend:
+  `web/src/weather.ts` (rain bars, scenario curve); the slider lives in the
+  ranking panel and mutates props like period switching; messages to
+  Gapoktan always use observed data. Scenario only for `current_period`.
 - Data files are `.json` (not `.geojson`): the claude.ai preview host refuses `.geojson`.
 - Raster layers are drawn through a MapLibre canvas source; labels are HTML
   markers (no glyph server). Both keep the app working offline / sandboxed.
@@ -79,6 +86,15 @@ Ventusky is only the visual inspiration, not the product.
   Reproductive stage now detected (Nov 4.4k ha; was ≈ 0). The looser harvest
   rule (no near-bare condition) relabelled 55–75% of Jun–Aug stress as
   harvest, too aggressive.
+- Stage 2 done (2026-11-20): Open-Meteo rain (wet season has started: every
+  kecamatan 70–160 mm forecast over 14 days, no dry spell) and the what-if.
+  Model = NDDI quantile maps from the 2026 dry months (Jun→Jul 8 mm,
+  Jul→Agu 16 mm, Agu→Sep 24 mm median rain), replayed on the Nov histogram.
+  Result: Kuat+Ekstrem 14.5k → 15.8k (3 das) → 18.5k (6) → 23.1k ha (9);
+  Awas 6 → 7 → 8 → 12 kecamatan. Hindcast MAE per kec beats "no change" by
+  19 / 41 / 56 % (in-sample in time). Rejected: pixel Markov chain on classes
+  (Kuat persistence only 30–60 %, learned noise, drought fell without rain)
+  and EE's percentile reducer (coarse buckets; exact 0.05 histograms instead).
 - Aug 2024 video-check run (single period) was done first; its data is in
   git history (commit 1d21c4f), not on disk.
 - Verification vs video (Aug 2024): Kuat 12,637 ha (video ≈ 11,000, OK);
@@ -113,8 +129,9 @@ Ventusky is only the visual inspiration, not the product.
 3. Calibrate `TRAJECTORY` thresholds with field reports ("Sudah panen / bera"
    answers); consider 16-day periods so harvest (abrupt) and drought
    (gradual) can be told apart.
-4. Stage 2: Open-Meteo rainfall forecast + what-if scenario (no rain for N
-   dasarian → hectares shifting class).
+4. Stage 2 follow-ups: rain from CHIRPS / BMKG stations instead of model
+   points; out-of-sample check of the what-if once the 2027 dry season exists;
+   stage aging in the scenario (vegetative → reproductive).
 5. Stage 3: FastAPI backend for shared action log + field reports; scheduled
    pipeline. Stage 4: ML (rice vs dryland from field reports; NDDI forecast).
 

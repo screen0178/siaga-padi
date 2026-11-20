@@ -28,10 +28,13 @@ pipeline/                 Python: data + scoring (single source of truth)
   scoring.py              hazard index H, status, ha-at-risk, recommendation
   make_placeholder.py     Stage 0: synthetic sample data (clearly labelled)
   gee_export.py           Stage 0/1: real Landsat NDDI via Earth Engine
+  weather.py              Stage 2: Open-Meteo rainfall per dasarian + forecast
+  scenario.py             Stage 2: "no rain for N dasarian" what-if (Earth Engine)
   outputs.py              writes the web data contract
 data/boundaries/          BPS 2020 boundaries (via HDX)
 web/                      TypeScript + Vite + MapLibre frontend
   public/data/            data contract: meta.json, kecamatan.json, desa.json, layers/*.png
+                          optional: weather.json, scenario.json (Stage 2)
 ```
 
 The frontend only reads `web/public/data/`. Sample data and real data use the
@@ -67,6 +70,10 @@ cd web && npm install && npm run dev                   # http://localhost:5173
    per kecamatan. A fixed range also works: `--series 2024-05:2024-10`.
    Single-period runs (`--start/--end`, used for the Aug 2024 video check) still
    work; the slider just hides.
+6. **Rainfall and what-if (Stage 2)**, after step 5:
+   `python pipeline/weather.py` (no Earth Engine; safe to run daily) and
+   `python pipeline/scenario.py --project ID` (~1 min). Both files are optional:
+   without them the rain section and the scenario slider simply do not appear.
 
 ## Method
 
@@ -85,6 +92,21 @@ cd web && npm install && npm run dev                   # http://localhost:5173
    - H = mean class hazard weight on active rice → status Normal / Waspada / Siaga / Awas
    - ha at risk = Σ area × class hazard × stage vulnerability → ranking
 
+8. Rainfall (Stage 2, `weather.py`): Open-Meteo at each kecamatan's label point.
+   Past 92 days + 16-day forecast, summed per dasarian (BMKG's 10-day unit;
+   < 50 mm = dry dasarian), plus days without rain (< 1 mm/day, BMKG classes).
+9. What-if "no rain for N dasarian" (Stage 2, `scenario.py`), calibrated on our
+   own series. Month pairs whose second month was nearly dry (median archive
+   rain < 40 mm: Jun→Jul, Jul→Aug, Aug→Sep 2026) each give a quantile map of
+   NDDI on rice that was active in both months ("p-th percentile before →
+   p-th percentile after"). The scenario replays dry month 1, 2, 3 (3 dasarian
+   each, linear within the month) on each kecamatan's current NDDI histogram,
+   then re-scores with `scoring.py`. Hindcast per kecamatan (Kuat+Ekstrem ha):
+   MAE 134 / 153 / 225 ha vs 166 / 261 / 507 ha for a "no change" baseline.
+   A pixel-level Markov chain on classes was tried first and rejected: pixels
+   keep the Kuat class only 30–60 % of the time month to month, so the chain
+   learned noise and predicted drought would *fall* without rain.
+
 ## Known limitations (state these in the presentation)
 
 - **Growth-stage NDVI thresholds are provisional** (`config.py`; Adinda 2020 full text
@@ -99,6 +121,11 @@ cd web && npm install && npm run dev                   # http://localhost:5173
   be affected. Field feedback is the planned fix.
 - **Revisit gap.** Landsat every 16 days minus clouds; the map always lags reality.
 - Scoring weights are expert guesses until calibrated with field reports.
+- **What-if is a stress test, not a forecast.** It replays one dry season (2026),
+  holds growth stage, active area and irrigation fixed, and its hindcast is
+  in-sample in time. The raster layers keep showing the last image.
+- **Rainfall is model data at one point per kecamatan** (Open-Meteo best-match
+  NWP / ERA5), not rain gauges; BMKG station or CHIRPS data would be better.
 - Stage 0 workflow/feedback is stored in the browser only.
 
 ## Roadmap
@@ -107,7 +134,7 @@ cd web && npm install && npm run dev                   # http://localhost:5173
 |---|---|
 | 0 ✅ | Map, layers, ranked actions, recommendation, WhatsApp text, action log (local) |
 | 1 ✅ | Time slider: monthly dry-season series, NDDI trend per kecamatan |
-| 2 | Rainfall forecast (Open-Meteo) + what-if scenarios (no rain for N dasarian) |
+| 2 ✅ | Rainfall per dasarian + 16-day forecast (Open-Meteo); calibrated what-if "no rain for N dasarian" |
 | 3 | Backend (FastAPI): shared action log, officer field reports, scheduled pipeline |
 | 4 | ML: rice vs. dryland classifier from field reports; NDDI 1–2 dasarian forecast |
 

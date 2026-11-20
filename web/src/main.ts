@@ -2,7 +2,8 @@ import "./style.css";
 import { createMap, type MapApi } from "./map";
 import { composeMessage } from "./message";
 import { renderStrip, renderTrend, shortLabel } from "./timeline";
-import { STAGE_COLOR, STATUS_COLOR, type KecFeature, type KecProps, type Meta } from "./types";
+import { STAGE_COLOR, STATUS_COLOR, type KecFeature, type KecProps, type Meta, type Scenario, type Weather } from "./types";
+import { renderRain, renderScenarioCurve } from "./weather";
 import { FEEDBACK, STEPS, addFeedback, advance, getState, initStore, resetStep } from "./workflow";
 
 const DATA = "./data";
@@ -17,14 +18,26 @@ let api: MapApi;
 let selected: string | null = null;
 let periodId: string | null = null; // null = single-period data (no time series)
 let playTimer: number | null = null;
+let weather: Weather | null = null; // Stage 2, optional
+let scenario: Scenario | null = null; // Stage 2, optional
+let scenN = 0; // dasarian without rain in the what-if (0 = observed)
+
+/** Optional data file: null when missing or malformed. */
+const optional = <T,>(file: string) =>
+  fetch(`${DATA}/${file}`).then((r) => (r.ok ? (r.json() as Promise<T>) : null)).catch(() => null);
 
 async function boot() {
-  const [m, kec, desa] = await Promise.all([
+  const [m, kec, desa, w, sc] = await Promise.all([
     fetch(`${DATA}/meta.json`).then((r) => r.json()),
     fetch(`${DATA}/kecamatan.json`).then((r) => r.json()),
     fetch(`${DATA}/desa.json`).then((r) => r.json()),
+    optional<Weather>("weather.json"),
+    optional<Scenario>("scenario.json"),
   ]);
   meta = m;
+  weather = w;
+  // A scenario only makes sense for the period it was computed from
+  scenario = sc && meta.periods?.some((p) => p.id === sc.period_id) ? sc : null;
   feats = (kec.features as KecFeature[]).slice().sort((a, b) => a.properties.rank - b.properties.rank);
   // Action log stays tied to the run's current period, not the period being viewed
   initStore(`${meta.region.id}:${meta.period.start}`);
@@ -34,6 +47,7 @@ async function boot() {
   }
 
   renderTopbar();
+  renderScenarioControl();
   renderRanking();
   renderLayerbar();
   renderTimeline();
@@ -54,6 +68,8 @@ async function setPeriod(id: string) {
   const p = meta.periods?.find((x) => x.id === id);
   if (!p || id === periodId) return;
   periodId = id;
+  scenN = 0; // the what-if belongs to one period; leaving it shows observed data
+  document.body.classList.remove("scen-on");
   meta.period = { start: p.start, end: p.end, label: p.label };
   meta.totals = p.totals;
   for (const f of feats) {
@@ -62,6 +78,7 @@ async function setPeriod(id: string) {
   }
   feats.sort((a, b) => a.properties.rank - b.properties.rank);
   renderTopbar();
+  renderScenarioControl();
   renderRanking();
   renderTimeline();
   const f = selected ? feats.find((x) => x.properties.id === selected) : null;
@@ -99,8 +116,70 @@ function renderTimeline() {
   renderStrip(el, meta, periodId, (id) => void setPeriod(id), togglePlay, playTimer != null);
 }
 
+// ---------------------------------------------------------------- what-if
+const BULAN3 = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"];
+const monthName = (id: string) => BULAN3[Number(id.slice(5, 7)) - 1] ?? id;
+/** Observed values of the scenario's period (props are mutated in place). */
+const observed = (p: KecProps): KecProps => ({ ...p, ...(scenario ? p.series?.[scenario.period_id] : undefined) });
+
+function setScenario(n: number) {
+  if (!scenario || periodId !== scenario.period_id) return;
+  scenN = Math.max(0, Math.min(scenario.max_dasarian, n));
+  const period = meta.periods!.find((p) => p.id === scenario!.period_id)!;
+  for (const f of feats) {
+    const p = f.properties;
+    Object.assign(p, p.series?.[period.id]); // back to observed first
+    const s = scenario.kecamatan[p.id]?.[String(scenN)];
+    if (scenN > 0 && s) Object.assign(p, s);
+  }
+  const t = scenario.totals[String(scenN)];
+  meta.totals = scenN > 0 ? { ...period.totals, class_ha: t.class_ha, active_ha: t.active_ha } : period.totals;
+  document.body.classList.toggle("scen-on", scenN > 0);
+  feats.sort((a, b) => a.properties.rank - b.properties.rank);
+  renderTopbar();
+  renderScenarioControl();
+  renderRanking();
+  const f = selected ? feats.find((x) => x.properties.id === selected) : null;
+  if (f) renderDetail(f.properties, false);
+  api?.refresh();
+}
+
+function renderScenarioControl() {
+  const el = $("#scenario");
+  if (!scenario) { el.hidden = true; return; }
+  el.hidden = false;
+  const live = periodId === scenario.period_id;
+  const period = meta.periods!.find((p) => p.id === scenario!.period_id)!;
+  const max = scenario.max_dasarian;
+  const months = scenario.calibration.months.map((m) => monthName(m.pair.split(">")[1]));
+  const t0 = scenario.totals["0"], tn = scenario.totals[String(scenN)];
+  const st = (t: { class_ha: Record<string, number> }) => (t.class_ha["4"] ?? 0) + (t.class_ha["5"] ?? 0);
+  const fcVals = weather ? Object.values(weather.kecamatan).map((k) => k.fc_mm).sort((a, b) => a - b) : [];
+  const fcMed = fcVals.length ? fcVals[Math.floor(fcVals.length / 2)] : null;
+  const fcDays = weather ? Object.values(weather.kecamatan)[0]?.fc_days : 0;
+  el.innerHTML = `
+    <div class="scen-h"><b>Bagaimana jika tidak hujan?</b>
+      <span class="scen-v">${scenN === 0 ? "kondisi teramati" : `${scenN} dasarian (±${scenN * 10} hari)`}</span></div>
+    <input id="scen-range" type="range" min="0" max="${max}" step="1" value="${scenN}" ${live ? "" : "disabled"}
+      aria-label="Jumlah dasarian tanpa hujan" aria-valuetext="${scenN} dasarian" />
+    <div class="scen-ticks">${Array.from({ length: max / 3 + 1 }, (_, k) => `<span>${k === 0 ? "0" : `${k} bln`}</span>`).join("")}</div>
+    ${!live ? `<p class="fine">Skenario hanya untuk periode terbaru (${period.label.split(" (")[0]}).</p>`
+      : scenN > 0 ? `<p class="scen-eff">Cekaman kuat–ekstrem <b>${fmt(st(t0))} → ${fmt(st(tn))} ha</b> · ha berisiko ${fmt(t0.ha_at_risk)} → ${fmt(tn.ha_at_risk)}</p>
+        <p class="fine">Skenario uji, bukan prakiraan${fcMed != null ? `: prakiraan ${fcDays} hari ke depan justru ±${fmt(fcMed)} mm (median kecamatan)` : ""}. Laju pengeringan diulang dari bulan kering 2026 (${months.join(", ")}); fase tumbuh dan luas dianggap tetap. Peta raster tetap citra terakhir.</p>`
+      : `<p class="fine">Geser untuk melihat status dan peringkat jika hujan berhenti, memakai laju pengeringan musim kering 2026.</p>`}`;
+  const r = el.querySelector<HTMLInputElement>("#scen-range")!;
+  r.oninput = () => setScenario(Number(r.value));
+}
+
 /** Change in ha-at-risk versus the previous period, for the ranking list. */
 function deltaHtml(p: KecProps) {
+  if (scenN > 0 && scenario) {
+    const obs = p.series?.[scenario.period_id];
+    if (!obs) return "";
+    const d = p.ha_at_risk - obs.ha_at_risk;
+    if (Math.abs(d) < 0.5) return `<span class="delta">= vs teramati</span>`;
+    return `<span class="delta ${d > 0 ? "up" : "down"}">${d > 0 ? "▲" : "▼"} ${fmt(Math.abs(d))} vs teramati</span>`;
+  }
   const ps = meta.periods;
   if (!ps || !periodId || !p.series) return "";
   const i = ps.findIndex((x) => x.id === periodId);
@@ -118,7 +197,7 @@ function renderTopbar() {
   const cs = meta.totals.cropland_stage_ha;
   const inactive = cs && ("6" in cs || "7" in cs) ? (cs["6"] ?? 0) + (cs["7"] ?? 0) : null;
   const count = (s: string) => feats.filter((f) => f.properties.status === s).length;
-  $("#region").textContent = `${meta.region.name} · ${meta.period.label}`;
+  $("#region").innerHTML = `${esc(meta.region.name)} · ${esc(meta.period.label)}${scenN > 0 ? ` <span class="scen-tag">Skenario: tanpa hujan ${scenN} dasarian</span>` : ""}`;
   $("#summary").innerHTML = `
     <div class="chip"><span class="k">Padi aktif</span><span class="v">${fmt(meta.totals.active_ha)} ha</span></div>
     <div class="chip"><span class="k">Cekaman kuat–ekstrem</span><span class="v" style="color:#ff8a7a">${fmt(stressed)} ha</span></div>
@@ -185,6 +264,17 @@ function inactiveSection(p: KecProps) {
     </section>`;
 }
 
+/** One line: when does this kecamatan first change status without rain? */
+function scenarioSentence(id: string) {
+  const s = scenario!.kecamatan[id];
+  const st0 = s["0"].status;
+  for (let n = 1; n <= scenario!.max_dasarian; n++) {
+    if (s[String(n)].status !== st0)
+      return `Tanpa hujan, status berubah dari <b>${st0}</b> ke <b>${s[String(n)].status}</b> setelah ±${n} dasarian (${n * 10} hari). Ha berisiko setelah ${scenario!.max_dasarian} dasarian: ${fmt(s[String(scenario!.max_dasarian)].ha_at_risk)} ha (sekarang ${fmt(s["0"].ha_at_risk)}).`;
+  }
+  return `Status tetap <b>${st0}</b> sampai ${scenario!.max_dasarian} dasarian tanpa hujan; ha berisiko ${fmt(s["0"].ha_at_risk)} → ${fmt(s[String(scenario!.max_dasarian)].ha_at_risk)} ha.`;
+}
+
 function openDetail(id: string, fly: boolean) {
   selected = id;
   const f = feats.find((x) => x.properties.id === id);
@@ -210,26 +300,29 @@ function renderDetail(p: KecProps, resetScroll = true) {
   const next = STEPS[stepIdx + 1];
   const stressed = p.stressed_stage_ha;
   const stressedTotal = Object.values(stressed).reduce((a, b) => a + b, 0) || 1;
-  const msg = composeMessage(p, meta);
+  const kw = weather?.kecamatan[p.id];
+  // Messages to farmers always use observed data, never the what-if
+  const msg = composeMessage(scenN > 0 ? observed(p) : p, meta, kw);
+  const obs = scenN > 0 ? observed(p) : null;
   const totalClass = Object.values(p.class_ha).reduce((a, b) => a + b, 0) || 1;
 
   el.innerHTML = `
     <header>
       <div>
-        <div class="d-kicker">Kecamatan · peringkat ${p.rank} dari ${feats.length}</div>
+        <div class="d-kicker">Kecamatan · peringkat ${p.rank} dari ${feats.length}${obs ? ` · skenario ${scenN} dasarian tanpa hujan` : ""}</div>
         <h2>${esc(p.name)}</h2>
       </div>
       <button class="icon" id="d-close" aria-label="Tutup">✕</button>
     </header>
     <div class="d-status" style="--c:${STATUS_COLOR[p.status]}">
       <span class="dot"></span><b>${p.status}</b>
-      <span class="d-why">indeks bahaya H = ${fmt(p.hazard_index, 2)}</span>
+      <span class="d-why">indeks bahaya H = ${fmt(p.hazard_index, 2)}${obs ? ` · teramati ${obs.status} (${fmt(obs.hazard_index, 2)})` : ""}</span>
     </div>
 
     <div class="kpis">
-      <div><span>NDDI rata-rata</span><b>${fmt(p.mean_nddi, 2)}</b></div>
+      <div><span>NDDI rata-rata${obs ? " (teramati)" : ""}</span><b>${fmt(p.mean_nddi, 2)}</b></div>
       <div><span>Padi aktif</span><b>${fmt(p.active_ha)} <small>ha</small></b></div>
-      <div><span>Berisiko (terbobot)</span><b>${fmt(p.ha_at_risk)} <small>ha</small></b></div>
+      <div><span>Berisiko (terbobot)</span><b>${fmt(p.ha_at_risk)} <small>ha${obs ? ` · teramati ${fmt(obs.ha_at_risk)}` : ""}</small></b></div>
       <div><span>NDVI / NDMI</span><b>${fmt(p.mean_ndvi, 2)} / ${fmt(p.mean_ndmi, 2)}</b></div>
     </div>
 
@@ -237,6 +330,24 @@ function renderDetail(p: KecProps, resetScroll = true) {
     <section>
       <h3>Tren NDDI rata-rata <span class="h3-note">titik bawah = status</span></h3>
       <div id="d-trend" class="trend"></div>
+    </section>` : ""}
+
+    ${kw ? `
+    <section>
+      <h3>Hujan per dasarian <span class="h3-note">Open-Meteo, mm</span></h3>
+      <div class="rain-facts">
+        <div><span>Hari tanpa hujan</span><b>${kw.hth}</b><small>${kw.hth_class}</small></div>
+        <div><span>30 hari terakhir</span><b>${fmt(kw.obs_30d_mm)}</b><small>mm</small></div>
+        <div><span>Prakiraan ${kw.fc_days} hari</span><b>${fmt(kw.fc_mm)}</b><small>mm · ${kw.fc_rain_days} hari hujan</small></div>
+      </div>
+      <div id="d-rain" class="trend"></div>
+    </section>` : ""}
+
+    ${scenario && periodId === scenario.period_id && scenario.kecamatan[p.id] ? `
+    <section>
+      <h3>Jika tidak hujan <span class="h3-note">ha berisiko per dasarian · klik titik</span></h3>
+      <div id="d-scen" class="trend"></div>
+      <p class="fine">${scenarioSentence(p.id)}</p>
     </section>` : ""}
 
     <section>
@@ -262,7 +373,7 @@ function renderDetail(p: KecProps, resetScroll = true) {
 
     ${p.action ? `
     <section class="reco">
-      <h3>Rekomendasi untuk penyuluh <span class="urg">${p.action.urgency}</span></h3>
+      <h3>Rekomendasi untuk penyuluh${obs ? " (skenario)" : ""} <span class="urg">${p.action.urgency}</span></h3>
       <p class="reco-h">${esc(p.action.headline)}</p>
       <ol>${p.action.steps.map((s) => `<li>${esc(s)}</li>`).join("")}</ol>
     </section>` : `<section class="reco ok"><h3>Rekomendasi</h3><p>Tidak ada tindakan khusus. Lanjutkan pemantauan rutin.</p></section>`}
@@ -305,6 +416,7 @@ function renderDetail(p: KecProps, resetScroll = true) {
     <details class="fine">
       <summary>Bagaimana status dihitung?</summary>
       <p>H = rata-rata bobot bahaya kelas NDDI pada padi aktif (Normal 0, Ringan 0,1, Sedang 0,5, Kuat 0,85, Ekstrem 1). Status: H &lt; 0,40 Normal, &lt; 0,60 Waspada, &lt; 0,75 Siaga, selebihnya Awas. Peringkat memakai ha berisiko = luas × bobot bahaya × kerentanan fase (reproduktif 1,0; vegetatif akhir 0,7; vegetatif awal 0,5). Bobot bersifat provisional, mengikuti logika indeks H-MHEWS, dan dikalibrasi dengan laporan lapangan.</p>
+      ${scenario ? `<p><b>Skenario tanpa hujan</b></p><p>Distribusi NDDI tiap kecamatan digeser mengikuti perubahan persentil NDDI padi aktif pada bulan kering 2026 (${scenario.calibration.months.map((m) => `${m.pair.split(">").map(monthName).join("→")}, hujan ${fmt(m.rain_mm)} mm`).join("; ")}), lalu dinilai ulang dengan aturan yang sama. Uji balik per kecamatan: galat rata-rata ${scenario.calibration.months.map((m) => `${fmt(m.kec_mae_ha)} ha`).join(" / ")} vs ${scenario.calibration.months.map((m) => `${fmt(m.persist_mae_ha)} ha`).join(" / ")} bila diasumsikan tidak berubah. Fase tumbuh, luas padi aktif, dan irigasi dianggap tetap.</p>` : ""}
       ${meta.notes.length ? `<p><b>Catatan data</b></p><ul>${meta.notes.map((n) => `<li>${esc(n)}</li>`).join("")}</ul>` : ""}
     </details>`;
 
@@ -312,6 +424,10 @@ function renderDetail(p: KecProps, resetScroll = true) {
   if (resetScroll) el.scrollTop = 0;
   const trend = document.getElementById("d-trend");
   if (trend && periodId) renderTrend(trend, p, meta, periodId, (id) => void setPeriod(id));
+  const rain = document.getElementById("d-rain");
+  if (rain && kw && weather) renderRain(rain, kw, weather.dry_dasarian_mm, weather.today);
+  const sc = document.getElementById("d-scen");
+  if (sc && scenario) renderScenarioCurve(sc, p.id, p.name, scenario, scenN, setScenario);
   $("#d-close").onclick = closeDetail;
   const adv = document.getElementById("d-advance");
   if (adv) adv.onclick = () => { advance(p.id); renderDetail(p); renderRanking(); };

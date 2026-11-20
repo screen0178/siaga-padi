@@ -111,3 +111,60 @@ export const STAGE_COLOR: Record<string, string> = {
   "6": "#5b6170",
   "7": "#d4b483",
 };
+
+// ---------------------------------------------------------------- Stage 2
+/** weather.json (pipeline/weather.py), optional. */
+export interface Dasarian {
+  id: string;
+  start: string;
+  end: string; // exclusive
+  label: string;
+  obs_mm: number;
+  fc_mm: number;
+  obs_days: number;
+  fc_days: number;
+  days: number;
+  complete: boolean;
+}
+
+export interface KecWeather {
+  dasarian: Dasarian[];
+  hth: number;
+  hth_class: string;
+  obs_30d_mm: number;
+  fc_mm: number;
+  fc_days: number;
+  fc_rain_days: number;
+}
+
+export interface Weather {
+  generated_at: string;
+  today: string;
+  source: string;
+  dry_day_mm: number;
+  dry_dasarian_mm: number;
+  kecamatan: Record<string, KecWeather>;
+}
+
+/** scenario.json (pipeline/scenario.py), optional. Keyed by N dasarian. */
+export type ScenarioStats = Pick<KecProps,
+  "active_ha" | "hazard_index" | "ha_at_risk" | "status" | "class_ha" | "stage_ha" | "stressed_stage_ha" | "action" | "rank">;
+
+export interface ScenarioMonth {
+  pair: string;
+  rain_mm: number;
+  kec_mae_ha: number;
+  kec_bias_ha: number;
+  persist_mae_ha: number;
+  kec_mean_ha: number;
+}
+
+export interface Scenario {
+  generated_at: string;
+  period_id: string;
+  max_dasarian: number;
+  method: string;
+  calibration: { rain_max_mm: number; months: ScenarioMonth[] };
+  totals: Record<string, { class_ha: Record<string, number>; active_ha: number; ha_at_risk: number }>;
+  kecamatan: Record<string, Record<string, ScenarioStats>>;
+}

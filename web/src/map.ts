@@ -15,6 +15,8 @@ export interface MapApi {
   /** Switch raster folder (null = top-level layers/) and redraw kecamatan
    *  styling from the (already mutated) feature properties. */
   setPeriod(layersDir: string | null): Promise<void>;
+  /** Redraw kecamatan styling from mutated feature properties (scenario). */
+  refresh(): void;
   select(id: string | null, fly?: boolean): void;
   onSelect(cb: (id: string) => void): void;
 }
@@ -174,6 +176,10 @@ export async function createMap(
     if (current !== "status") await setLayer(current);
   }
 
+  function refresh() {
+    (map.getSource("kec") as maplibregl.GeoJSONSource).setData(kec);
+  }
+
   function setOpacity(v: number) {
     opacity = v;
     if (map.getLayer("overlay")) map.setPaintProperty("overlay", "raster-opacity", v);
@@ -231,5 +237,5 @@ export async function createMap(
     }
   }
 
-  return { map, setLayer, setOpacity, setPeriod, select, onSelect: (cb) => selectCbs.push(cb) };
+  return { map, setLayer, setOpacity, setPeriod, refresh, select, onSelect: (cb) => selectCbs.push(cb) };
 }
