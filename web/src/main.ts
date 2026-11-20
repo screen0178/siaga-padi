@@ -210,7 +210,8 @@ function renderTopbar() {
   const t = meta.totals.class_ha;
   const stressed = (t["4"] ?? 0) + (t["5"] ?? 0);
   const cs = meta.totals.cropland_stage_ha;
-  const inactive = cs && ["6", "7", "8", "9"].some((k) => k in cs) ? ["6", "7", "8", "9"].reduce((a, k) => a + (cs[k] ?? 0), 0) : null;
+  const NA = ["6", "7", "8", "9", "10"];
+  const inactive = cs && NA.some((k) => k in cs) ? NA.reduce((a, k) => a + (cs[k] ?? 0), 0) : null;
   const count = (s: string) => feats.filter((f) => f.properties.status === s).length;
   $("#region").innerHTML = `${esc(meta.region.name)} · ${esc(meta.period.label)}${scenN > 0 ? ` <span class="scen-tag">Skenario: tanpa hujan ${scenN} dasarian</span>` : ""}`;
   $("#summary").innerHTML = `
@@ -251,7 +252,7 @@ function renderRanking() {
           <div class="r-top"><span class="r-name">${esc(p.name)}</span>
             <span class="pill" style="--c:${STATUS_COLOR[p.status]}">${p.status}</span></div>
           ${classBar(p)}
-          <div class="r-meta"><span><b>${fmt(p.ha_at_risk)}</b> ha berisiko ${deltaHtml(p)}</span>
+          <div class="r-meta"><span><b>${fmt(p.ha_at_risk)}</b> ha berisiko ${deltaHtml(p)}${p.water_source ? ` <span class="r-water ${p.water_source === "tadah hujan" ? "rf" : ""}" title="Sumber air dominan (data resmi 2024)">${p.water_source}</span>` : ""}</span>
             <span class="r-step ${st.step}">${stepLabel}</span></div>
           ${p.action ? `<div class="r-act">${esc(p.action.headline)}</div>` : ""}
           ${verifyHa(p) >= VERIFY_MIN_HA ? `<div class="r-verify" title="Lahan yang turun seperti panen, tetapi ada tanda kekeringan sebelumnya">⚠ ${fmt(verifyHa(p))} ha panen atau puso? perlu cek</div>` : ""}
@@ -268,19 +269,45 @@ function renderRanking() {
 /** Sawah not counted as active rice (series mode): fallow and harvested. */
 // ---------------------------------------------------------------- verification (v2 0.2)
 const VERIFY_MIN_HA = 25; // below this a flag is noise on the priority list
-const verifyHa = (p: KecProps) => p.cropland_stage_ha?.["9"] ?? 0;
+const verifyHa = (p: KecProps) => (p.cropland_stage_ha?.["9"] ?? 0) + (p.cropland_stage_ha?.["10"] ?? 0);
+
+/** v2 Phase 3: what water the kecamatan can fall back on. */
+function waterSection(p: KecProps) {
+  const w = p.water;
+  if (!w) return "";
+  const pct = (v: number | undefined) => (v == null ? "-" : `${Math.round(v * 100)}%`);
+  const f = p.capacity_factor;
+  return `
+    <section>
+      <h3>Kapasitas air <span class="h-note">${esc(p.water_source ?? "")}</span></h3>
+      <div class="wbar" title="Sawah irigasi ${fmt(w.irrigated_ha)} ha, tadah hujan ${fmt(w.rainfed_ha)} ha">
+        <span style="width:${w.irrigated_share * 100}%" class="irr"></span><span style="width:${(1 - w.irrigated_share) * 100}%" class="rf"></span></div>
+      <ul class="legend-rows">
+        <li><i style="--c:#5bb0d9"></i>Sawah irigasi<span>${fmt(w.irrigated_ha)} ha (${pct(w.irrigated_share)})</span></li>
+        <li><i style="--c:#c9a66b"></i>Sawah tadah hujan<span>${fmt(w.rainfed_ha)} ha</span></li>
+        <li>Ditanami padi ≥ 3× setahun<span>${pct(w.rice3x_share)}</span></li>
+        ${w.dry_green_share != null ? `<li>Hijau di puncak kemarau 2026 (satelit)<span>${pct(w.dry_green_share)}</span></li>` : ""}
+      </ul>
+      <p class="fine">Data resmi Dinas Pertanian 2024. ${f != null && f < 1 ? `Peringkat memakai ha berisiko × ${fmt(f, 2)}: sawah irigasi meredam, tidak menghapus, risiko kekeringan. Status tetap dari tingkat bahaya.` : ""} "Hijau di puncak kemarau" = sawah dengan tajuk padi (NDVI ≥ 0,45) pada Agustus atau September 2026, tanda ada air irigasi, pompa, atau sumur.</p>
+    </section>`;
+}
 
 /** Harvest-like drops that may be drought-killed crops: ask, do not hide. */
 function verifySection(p: KecProps) {
-  const ha = verifyHa(p);
-  if (ha <= 0) return "";
-  const harvested = p.cropland_stage_ha?.["7"] ?? 0;
+  if (verifyHa(p) <= 0) return "";
+  const cs = p.cropland_stage_ha ?? {};
+  const puso = cs["9"] ?? 0, failed = cs["10"] ?? 0;
   return `
     <section class="verify">
       <h3>Perlu verifikasi</h3>
-      <ul class="legend-rows"><li><i style="--c:${STAGE_COLOR["9"]}"></i>Panen atau puso?<span>${fmt(ha)} ha</span></li></ul>
-      <p class="fine">Lahan ini turun seperti panen (${fmt(harvested)} ha lain terlihat panen biasa), tetapi sebelum turun sudah tercekam kuat, atau turunnya terlalu cepat setelah tanam. Bisa panen biasa, bisa juga puso karena kering. Tidak dihitung sebagai padi aktif, jadi tidak masuk peringkat: hanya cek lapangan yang bisa memastikan.</p>
-      <button class="ghost" id="d-verify">Isi laporan cek: panen atau puso?</button>
+      <ul class="legend-rows">
+        ${puso > 0 ? `<li><i style="--c:${STAGE_COLOR["9"]}"></i>Panen atau puso?<span>${fmt(puso)} ha</span></li>` : ""}
+        ${failed > 0 ? `<li><i style="--c:${STAGE_COLOR["10"]}"></i>Gagal tanam?<span>${fmt(failed)} ha</span></li>` : ""}
+      </ul>
+      ${puso > 0 ? `<p class="fine"><b>Panen atau puso?</b> Lahan turun seperti panen (${fmt(cs["7"] ?? 0)} ha lain terlihat panen biasa), tetapi sebelumnya sudah tercekam kuat, atau turunnya terlalu cepat setelah tanam.</p>` : ""}
+      ${failed > 0 ? `<p class="fine"><b>Gagal tanam?</b> Lahan tidak pernah hijau, padahal sebagian besar sawah dalam radius 300 m di sekitarnya hijau: wilayah itu ditanami, jadi lahan ini mungkin gagal tumbuh, bukan sengaja dibiarkan bera.</p>` : ""}
+      <p class="fine">Tidak dihitung sebagai padi aktif, jadi tidak masuk peringkat: hanya cek lapangan yang bisa memastikan.</p>
+      <button class="ghost" id="d-verify">Isi laporan cek lapangan</button>
     </section>`;
 }
 
@@ -288,7 +315,7 @@ function inactiveSection(p: KecProps) {
   const cs = p.cropland_stage_ha;
   if (!cs || !("6" in cs || "7" in cs || "8" in cs)) return "";
   // Stage 9 has its own "Perlu verifikasi" section
-  const rows = meta.stage_classes.filter((s) => s.id >= 6 && s.id !== 9 && (s.id !== 8 || (cs["8"] ?? 0) > 0));
+  const rows = meta.stage_classes.filter((s) => s.id >= 6 && s.id !== 9 && s.id !== 10 && (s.id !== 8 || (cs["8"] ?? 0) > 0));
   const ex = fb?.excluded_desa.filter((e) => e.kec_id === p.id) ?? [];
   return `
     <section>
@@ -397,6 +424,7 @@ function renderDetail(p: KecProps, resetScroll = true) {
     </section>
 
     ${verifySection(p)}
+    ${waterSection(p)}
     ${inactiveSection(p)}
 
     <section>
@@ -446,7 +474,7 @@ function renderDetail(p: KecProps, resetScroll = true) {
       <h3>Laporan cek lapangan</h3>
       ${reportSummary(reps)}
       <form id="d-fb">
-        <p class="ask">Di lahan yang terlihat panen: <b>panen biasa</b> (pilih "Sudah panen / bera") atau <b>puso</b>?</p>
+        <p class="ask">Lahan yang ditandai: <b>panen biasa / bera</b>, <b>puso</b>, atau <b>gagal tanam</b>?</p>
         ${FEEDBACK.map((o, i) => `<label class="radio"><input type="radio" name="fb" value="${o.id}" ${i === 0 ? "checked" : ""}> ${o.label}</label>`).join("")}
         <select name="desa"><option value="">Desa (opsional)</option>${(desaByKec[p.id] ?? []).map((d) => `<option value="${d.id}">${esc(d.name)}</option>`).join("")}</select>
         <input type="text" name="note" maxlength="1000" placeholder="Catatan (opsional): blok, komoditas, foto…" />
@@ -463,7 +491,7 @@ function renderDetail(p: KecProps, resetScroll = true) {
 
     <details class="fine">
       <summary>Bagaimana status dihitung?</summary>
-      <p>H = rata-rata bobot bahaya kelas NDDI pada padi aktif (Normal 0, Ringan 0,1, Sedang 0,5, Kuat 0,85, Ekstrem 1). Status: H &lt; 0,40 Normal, &lt; 0,60 Waspada, &lt; 0,75 Siaga, selebihnya Awas. Peringkat memakai ha berisiko = luas × bobot bahaya × kerentanan fase (reproduktif 1,0; vegetatif akhir 0,7; vegetatif awal 0,5). Bobot bersifat provisional, mengikuti logika indeks H-MHEWS, dan dikalibrasi dengan laporan lapangan.</p>
+      <p>H = rata-rata bobot bahaya kelas NDDI pada padi aktif (Normal 0, Ringan 0,1, Sedang 0,5, Kuat 0,85, Ekstrem 1). Status: H &lt; 0,40 Normal, &lt; 0,60 Waspada, &lt; 0,75 Siaga, selebihnya Awas. Ha berisiko = luas × bobot bahaya × kerentanan fase (reproduktif 1,0; vegetatif akhir 0,7; vegetatif awal 0,5). Peringkat memakai ha berisiko × (1 − 0,3 × pangsa sawah irigasi): kapasitas air menurunkan prioritas, bukan status. Bobot bersifat provisional, mengikuti logika indeks H-MHEWS, dan dikalibrasi dengan laporan lapangan.</p>
       ${scenario ? `<p><b>Skenario tanpa hujan</b></p><p>Distribusi NDDI tiap kecamatan digeser mengikuti perubahan persentil NDDI padi aktif pada bulan kering 2026 (${scenario.calibration.months.map((m) => `${m.pair.split(">").map(monthName).join("→")}, hujan ${fmt(m.rain_mm)} mm`).join("; ")}), lalu dinilai ulang dengan aturan yang sama. Uji balik per kecamatan: galat rata-rata ${scenario.calibration.months.map((m) => `${fmt(m.kec_mae_ha)} ha`).join(" / ")} vs ${scenario.calibration.months.map((m) => `${fmt(m.persist_mae_ha)} ha`).join(" / ")} bila diasumsikan tidak berubah. Fase tumbuh, luas padi aktif, dan irigasi dianggap tetap.</p>` : ""}
       ${feedbackExplainer()}
       ${meta.notes.length ? `<p><b>Catatan data</b></p><ul>${meta.notes.map((n) => `<li>${esc(n)}</li>`).join("")}</ul>` : ""}

@@ -24,6 +24,10 @@ export interface KecProps {
   active_ha: number;
   hazard_index: number;
   ha_at_risk: number;
+  /** v2 Phase 3: ha_at_risk x capacity_factor; the ranking key. */
+  priority?: number;
+  capacity_factor?: number;
+  water_source?: "irigasi" | "tadah hujan" | "campuran" | null;
   status: Status;
   class_ha: Record<string, number>;
   stage_ha: Record<string, number>;
@@ -32,10 +36,21 @@ export interface KecProps {
   rank: number;
   /** Stage 1: per-period stats + scoring, keyed by Period.id (optional). */
   series?: Record<string, PeriodStats>;
+  /** v2 Phase 3: official 2024 irrigation + 2026 dry-season satellite proxy (static). */
+  water?: Water;
+}
+
+export interface Water {
+  irrigated_ha: number;
+  rainfed_ha: number;
+  sawah_ha: number;
+  irrigated_share: number;
+  rice3x_share: number;
+  dry_green_share?: number;
 }
 
 /** The per-period part of KecProps (everything that changes over time). */
-export type PeriodStats = Omit<KecProps, "id" | "name" | "area_ha" | "n_desa" | "label_lon" | "label_lat" | "series">;
+export type PeriodStats = Omit<KecProps, "id" | "name" | "area_ha" | "n_desa" | "label_lon" | "label_lat" | "series" | "water">;
 
 export interface Totals {
   class_ha: Record<string, number>;
