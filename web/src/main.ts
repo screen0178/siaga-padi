@@ -255,7 +255,7 @@ function renderRanking() {
           <div class="r-meta"><span><b>${fmt(p.ha_at_risk)}</b> ha berisiko ${deltaHtml(p)}${p.water_source ? ` <span class="r-water ${p.water_source === "tadah hujan" ? "rf" : ""}" title="Sumber air dominan (data resmi 2024)">${p.water_source}</span>` : ""}</span>
             <span class="r-step ${st.step}">${stepLabel}</span></div>
           ${p.action ? `<div class="r-act">${esc(p.action.headline)}</div>` : ""}
-          ${verifyHa(p) >= VERIFY_MIN_HA ? `<div class="r-verify" title="Lahan yang turun seperti panen, tetapi ada tanda kekeringan sebelumnya">⚠ ${fmt(verifyHa(p))} ha panen atau puso? perlu cek</div>` : ""}
+          ${verifyHa(p) >= VERIFY_MIN_HA ? `<div class="r-verify" title="Panen atau puso? ${fmt(p.cropland_stage_ha?.["9"] ?? 0)} ha · gagal tanam? ${fmt(p.cropland_stage_ha?.["10"] ?? 0)} ha">⚠ ${fmt(verifyHa(p))} ha perlu cek lapangan (puso? / gagal tanam?)</div>` : ""}
         </div>
       </li>`;
     })

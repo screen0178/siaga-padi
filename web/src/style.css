@@ -314,5 +314,5 @@ section.verify { border-left: 3px solid #e0602b; padding-left: 10px; }
 .wbar { display: flex; height: 8px; border-radius: 4px; overflow: hidden; gap: 2px; margin: 4px 0 8px; }
 .wbar .irr { background: #5bb0d9; }
 .wbar .rf { background: #c9a66b; }
-.r-water { font-size: 10px; color: #7cc3e6; margin-left: 4px; }
+.r-water { font-size: 10px; color: #7cc3e6; margin-left: 4px; white-space: nowrap; }
 .r-water.rf { color: #d8b77a; }
