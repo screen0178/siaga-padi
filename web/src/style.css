@@ -355,3 +355,35 @@ section.verify { border-left: 3px solid #e0602b; padding-left: 10px; }
 .layerbar .scen p.fine { font-size: 11px; margin-top: 4px; }
 #d-scen-on { margin-top: 8px; }
 @media (max-width: 900px) { .tl-now small { display: none; } .scen-row { flex-direction: column; align-items: stretch; gap: 0; } }
+
+/* ---------------------------------------------------------------- v2 1.2: guided tour */
+.tour-btn {
+  pointer-events: auto; padding: 8px 12px; background: var(--panel); backdrop-filter: blur(8px);
+  border: 1px solid var(--line); border-radius: 10px; color: var(--text); font: 500 12.5px var(--sans); cursor: pointer;
+}
+.tour-btn:hover { border-color: var(--accent); }
+.tour-shield { position: fixed; inset: 0; z-index: 40; }
+.tour-hole {
+  position: fixed; z-index: 41; pointer-events: none; border-radius: 12px; border: 2px solid var(--accent);
+  box-shadow: 0 0 0 9999px rgba(5, 8, 12, 0.62); transition: all 0.25s ease;
+}
+.tour-hole.none { left: 50% !important; top: 50% !important; width: 0 !important; height: 0 !important; border: 0; }
+.tour-card {
+  position: fixed; z-index: 42; width: 330px; padding: 14px 16px 12px; border-radius: 12px;
+  background: var(--panel-solid); border: 1px solid #2c3442; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+  transition: left 0.25s ease, top 0.25s ease, opacity 0.15s;
+}
+.tour-card.busy { opacity: 0.6; }
+.tour-k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); }
+.tour-card h3 { font-size: 15px; margin: 4px 0 6px; }
+.tour-card p { margin: 0; color: #c8cfd9; font-size: 12.5px; line-height: 1.5; }
+.tour-card p b { color: var(--text); }
+.tour-dots { display: flex; gap: 5px; margin: 12px 0 10px; }
+.tour-dots i { width: 6px; height: 6px; border-radius: 50%; background: #333b48; }
+.tour-dots i.on { background: var(--accent); }
+.tour-row { display: flex; align-items: center; gap: 6px; }
+.tour-row span { flex: 1; }
+@media (max-width: 700px) {
+  .tour-card { left: 12px !important; right: 12px; top: auto !important; bottom: 12px; width: auto; }
+}
+@media (max-width: 900px) { .tour-btn { padding: 8px 10px; } }

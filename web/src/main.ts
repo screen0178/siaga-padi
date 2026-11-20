@@ -3,6 +3,7 @@ import { createMap, type MapApi } from "./map";
 import { daysSince, freshness, latestScene, renderFresh } from "./fresh";
 import { composeMessage } from "./message";
 import { renderStrip, renderTrend, shortLabel } from "./timeline";
+import { startTour, tourSeen, type TourStep } from "./tour";
 import { STAGE_COLOR, STATUS_COLOR, type KecFeature, type KecProps, type Meta, type Feedback, type Scenario, type Weather } from "./types";
 import { renderRain, renderScenarioCurve } from "./weather";
 import {
@@ -80,6 +81,65 @@ async function boot() {
   const hash = location.hash.slice(1);
   const fromHash = feats.find((f) => slug(f.properties.name) === hash);
   if (fromHash) openDetail(fromHash.properties.id, true);
+  $("#tour-btn").onclick = runTour;
+  // First visit: start the tour, unless the link points at a kecamatan
+  if (!fromHash && !tourSeen()) runTour();
+}
+
+// ---------------------------------------------------------------- guided tour (v2 1.2)
+function runTour() {
+  const wasSelected = selected;
+  const top = feats[0]?.properties;
+  const q = (sel: string) => () => [document.querySelector(sel)];
+  const section = (sel: string) => () => [document.querySelector(sel)?.closest("section") ?? null];
+  const openTop = () => { if (top && selected !== top.id) openDetail(top.id, true); };
+  const steps: TourStep[] = [
+    {
+      title: "Selamat datang di SIAGA-Padi",
+      body: `Sistem respons kekeringan padi pada musim berjalan untuk penyuluh ${esc(meta.region.name)}: citra satelit diubah menjadi tindakan lapangan yang diprioritaskan, disetujui Dinas, dilacak, lalu dikoreksi oleh laporan lapangan. Tur ini 8 langkah; bisa dijeda kapan saja.`,
+    },
+    {
+      title: "Peta dan lapisan",
+      body: "Warna kecamatan = status kekeringan. Lapisan lain berasal dari citra Landsat: kelas kekeringan (NDDI), kehijauan (NDVI), kelembapan (NDMI), dan fase tumbuh padi. Klik kecamatan di peta untuk melihat detailnya.",
+      target: q(".layers"),
+    },
+    {
+      title: "Garis waktu",
+      body: "Enam bulan terakhir; tinggi batang = ha padi tercekam kuat–ekstrem. <b>Hari ini</b> mengingatkan bahwa peta memakai citra terakhir, bukan kondisi hari ini. ▶ memutar urutan bulan; tombol panah ← → juga bisa.",
+      target: q("#timeline"),
+    },
+    {
+      title: "Ringkasan dan kesegaran data",
+      body: "Luas padi aktif, luas tercekam, sawah yang tidak dihitung aktif (bera, panen, perlu cek), dan jumlah kecamatan per status: <b>Normal, Waspada, Siaga, Awas</b>. Titik hijau / kuning / merah di kanan menunjukkan umur citra dan data hujan.",
+      target: () => [document.querySelector("#summary"), document.querySelector("#fresh")],
+    },
+    {
+      title: "Prioritas tindakan",
+      body: "Kecamatan diurutkan menurut ha padi berisiko (cekaman × kerentanan fase tumbuh), diredam oleh pangsa sawah irigasi. Tanda ⚠ = lahan yang turun seperti panen atau tidak pernah hijau: bisa puso atau gagal tanam, perlu cek lapangan.",
+      target: q("#rank"),
+    },
+    {
+      title: `Detail kecamatan: ${top ? esc(top.name) : ""}`,
+      body: "Status dan alasannya, tren NDDI, hujan per dasarian, kapasitas air, dan rekomendasi untuk penyuluh. <b>Uji skenario</b> menunjukkan apa yang terjadi bila hujan berhenti; pesan ke petani tetap memakai data teramati.",
+      target: q("#detail"),
+      before: openTop,
+    },
+    {
+      title: "Alur tindakan",
+      body: "Penyuluh <b>mengusulkan</b>, Dinas <b>menyetujui</b>, penyuluh <b>mengirim</b> pesan WhatsApp ke Gapoktan dan menandai <b>selesai</b>. Setiap langkah dicatat dengan nama, peran, dan waktu.",
+      target: section("#detail .stepper"),
+      before: openTop,
+    },
+    {
+      title: "Laporan lapangan dan identitas",
+      body: "Hasil cek lapangan (sesuai, bukan padi, sudah panen, puso, gagal tanam) dibandingkan dengan peta dan mengoreksi masker padi pada pembaruan data berikutnya. Masuk sebagai penyuluh atau Dinas lewat tombol kanan atas; <b>Pemandu</b> membuka tur ini lagi.",
+      target: () => [document.querySelector("#d-fb")?.closest("section") ?? null],
+      before: openTop,
+    },
+  ];
+  startTour(steps, () => {
+    if (!wasSelected && selected) closeDetail();
+  });
 }
 
 const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
