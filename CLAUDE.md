@@ -232,7 +232,7 @@ Ventusky is only the visual inspiration, not the product.
     bar switch, detail card, model page, Terima/Tolak against the real
     server (message sentence appears after Terima, disappears after Tolak;
     test reviews deleted), tour step 4 of 9. The scheduler's weather job ran
-    forecast.py by itself. 11 server + 13 pipeline tests pass.
+    forecast.py by itself. 10 server + 13 pipeline tests pass.
 - Aug 2024 video-check run (single period) was done first; its data is in
   git history (commit 1d21c4f), not on disk.
 - Verification vs video (Aug 2024): Kuat 12,637 ha (video ≈ 11,000, OK);
