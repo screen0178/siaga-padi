@@ -1,5 +1,7 @@
 import "./style.css";
 import { createMap, type MapApi } from "./map";
+import { cockpitHtml } from "./cockpit";
+import { impactSection } from "./impact";
 import { forecastCard, forecastSentence, modelPage, tgl } from "./forecast";
 import { daysSince, freshness, latestScene, renderFresh } from "./fresh";
 import { composeMessage } from "./message";
@@ -89,6 +91,7 @@ async function boot() {
   const fromHash = feats.find((f) => slug(f.properties.name) === hash);
   if (fromHash) openDetail(fromHash.properties.id, true);
   $("#tour-btn").onclick = runTour;
+  $("#cockpit-btn").onclick = openCockpit;
   // First visit: start the tour, unless the link points at a kecamatan
   if (!fromHash && !tourSeen()) runTour();
 }
@@ -136,6 +139,12 @@ function runTour() {
       target: q("#detail"),
       before: openTop,
     },
+    {
+      title: "Dampak dan opsi tindakan",
+      body: "Ha berisiko diterjemahkan menjadi <b>produksi terancam</b> (ton GKG) dan <b>nilai rupiah</b>, selalu sebagai rentang: produktivitas BPS Pati 2024 × harga HPP–pasar. Di bawahnya opsi tindakan dengan sasaran dan perkiraan efeknya: pompanisasi untuk sawah tadah hujan (jumlah pompa), gilir air untuk sawah irigasi, tunda tanam untuk lahan yang belum ditanam.",
+      target: section("#detail .imp-kpi"),
+      before: openTop,
+    },
     ...(forecast ? [{
       title: "Kartu prakiraan dan tinjauan Dinas",
       body: "Per langkah: status prakiraan, kisaran P10–P90 (batang), dan keyakinan. <span class='tag model'>Model</span> dibandingkan dengan <span class='tag rule'>Aturan</span> (status peta), lalu tiga alasan utama. Dinas memilih <b>Terima</b> atau <b>Tolak</b>; pesan ke Gapoktan hanya memuat prakiraan bila keyakinannya tinggi atau sudah diterima. <b>Tentang model</b> menjelaskan data, hasil uji, dan batasannya.",
@@ -147,6 +156,11 @@ function runTour() {
       body: "Penyuluh <b>mengusulkan</b>, Dinas <b>menyetujui</b>, penyuluh <b>mengirim</b> pesan WhatsApp ke Gapoktan dan menandai <b>selesai</b>. Setiap langkah dicatat dengan nama, peran, dan waktu.",
       target: section("#detail .stepper"),
       before: openTop,
+    },
+    {
+      title: "Dasbor Dinas",
+      body: "Ringkasan kabupaten untuk Dinas Pertanian: luas tercekam, kecamatan per status, nilai produksi terancam, tindakan yang menunggu persetujuan, dan prakiraan. Daftar <b>Perlu perhatian</b> menunjukkan pemilik tiap kasus, berapa lama menunggu, dan langkah berikutnya; usulan yang menunggu Dinas berada paling atas.",
+      target: q("#cockpit-btn"),
     },
     {
       title: "Laporan lapangan dan identitas",
@@ -582,6 +596,11 @@ function renderDetail(p: KecProps, resetScroll = true) {
         .join("")}</ul>
     </section>
 
+    ${impactSection(p.impact, periodId === curPeriodId() ? observed(p).options ?? [] : null, meta, {
+      label: scenN > 0 ? `skenario ${scenN} dasarian` : fcStep ? "data teramati" : curPeriodLabel() === meta.period.label ? "bulan berjalan" : meta.period.label.split(" (")[0],
+      fcRainMm: kw?.fc_mm, fcDays: kw?.fc_days,
+      optsNote: scenN > 0 ? "Opsi dihitung dari data teramati, bukan skenario." : undefined,
+    })}
     ${verifySection(p)}
     ${waterSection(p)}
     ${inactiveSection(p)}
@@ -716,6 +735,32 @@ function bindForecastCard(p: KecProps) {
   const ok = document.getElementById("fc-accept"), no = document.getElementById("fc-reject");
   if (ok) ok.onclick = send("accept");
   if (no) no.onclick = send("reject");
+}
+
+// ---------------------------------------------------------------- Dinas cockpit (v2 Phase 4.3)
+function openCockpit() {
+  const cur = curPeriodId();
+  const ps = meta.periods ?? [];
+  const i = ps.findIndex((x) => x.id === cur);
+  const prev = i > 0 ? ps[i - 1] : null;
+  const curMeta = { ...meta, totals: ps[i]?.totals ?? meta.totals };
+  const dlg = $("#cockpit-dlg") as HTMLDialogElement;
+  const draw = () => {
+    dlg.innerHTML = cockpitHtml({
+      meta: curMeta,
+      kec: feats.map((f) => ({ ...f.properties, ...f.properties.series?.[cur] })),
+      prevStressedHa: prev ? (prev.totals.class_ha["4"] ?? 0) + (prev.totals.class_ha["5"] ?? 0) : null,
+      prevLabel: prev ? shortLabel(prev) : null,
+      forecast: forecast && meta.periods?.length ? forecast : null,
+      periodLabel: curPeriodLabel(),
+    });
+    dlg.querySelectorAll<HTMLTableRowElement>("tr[data-kec]").forEach((tr) => (tr.onclick = () => {
+      dlg.close();
+      openDetail(tr.dataset.kec!, true);
+    }));
+  };
+  draw();
+  dlg.showModal();
 }
 
 function openModelPage() {

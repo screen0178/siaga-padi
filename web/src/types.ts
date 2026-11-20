@@ -38,6 +38,21 @@ export interface KecProps {
   series?: Record<string, PeriodStats>;
   /** v2 Phase 3: official 2024 irrigation + 2026 dry-season satellite proxy (static). */
   water?: Water;
+  /** v2 Phase 4: production at risk; per period in series, per step in scenario. */
+  impact?: Impact;
+  /** v2 Phase 4: action options for the current period (top level only). */
+  options?: ActionOption[];
+}
+
+/** [low, mid, high] tonnes GKG and rupiah for ha_eq hectare-equivalents of lost harvest. */
+export interface Impact { ha_eq: number; t: [number, number, number]; rp: [number, number, number] }
+export interface ActionOption {
+  id: "pump" | "rotation" | "delay";
+  label: string;
+  target_ha: number;
+  pumps: [number, number] | null;
+  detail: string;
+  saves: { ha_eq: [number, number]; t: [number, number]; rp: [number, number] } | null;
 }
 
 export interface Water {
@@ -50,11 +65,12 @@ export interface Water {
 }
 
 /** The per-period part of KecProps (everything that changes over time). */
-export type PeriodStats = Omit<KecProps, "id" | "name" | "area_ha" | "n_desa" | "label_lon" | "label_lat" | "series" | "water">;
+export type PeriodStats = Omit<KecProps, "id" | "name" | "area_ha" | "n_desa" | "label_lon" | "label_lat" | "series" | "water" | "options">;
 
 export interface Totals {
   class_ha: Record<string, number>;
   active_ha: number;
+  impact?: Impact;
   cropland_stage_ha?: Record<string, number>;
 }
 
@@ -105,6 +121,8 @@ export interface Meta {
   status_levels: Status[];
   totals: Totals;
   notes: string[];
+  /** v2 Phase 4: economic assumptions with sources. */
+  impact?: { yield_t_ha: number; yield_source: string; yield_factor: [number, number]; price_rp_kg: [number, number]; price_source: string };
   /** Stage 1 time series (optional; absent in single-period data). */
   periods?: Period[];
   current_period?: string;
@@ -166,7 +184,7 @@ export interface Weather {
 
 /** scenario.json (pipeline/scenario.py), optional. Keyed by N dasarian. */
 export type ScenarioStats = Pick<KecProps,
-  "active_ha" | "hazard_index" | "ha_at_risk" | "status" | "class_ha" | "stage_ha" | "stressed_stage_ha" | "action" | "rank">;
+  "active_ha" | "hazard_index" | "ha_at_risk" | "status" | "class_ha" | "stage_ha" | "stressed_stage_ha" | "action" | "rank" | "impact">;
 
 export interface ScenarioMonth {
   pair: string;
