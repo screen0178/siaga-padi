@@ -7,7 +7,11 @@ import { forecastCard, forecastSentence, modelPage, tgl } from "./forecast";
 import { daysSince, freshness, latestScene, renderFresh } from "./fresh";
 import { composeMessage } from "./message";
 import { renderStrip, renderTrend, shortLabel } from "./timeline";
-import { startTour, tourSeen, type TourStep } from "./tour";
+import { startTour, tourSeen } from "./tour";
+import { tourSteps } from "./tourSteps";
+import { drawLegend } from "./legend";
+import { VERIFY_MIN_HA, feedbackExplainer, inactiveSection, reportCheck, reportSummary, verifyHa, verifySection, waterSection } from "./sections";
+import { BULAN3, BULAN_PANJANG, esc, fmt, slug, when } from "./util";
 import { STAGE_COLOR, STATUS_COLOR, type Anomaly, type Forecast, type KecFeature, type KecProps, type Meta, type Feedback, type Scenario, type Weather } from "./types";
 import { renderRain, renderScenarioCurve } from "./weather";
 import {
@@ -18,9 +22,6 @@ import {
 
 const DATA = "./data";
 const $ = <T extends HTMLElement = HTMLElement>(sel: string) => document.querySelector(sel) as T;
-const fmt = (n: number | null | undefined, d = 0) =>
-  n == null ? "-" : n.toLocaleString("id-ID", { maximumFractionDigits: d, minimumFractionDigits: d });
-const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]!);
 
 let meta: Meta;
 let feats: KecFeature[];
@@ -116,81 +117,13 @@ async function boot() {
 function runTour() {
   const wasSelected = selected;
   const top = feats[0]?.properties;
-  const q = (sel: string) => () => [document.querySelector(sel)];
-  const section = (sel: string) => () => [document.querySelector(sel)?.closest("section") ?? null];
   const openTop = () => { if (top && selected !== top.id) openDetail(top.id, true); };
-  const steps: TourStep[] = [
-    {
-      title: "Selamat datang di SIAGA-Padi",
-      body: `Sistem respons kekeringan padi pada musim berjalan untuk penyuluh ${esc(meta.region.name)}: citra satelit diubah menjadi tindakan lapangan yang diprioritaskan, disetujui Dinas, dilacak, lalu dikoreksi oleh laporan lapangan. Tur singkat; bisa dijeda kapan saja.`,
-    },
-    {
-      title: "Peta dan lapisan",
-      body: `Warna kecamatan = status kekeringan. Lapisan lain berasal dari citra Landsat: kelas kekeringan (NDDI), kehijauan (NDVI), kelembapan (NDMI), dan fase tumbuh padi. Klik kecamatan di peta untuk melihat detailnya.${anomaly ? " <b>Anomali vs biasanya</b> membandingkan tiap desa dengan bulan yang sama 2013–2025: merah = lebih kering dari biasanya." : ""}`,
-      target: q(".layers"),
-    },
-    {
-      title: "Garis waktu",
-      body: `Enam bulan terakhir; tinggi batang = ha padi tercekam kuat–ekstrem. Peta bulan berjalan memakai citra terakhir, jadi selalu tertinggal dari hari ini: kotak <b>Hari ini</b> menunjukkan umur citra itu${forecast ? "" : " dan kembali ke bulan berjalan bila diklik"}. ▶ memutar urutan bulan; tombol panah ← → juga bisa.`,
-      target: q("#timeline"),
-    },
-    ...(forecast ? [{
-      title: "Prakiraan 14 hari",
-      body: "<b>Hari ini · model</b>, <b>+7h</b>, dan <b>+14h</b> adalah prakiraan pembelajaran mesin (dilatih pada citra Landsat sejak 2013 dan hujan harian): citra terakhir diproyeksikan ke depan dengan hujan teramati dan prakiraan. Peta dan peringkat berganti ke status prakiraan, ditandai <b>PRAKIRAAN</b> dan arsiran. Klik bulan mana pun untuk kembali ke data teramati.",
-      target: () => [document.querySelector("#timeline .tl-now"), document.querySelector("#timeline .tl-fc")],
-    }] : []),
-    {
-      title: "Ringkasan dan kesegaran data",
-      body: `Luas padi aktif, luas tercekam, sawah yang tidak dihitung aktif (bera, panen, perlu cek), dan jumlah kecamatan per status: <b>Normal, Waspada, Siaga, Awas</b>. Titik hijau / kuning / merah di kanan menunjukkan umur citra, data hujan${forecast ? ", dan prakiraan model" : ""}${verification ? "; klik untuk halaman <b>Verifikasi</b>: semua uji metode, model, dan laporan, termasuk yang belum lolos" : ""}.`,
-      target: () => [document.querySelector("#summary"), document.querySelector("#fresh")],
-    },
-    {
-      title: "Prioritas tindakan",
-      body: "Kecamatan diurutkan menurut ha padi berisiko (cekaman × kerentanan fase tumbuh), diredam oleh pangsa sawah irigasi. Tanda ⚠ = lahan yang turun seperti panen atau tidak pernah hijau: bisa puso atau gagal tanam, perlu cek lapangan.",
-      target: q("#rank"),
-    },
-    {
-      title: `Detail kecamatan: ${top ? esc(top.name) : ""}`,
-      body: "Status peta dan alasannya, tren NDDI, hujan per dasarian, kapasitas air, sawah yang perlu verifikasi, dan rekomendasi untuk penyuluh. <b>Uji skenario</b> menunjukkan apa yang terjadi bila hujan berhenti sama sekali: uji tekanan, bukan prakiraan.",
-      target: q("#detail"),
-      before: openTop,
-    },
-    {
-      title: "Dampak dan opsi tindakan",
-      body: "Ha berisiko diterjemahkan menjadi <b>produksi terancam</b> (ton GKG) dan <b>nilai rupiah</b>, selalu sebagai rentang: produktivitas BPS Pati 2024 × harga HPP–pasar. Di bawahnya opsi tindakan dengan sasaran dan perkiraan efeknya: pompanisasi untuk sawah tadah hujan (jumlah pompa), gilir air untuk sawah irigasi, tunda tanam untuk lahan yang belum ditanam.",
-      target: section("#detail .imp-kpi"),
-      before: openTop,
-    },
-    ...(forecast ? [{
-      title: "Kartu prakiraan dan tinjauan Dinas",
-      body: "Per langkah: status prakiraan, kisaran P10–P90 (batang), dan keyakinan. <span class='tag model'>Model</span> dibandingkan dengan <span class='tag rule'>Aturan</span> (status peta), lalu tiga alasan utama. Dinas memilih <b>Terima</b> atau <b>Tolak</b>; pesan ke Gapoktan hanya memuat prakiraan bila keyakinannya tinggi atau sudah diterima. <b>Tentang model</b> menjelaskan data, hasil uji, dan batasannya.",
-      target: section("#detail .fc-rows"),
-      before: openTop,
-    }] : []),
-    {
-      title: "Alur tindakan",
-      body: "Penyuluh <b>mengusulkan</b>, Dinas <b>menyetujui</b>, penyuluh <b>mengirim</b> pesan WhatsApp ke Gapoktan dan menandai <b>selesai</b>. Setiap langkah dicatat dengan nama, peran, dan waktu.",
-      target: section("#detail .stepper"),
-      before: openTop,
-    },
-    {
-      title: "Dasbor Dinas",
-      body: "Ringkasan kabupaten untuk Dinas Pertanian: luas tercekam, kecamatan per status, nilai produksi terancam, tindakan yang menunggu persetujuan, dan prakiraan. Daftar <b>Perlu perhatian</b> menunjukkan pemilik tiap kasus, berapa lama menunggu, dan langkah berikutnya; usulan yang menunggu Dinas berada paling atas.",
-      target: q("#cockpit-btn"),
-    },
-    {
-      title: "Laporan lapangan dan identitas",
-      body: "Hasil cek lapangan (sesuai, bukan padi, sudah panen, puso, gagal tanam) dibandingkan dengan peta dan mengoreksi masker padi pada pembaruan data berikutnya. Masuk sebagai penyuluh atau Dinas lewat tombol kanan atas; <b>Pemandu</b> membuka tur ini lagi.",
-      target: () => [document.querySelector("#d-fb")?.closest("section") ?? null],
-      before: openTop,
-    },
-  ];
+  const steps = tourSteps({ meta, forecast, anomaly, verification, top, openTop });
   startTour(steps, () => {
     if (!wasSelected && selected) closeDetail();
   });
 }
 
-const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
 // ---------------------------------------------------------------- periods
 const curPeriodId = () => meta.current_period ?? meta.periods!.at(-1)!.id;
@@ -224,7 +157,6 @@ async function setPeriod(id: string) {
 }
 
 // ---------------------------------------------------------------- NDDI anomaly (v2 5.2)
-const BULAN_PANJANG = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
 const anomPeriod = () => (anomaly && periodId ? anomaly.periods[periodId] : undefined);
 function anomalyZ(): Record<string, number> | null {
   const a = anomPeriod();
@@ -280,7 +212,6 @@ function renderTimeline() {
 }
 
 // ---------------------------------------------------------------- what-if
-const BULAN3 = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"];
 const monthName = (id: string) => BULAN3[Number(id.slice(5, 7)) - 1] ?? id;
 /** Observed values of the scenario's period (props are mutated in place). */
 const observed = (p: KecProps): KecProps => ({ ...p, ...(periodId ? p.series?.[periodId] : undefined) });
@@ -461,68 +392,6 @@ function renderRanking() {
 }
 
 // ---------------------------------------------------------------- detail
-/** Sawah not counted as active rice (series mode): fallow and harvested. */
-// ---------------------------------------------------------------- verification (v2 0.2)
-const VERIFY_MIN_HA = 25; // below this a flag is noise on the priority list
-const verifyHa = (p: KecProps) => (p.cropland_stage_ha?.["9"] ?? 0) + (p.cropland_stage_ha?.["10"] ?? 0);
-
-/** v2 Phase 3: what water the kecamatan can fall back on. */
-function waterSection(p: KecProps) {
-  const w = p.water;
-  if (!w) return "";
-  const pct = (v: number | undefined) => (v == null ? "-" : `${Math.round(v * 100)}%`);
-  const f = p.capacity_factor;
-  return `
-    <section>
-      <h3>Kapasitas air <span class="h-note">${esc(p.water_source ?? "")}</span></h3>
-      <div class="wbar" title="Sawah irigasi ${fmt(w.irrigated_ha)} ha, tadah hujan ${fmt(w.rainfed_ha)} ha">
-        <span style="width:${w.irrigated_share * 100}%" class="irr"></span><span style="width:${(1 - w.irrigated_share) * 100}%" class="rf"></span></div>
-      <ul class="legend-rows">
-        <li><i style="--c:#5bb0d9"></i>Sawah irigasi<span>${fmt(w.irrigated_ha)} ha (${pct(w.irrigated_share)})</span></li>
-        <li><i style="--c:#c9a66b"></i>Sawah tadah hujan<span>${fmt(w.rainfed_ha)} ha</span></li>
-        <li>Ditanami padi ≥ 3× setahun<span>${pct(w.rice3x_share)}</span></li>
-        ${w.dry_green_share != null ? `<li>Hijau di puncak kemarau 2026 (satelit)<span>${pct(w.dry_green_share)}</span></li>` : ""}
-      </ul>
-      <p class="fine">Data resmi Dinas Pertanian 2024. ${f != null && f < 1 ? `Peringkat memakai ha berisiko × ${fmt(f, 2)}: sawah irigasi meredam, tidak menghapus, risiko kekeringan. Status tetap dari tingkat bahaya.` : ""} "Hijau di puncak kemarau" = sawah dengan tajuk padi (NDVI ≥ 0,45) pada Agustus atau September 2026, tanda ada air irigasi, pompa, atau sumur.</p>
-    </section>`;
-}
-
-/** Harvest-like drops that may be drought-killed crops: ask, do not hide. */
-function verifySection(p: KecProps) {
-  if (verifyHa(p) <= 0) return "";
-  const cs = p.cropland_stage_ha ?? {};
-  const puso = cs["9"] ?? 0, failed = cs["10"] ?? 0;
-  return `
-    <section class="verify">
-      <h3>Perlu verifikasi</h3>
-      <ul class="legend-rows">
-        ${puso > 0 ? `<li><i style="--c:${STAGE_COLOR["9"]}"></i>Panen atau puso?<span>${fmt(puso)} ha</span></li>` : ""}
-        ${failed > 0 ? `<li><i style="--c:${STAGE_COLOR["10"]}"></i>Gagal tanam?<span>${fmt(failed)} ha</span></li>` : ""}
-      </ul>
-      ${puso > 0 ? `<p class="fine"><b>Panen atau puso?</b> Lahan turun seperti panen (${fmt(cs["7"] ?? 0)} ha lain terlihat panen biasa), tetapi sebelumnya sudah tercekam kuat, atau turunnya terlalu cepat setelah tanam.</p>` : ""}
-      ${failed > 0 ? `<p class="fine"><b>Gagal tanam?</b> Lahan tidak pernah hijau, padahal sebagian besar sawah dalam radius 300 m di sekitarnya hijau: wilayah itu ditanami, jadi lahan ini mungkin gagal tumbuh, bukan sengaja dibiarkan bera.</p>` : ""}
-      <p class="fine">Tidak dihitung sebagai padi aktif, jadi tidak masuk peringkat: hanya cek lapangan yang bisa memastikan.</p>
-      <button class="ghost" id="d-verify">Isi laporan cek lapangan</button>
-    </section>`;
-}
-
-function inactiveSection(p: KecProps) {
-  const cs = p.cropland_stage_ha;
-  if (!cs || !("6" in cs || "7" in cs || "8" in cs)) return "";
-  // Stage 9 has its own "Perlu verifikasi" section
-  const rows = meta.stage_classes.filter((s) => s.id >= 6 && s.id !== 9 && s.id !== 10 && (s.id !== 8 || (cs["8"] ?? 0) > 0));
-  const ex = fb?.excluded_desa.filter((e) => e.kec_id === p.id) ?? [];
-  return `
-    <section>
-      <h3>Sawah tidak dihitung aktif</h3>
-      <ul class="legend-rows">${rows
-        .map((s) => `<li><i style="--c:${STAGE_COLOR[String(s.id)]}"></i>${s.label}<span>${fmt(cs[String(s.id)] ?? 0)} ha</span></li>`)
-        .join("")}</ul>
-      <p class="fine">Dari lintasan NDVI 4 bulan: <b>bera</b> = tidak pernah hijau, <b>panen</b> = sudah turun ke tanah terbuka setelah puncak. Bera bisa juga padi yang gagal tumbuh karena kering: mohon cek lapangan dan kirim laporan di bawah.</p>
-      ${ex.length ? `<p class="fine"><b>Bukan padi (laporan lapangan)</b>: ${ex.map((e) => `${esc(e.name)} (${e.not_rice} dari ${e.reports} laporan)`).join(", ")}. Lahan pertanian di desa ini tidak dihitung sebagai padi aktif pada semua bulan.</p>` : ""}
-    </section>`;
-}
-
 /** One line: when does this kecamatan first change status without rain? */
 function scenarioSentence(id: string) {
   const s = scenario!.kecamatan[id];
@@ -637,7 +506,7 @@ function renderDetail(p: KecProps, resetScroll = true) {
     })}
     ${verifySection(p)}
     ${waterSection(p)}
-    ${inactiveSection(p)}
+    ${inactiveSection(p, meta, fb)}
 
     <section>
       <h3>Fase tumbuh pada lahan tercekam kuat</h3>
@@ -694,7 +563,7 @@ function renderDetail(p: KecProps, resetScroll = true) {
         <p class="wf-err" id="d-fb-err" hidden></p>
       </form>
       <ul class="log">${reps
-        .map((r) => `<li><time>${when(r.created_at)}</time> 📍 ${esc(feedbackLabel(r.answer))}${r.desa_name ? ` · ${esc(r.desa_name)}` : ""}${r.actor ? ` <span class="who-tag">${esc(r.actor)}</span>` : ""}${r.note ? ` <em>${esc(r.note)}</em>` : ""}${reportCheck(r)}</li>`)
+        .map((r) => `<li><time>${when(r.created_at)}</time> 📍 ${esc(feedbackLabel(r.answer))}${r.desa_name ? ` · ${esc(r.desa_name)}` : ""}${r.actor ? ` <span class="who-tag">${esc(r.actor)}</span>` : ""}${r.note ? ` <em>${esc(r.note)}</em>` : ""}${reportCheck(r, fb)}</li>`)
         .join("") || `<li class="muted">Belum ada laporan.</li>`}</ul>
       <p class="fine">${getMode() === "server"
         ? "Laporan tersimpan di server dan terlihat oleh semua pengguna. Jawaban \"Bukan padi\" dan \"Sudah panen / bera\" dipakai untuk mengoreksi masker padi dan ambang lintasan NDVI."
@@ -705,7 +574,7 @@ function renderDetail(p: KecProps, resetScroll = true) {
       <summary>Bagaimana status dihitung?</summary>
       <p>H = rata-rata bobot bahaya kelas NDDI pada padi aktif (Normal 0, Ringan 0,1, Sedang 0,5, Kuat 0,85, Ekstrem 1). Status: H &lt; 0,40 Normal, &lt; 0,60 Waspada, &lt; 0,75 Siaga, selebihnya Awas. Ha berisiko = luas × bobot bahaya × kerentanan fase (reproduktif 1,0; vegetatif akhir 0,7; vegetatif awal 0,5). Peringkat memakai ha berisiko × (1 − 0,3 × pangsa sawah irigasi): kapasitas air menurunkan prioritas, bukan status. Bobot bersifat provisional, mengikuti logika indeks H-MHEWS, dan dikalibrasi dengan laporan lapangan.</p>
       ${scenario ? `<p><b>Skenario tanpa hujan</b></p><p>Distribusi NDDI tiap kecamatan digeser mengikuti perubahan persentil NDDI padi aktif pada bulan kering 2026 (${scenario.calibration.months.map((m) => `${m.pair.split(">").map(monthName).join("→")}, hujan ${fmt(m.rain_mm)} mm`).join("; ")}), lalu dinilai ulang dengan aturan yang sama. Uji balik per kecamatan: galat rata-rata ${scenario.calibration.months.map((m) => `${fmt(m.kec_mae_ha)} ha`).join(" / ")} vs ${scenario.calibration.months.map((m) => `${fmt(m.persist_mae_ha)} ha`).join(" / ")} bila diasumsikan tidak berubah. Fase tumbuh, luas padi aktif, dan irigasi dianggap tetap.</p>` : ""}
-      ${feedbackExplainer()}
+      ${feedbackExplainer(fb)}
       ${verification ? `<p><button class="link" data-open="verify">Verifikasi data dan model: semua uji, termasuk yang belum lolos →</button></p>` : ""}
       ${meta.notes.length ? `<p><b>Catatan data</b></p><ul>${meta.notes.map((n) => `<li>${esc(n)}</li>`).join("")}</ul>` : ""}
     </details>`;
@@ -816,50 +685,12 @@ function openModelPage() {
 }
 
 // ---------------------------------------------------------------- workflow (Stage 3)
-const when = (iso: string) => new Date(iso).toLocaleString("id-ID", { dateStyle: "short", timeStyle: "short" });
 
 function curPeriodLabel() {
   const id = meta.current_period;
   return (id && meta.periods?.find((x) => x.id === id)?.label) || meta.period.label;
 }
 
-function reportSummary(reps: ReturnType<typeof getReports>) {
-  if (!reps.length) return "";
-  const n: Record<string, number> = {};
-  reps.forEach((r) => (n[r.answer] = (n[r.answer] ?? 0) + 1));
-  const parts = FEEDBACK.filter((f) => n[f.id]).map((f) => `${n[f.id]} ${f.label.split(":")[0].split(" (")[0].toLowerCase()}`);
-  const wrong = (n.not_rice ?? 0) + (n.harvested ?? 0) + (n.irrigated ?? 0);
-  // Only flag doubt once a few independent checks agree
-  return `<p class="rep-sum"><b>${reps.length} laporan</b>: ${parts.join(", ")}.${reps.length >= 3 && wrong / reps.length >= 0.5 ? ` <span class="warn">Sebagian besar laporan tidak membenarkan cekaman; status peta di sini perlu diragukan.</span>` : ""}</p>`;
-}
-
-/** How the last pipeline run judged one report against the map. */
-function reportCheck(r: ReturnType<typeof getReports>[number]) {
-  if (!fb || r.id == null) return "";
-  const c = fb.check.reports.find((x) => x.id === r.id);
-  if (!c) {
-    return new Date(r.created_at) > new Date(fb.generated_at)
-      ? ` <span class="chk wait" title="Dipakai pada pembaruan citra berikutnya">menunggu pembaruan data</span>` : "";
-  }
-  const m = c.map;
-  const pct = (v: number | null) => (v == null ? "-" : `${Math.round(v * 100)}%`);
-  const said = m.active_ha < 1
-    ? `Peta ${c.period_id}: tidak ada padi aktif${m.excluded_ha ? ` (${fmt(m.excluded_ha)} ha dikoreksi bukan padi)` : ""}`
-    : `Peta ${c.period_id}: cekaman kuat+ ${pct(m.stressed_share)} padi aktif, bera/panen ${pct(m.inactive_share)} sawah${m.excluded_ha ? `, ${fmt(m.excluded_ha)} ha dikoreksi bukan padi` : ""}`;
-  if (c.agrees === null) return ` <span class="chk" title="${said}">tidak dapat dinilai</span>`;
-  return c.agrees
-    ? ` <span class="chk ok" title="${said}">✓ peta sesuai</span>`
-    : ` <span class="chk no" title="${said}">✗ peta berbeda</span>`;
-}
-
-function feedbackExplainer() {
-  if (!fb || !fb.n_reports) return "";
-  const rows = Object.values(fb.check.summary).filter((v) => v.n);
-  return `<p><b>Laporan lapangan dalam pipeline</b></p>
-    <p>Pembaruan citra terakhir (${when(fb.generated_at)}) membaca ${fb.n_reports} laporan. Desa dengan ≥ ${fb.rules.exclude_min_reports} laporan "bukan padi" yang menjadi mayoritas laporannya dikeluarkan dari padi aktif (${fb.excluded_desa.length} desa). Setiap laporan juga dibandingkan dengan peta bulan itu:</p>
-    <ul>${rows.map((v) => `<li>${esc(v.label)}: peta sesuai ${v.agree} dari ${v.judged}${v.n > v.judged ? ` (${v.n - v.judged} tidak dapat dinilai)` : ""}</li>`).join("")}</ul>
-    <p>"Sudah panen / bera" yang sering berbeda dengan peta berarti ambang lintasan NDVI perlu disetel.</p>`;
-}
 
 function rerender() {
   renderRanking();
@@ -1009,6 +840,7 @@ function startFreshClock() {
 }
 
 // ---------------------------------------------------------------- layer bar
+const renderLegend = (id: string) => drawLegend($("#legend"), id, meta, anomaly, periodId);
 function renderLayerbar() {
   const layers = [{ id: "status", label: "Status wilayah" }, ...meta.layers,
     ...(anomaly ? [{ id: "anomaly", label: "Anomali vs biasanya" }] : [])];
@@ -1030,49 +862,6 @@ function renderLayerbar() {
   renderLegend("status");
 }
 
-const RAMPS: Record<string, { stops: [number, string][]; label: string }> = {
-  nddi_ramp: { label: "NDDI", stops: [[-1, "#2b83ba"], [0.7, "#abdda4"], [1.25, "#fdae61"], [3, "#e8553d"], [4, "#8b0a1a"]] },
-  ndvi_ramp: { label: "NDVI", stops: [[0, "#8c5a2b"], [0.25, "#d9c36a"], [0.45, "#8fcf5a"], [0.7, "#1a7f37"]] },
-  ndmi_ramp: { label: "NDMI", stops: [[-0.8, "#8c3b1a"], [-0.3, "#e0a050"], [0, "#f2efc7"], [0.3, "#5bb0d9"], [0.6, "#1f4e9c"]] },
-};
-
-function renderLegend(layerId: string) {
-  const el = $("#legend");
-  if (layerId === "status") {
-    el.innerHTML = meta.status_levels
-      .map((s) => `<span class="sw"><i style="--c:${STATUS_COLOR[s]}"></i>${s}</span>`)
-      .join("");
-    return;
-  }
-  if (layerId === "anomaly") {
-    const a = anomPeriod();
-    const stops: [number, string][] = [[-2, "#2b6cb0"], [-1, "#7fb3d5"], [-0.4, "#3a4150"], [0.4, "#3a4150"], [1, "#f4a261"], [2, "#d64545"], [3, "#8b0a1a"]];
-    const grad = stops.map(([v, c]) => `${c} ${(100 * (v + 2)) / 5}%`).join(",");
-    el.innerHTML = `<span class="ramp-l">z NDDI</span><span class="ramp" style="background:linear-gradient(90deg,${grad})">${[-2, -1, 0, 1, 2, 3]
-      .map((v) => `<em style="left:${(100 * (v + 2)) / 5}%">${v > 0 ? "+" : ""}${v}</em>`).join("")}</span>
-      <span class="anom-key">← lebih basah · <b>lebih kering</b> → dari ${periodId ? BULAN_PANJANG[Number(periodId.slice(5, 7)) - 1] : "bulan ini"} ${anomaly!.baseline_years.join("–")}${a ? "" : " · tidak ada data bulan ini"}</span>`;
-    return;
-  }
-  const def = meta.layers.find((l) => l.id === layerId)!;
-  if (def.legend === "nddi_classes") {
-    el.innerHTML = meta.nddi_classes
-      .map((c) => `<span class="sw"><i style="--c:${c.color}"></i>${c.label}</span>`)
-      .join("");
-  } else if (def.legend === "stage_classes") {
-    el.innerHTML = meta.stage_classes
-      // Series mode has no single-date ripening class (5); harvest (7) replaces it
-      .filter((s) => s.id >= 2 && !(s.id === 5 && meta.stage_classes.some((c) => c.id === 7)))
-      .map((s) => `<span class="sw"><i style="--c:${STAGE_COLOR[String(s.id)]}"></i>${s.label}${s.active ? "" : " <em>(dikecualikan)</em>"}</span>`)
-      .join("");
-  } else {
-    const r = RAMPS[def.legend];
-    const lo = r.stops[0][0], hi = r.stops[r.stops.length - 1][0];
-    const grad = r.stops.map(([v, c]) => `${c} ${(100 * (v - lo)) / (hi - lo)}%`).join(",");
-    el.innerHTML = `<span class="ramp-l">${r.label}</span><span class="ramp" style="background:linear-gradient(90deg,${grad})">${r.stops
-      .map(([v]) => `<em style="left:${(100 * (v - lo)) / (hi - lo)}%">${v}</em>`)
-      .join("")}</span>`;
-  }
-}
 
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && selected) closeDetail();
