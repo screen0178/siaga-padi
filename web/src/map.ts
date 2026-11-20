@@ -44,6 +44,17 @@ function loadImage(src: string): Promise<HTMLImageElement> {
   });
 }
 
+// Map padding around the panels: side panels on desktop; on phones the ranking
+// is a bottom sheet (36vh) under the top bar, and the detail covers the map.
+const phone = () => innerWidth <= 700;
+const sheet = () => Math.round(innerHeight * 0.36) + 150;
+const overview = () => (phone()
+  ? { top: 64, bottom: sheet(), left: 12, right: 12 }
+  : { top: 70, bottom: 120, left: 380, right: 40 });
+const focus = () => (phone()
+  ? { top: 64, bottom: sheet(), left: 24, right: 24 }
+  : { top: 90, bottom: 140, left: 400, right: 460 });
+
 export async function createMap(
   el: HTMLElement,
   meta: Meta,
@@ -67,7 +78,7 @@ export async function createMap(
       ],
     },
     bounds: [[w, s], [e, n]],
-    fitBoundsOptions: { padding: { top: 70, bottom: 120, left: 380, right: 40 } },
+    fitBoundsOptions: { padding: overview() },
     attributionControl: { compact: true },
     maxZoom: 15,
   });
@@ -252,7 +263,7 @@ export async function createMap(
           else if (Array.isArray(c)) c.forEach(walk);
         };
         walk((f.geometry as GeoJSON.Polygon).coordinates);
-        map.fitBounds(b, { padding: { top: 90, bottom: 140, left: 400, right: 460 }, duration: 900, maxZoom: 12.5 });
+        map.fitBounds(b, { padding: focus(), duration: 900, maxZoom: 12.5 });
       }
     }
   }

@@ -386,6 +386,7 @@ section.verify { border-left: 3px solid #e0602b; padding-left: 10px; }
 .tour-row span { flex: 1; }
 @media (max-width: 700px) {
   .tour-card { left: 12px !important; right: 12px; top: auto !important; bottom: 12px; width: auto; }
+  .tour-card.top { top: 12px !important; bottom: auto; }
 }
 @media (max-width: 900px) { .tour-btn { padding: 8px 10px; } }
 
@@ -515,3 +516,36 @@ button.link:hover { text-decoration: underline; }
 .vgrid p { margin: 0 0 8px; }
 .vdot { fill: #8fc3ff; stroke: var(--panel-solid); stroke-width: 2; }
 @media (max-width: 700px) { .vgrid { grid-template-columns: 1fr; } }
+
+/* ---------------------------------------------------------------- v2 5.3: phones */
+@media (max-width: 700px) {
+  /* Nothing may be wider than the screen, or phones zoom the whole page out */
+  .layerbar { left: 8px; right: 8px; transform: none; max-width: none; padding: 6px; }
+  .timeline { overflow-x: auto; scrollbar-width: none; gap: 6px; padding-bottom: 6px; }
+  .timeline::-webkit-scrollbar { display: none; }
+  .tl-cap { display: none; }
+  .tl-p { width: 38px; flex: none; }
+  .tl-p.fc { width: 38px; }
+  .tl-periods, .tl-fc { flex: none; }
+  .layers { flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; scrollbar-width: none; }
+  .layers::-webkit-scrollbar { display: none; }
+  .layers button { padding: 5px 9px; font-size: 12px; }
+  .lb-bottom { overflow-x: auto; justify-content: flex-start; }
+  .legend { gap: 8px; font-size: 11px; white-space: nowrap; }
+  .ramp { width: 180px; }
+  .opacity { display: none; }
+  /* Topbar: brand + buttons only */
+  .topbar { left: 8px; right: 8px; gap: 6px; }
+  .brand { padding: 7px 10px; min-width: 0; }
+  .region { display: none; }
+  .tour-btn { padding: 7px 9px; font-size: 12px; }
+  .who-btn { padding: 7px 9px; }
+  /* Panels: ranking as a bottom sheet, detail slides up over it */
+  .panel.left { left: 8px; right: 8px; width: auto; top: auto; height: 36vh; }
+  .panel.right { left: 8px; right: 8px; width: auto; top: 62px; transform: translateY(calc(100% + 200px)); padding: 14px; }
+  .panel.right.open { transform: none; }
+  .kec-label { font-size: 9.5px; }
+  .fc-rows li { grid-template-columns: 56px 60px 1fr 54px; }
+  .fc-rows .fc-conf { display: none; }
+  .imp-kpi { grid-template-columns: 1fr; }
+}

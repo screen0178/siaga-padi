@@ -59,7 +59,11 @@ export function startTour(steps: TourStep[], onEnd?: () => void) {
       bottom: Math.min(vh - 4, Math.max(...rs.map((x) => x.bottom)) + PAD),
     };
     Object.assign(hole.style, { left: `${r.left}px`, top: `${r.top}px`, width: `${r.right - r.left}px`, height: `${r.bottom - r.top}px` });
-    if (vw <= 700) return; // CSS docks the card at the bottom on phones
+    if (vw <= 700) {
+      // CSS docks the card full-width; keep it on the half away from the target
+      card.classList.toggle("top", (r.top + r.bottom) / 2 > vh / 2);
+      return;
+    }
     const cw = card.offsetWidth, ch = card.offsetHeight;
     const clampX = (x: number) => Math.max(M, Math.min(vw - cw - M, x));
     const clampY = (y: number) => Math.max(M, Math.min(vh - ch - M, y));
