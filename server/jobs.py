@@ -3,7 +3,8 @@
 Two jobs, run one at a time as subprocesses of the existing pipeline scripts
 (the pipeline stays the single source of truth; the server only schedules it):
 
-  weather  weather.py                                every 6 h (cheap, no Earth Engine)
+  weather  weather.py (+ forecast.py once a model     every 6 h (cheap, no Earth Engine)
+           is trained)
   full     gee_export.py --last-months 6, then       every 7 days (Landsat 8+9 together
            scenario.py, then weather.py              revisit about every 8 days); needs
                                                      SIAGA_EE_PROJECT and EE credentials
@@ -24,16 +25,24 @@ RETRY = timedelta(hours=1)
 TICK_S = 300
 
 
+def forecast_ready() -> bool:
+    """A trained model and the Landsat observations it starts from (v2 Phase 2)."""
+    ml = PIPELINE.parent / "data" / "ml"
+    return (ml / "models" / "LATEST").exists() and any(ml.glob("obs_*.csv"))
+
+
 def job_specs():
     py = sys.executable  # the server runs in the pipeline's venv
     project = os.environ.get("SIAGA_EE_PROJECT")
     months = os.environ.get("SIAGA_LAST_MONTHS", "6")
+    fc = forecast_ready()
     return {
         "weather": {
-            "label": "Curah hujan (Open-Meteo)",
+            "label": "Curah hujan (Open-Meteo)" + (" + prakiraan" if fc else ""),
             "interval": timedelta(hours=float(os.environ.get("SIAGA_WEATHER_HOURS", 6))),
             "enabled": True,
-            "steps": [[py, "weather.py"]],
+            # New rain forecast -> new drought forecast
+            "steps": [[py, "weather.py"]] + ([[py, "forecast.py"]] if fc else []),
         },
         "full": {
             "label": "Citra Landsat + skenario (Earth Engine)",
@@ -43,6 +52,8 @@ def job_specs():
                 [py, "gee_export.py", "--project", str(project), "--last-months", months],
                 [py, "scenario.py", "--project", str(project)],
                 [py, "weather.py"],
+                # Adds the new Landsat dates to the training observations, then forecasts
+                *([[py, "forecast.py", "--project", str(project)]] if fc else []),
             ],
         },
     }

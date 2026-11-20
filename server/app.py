@@ -72,6 +72,14 @@ class ReportIn(BaseModel):
     actor: Actor
 
 
+class ReviewIn(BaseModel):
+    kec_id: str
+    forecast_at: str  # generated_at of the forecast.json the client saw
+    verdict: Literal["accept", "reject"]
+    note: str | None = Field(default=None, max_length=500)
+    actor: Actor
+
+
 class RefreshIn(BaseModel):
     job: Literal["weather", "full"]
     actor: Actor
@@ -224,6 +232,32 @@ def reports_csv():
     return PlainTextResponse(buf.getvalue(), media_type="text/csv; charset=utf-8")
 
 
+# ---------------------------------------------------------------- forecast review (v2 Phase 2)
+def current_forecast():
+    f = read_json("forecast.json")
+    if not f:
+        raise HTTPException(404, "belum ada prakiraan (jalankan pipeline/forecast.py)")
+    return f
+
+
+@app.get("/api/forecast/reviews")
+def forecast_reviews():
+    f = current_forecast()
+    return {"forecast_at": f["generated_at"], "reviews": store.reviews(f["generated_at"])}
+
+
+@app.post("/api/forecast/reviews", status_code=201)
+def review_forecast(body: ReviewIn):
+    check_kec(body.kec_id)
+    if body.actor.role != "dinas":
+        raise HTTPException(403, "hanya Dinas Pertanian yang menerima atau menolak prakiraan")
+    f = current_forecast()
+    if body.forecast_at != f["generated_at"]:
+        raise HTTPException(409, "prakiraan sudah diperbarui; tinjau prakiraan yang baru")
+    return store.add_review(f["generated_at"], f.get("model", {}).get("run_id"), body.kec_id, body.verdict,
+                            (body.note or "").strip() or None, body.actor.name.strip(), body.actor.role)
+
+
 @app.get("/api/status")
 def status():
     def gen(name):
@@ -242,7 +276,8 @@ def status():
             "next_due": runner.next_due(name, spec),
         }
     return {
-        "data": {"meta": gen("meta.json"), "weather": gen("weather.json"), "scenario": gen("scenario.json")},
+        "data": {"meta": gen("meta.json"), "weather": gen("weather.json"), "scenario": gen("scenario.json"),
+                 "forecast": gen("forecast.json")},
         "current_period": current_period(),
         "scheduler": os.environ.get("SIAGA_SCHEDULE", "1") != "0",
         "jobs": jobs,

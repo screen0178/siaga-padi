@@ -112,3 +112,19 @@ def test_simultaneous_identical_steps_get_one_200_one_409(monkeypatch):
     [x.join() for x in t]
     assert sorted(codes) == [200, 409]
     assert [e["step"] for e in c.get("/api/state").json()["kecamatan"][k]["log"]] == ["proposed"]
+
+
+def test_forecast_review_rules(monkeypatch):
+    import server.app as appmod
+    fc = {"generated_at": "2026-11-20T10:00:00+00:00", "model": {"run_id": "r1"}}
+    monkeypatch.setattr(appmod, "current_forecast", lambda: fc)
+    body = {"kec_id": K, "forecast_at": fc["generated_at"], "verdict": "accept"}
+    assert c.post("/api/forecast/reviews", json=body | {"actor": PENY}).status_code == 403   # Dinas only
+    assert c.post("/api/forecast/reviews", json=body | {"actor": DINAS}).status_code == 201
+    stale = body | {"forecast_at": "2026-11-19T00:00:00+00:00", "actor": DINAS}
+    assert c.post("/api/forecast/reviews", json=stale).status_code == 409                    # old forecast
+    c.post("/api/forecast/reviews", json=body | {"verdict": "reject", "note": "hujan sudah turun", "actor": DINAS})
+    r = c.get("/api/forecast/reviews").json()
+    assert r["reviews"][K]["verdict"] == "reject" and r["reviews"][K]["actor"] == "Budi Dinas"  # latest wins
+    fc["generated_at"] = "2026-11-21T00:00:00+00:00"                                        # new forecast
+    assert c.get("/api/forecast/reviews").json()["reviews"] == {}

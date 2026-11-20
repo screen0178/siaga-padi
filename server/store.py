@@ -36,6 +36,22 @@ CREATE TABLE IF NOT EXISTS reports (
 );
 CREATE INDEX IF NOT EXISTS reports_kec ON reports (kec_id, id);
 
+-- v2 Phase 2: Dinas accepts or rejects the model forecast per kecamatan.
+-- Tied to one forecast.json (forecast_at = its generated_at): a new forecast
+-- starts unreviewed.
+CREATE TABLE IF NOT EXISTS forecast_reviews (
+  id          INTEGER PRIMARY KEY,
+  forecast_at TEXT NOT NULL,
+  run_id      TEXT,
+  kec_id      TEXT NOT NULL,
+  verdict     TEXT NOT NULL CHECK (verdict IN ('accept', 'reject')),
+  note        TEXT,
+  actor       TEXT NOT NULL,
+  role        TEXT NOT NULL,
+  created_at  TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS forecast_reviews_at ON forecast_reviews (forecast_at, kec_id, id);
+
 CREATE TABLE IF NOT EXISTS runs (
   id          INTEGER PRIMARY KEY,
   job         TEXT NOT NULL,
@@ -115,6 +131,21 @@ class Store:
             q, args = q + " WHERE kec_id=?", (kec_id,)
         with self.conn() as c:
             return [dict(r) for r in c.execute(q + " ORDER BY id DESC", args)]
+
+    # ------------------------------------------------------------ forecast reviews
+    def add_review(self, forecast_at, run_id, kec_id, verdict, note, actor, role):
+        with self.conn(write=True) as c:
+            cur = c.execute(
+                "INSERT INTO forecast_reviews (forecast_at, run_id, kec_id, verdict, note, actor, role, created_at) "
+                "VALUES (?,?,?,?,?,?,?,?)", (forecast_at, run_id, kec_id, verdict, note, actor, role, now()))
+            return dict(c.execute("SELECT * FROM forecast_reviews WHERE id=?", (cur.lastrowid,)).fetchone())
+
+    def reviews(self, forecast_at):
+        """Latest review per kecamatan for one forecast."""
+        with self.conn() as c:
+            rows = [dict(r) for r in c.execute(
+                "SELECT * FROM forecast_reviews WHERE forecast_at=? ORDER BY id", (forecast_at,))]
+        return {r["kec_id"]: r for r in rows}
 
     # ------------------------------------------------------------ runs
     def start_run(self, job, trigger) -> int:
