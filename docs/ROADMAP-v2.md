@@ -152,6 +152,9 @@ Phase 2), plus stage 10 from 0.2. Results in CLAUDE.md.
 ---------------------------------------------------------------------------
 ## Phase 4: impact in tonnes and rupiah + action options
 
+Status 2026-11-20: 4.1-4.3 done, results and sources in CLAUDE.md. Not done:
+forecast steps in rupiah (the forecast gives Kuat+Ekstrem ha, not ha at risk).
+
 4.1 Potential loss = ha at risk x Pati rice productivity (BPS, cite year) x
     gabah price (HPP GKP, cite regulation). Keep both in config.py with
     sources; show as a range, never false precision.

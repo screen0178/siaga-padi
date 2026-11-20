@@ -35,6 +35,7 @@ pipeline/                 Python: data + scoring (single source of truth)
   ml_common.py            features shared by training and inference
   ml_train.py             quantile forecast, time split, baselines, model card
   forecast.py             today / +7 / +14 day forecast -> forecast.json
+  impact.py               v2 Phase 4: tonnes / rupiah at risk + action options (no Earth Engine)
   tests/                  rule tests (no Earth Engine)
   outputs.py              writes the web data contract
 server/                   Stage 3: FastAPI backend (shared action log, field reports, scheduler)
@@ -179,6 +180,13 @@ python -m pytest server/tests -q                     # role / step / conflict ru
    "Tentang model" page). Kecamatan values aggregate desa by active rice; ha = share ×
    the map's active rice; status from H with the map's thresholds.
 
+13. Impact (v2 Phase 4, `impact.py`): production at risk = ha at risk × Pati yield
+   (BPS 2024, 54.63 ku/ha GKG, ±10 %) × GKG price Rp 8,000 (HPP) – 8,600 (market),
+   always a range. Action options with target ha and saved tonnes / rupiah: pumps
+   (10–30 ha per 4-inch pump) on the rainfed part, water rotation on the irrigated
+   part, delayed planting on rainfed fallow. "Dasbor Dinas" summarises the kabupaten
+   and lists cases needing attention with owner and age.
+
 ## Known limitations (state these in the presentation)
 
 - **Growth-stage NDVI thresholds are provisional** (`config.py`; Adinda 2020 full text
@@ -202,6 +210,9 @@ python -m pytest server/tests -q                     # role / step / conflict ru
   and on observed rain; at run time the rain is a forecast. Wet-season onset after a
   drought is rare in the training data, so ranges are wide then. It forecasts an NDDI
   class, not crop loss.
+- **Rupiah figures are estimates of production at risk, not losses.** They rest on
+  ha at risk (provisional weights), one annual yield, and price assumptions; option
+  efficacies are assumptions until field reports calibrate them.
 - **No login yet.** Users type a name and pick a role; the server enforces what each
   role may do, but anyone can claim either role. Accountability, not security.
 
@@ -213,8 +224,8 @@ python -m pytest server/tests -q                     # role / step / conflict ru
 | 1 ✅ | Time slider: monthly dry-season series, NDDI trend per kecamatan |
 | 2 ✅ | Rainfall per dasarian + 16-day forecast (Open-Meteo); calibrated what-if "no rain for N dasarian" |
 | 3 ✅ | Backend (FastAPI + SQLite): shared action log with roles, field reports per desa, scheduled pipeline |
-| v2 | Phases 0, 1, 2, 3 ✅ (see docs/ROADMAP-v2.md): puso/gagal tanam flags, timeline + tour + freshness, ML forecast with Dinas review, irrigation capacity |
-| next | Phase 4 (tonnes / rupiah, action options, Dinas cockpit), Phase 5 (verification, NDDI anomaly, mobile) |
+| v2 | Phases 0–4 ✅ (see docs/ROADMAP-v2.md): puso/gagal tanam flags, timeline + tour + freshness, ML forecast with Dinas review, irrigation capacity, tonnes / rupiah + options + Dinas cockpit |
+| next | Phase 5 (verification panel, NDDI anomaly, mobile) |
 
 ## Sources
 

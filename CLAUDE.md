@@ -77,6 +77,13 @@ Ventusky is only the visual inspiration, not the product.
   only, 409 if the forecast changed). Frontend `web/src/forecast.ts` (card,
   model page, message sentence); forecast view mutates props like the
   scenario (status, H, rank) and is exclusive with it.
+- v2 Phase 4 impact: `pipeline/impact.py` (config `IMPACT`, `ACTION_OPTIONS`)
+  annotates the written files in place (no EE): `impact` {ha_eq, t, rp as
+  [low, mid, high]} on kecamatan props, each series entry, meta totals and
+  periods, scenario steps; `options` (pump / rotation / delay) on top-level
+  props = current period only. Called at the end of `outputs.write_run` and
+  `scenario.py`. Frontend `web/src/impact.ts` (detail section), 
+  `web/src/cockpit.ts` ("Dasbor Dinas" dialog, top-bar button, all roles).
 - Reports → pipeline: `pipeline/feedback.py` (rules in `config.FEEDBACK`).
   gee_export loads reports (server/siaga.db or `--reports csv`), paints
   corrected desa to stage 8 in `build(exclude=)` for all periods, checks
@@ -237,6 +244,31 @@ Ventusky is only the visual inspiration, not the product.
     server (message sentence appears after Terima, disappears after Tolak;
     test reviews deleted), tour step 4 of 9. The scheduler's weather job ran
     forecast.py by itself. 10 server + 13 pipeline tests pass.
+- v2 Phase 4 (2026-11-20), impact + options + Dinas cockpit:
+  - Sources: Pati 2024 yield 54.63 ku/ha GKG (BPS Jateng table, 96,537 ha,
+    527,355 t; read in the browser, the page renders by JS); HPP GKG at mill
+    Rp 8,000/kg (Kepbadan 2/2025), HPP GKP Rp 6,500 kept for 2026 (Inpres
+    4/2026); GKP market ~Rp 7,000 in Jul 2026 (Bapanas) → high price 8,600
+    (assumption). Pump 4 inch ~10 ha static, ~30 ha moved (Kementan pump
+    aid, Indramayu 2024). Efficacies (pump 50–80 %, rotation 20–40 %) and
+    yield ±10 % are assumptions, labelled as such in the UI.
+  - Production at risk = ha_at_risk × yield, read as hectare-equivalents of
+    lost harvest (ha_at_risk already weighs hazard × stage). Nov 2026:
+    51.6–63.1k t GKG, Rp 413–543 bn (≈ 11 % of Pati's 2024 output); peak
+    Sep 104k t, Rp 860 bn (mid).
+  - Options Nov: rainfed-heavy Jaken / Pucakwangi 9–26 pumps for ~255 ha
+    (Rp 3–7 bn saved); irrigated Kayen mostly gilir air (1,296 ha, Rp 5–13
+    bn); delay planting for rainfed fallow (Pucakwangi 3.2k ha), with a
+    note "syarat tanam mulai terpenuhi" when the 16-day rain forecast ≥ 100 mm.
+  - Cockpit: tiles (Kuat+Ekstrem + delta vs previous month, kecamatan per
+    status, value at risk, actions incl. "menunggu Dinas" and Siaga/Awas not
+    yet acted on, +14 forecast), alert list (Siaga/Awas now or forecast, or
+    action in progress) with owner (last actor), age (since last event, else
+    since data processed), next need; proposals awaiting Dinas on top; row
+    click opens the detail. Always describes the current month, observed.
+  - Tour now 12 steps (+ "Dampak dan opsi tindakan", + "Dasbor Dinas"),
+    seen key `siaga.tour.v3`. Verified in the browser at 1440×900 with a
+    test proposal via the API (deleted afterwards); 15 pipeline tests pass.
 - Aug 2024 video-check run (single period) was done first; its data is in
   git history (commit 1d21c4f), not on disk.
 - Verification vs video (Aug 2024): Kuat 12,637 ha (video ≈ 11,000, OK);
