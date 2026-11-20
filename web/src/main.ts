@@ -4,7 +4,11 @@ import { composeMessage } from "./message";
 import { renderStrip, renderTrend, shortLabel } from "./timeline";
 import { STAGE_COLOR, STATUS_COLOR, type KecFeature, type KecProps, type Meta, type Scenario, type Weather } from "./types";
 import { renderRain, renderScenarioCurve } from "./weather";
-import { FEEDBACK, STEPS, addFeedback, advance, getState, initStore, resetStep } from "./workflow";
+import {
+  FEEDBACK, ROLE_LABEL, STEPS, addReport, advance, canReset, canStep, feedbackLabel, getActor, getMode, getReports,
+  ApiError, getState, initStore, requestRefresh, resetStep, serverStatus, setActor, stepLabel, sync,
+  type Actor, type Role, type ServerStatus,
+} from "./workflow";
 
 const DATA = "./data";
 const $ = <T extends HTMLElement = HTMLElement>(sel: string) => document.querySelector(sel) as T;
@@ -21,6 +25,9 @@ let playTimer: number | null = null;
 let weather: Weather | null = null; // Stage 2, optional
 let scenario: Scenario | null = null; // Stage 2, optional
 let scenN = 0; // dasarian without rain in the what-if (0 = observed)
+let desaByKec: Record<string, { id: string; name: string }[]> = {};
+let actor: Actor | null = getActor();
+let status: ServerStatus | null = null; // Stage 3, server mode only
 
 /** Optional data file: null when missing or malformed. */
 const optional = <T,>(file: string) =>
@@ -39,8 +46,11 @@ async function boot() {
   // A scenario only makes sense for the period it was computed from
   scenario = sc && meta.periods?.some((p) => p.id === sc.period_id) ? sc : null;
   feats = (kec.features as KecFeature[]).slice().sort((a, b) => a.properties.rank - b.properties.rank);
-  // Action log stays tied to the run's current period, not the period being viewed
-  initStore(`${meta.region.id}:${meta.period.start}`);
+  for (const f of desa.features as { properties: { id: string; name: string; kec_id: string } }[])
+    (desaByKec[f.properties.kec_id] ??= []).push({ id: f.properties.id, name: f.properties.name });
+  Object.values(desaByKec).forEach((l) => l.sort((a, b) => a.name.localeCompare(b.name)));
+  // Action log stays tied to the run's current month, not the month being viewed
+  await initStore(meta.current_period ?? meta.period.start.slice(0, 7));
   if (meta.periods?.length) {
     periodId = meta.current_period ?? meta.periods[meta.periods.length - 1].id;
     document.body.classList.add("has-periods");
@@ -55,6 +65,8 @@ async function boot() {
   api = await createMap($("#map"), meta, kec, desa, DATA);
   api.onSelect((id) => openDetail(id, false));
   $("#loading").remove();
+  renderWho();
+  startSync();
 
   const hash = location.hash.slice(1);
   const fromHash = feats.find((f) => slug(f.properties.name) === hash);
@@ -305,6 +317,7 @@ function renderDetail(p: KecProps, resetScroll = true) {
   const msg = composeMessage(scenN > 0 ? observed(p) : p, meta, kw);
   const obs = scenN > 0 ? observed(p) : null;
   const totalClass = Object.values(p.class_ha).reduce((a, b) => a + b, 0) || 1;
+  const reps = getReports(p.id);
 
   el.innerHTML = `
     <header>
@@ -379,14 +392,19 @@ function renderDetail(p: KecProps, resetScroll = true) {
     </section>` : `<section class="reco ok"><h3>Rekomendasi</h3><p>Tidak ada tindakan khusus. Lanjutkan pemantauan rutin.</p></section>`}
 
     <section>
-      <h3>Alur tindakan</h3>
+      <h3>Alur tindakan <span class="h-note">${getMode() === "server" ? "bersama" : "lokal"} · ${esc(curPeriodLabel())}</span></h3>
       <ol class="stepper">${STEPS.slice(1)
         .map((s, i) => `<li class="${i + 1 <= stepIdx ? "done" : i + 1 === stepIdx + 1 ? "next" : ""}"><b>${s.label}</b><span>${s.who}</span></li>`)
         .join("")}</ol>
       <div class="row">
-        ${next ? `<button class="primary" id="d-advance">Tandai: ${next.label}</button>` : `<span class="muted">Selesai ditindaklanjuti.</span>`}
-        ${stepIdx > 0 ? `<button class="ghost" id="d-reset">Atur ulang</button>` : ""}
+        ${!next ? `<span class="muted">Selesai ditindaklanjuti.</span>`
+          : !actor ? `<button class="primary" id="d-who">Masuk untuk mencatat tindakan</button>`
+          : canStep(next.id, actor) ? `<button class="primary" id="d-advance">Tandai: ${next.label}</button>`
+          : `<span class="muted">Menunggu ${next.who}: ${next.label.toLowerCase()}</span>`}
+        ${canReset(st.step, actor) ? `<button class="ghost" id="d-reset">${actor!.role === "dinas" ? "Batalkan" : "Tarik usulan"}</button>` : ""}
       </div>
+      <p class="wf-err" id="d-wf-err" hidden></p>
+      ${st.log.length ? `<ul class="log">${st.log.slice().reverse().map((l) => `<li><time>${when(l.at)}</time> ${l.kind === "reset" ? `↺ dibatalkan (dari ${esc(stepLabel(l.step))})` : `→ ${esc(stepLabel(l.step))}`}${l.actor ? ` <span class="who-tag">${esc(l.actor)}${l.role ? ` · ${ROLE_LABEL[l.role]}` : ""}</span>` : ""}${l.note ? ` <em>${esc(l.note)}</em>` : ""}</li>`).join("")}</ul>` : ""}
     </section>
 
     <section>
@@ -400,17 +418,20 @@ function renderDetail(p: KecProps, resetScroll = true) {
 
     <section>
       <h3>Laporan cek lapangan</h3>
+      ${reportSummary(reps)}
       <form id="d-fb">
-        ${FEEDBACK.map((o, i) => `<label class="radio"><input type="radio" name="fb" value="${o.label}" ${i === 0 ? "checked" : ""}> ${o.label}</label>`).join("")}
-        <input type="text" name="note" placeholder="Catatan (opsional): desa, blok, foto…" />
-        <button class="ghost" type="submit">Kirim laporan</button>
+        ${FEEDBACK.map((o, i) => `<label class="radio"><input type="radio" name="fb" value="${o.id}" ${i === 0 ? "checked" : ""}> ${o.label}</label>`).join("")}
+        <select name="desa"><option value="">Desa (opsional)</option>${(desaByKec[p.id] ?? []).map((d) => `<option value="${d.id}">${esc(d.name)}</option>`).join("")}</select>
+        <input type="text" name="note" maxlength="1000" placeholder="Catatan (opsional): blok, komoditas, foto…" />
+        <button class="ghost" type="submit">${actor ? "Kirim laporan" : "Masuk lalu kirim laporan"}</button>
+        <p class="wf-err" id="d-fb-err" hidden></p>
       </form>
-      <ul class="log">${st.log
-        .slice()
-        .reverse()
-        .map((l) => `<li><time>${new Date(l.at).toLocaleString("id-ID", { dateStyle: "short", timeStyle: "short" })}</time> ${l.kind === "feedback" ? "📍 " : "→ "}${esc(l.value)}${l.note ? ` <em>${esc(l.note)}</em>` : ""}</li>`)
-        .join("") || `<li class="muted">Belum ada catatan.</li>`}</ul>
-      <p class="fine">Prototipe: catatan disimpan di peramban ini saja. Pada Tahap 3 laporan dikirim ke server dan dipakai untuk mengoreksi masker padi dan ambang.</p>
+      <ul class="log">${reps
+        .map((r) => `<li><time>${when(r.created_at)}</time> 📍 ${esc(feedbackLabel(r.answer))}${r.desa_name ? ` · ${esc(r.desa_name)}` : ""}${r.actor ? ` <span class="who-tag">${esc(r.actor)}</span>` : ""}${r.note ? ` <em>${esc(r.note)}</em>` : ""}</li>`)
+        .join("") || `<li class="muted">Belum ada laporan.</li>`}</ul>
+      <p class="fine">${getMode() === "server"
+        ? "Laporan tersimpan di server dan terlihat oleh semua pengguna. Jawaban \"Bukan padi\" dan \"Sudah panen / bera\" dipakai untuk mengoreksi masker padi dan ambang lintasan NDVI."
+        : "Server tidak terhubung: laporan dan alur tindakan hanya tersimpan di peramban ini."}</p>
     </section>
 
     <details class="fine">
@@ -429,10 +450,12 @@ function renderDetail(p: KecProps, resetScroll = true) {
   const sc = document.getElementById("d-scen");
   if (sc && scenario) renderScenarioCurve(sc, p.id, p.name, scenario, scenN, setScenario);
   $("#d-close").onclick = closeDetail;
-  const adv = document.getElementById("d-advance");
-  if (adv) adv.onclick = () => { advance(p.id); renderDetail(p); renderRanking(); };
-  const rst = document.getElementById("d-reset");
-  if (rst) rst.onclick = () => { resetStep(p.id); renderDetail(p); renderRanking(); };
+  const adv = document.getElementById("d-advance") as HTMLButtonElement | null;
+  if (adv) adv.onclick = () => act(adv, "d-wf-err", () => advance(p.id, actor!));
+  const rst = document.getElementById("d-reset") as HTMLButtonElement | null;
+  if (rst) rst.onclick = () => act(rst, "d-wf-err", () => resetStep(p.id, actor!));
+  const who = document.getElementById("d-who");
+  if (who) who.onclick = () => openWho();
   $("#d-copy").onclick = async (ev) => {
     const b = ev.currentTarget as HTMLButtonElement;
     try {
@@ -445,10 +468,164 @@ function renderDetail(p: KecProps, resetScroll = true) {
   };
   ($("#d-fb") as HTMLFormElement).onsubmit = (ev) => {
     ev.preventDefault();
-    const fd = new FormData(ev.target as HTMLFormElement);
-    addFeedback(p.id, String(fd.get("fb")), String(fd.get("note") || ""));
-    renderDetail(p);
+    if (!actor) return openWho();
+    const form = ev.target as HTMLFormElement;
+    const fd = new FormData(form);
+    void act(form.querySelector("button")!, "d-fb-err", () =>
+      addReport(p.id, String(fd.get("fb")), String(fd.get("note") || "").trim(), String(fd.get("desa") || "") || null, actor!));
   };
+}
+
+// ---------------------------------------------------------------- workflow (Stage 3)
+const when = (iso: string) => new Date(iso).toLocaleString("id-ID", { dateStyle: "short", timeStyle: "short" });
+
+function curPeriodLabel() {
+  const id = meta.current_period;
+  return (id && meta.periods?.find((x) => x.id === id)?.label) || meta.period.label;
+}
+
+function reportSummary(reps: ReturnType<typeof getReports>) {
+  if (!reps.length) return "";
+  const n: Record<string, number> = {};
+  reps.forEach((r) => (n[r.answer] = (n[r.answer] ?? 0) + 1));
+  const parts = FEEDBACK.filter((f) => n[f.id]).map((f) => `${n[f.id]} ${f.label.split(":")[0].split(" (")[0].toLowerCase()}`);
+  const wrong = (n.not_rice ?? 0) + (n.harvested ?? 0) + (n.irrigated ?? 0);
+  // Only flag doubt once a few independent checks agree
+  return `<p class="rep-sum"><b>${reps.length} laporan</b>: ${parts.join(", ")}.${reps.length >= 3 && wrong / reps.length >= 0.5 ? ` <span class="warn">Sebagian besar laporan tidak membenarkan cekaman; status peta di sini perlu diragukan.</span>` : ""}</p>`;
+}
+
+function rerender() {
+  renderRanking();
+  const f = selected ? feats.find((x) => x.properties.id === selected) : null;
+  if (f) renderDetail(f.properties, false);
+}
+
+/** Run a workflow write, then redraw; errors (e.g. someone else was faster) shown inline. */
+async function act(btn: HTMLElement, errId: string, fn: () => Promise<unknown>) {
+  (btn as HTMLButtonElement).disabled = true;
+  try {
+    await fn();
+    rerender();
+  } catch (e) {
+    rerender(); // a 409 has already pulled the newer state
+    const el = document.getElementById(errId);
+    if (el) {
+      el.textContent = `Gagal: ${(e as Error).message}.${e instanceof ApiError && e.status === 409 ? " Tampilan sudah diperbarui." : ""}`;
+      el.hidden = false;
+    }
+  }
+}
+
+function renderWho() {
+  const m = getMode();
+  $("#who").innerHTML = `
+    <button class="who-btn" title="${m === "server" ? "Tersambung ke server: alur tindakan dan laporan dipakai bersama" : "Server tidak terhubung: data hanya di peramban ini"}">
+      <i class="dot ${m}"></i>${actor ? `${esc(actor.name)} <span>${ROLE_LABEL[actor.role]}</span>` : "Masuk"}
+    </button>`;
+  $("#who").querySelector("button")!.onclick = () => openWho();
+}
+
+function ago(iso: string | null) {
+  if (!iso) return "belum pernah";
+  const h = (Date.now() - new Date(iso).getTime()) / 3.6e6;
+  return h < 1 ? `${Math.max(1, Math.round(h * 60))} menit lalu` : h < 48 ? `${Math.round(h)} jam lalu` : `${Math.round(h / 24)} hari lalu`;
+}
+
+function statusHtml() {
+  if (getMode() !== "server") return `<p class="fine">Server tidak terhubung. Jalankan <code>uvicorn server.app:app</code> agar alur tindakan dan laporan dipakai bersama.</p>`;
+  if (!status) return `<p class="fine">Memuat status data…</p>`;
+  const rows = Object.entries(status.jobs).map(([id, j]) => {
+    const last = j.last;
+    const state = j.running ? "sedang berjalan…" : !j.enabled ? "nonaktif di server" : last?.status === "failed" ? `gagal ${ago(last.started_at)}` : `berhasil ${ago(j.last_ok)}`;
+    return `<li><b>${esc(j.label)}</b><span class="${last?.status === "failed" ? "warn" : ""}">${state}</span>
+      <small>${j.enabled ? `otomatis tiap ${j.interval_h >= 24 ? `${j.interval_h / 24} hari` : `${j.interval_h} jam`}` : ""}</small>
+      ${actor?.role === "dinas" && j.enabled ? `<button class="ghost" data-job="${id}" ${j.running || Object.values(status!.jobs).some((x) => x.running) ? "disabled" : ""}>Perbarui sekarang</button>` : ""}</li>`;
+  });
+  return `<ul class="jobs">${rows.join("")}</ul>
+    <p class="fine">Citra: ${status.data.meta ? when(status.data.meta) : "-"} · hujan: ${status.data.weather ? when(status.data.weather) : "-"}${status.scheduler ? "" : " · penjadwal mati"}</p>`;
+}
+
+function openWho() {
+  const dlg = $("#who-dlg") as HTMLDialogElement;
+  const draw = () => {
+    dlg.innerHTML = `
+      <form method="dialog" id="who-form">
+        <h3>Identitas pengguna</h3>
+        <p class="fine">Nama dan peran dicatat pada setiap tindakan dan laporan. Prototipe: belum ada kata sandi.</p>
+        <label>Nama <input name="name" required minlength="2" maxlength="60" value="${esc(actor?.name ?? "")}" autocomplete="name"></label>
+        <div class="roles">${(["penyuluh", "dinas"] as Role[]).map((r) => `<label class="radio"><input type="radio" name="role" value="${r}" ${(actor?.role ?? "penyuluh") === r ? "checked" : ""}> ${ROLE_LABEL[r]}<small>${r === "penyuluh" ? "mengusulkan, mengirim pesan, melapor" : "menyetujui dan membatalkan tindakan"}</small></label>`).join("")}</div>
+        <div class="row"><button class="primary" value="save">Simpan</button>${actor ? `<button class="ghost" value="out" formnovalidate>Keluar</button>` : ""}<button class="ghost" value="cancel" formnovalidate>Tutup</button></div>
+        <h3>Pembaruan data</h3>
+        <div id="who-status">${statusHtml()}</div>
+      </form>`;
+    bindJobs();
+  };
+  const drawStatus = () => {
+    const el = dlg.querySelector("#who-status");
+    if (el) el.innerHTML = statusHtml();
+    bindJobs();
+  };
+  const bindJobs = () => {
+    dlg.querySelectorAll<HTMLButtonElement>("[data-job]").forEach((b) => (b.onclick = async (ev) => {
+      ev.preventDefault();
+      b.disabled = true;
+      try {
+        await requestRefresh(b.dataset.job as "weather" | "full", actor!);
+        await pollStatus();
+      } catch (e) {
+        b.textContent = `Gagal: ${(e as Error).message}`;
+        return;
+      }
+      drawStatus();
+    }));
+  };
+  draw();
+  dlg.onclose = () => {
+    const v = dlg.returnValue;
+    if (v === "save") {
+      const fd = new FormData(dlg.querySelector("form")!);
+      actor = { name: String(fd.get("name")).trim(), role: String(fd.get("role")) as Role };
+      setActor(actor);
+    } else if (v === "out") {
+      actor = null;
+      setActor(null);
+    }
+    renderWho();
+    rerender();
+  };
+  dlg.showModal();
+  void pollStatus().then(() => dlg.open && drawStatus());
+  // Follow a running refresh until it finishes
+  const t = setInterval(async () => {
+    if (!dlg.open) return clearInterval(t);
+    if (status && Object.values(status.jobs).some((j) => j.running)) { await pollStatus(); if (dlg.open) drawStatus(); }
+  }, 3000);
+}
+
+async function pollStatus() {
+  if (getMode() !== "server") return;
+  try {
+    status = await serverStatus();
+  } catch {
+    return;
+  }
+  // The pipeline wrote new files since this page loaded
+  const fresh = status.data.meta !== meta.generated_at || (weather && status.data.weather !== weather.generated_at);
+  $("#update").hidden = !fresh;
+}
+
+function startSync() {
+  if (getMode() !== "server") return;
+  $("#update").querySelector("button")!.onclick = () => location.reload();
+  void pollStatus();
+  setInterval(async () => {
+    if (document.hidden) return;
+    try {
+      // Do not redraw under someone typing a report
+      if ((await sync()) && !document.activeElement?.closest("#d-fb, dialog")) rerender();
+    } catch { /* server went away; keep the last state */ }
+  }, 15000);
+  setInterval(() => { if (!document.hidden) void pollStatus(); }, 60000);
 }
 
 // ---------------------------------------------------------------- layer bar

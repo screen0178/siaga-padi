@@ -31,6 +31,11 @@ pipeline/                 Python: data + scoring (single source of truth)
   weather.py              Stage 2: Open-Meteo rainfall per dasarian + forecast
   scenario.py             Stage 2: "no rain for N dasarian" what-if (Earth Engine)
   outputs.py              writes the web data contract
+server/                   Stage 3: FastAPI backend (shared action log, field reports, scheduler)
+  app.py                  API + serves web/dist and the data contract
+  store.py                SQLite, append-only (audit trail)
+  jobs.py                 scheduled pipeline refresh (weather 6-hourly, full weekly)
+  tests/                  API rules (pytest)
 data/boundaries/          BPS 2020 boundaries (via HDX)
 web/                      TypeScript + Vite + MapLibre frontend
   public/data/            data contract: meta.json, kecamatan.json, desa.json, layers/*.png
@@ -74,6 +79,29 @@ cd web && npm install && npm run dev                   # http://localhost:5173
    `python pipeline/weather.py` (no Earth Engine; safe to run daily) and
    `python pipeline/scenario.py --project ID` (~1 min). Both files are optional:
    without them the rain section and the scenario slider simply do not appear.
+
+### Backend (Stage 3)
+
+```bash
+pip install -r server/requirements.txt               # into the same venv as the pipeline
+uvicorn server.app:app --port 8000                   # API on :8000; Vite proxies /api in dev
+# production: cd web && npm run build, then http://localhost:8000 serves app + data + API
+SIAGA_EE_PROJECT=your-project uvicorn server.app:app # also enables the weekly Landsat refresh
+python -m pytest server/tests -q                     # role / step / conflict rules
+```
+
+- Penyuluh and Dinas Pertanian share one action log and one set of field reports
+  (SQLite, `server/siaga.db`, append-only so the log is an audit trail).
+- Roles are enforced by the server: a penyuluh proposes, sends, and records follow-up;
+  only Dinas approves or cancels an approved action. Two people acting on stale views
+  get a conflict, not a silent overwrite. Actions are for the current month only;
+  past months are read-only history.
+- Field reports carry an optional desa and are exported at `/api/reports.csv`
+  for calibrating the rice mask and `TRAJECTORY` thresholds.
+- The scheduler reruns `weather.py` every 6 h and, when `SIAGA_EE_PROJECT` is set,
+  `gee_export.py --last-months 6` + `scenario.py` weekly. Open pages see a
+  "data baru" prompt. Dinas can trigger a refresh from the user dialog.
+- Without the server (static hosting) the app falls back to browser storage and says so.
 
 ## Method
 
@@ -126,7 +154,8 @@ cd web && npm install && npm run dev                   # http://localhost:5173
   in-sample in time. The raster layers keep showing the last image.
 - **Rainfall is model data at one point per kecamatan** (Open-Meteo best-match
   NWP / ERA5), not rain gauges; BMKG station or CHIRPS data would be better.
-- Stage 0 workflow/feedback is stored in the browser only.
+- **No login yet.** Users type a name and pick a role; the server enforces what each
+  role may do, but anyone can claim either role. Accountability, not security.
 
 ## Roadmap
 
@@ -135,7 +164,7 @@ cd web && npm install && npm run dev                   # http://localhost:5173
 | 0 ✅ | Map, layers, ranked actions, recommendation, WhatsApp text, action log (local) |
 | 1 ✅ | Time slider: monthly dry-season series, NDDI trend per kecamatan |
 | 2 ✅ | Rainfall per dasarian + 16-day forecast (Open-Meteo); calibrated what-if "no rain for N dasarian" |
-| 3 | Backend (FastAPI): shared action log, officer field reports, scheduled pipeline |
+| 3 ✅ | Backend (FastAPI + SQLite): shared action log with roles, field reports per desa, scheduled pipeline |
 | 4 | ML: rice vs. dryland classifier from field reports; NDDI 1–2 dasarian forecast |
 
 ## Sources

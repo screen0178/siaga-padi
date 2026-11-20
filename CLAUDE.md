@@ -56,6 +56,16 @@ Ventusky is only the visual inspiration, not the product.
   `web/src/weather.ts` (rain bars, scenario curve); the slider lives in the
   ranking panel and mutates props like period switching; messages to
   Gapoktan always use observed data. Scenario only for `current_period`.
+- Stage 3 backend: `server/` FastAPI + SQLite (`app.py`, `store.py`, `jobs.py`).
+  Append-only events (step/reset) per (period, kec); state derived. Server
+  enforces roles (proposed/sent/done = penyuluh, approved = dinas; reset:
+  dinas, or penyuluh withdrawing a proposal), step order, optimistic
+  concurrency (`from_step` → 409) and current-period-only writes. Reports
+  (answer id, optional desa) at `/api/reports.csv`. Scheduler runs pipeline
+  scripts as subprocesses (weather 6 h; full weekly if `SIAGA_EE_PROJECT`).
+  Frontend `web/src/workflow.ts` falls back to localStorage when `/api` fails
+  (4 s timeout); polls state 15 s, status 60 s. Vite proxies `/api` → :8000.
+  No auth: name + role typed by the user.
 - Data files are `.json` (not `.geojson`): the claude.ai preview host refuses `.geojson`.
 - Raster layers are drawn through a MapLibre canvas source; labels are HTML
   markers (no glyph server). Both keep the app working offline / sandboxed.
@@ -95,6 +105,11 @@ Ventusky is only the visual inspiration, not the product.
   19 / 41 / 56 % (in-sample in time). Rejected: pixel Markov chain on classes
   (Kuat persistence only 30–60 %, learned noise, drought fell without rain)
   and EE's percentile reducer (coarse buckets; exact 0.05 histograms instead).
+- Stage 3 done (2026-11-20): shared action log with roles, field reports per
+  desa, scheduled refresh, "data baru" prompt, local fallback. 8 API tests
+  pass; verified in the browser (propose → Dinas approve via API → page
+  syncs; stale click → 409 + refreshed view; report with desa; Dinas
+  "Perbarui sekarang" ran weather.py). Production: FastAPI serves web/dist.
 - Aug 2024 video-check run (single period) was done first; its data is in
   git history (commit 1d21c4f), not on disk.
 - Verification vs video (Aug 2024): Kuat 12,637 ha (video ≈ 11,000, OK);
@@ -132,8 +147,11 @@ Ventusky is only the visual inspiration, not the product.
 4. Stage 2 follow-ups: rain from CHIRPS / BMKG stations instead of model
    points; out-of-sample check of the what-if once the 2027 dry season exists;
    stage aging in the scenario (vegetative → reproductive).
-5. Stage 3: FastAPI backend for shared action log + field reports; scheduled
-   pipeline. Stage 4: ML (rice vs dryland from field reports; NDDI forecast).
+5. Stage 3 follow-ups: real login (at least a PIN per role), deploy (one
+   small VM or container with EE service-account credentials), WhatsApp
+   delivery tracking. Use field reports to calibrate (feed `/api/reports.csv`
+   into the pipeline: exclude reported non-rice desa, tune `TRAJECTORY`).
+   Stage 4: ML (rice vs dryland from field reports; NDDI forecast).
 
 ## Known limitations (keep visible in UI and slides)
 

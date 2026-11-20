@@ -252,3 +252,52 @@ body.scen-on #rank-list { background: repeating-linear-gradient(135deg, transpar
 .rain-key i.hatch { background: repeating-linear-gradient(45deg, #5bb0d9 0 2px, rgba(91, 176, 217, 0.28) 2px 4px); }
 .rain-key { flex-wrap: wrap; }
 .rain-key i.thr { width: 14px; height: 0; border-top: 1px dashed rgba(242, 201, 76, 0.8); border-radius: 0; }
+
+/* ---------------------------------------------------------------- Stage 3: shared workflow */
+.who { pointer-events: auto; }
+.topbar .summary { margin-left: auto; }
+.who-btn {
+  display: flex; align-items: center; gap: 8px; height: 100%; padding: 8px 12px;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 10px; color: var(--text);
+  font: 500 12.5px var(--sans); cursor: pointer; backdrop-filter: blur(8px);
+}
+.who-btn span { color: var(--muted); font-weight: 400; }
+.who-btn:hover { border-color: var(--accent); }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: #8a93a1; }
+.dot.server { background: #3fb27f; box-shadow: 0 0 0 3px rgba(63, 178, 127, 0.18); }
+.dot.local { background: transparent; border: 1.5px solid #8a93a1; }
+.update {
+  position: absolute; top: 64px; left: 50%; transform: translateX(-50%); z-index: 20;
+  background: var(--panel); border: 1px solid var(--accent); border-radius: 10px; padding: 6px 8px 6px 14px;
+  font-size: 12.5px; display: flex; gap: 10px; align-items: center;
+}
+.update[hidden] { display: none; }
+.who-dlg {
+  width: min(420px, calc(100vw - 32px)); background: var(--panel-solid, #151a22); color: var(--text);
+  border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px;
+}
+.who-dlg::backdrop { background: rgba(5, 8, 12, 0.55); }
+.who-dlg h3 { margin: 0 0 6px; font-size: 13px; }
+.who-dlg h3:not(:first-child) { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line); }
+.who-dlg label:not(.radio) { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--muted); margin: 10px 0; }
+.who-dlg input[name="name"] { font-size: 14px; }
+.roles { display: grid; gap: 6px; margin-bottom: 12px; }
+.roles .radio small { color: var(--muted); margin-left: auto; font-size: 11px; }
+.jobs { list-style: none; padding: 0; margin: 8px 0; display: grid; gap: 8px; font-size: 12px; }
+.jobs li { display: grid; grid-template-columns: 1fr auto; gap: 2px 8px; align-items: center; }
+.jobs li small { color: var(--muted); }
+.jobs li button { grid-column: 2; grid-row: 1 / span 2; }
+.jobs li span { color: var(--muted); grid-column: 1; }
+.warn { color: #f2a33a; }
+.wf-err { color: #ff8a7a; font-size: 12px; margin: 6px 0 0; }
+.who-tag { color: var(--muted); font-size: 11px; }
+.who-tag::before { content: "· "; }
+.h-note { color: var(--muted); font-weight: 400; font-size: 11px; margin-left: 6px; text-transform: none; letter-spacing: 0; }
+.rep-sum { font-size: 12px; margin: 0 0 8px; }
+#d-fb select { width: 100%; }
+@media (max-width: 900px) { .who-btn span { display: none; } }
+#d-fb select, .who-dlg input[name="name"] {
+  margin-top: 4px; background: rgba(255, 255, 255, 0.04); border: 1px solid var(--line); border-radius: 8px;
+  padding: 7px 10px; color: var(--text); font: inherit;
+}
+#d-fb select option { background: var(--panel-solid); }
