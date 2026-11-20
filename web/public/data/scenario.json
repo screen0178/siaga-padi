@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-20T07:37:01+00:00",
+ "generated_at": "2026-11-20T10:09:06+00:00",
  "period_id": "2026-11",
  "max_dasarian": 9,
  "method": "quantile_mapping",
@@ -249,6 +249,9 @@
     "active_ha": 4505.5,
     "hazard_index": 0.315,
     "ha_at_risk": 936.6,
+    "priority": 698.4,
+    "capacity_factor": 0.746,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 1.5,
@@ -268,12 +271,15 @@
      "4": 162.9
     },
     "action": null,
-    "rank": 2
+    "rank": 5
    },
    "1": {
     "active_ha": 4505.5,
     "hazard_index": 0.33,
     "ha_at_risk": 982.5,
+    "priority": 732.6,
+    "capacity_factor": 0.746,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 1.5,
@@ -293,12 +299,15 @@
      "4": 167.4
     },
     "action": null,
-    "rank": 2
+    "rank": 4
    },
    "2": {
     "active_ha": 4505.5,
     "hazard_index": 0.335,
     "ha_at_risk": 998.6,
+    "priority": 744.5,
+    "capacity_factor": 0.746,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 1.5,
@@ -318,12 +327,15 @@
      "4": 174.4
     },
     "action": null,
-    "rank": 2
+    "rank": 3
    },
    "3": {
     "active_ha": 4505.5,
     "hazard_index": 0.352,
     "ha_at_risk": 1050.5,
+    "priority": 783.2,
+    "capacity_factor": 0.746,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 1.4,
@@ -343,12 +355,15 @@
      "4": 179.0
     },
     "action": null,
-    "rank": 2
+    "rank": 3
    },
    "4": {
     "active_ha": 4505.5,
     "hazard_index": 0.369,
     "ha_at_risk": 1103.5,
+    "priority": 822.7,
+    "capacity_factor": 0.746,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 1.4,
@@ -368,12 +383,15 @@
      "4": 185.1
     },
     "action": null,
-    "rank": 2
+    "rank": 3
    },
    "5": {
     "active_ha": 4505.5,
     "hazard_index": 0.393,
     "ha_at_risk": 1178.0,
+    "priority": 878.3,
+    "capacity_factor": 0.746,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 1.4,
@@ -393,12 +411,15 @@
      "4": 198.0
     },
     "action": null,
-    "rank": 2
+    "rank": 3
    },
    "6": {
     "active_ha": 4505.5,
     "hazard_index": 0.417,
     "ha_at_risk": 1254.7,
+    "priority": 935.5,
+    "capacity_factor": 0.746,
+    "water_source": "irigasi",
     "status": "Waspada",
     "class_ha": {
      "1": 1.4,
@@ -420,18 +441,21 @@
     "action": {
      "headline": "Hemat air dan siapkan pompa untuk vegetatif akhir",
      "steps": [
-      "Terapkan pengairan berselang (basah-kering) agar air cukup sampai fase bunting.",
-      "Inventarisasi pompa dan sumur dangkal di wilayah kelompok tani.",
+      "Hemat air agar cukup sampai fase bunting.",
+      "Terapkan pengairan berselang (basah-kering) dan sepakati jadwal gilir dengan P3A.",
       "Cek lapangan blok yang ditandai merah."
      ],
      "urgency": "minggu ini"
     },
-    "rank": 2
+    "rank": 3
    },
    "7": {
     "active_ha": 4505.5,
     "hazard_index": 0.456,
     "ha_at_risk": 1376.2,
+    "priority": 1026.1,
+    "capacity_factor": 0.746,
+    "water_source": "irigasi",
     "status": "Waspada",
     "class_ha": {
      "1": 1.4,
@@ -453,8 +477,8 @@
     "action": {
      "headline": "Hemat air dan siapkan pompa untuk vegetatif akhir",
      "steps": [
-      "Terapkan pengairan berselang (basah-kering) agar air cukup sampai fase bunting.",
-      "Inventarisasi pompa dan sumur dangkal di wilayah kelompok tani.",
+      "Hemat air agar cukup sampai fase bunting.",
+      "Terapkan pengairan berselang (basah-kering) dan sepakati jadwal gilir dengan P3A.",
       "Cek lapangan blok yang ditandai merah."
      ],
      "urgency": "minggu ini"
@@ -465,6 +489,9 @@
     "active_ha": 4505.5,
     "hazard_index": 0.486,
     "ha_at_risk": 1471.0,
+    "priority": 1096.8,
+    "capacity_factor": 0.746,
+    "water_source": "irigasi",
     "status": "Waspada",
     "class_ha": {
      "1": 1.4,
@@ -486,8 +513,8 @@
     "action": {
      "headline": "Hemat air dan siapkan pompa untuk vegetatif akhir",
      "steps": [
-      "Terapkan pengairan berselang (basah-kering) agar air cukup sampai fase bunting.",
-      "Inventarisasi pompa dan sumur dangkal di wilayah kelompok tani.",
+      "Hemat air agar cukup sampai fase bunting.",
+      "Terapkan pengairan berselang (basah-kering) dan sepakati jadwal gilir dengan P3A.",
       "Cek lapangan blok yang ditandai merah."
      ],
      "urgency": "minggu ini"
@@ -498,6 +525,9 @@
     "active_ha": 4505.5,
     "hazard_index": 0.516,
     "ha_at_risk": 1564.5,
+    "priority": 1166.5,
+    "capacity_factor": 0.746,
+    "water_source": "irigasi",
     "status": "Waspada",
     "class_ha": {
      "1": 1.4,
@@ -519,8 +549,8 @@
     "action": {
      "headline": "Hemat air dan siapkan pompa untuk vegetatif akhir",
      "steps": [
-      "Terapkan pengairan berselang (basah-kering) agar air cukup sampai fase bunting.",
-      "Inventarisasi pompa dan sumur dangkal di wilayah kelompok tani.",
+      "Hemat air agar cukup sampai fase bunting.",
+      "Terapkan pengairan berselang (basah-kering) dan sepakati jadwal gilir dengan P3A.",
       "Cek lapangan blok yang ditandai merah."
      ],
      "urgency": "minggu ini"
@@ -533,6 +563,9 @@
     "active_ha": 3103.9,
     "hazard_index": 0.65,
     "ha_at_risk": 1219.1,
+    "priority": 954.0,
+    "capacity_factor": 0.782,
+    "water_source": "irigasi",
     "status": "Siaga",
     "class_ha": {
      "1": 4.8,
@@ -555,7 +588,7 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "3 hari ke depan"
@@ -566,6 +599,9 @@
     "active_ha": 3103.9,
     "hazard_index": 0.666,
     "ha_at_risk": 1252.0,
+    "priority": 979.7,
+    "capacity_factor": 0.782,
+    "water_source": "irigasi",
     "status": "Siaga",
     "class_ha": {
      "1": 4.8,
@@ -588,7 +624,7 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "3 hari ke depan"
@@ -599,6 +635,9 @@
     "active_ha": 3103.9,
     "hazard_index": 0.675,
     "ha_at_risk": 1270.0,
+    "priority": 993.8,
+    "capacity_factor": 0.782,
+    "water_source": "irigasi",
     "status": "Siaga",
     "class_ha": {
      "1": 4.8,
@@ -621,7 +660,7 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "3 hari ke depan"
@@ -632,6 +671,9 @@
     "active_ha": 3103.9,
     "hazard_index": 0.692,
     "ha_at_risk": 1305.4,
+    "priority": 1021.5,
+    "capacity_factor": 0.782,
+    "water_source": "irigasi",
     "status": "Siaga",
     "class_ha": {
      "1": 4.8,
@@ -654,7 +696,7 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "3 hari ke depan"
@@ -665,6 +707,9 @@
     "active_ha": 3103.9,
     "hazard_index": 0.712,
     "ha_at_risk": 1346.1,
+    "priority": 1053.4,
+    "capacity_factor": 0.782,
+    "water_source": "irigasi",
     "status": "Siaga",
     "class_ha": {
      "1": 4.8,
@@ -687,7 +732,7 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "3 hari ke depan"
@@ -698,6 +743,9 @@
     "active_ha": 3103.9,
     "hazard_index": 0.739,
     "ha_at_risk": 1403.5,
+    "priority": 1098.3,
+    "capacity_factor": 0.782,
+    "water_source": "irigasi",
     "status": "Siaga",
     "class_ha": {
      "1": 4.8,
@@ -720,7 +768,7 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "3 hari ke depan"
@@ -731,6 +779,9 @@
     "active_ha": 3103.9,
     "hazard_index": 0.767,
     "ha_at_risk": 1462.1,
+    "priority": 1144.1,
+    "capacity_factor": 0.782,
+    "water_source": "irigasi",
     "status": "Awas",
     "class_ha": {
      "1": 4.8,
@@ -753,7 +804,7 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
@@ -764,6 +815,9 @@
     "active_ha": 3103.9,
     "hazard_index": 0.805,
     "ha_at_risk": 1544.9,
+    "priority": 1208.9,
+    "capacity_factor": 0.782,
+    "water_source": "irigasi",
     "status": "Awas",
     "class_ha": {
      "1": 4.8,
@@ -786,7 +840,7 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
@@ -797,6 +851,9 @@
     "active_ha": 3103.9,
     "hazard_index": 0.829,
     "ha_at_risk": 1597.4,
+    "priority": 1250.0,
+    "capacity_factor": 0.782,
+    "water_source": "irigasi",
     "status": "Awas",
     "class_ha": {
      "1": 4.8,
@@ -819,7 +876,7 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
@@ -830,6 +887,9 @@
     "active_ha": 3103.9,
     "hazard_index": 0.854,
     "ha_at_risk": 1650.7,
+    "priority": 1291.6,
+    "capacity_factor": 0.782,
+    "water_source": "irigasi",
     "status": "Awas",
     "class_ha": {
      "1": 4.8,
@@ -852,7 +912,7 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
@@ -865,6 +925,9 @@
     "active_ha": 1773.5,
     "hazard_index": 0.852,
     "ha_at_risk": 845.3,
+    "priority": 723.8,
+    "capacity_factor": 0.856,
+    "water_source": "campuran",
     "status": "Awas",
     "class_ha": {
      "1": 7.7,
@@ -887,17 +950,21 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Blok irigasi: sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
+      "Blok tadah hujan: tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 5
+    "rank": 3
    },
    "1": {
     "active_ha": 1773.5,
     "hazard_index": 0.862,
     "ha_at_risk": 856.9,
+    "priority": 733.8,
+    "capacity_factor": 0.856,
+    "water_source": "campuran",
     "status": "Awas",
     "class_ha": {
      "1": 7.7,
@@ -920,17 +987,21 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Blok irigasi: sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
+      "Blok tadah hujan: tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 5
+    "rank": 3
    },
    "2": {
     "active_ha": 1773.5,
     "hazard_index": 0.871,
     "ha_at_risk": 867.1,
+    "priority": 742.5,
+    "capacity_factor": 0.856,
+    "water_source": "campuran",
     "status": "Awas",
     "class_ha": {
      "1": 7.7,
@@ -953,17 +1024,21 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Blok irigasi: sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
+      "Blok tadah hujan: tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 5
+    "rank": 4
    },
    "3": {
     "active_ha": 1773.5,
     "hazard_index": 0.881,
     "ha_at_risk": 879.1,
+    "priority": 752.8,
+    "capacity_factor": 0.856,
+    "water_source": "campuran",
     "status": "Awas",
     "class_ha": {
      "1": 7.7,
@@ -986,17 +1061,21 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Blok irigasi: sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
+      "Blok tadah hujan: tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 5
+    "rank": 4
    },
    "4": {
     "active_ha": 1773.5,
     "hazard_index": 0.892,
     "ha_at_risk": 891.4,
+    "priority": 763.3,
+    "capacity_factor": 0.856,
+    "water_source": "campuran",
     "status": "Awas",
     "class_ha": {
      "1": 7.7,
@@ -1019,17 +1098,21 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Blok irigasi: sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
+      "Blok tadah hujan: tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 5
+    "rank": 4
    },
    "5": {
     "active_ha": 1773.5,
     "hazard_index": 0.911,
     "ha_at_risk": 913.3,
+    "priority": 782.0,
+    "capacity_factor": 0.856,
+    "water_source": "campuran",
     "status": "Awas",
     "class_ha": {
      "1": 7.7,
@@ -1052,7 +1135,8 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Blok irigasi: sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
+      "Blok tadah hujan: tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
@@ -1063,6 +1147,9 @@
     "active_ha": 1773.5,
     "hazard_index": 0.927,
     "ha_at_risk": 932.6,
+    "priority": 798.6,
+    "capacity_factor": 0.856,
+    "water_source": "campuran",
     "status": "Awas",
     "class_ha": {
      "1": 7.7,
@@ -1085,7 +1172,8 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Blok irigasi: sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
+      "Blok tadah hujan: tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
@@ -1096,6 +1184,9 @@
     "active_ha": 1773.5,
     "hazard_index": 0.95,
     "ha_at_risk": 959.5,
+    "priority": 821.7,
+    "capacity_factor": 0.856,
+    "water_source": "campuran",
     "status": "Awas",
     "class_ha": {
      "1": 7.7,
@@ -1118,7 +1209,8 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Blok irigasi: sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
+      "Blok tadah hujan: tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
@@ -1129,6 +1221,9 @@
     "active_ha": 1773.5,
     "hazard_index": 0.96,
     "ha_at_risk": 971.8,
+    "priority": 832.2,
+    "capacity_factor": 0.856,
+    "water_source": "campuran",
     "status": "Awas",
     "class_ha": {
      "1": 7.7,
@@ -1151,7 +1246,8 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Blok irigasi: sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
+      "Blok tadah hujan: tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
@@ -1162,6 +1258,9 @@
     "active_ha": 1773.5,
     "hazard_index": 0.968,
     "ha_at_risk": 982.3,
+    "priority": 841.1,
+    "capacity_factor": 0.856,
+    "water_source": "campuran",
     "status": "Awas",
     "class_ha": {
      "1": 7.7,
@@ -1184,7 +1283,8 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Blok irigasi: sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
+      "Blok tadah hujan: tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
@@ -1197,6 +1297,9 @@
     "active_ha": 1520.2,
     "hazard_index": 0.861,
     "ha_at_risk": 725.3,
+    "priority": 608.9,
+    "capacity_factor": 0.84,
+    "water_source": "campuran",
     "status": "Awas",
     "class_ha": {
      "1": 19.6,
@@ -1219,7 +1322,8 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Blok irigasi: sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
+      "Blok tadah hujan: tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
@@ -1230,6 +1334,9 @@
     "active_ha": 1520.2,
     "hazard_index": 0.87,
     "ha_at_risk": 734.5,
+    "priority": 616.6,
+    "capacity_factor": 0.84,
+    "water_source": "campuran",
     "status": "Awas",
     "class_ha": {
      "1": 19.6,
@@ -1252,7 +1359,8 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Blok irigasi: sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
+      "Blok tadah hujan: tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
@@ -1263,6 +1371,9 @@
     "active_ha": 1520.2,
     "hazard_index": 0.879,
     "ha_at_risk": 742.9,
+    "priority": 623.6,
+    "capacity_factor": 0.84,
+    "water_source": "campuran",
     "status": "Awas",
     "class_ha": {
      "1": 19.6,
@@ -1285,7 +1396,8 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Blok irigasi: sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
+      "Blok tadah hujan: tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
@@ -1296,6 +1408,9 @@
     "active_ha": 1520.2,
     "hazard_index": 0.888,
     "ha_at_risk": 751.7,
+    "priority": 631.1,
+    "capacity_factor": 0.84,
+    "water_source": "campuran",
     "status": "Awas",
     "class_ha": {
      "1": 19.6,
@@ -1318,7 +1433,8 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Blok irigasi: sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
+      "Blok tadah hujan: tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
@@ -1329,6 +1445,9 @@
     "active_ha": 1520.2,
     "hazard_index": 0.899,
     "ha_at_risk": 762.4,
+    "priority": 640.1,
+    "capacity_factor": 0.84,
+    "water_source": "campuran",
     "status": "Awas",
     "class_ha": {
      "1": 19.6,
@@ -1351,7 +1470,8 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Blok irigasi: sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
+      "Blok tadah hujan: tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
@@ -1362,6 +1482,9 @@
     "active_ha": 1520.2,
     "hazard_index": 0.915,
     "ha_at_risk": 777.8,
+    "priority": 653.0,
+    "capacity_factor": 0.84,
+    "water_source": "campuran",
     "status": "Awas",
     "class_ha": {
      "1": 19.6,
@@ -1384,7 +1507,8 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Blok irigasi: sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
+      "Blok tadah hujan: tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
@@ -1395,6 +1519,9 @@
     "active_ha": 1520.2,
     "hazard_index": 0.928,
     "ha_at_risk": 791.8,
+    "priority": 664.7,
+    "capacity_factor": 0.84,
+    "water_source": "campuran",
     "status": "Awas",
     "class_ha": {
      "1": 19.6,
@@ -1417,7 +1544,8 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Blok irigasi: sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
+      "Blok tadah hujan: tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
@@ -1428,6 +1556,9 @@
     "active_ha": 1520.2,
     "hazard_index": 0.947,
     "ha_at_risk": 811.2,
+    "priority": 681.0,
+    "capacity_factor": 0.84,
+    "water_source": "campuran",
     "status": "Awas",
     "class_ha": {
      "1": 19.6,
@@ -1450,17 +1581,21 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Blok irigasi: sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
+      "Blok tadah hujan: tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 8
+    "rank": 7
    },
    "8": {
     "active_ha": 1520.2,
     "hazard_index": 0.956,
     "ha_at_risk": 820.7,
+    "priority": 689.0,
+    "capacity_factor": 0.84,
+    "water_source": "campuran",
     "status": "Awas",
     "class_ha": {
      "1": 19.6,
@@ -1483,17 +1618,21 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Blok irigasi: sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
+      "Blok tadah hujan: tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 9
+    "rank": 8
    },
    "9": {
     "active_ha": 1520.2,
     "hazard_index": 0.964,
     "ha_at_risk": 829.1,
+    "priority": 696.0,
+    "capacity_factor": 0.84,
+    "water_source": "campuran",
     "status": "Awas",
     "class_ha": {
      "1": 19.6,
@@ -1516,12 +1655,13 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Blok irigasi: sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
+      "Blok tadah hujan: tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 10
+    "rank": 8
    }
   },
   "id3318050": {
@@ -1529,6 +1669,9 @@
     "active_ha": 1484.8,
     "hazard_index": 0.81,
     "ha_at_risk": 680.3,
+    "priority": 664.1,
+    "capacity_factor": 0.976,
+    "water_source": "tadah hujan",
     "status": "Awas",
     "class_ha": {
      "1": 5.1,
@@ -1551,17 +1694,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 8
+    "rank": 6
    },
    "1": {
     "active_ha": 1484.8,
     "hazard_index": 0.825,
     "ha_at_risk": 695.3,
+    "priority": 678.8,
+    "capacity_factor": 0.976,
+    "water_source": "tadah hujan",
     "status": "Awas",
     "class_ha": {
      "1": 5.1,
@@ -1584,17 +1730,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 8
+    "rank": 6
    },
    "2": {
     "active_ha": 1484.8,
     "hazard_index": 0.835,
     "ha_at_risk": 704.6,
+    "priority": 687.9,
+    "capacity_factor": 0.976,
+    "water_source": "tadah hujan",
     "status": "Awas",
     "class_ha": {
      "1": 5.1,
@@ -1617,17 +1766,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 8
+    "rank": 6
    },
    "3": {
     "active_ha": 1484.8,
     "hazard_index": 0.849,
     "ha_at_risk": 718.3,
+    "priority": 701.3,
+    "capacity_factor": 0.976,
+    "water_source": "tadah hujan",
     "status": "Awas",
     "class_ha": {
      "1": 5.1,
@@ -1650,17 +1802,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 8
+    "rank": 6
    },
    "4": {
     "active_ha": 1484.8,
     "hazard_index": 0.866,
     "ha_at_risk": 733.9,
+    "priority": 716.5,
+    "capacity_factor": 0.976,
+    "water_source": "tadah hujan",
     "status": "Awas",
     "class_ha": {
      "1": 5.1,
@@ -1683,17 +1838,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 8
+    "rank": 6
    },
    "5": {
     "active_ha": 1484.8,
     "hazard_index": 0.889,
     "ha_at_risk": 755.9,
+    "priority": 737.9,
+    "capacity_factor": 0.976,
+    "water_source": "tadah hujan",
     "status": "Awas",
     "class_ha": {
      "1": 5.1,
@@ -1716,17 +1874,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 8
+    "rank": 6
    },
    "6": {
     "active_ha": 1484.8,
     "hazard_index": 0.91,
     "ha_at_risk": 776.6,
+    "priority": 758.2,
+    "capacity_factor": 0.976,
+    "water_source": "tadah hujan",
     "status": "Awas",
     "class_ha": {
      "1": 5.1,
@@ -1749,17 +1910,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 8
+    "rank": 6
    },
    "7": {
     "active_ha": 1484.8,
     "hazard_index": 0.937,
     "ha_at_risk": 803.4,
+    "priority": 784.3,
+    "capacity_factor": 0.976,
+    "water_source": "tadah hujan",
     "status": "Awas",
     "class_ha": {
      "1": 5.1,
@@ -1782,17 +1946,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 10
+    "rank": 6
    },
    "8": {
     "active_ha": 1484.8,
     "hazard_index": 0.951,
     "ha_at_risk": 817.8,
+    "priority": 798.4,
+    "capacity_factor": 0.976,
+    "water_source": "tadah hujan",
     "status": "Awas",
     "class_ha": {
      "1": 5.1,
@@ -1815,17 +1982,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 10
+    "rank": 6
    },
    "9": {
     "active_ha": 1484.8,
     "hazard_index": 0.962,
     "ha_at_risk": 829.3,
+    "priority": 809.6,
+    "capacity_factor": 0.976,
+    "water_source": "tadah hujan",
     "status": "Awas",
     "class_ha": {
      "1": 5.1,
@@ -1848,12 +2018,12 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 9
+    "rank": 6
    }
   },
   "id3318060": {
@@ -1861,6 +2031,9 @@
     "active_ha": 1868.3,
     "hazard_index": 0.829,
     "ha_at_risk": 873.3,
+    "priority": 837.9,
+    "capacity_factor": 0.96,
+    "water_source": "tadah hujan",
     "status": "Awas",
     "class_ha": {
      "1": 6.2,
@@ -1883,17 +2056,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 3
+    "rank": 2
    },
    "1": {
     "active_ha": 1868.3,
     "hazard_index": 0.842,
     "ha_at_risk": 888.5,
+    "priority": 852.5,
+    "capacity_factor": 0.96,
+    "water_source": "tadah hujan",
     "status": "Awas",
     "class_ha": {
      "1": 6.2,
@@ -1916,17 +2092,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 3
+    "rank": 2
    },
    "2": {
     "active_ha": 1868.3,
     "hazard_index": 0.851,
     "ha_at_risk": 899.6,
+    "priority": 863.2,
+    "capacity_factor": 0.96,
+    "water_source": "tadah hujan",
     "status": "Awas",
     "class_ha": {
      "1": 6.2,
@@ -1949,17 +2128,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 3
+    "rank": 2
    },
    "3": {
     "active_ha": 1868.2,
     "hazard_index": 0.865,
     "ha_at_risk": 915.9,
+    "priority": 878.8,
+    "capacity_factor": 0.96,
+    "water_source": "tadah hujan",
     "status": "Awas",
     "class_ha": {
      "1": 6.2,
@@ -1982,17 +2164,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 3
+    "rank": 2
    },
    "4": {
     "active_ha": 1868.2,
     "hazard_index": 0.882,
     "ha_at_risk": 935.3,
+    "priority": 897.4,
+    "capacity_factor": 0.96,
+    "water_source": "tadah hujan",
     "status": "Awas",
     "class_ha": {
      "1": 6.2,
@@ -2015,17 +2200,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 3
+    "rank": 2
    },
    "5": {
     "active_ha": 1868.3,
     "hazard_index": 0.903,
     "ha_at_risk": 960.9,
+    "priority": 921.9,
+    "capacity_factor": 0.96,
+    "water_source": "tadah hujan",
     "status": "Awas",
     "class_ha": {
      "1": 6.2,
@@ -2048,17 +2236,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 3
+    "rank": 2
    },
    "6": {
     "active_ha": 1868.3,
     "hazard_index": 0.921,
     "ha_at_risk": 982.8,
+    "priority": 943.0,
+    "capacity_factor": 0.96,
+    "water_source": "tadah hujan",
     "status": "Awas",
     "class_ha": {
      "1": 6.2,
@@ -2081,17 +2272,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 3
+    "rank": 2
    },
    "7": {
     "active_ha": 1868.3,
     "hazard_index": 0.946,
     "ha_at_risk": 1013.8,
+    "priority": 972.8,
+    "capacity_factor": 0.96,
+    "water_source": "tadah hujan",
     "status": "Awas",
     "class_ha": {
      "1": 6.2,
@@ -2114,7 +2308,7 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
@@ -2125,6 +2319,9 @@
     "active_ha": 1868.2,
     "hazard_index": 0.959,
     "ha_at_risk": 1029.5,
+    "priority": 987.8,
+    "capacity_factor": 0.96,
+    "water_source": "tadah hujan",
     "status": "Awas",
     "class_ha": {
      "1": 6.2,
@@ -2147,17 +2344,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 4
+    "rank": 3
    },
    "9": {
     "active_ha": 1868.3,
     "hazard_index": 0.97,
     "ha_at_risk": 1043.9,
+    "priority": 1001.6,
+    "capacity_factor": 0.96,
+    "water_source": "tadah hujan",
     "status": "Awas",
     "class_ha": {
      "1": 6.2,
@@ -2180,12 +2380,12 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 4
+    "rank": 3
    }
   },
   "id3318070": {
@@ -2193,6 +2393,9 @@
     "active_ha": 451.3,
     "hazard_index": 0.823,
     "ha_at_risk": 202.3,
+    "priority": 195.9,
+    "capacity_factor": 0.968,
+    "water_source": "tadah hujan",
     "status": "Awas",
     "class_ha": {
      "1": 21.5,
@@ -2215,17 +2418,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 17
+    "rank": 15
    },
    "1": {
     "active_ha": 451.3,
     "hazard_index": 0.832,
     "ha_at_risk": 205.0,
+    "priority": 198.4,
+    "capacity_factor": 0.968,
+    "water_source": "tadah hujan",
     "status": "Awas",
     "class_ha": {
      "1": 21.5,
@@ -2248,17 +2454,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 17
+    "rank": 16
    },
    "2": {
     "active_ha": 451.3,
     "hazard_index": 0.84,
     "ha_at_risk": 207.1,
+    "priority": 200.5,
+    "capacity_factor": 0.968,
+    "water_source": "tadah hujan",
     "status": "Awas",
     "class_ha": {
      "1": 21.5,
@@ -2281,17 +2490,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 17
+    "rank": 16
    },
    "3": {
     "active_ha": 451.3,
     "hazard_index": 0.848,
     "ha_at_risk": 209.5,
+    "priority": 202.9,
+    "capacity_factor": 0.968,
+    "water_source": "tadah hujan",
     "status": "Awas",
     "class_ha": {
      "1": 21.5,
@@ -2314,17 +2526,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 17
+    "rank": 16
    },
    "4": {
     "active_ha": 451.3,
     "hazard_index": 0.861,
     "ha_at_risk": 212.8,
+    "priority": 206.1,
+    "capacity_factor": 0.968,
+    "water_source": "tadah hujan",
     "status": "Awas",
     "class_ha": {
      "1": 21.5,
@@ -2347,17 +2562,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 17
+    "rank": 16
    },
    "5": {
     "active_ha": 451.3,
     "hazard_index": 0.876,
     "ha_at_risk": 217.1,
+    "priority": 210.2,
+    "capacity_factor": 0.968,
+    "water_source": "tadah hujan",
     "status": "Awas",
     "class_ha": {
      "1": 21.5,
@@ -2380,17 +2598,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 17
+    "rank": 16
    },
    "6": {
     "active_ha": 451.3,
     "hazard_index": 0.889,
     "ha_at_risk": 221.2,
+    "priority": 214.2,
+    "capacity_factor": 0.968,
+    "water_source": "tadah hujan",
     "status": "Awas",
     "class_ha": {
      "1": 21.5,
@@ -2413,17 +2634,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 17
+    "rank": 16
    },
    "7": {
     "active_ha": 451.3,
     "hazard_index": 0.909,
     "ha_at_risk": 226.9,
+    "priority": 219.7,
+    "capacity_factor": 0.968,
+    "water_source": "tadah hujan",
     "status": "Awas",
     "class_ha": {
      "1": 21.5,
@@ -2446,17 +2670,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 18
+    "rank": 16
    },
    "8": {
     "active_ha": 451.3,
     "hazard_index": 0.918,
     "ha_at_risk": 229.9,
+    "priority": 222.6,
+    "capacity_factor": 0.968,
+    "water_source": "tadah hujan",
     "status": "Awas",
     "class_ha": {
      "1": 21.5,
@@ -2479,17 +2706,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 18
+    "rank": 16
    },
    "9": {
     "active_ha": 451.2,
     "hazard_index": 0.925,
     "ha_at_risk": 232.1,
+    "priority": 224.7,
+    "capacity_factor": 0.968,
+    "water_source": "tadah hujan",
     "status": "Awas",
     "class_ha": {
      "1": 21.5,
@@ -2512,12 +2742,12 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 19
+    "rank": 18
    }
   },
   "id3318080": {
@@ -2525,6 +2755,9 @@
     "active_ha": 594.7,
     "hazard_index": 0.721,
     "ha_at_risk": 251.2,
+    "priority": 234.3,
+    "capacity_factor": 0.932,
+    "water_source": "tadah hujan",
     "status": "Siaga",
     "class_ha": {
      "1": 3.0,
@@ -2547,17 +2780,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "3 hari ke depan"
     },
-    "rank": 15
+    "rank": 14
    },
    "1": {
     "active_ha": 594.7,
     "hazard_index": 0.738,
     "ha_at_risk": 258.1,
+    "priority": 240.7,
+    "capacity_factor": 0.932,
+    "water_source": "tadah hujan",
     "status": "Siaga",
     "class_ha": {
      "1": 3.0,
@@ -2580,17 +2816,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "3 hari ke depan"
     },
-    "rank": 15
+    "rank": 14
    },
    "2": {
     "active_ha": 594.7,
     "hazard_index": 0.747,
     "ha_at_risk": 261.5,
+    "priority": 243.9,
+    "capacity_factor": 0.932,
+    "water_source": "tadah hujan",
     "status": "Siaga",
     "class_ha": {
      "1": 3.0,
@@ -2613,17 +2852,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "3 hari ke depan"
     },
-    "rank": 15
+    "rank": 14
    },
    "3": {
     "active_ha": 594.7,
     "hazard_index": 0.764,
     "ha_at_risk": 268.1,
+    "priority": 250.0,
+    "capacity_factor": 0.932,
+    "water_source": "tadah hujan",
     "status": "Awas",
     "class_ha": {
      "1": 3.0,
@@ -2646,17 +2888,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 15
+    "rank": 14
    },
    "4": {
     "active_ha": 594.7,
     "hazard_index": 0.784,
     "ha_at_risk": 275.7,
+    "priority": 257.1,
+    "capacity_factor": 0.932,
+    "water_source": "tadah hujan",
     "status": "Awas",
     "class_ha": {
      "1": 3.0,
@@ -2679,17 +2924,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 15
+    "rank": 14
    },
    "5": {
     "active_ha": 594.7,
     "hazard_index": 0.811,
     "ha_at_risk": 286.5,
+    "priority": 267.1,
+    "capacity_factor": 0.932,
+    "water_source": "tadah hujan",
     "status": "Awas",
     "class_ha": {
      "1": 3.0,
@@ -2712,7 +2960,7 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
@@ -2723,6 +2971,9 @@
     "active_ha": 594.7,
     "hazard_index": 0.836,
     "ha_at_risk": 296.3,
+    "priority": 276.3,
+    "capacity_factor": 0.932,
+    "water_source": "tadah hujan",
     "status": "Awas",
     "class_ha": {
      "1": 3.0,
@@ -2745,7 +2996,7 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
@@ -2756,6 +3007,9 @@
     "active_ha": 594.7,
     "hazard_index": 0.874,
     "ha_at_risk": 311.8,
+    "priority": 290.7,
+    "capacity_factor": 0.932,
+    "water_source": "tadah hujan",
     "status": "Awas",
     "class_ha": {
      "1": 3.0,
@@ -2778,7 +3032,7 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
@@ -2789,6 +3043,9 @@
     "active_ha": 594.7,
     "hazard_index": 0.898,
     "ha_at_risk": 321.5,
+    "priority": 299.8,
+    "capacity_factor": 0.932,
+    "water_source": "tadah hujan",
     "status": "Awas",
     "class_ha": {
      "1": 3.0,
@@ -2811,7 +3068,7 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
@@ -2822,6 +3079,9 @@
     "active_ha": 594.7,
     "hazard_index": 0.918,
     "ha_at_risk": 329.7,
+    "priority": 307.4,
+    "capacity_factor": 0.932,
+    "water_source": "tadah hujan",
     "status": "Awas",
     "class_ha": {
      "1": 3.0,
@@ -2844,12 +3104,12 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 17
+    "rank": 15
    }
   },
   "id3318090": {
@@ -2857,6 +3117,9 @@
     "active_ha": 1691.2,
     "hazard_index": 0.839,
     "ha_at_risk": 760.1,
+    "priority": 588.4,
+    "capacity_factor": 0.774,
+    "water_source": "irigasi",
     "status": "Awas",
     "class_ha": {
      "1": 18.7,
@@ -2879,17 +3142,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 6
+    "rank": 8
    },
    "1": {
     "active_ha": 1691.2,
     "hazard_index": 0.847,
     "ha_at_risk": 769.2,
+    "priority": 595.5,
+    "capacity_factor": 0.774,
+    "water_source": "irigasi",
     "status": "Awas",
     "class_ha": {
      "1": 18.7,
@@ -2912,17 +3178,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 6
+    "rank": 8
    },
    "2": {
     "active_ha": 1691.2,
     "hazard_index": 0.853,
     "ha_at_risk": 775.7,
+    "priority": 600.5,
+    "capacity_factor": 0.774,
+    "water_source": "irigasi",
     "status": "Awas",
     "class_ha": {
      "1": 18.7,
@@ -2945,17 +3214,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 6
+    "rank": 8
    },
    "3": {
     "active_ha": 1691.2,
     "hazard_index": 0.861,
     "ha_at_risk": 783.6,
+    "priority": 606.6,
+    "capacity_factor": 0.774,
+    "water_source": "irigasi",
     "status": "Awas",
     "class_ha": {
      "1": 18.7,
@@ -2978,17 +3250,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 6
+    "rank": 8
    },
    "4": {
     "active_ha": 1691.2,
     "hazard_index": 0.872,
     "ha_at_risk": 795.7,
+    "priority": 615.9,
+    "capacity_factor": 0.774,
+    "water_source": "irigasi",
     "status": "Awas",
     "class_ha": {
      "1": 18.7,
@@ -3011,17 +3286,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 6
+    "rank": 8
    },
    "5": {
     "active_ha": 1691.2,
     "hazard_index": 0.885,
     "ha_at_risk": 810.3,
+    "priority": 627.3,
+    "capacity_factor": 0.774,
+    "water_source": "irigasi",
     "status": "Awas",
     "class_ha": {
      "1": 18.7,
@@ -3044,17 +3322,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 6
+    "rank": 8
    },
    "6": {
     "active_ha": 1691.2,
     "hazard_index": 0.897,
     "ha_at_risk": 823.4,
+    "priority": 637.4,
+    "capacity_factor": 0.774,
+    "water_source": "irigasi",
     "status": "Awas",
     "class_ha": {
      "1": 18.7,
@@ -3077,17 +3358,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 6
+    "rank": 8
    },
    "7": {
     "active_ha": 1691.2,
     "hazard_index": 0.912,
     "ha_at_risk": 841.6,
+    "priority": 651.5,
+    "capacity_factor": 0.774,
+    "water_source": "irigasi",
     "status": "Awas",
     "class_ha": {
      "1": 18.7,
@@ -3110,17 +3394,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 6
+    "rank": 8
    },
    "8": {
     "active_ha": 1691.2,
     "hazard_index": 0.922,
     "ha_at_risk": 853.1,
+    "priority": 660.4,
+    "capacity_factor": 0.774,
+    "water_source": "irigasi",
     "status": "Awas",
     "class_ha": {
      "1": 18.7,
@@ -3143,17 +3430,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 8
+    "rank": 9
    },
    "9": {
     "active_ha": 1691.2,
     "hazard_index": 0.932,
     "ha_at_risk": 865.3,
+    "priority": 669.9,
+    "capacity_factor": 0.774,
+    "water_source": "irigasi",
     "status": "Awas",
     "class_ha": {
      "1": 18.7,
@@ -3176,12 +3466,12 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 8
+    "rank": 10
    }
   },
   "id3318100": {
@@ -3189,6 +3479,9 @@
     "active_ha": 1729.3,
     "hazard_index": 0.48,
     "ha_at_risk": 609.4,
+    "priority": 436.4,
+    "capacity_factor": 0.716,
+    "water_source": "irigasi",
     "status": "Waspada",
     "class_ha": {
      "1": 0.6,
@@ -3211,7 +3504,7 @@
      "headline": "Prioritaskan air untuk padi fase reproduktif",
      "steps": [
       "Sekitar 235 ha padi fase bunting/berbunga mengalami cekaman kering kuat.",
-      "Koordinasikan gilir air irigasi atau pompa ke blok tersebut minggu ini.",
+      "Koordinasikan gilir air dengan P3A / juru air agar blok bunting mendapat giliran minggu ini.",
       "Cek lapangan: pastikan lahan memang padi sawah (bukan jagung/tebu)."
      ],
      "urgency": "minggu ini"
@@ -3222,6 +3515,9 @@
     "active_ha": 1729.3,
     "hazard_index": 0.497,
     "ha_at_risk": 630.9,
+    "priority": 451.9,
+    "capacity_factor": 0.716,
+    "water_source": "irigasi",
     "status": "Waspada",
     "class_ha": {
      "1": 0.6,
@@ -3244,17 +3540,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "minggu ini"
     },
-    "rank": 9
+    "rank": 10
    },
    "2": {
     "active_ha": 1729.3,
     "hazard_index": 0.504,
     "ha_at_risk": 641.0,
+    "priority": 459.1,
+    "capacity_factor": 0.716,
+    "water_source": "irigasi",
     "status": "Waspada",
     "class_ha": {
      "1": 0.6,
@@ -3277,17 +3576,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "minggu ini"
     },
-    "rank": 9
+    "rank": 10
    },
    "3": {
     "active_ha": 1729.3,
     "hazard_index": 0.522,
     "ha_at_risk": 664.1,
+    "priority": 475.6,
+    "capacity_factor": 0.716,
+    "water_source": "irigasi",
     "status": "Waspada",
     "class_ha": {
      "1": 0.6,
@@ -3310,17 +3612,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "minggu ini"
     },
-    "rank": 9
+    "rank": 10
    },
    "4": {
     "active_ha": 1729.3,
     "hazard_index": 0.543,
     "ha_at_risk": 691.7,
+    "priority": 495.4,
+    "capacity_factor": 0.716,
+    "water_source": "irigasi",
     "status": "Waspada",
     "class_ha": {
      "1": 0.6,
@@ -3343,17 +3648,20 @@
      "headline": "Prioritaskan air untuk padi fase reproduktif",
      "steps": [
       "Sekitar 277 ha padi fase bunting/berbunga mengalami cekaman kering kuat.",
-      "Koordinasikan gilir air irigasi atau pompa ke blok tersebut minggu ini.",
+      "Koordinasikan gilir air dengan P3A / juru air agar blok bunting mendapat giliran minggu ini.",
       "Cek lapangan: pastikan lahan memang padi sawah (bukan jagung/tebu)."
      ],
      "urgency": "minggu ini"
     },
-    "rank": 9
+    "rank": 10
    },
    "5": {
     "active_ha": 1729.3,
     "hazard_index": 0.572,
     "ha_at_risk": 729.2,
+    "priority": 522.2,
+    "capacity_factor": 0.716,
+    "water_source": "irigasi",
     "status": "Waspada",
     "class_ha": {
      "1": 0.6,
@@ -3376,17 +3684,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "minggu ini"
     },
-    "rank": 9
+    "rank": 10
    },
    "6": {
     "active_ha": 1729.3,
     "hazard_index": 0.6,
     "ha_at_risk": 767.0,
+    "priority": 549.3,
+    "capacity_factor": 0.716,
+    "water_source": "irigasi",
     "status": "Siaga",
     "class_ha": {
      "1": 0.6,
@@ -3409,17 +3720,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "3 hari ke depan"
     },
-    "rank": 9
+    "rank": 10
    },
    "7": {
     "active_ha": 1729.3,
     "hazard_index": 0.648,
     "ha_at_risk": 831.4,
+    "priority": 595.4,
+    "capacity_factor": 0.716,
+    "water_source": "irigasi",
     "status": "Siaga",
     "class_ha": {
      "1": 0.6,
@@ -3442,17 +3756,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "3 hari ke depan"
     },
-    "rank": 7
+    "rank": 10
    },
    "8": {
     "active_ha": 1729.3,
     "hazard_index": 0.686,
     "ha_at_risk": 885.3,
+    "priority": 634.1,
+    "capacity_factor": 0.716,
+    "water_source": "irigasi",
     "status": "Siaga",
     "class_ha": {
      "1": 0.6,
@@ -3474,18 +3791,21 @@
     "action": {
      "headline": "Hemat air dan siapkan pompa untuk vegetatif akhir",
      "steps": [
-      "Terapkan pengairan berselang (basah-kering) agar air cukup sampai fase bunting.",
-      "Inventarisasi pompa dan sumur dangkal di wilayah kelompok tani.",
+      "Hemat air agar cukup sampai fase bunting.",
+      "Terapkan pengairan berselang (basah-kering) dan sepakati jadwal gilir dengan P3A.",
       "Cek lapangan blok yang ditandai merah."
      ],
      "urgency": "3 hari ke depan"
     },
-    "rank": 6
+    "rank": 10
    },
    "9": {
     "active_ha": 1729.3,
     "hazard_index": 0.732,
     "ha_at_risk": 950.1,
+    "priority": 680.5,
+    "capacity_factor": 0.716,
+    "water_source": "irigasi",
     "status": "Siaga",
     "class_ha": {
      "1": 0.6,
@@ -3507,13 +3827,13 @@
     "action": {
      "headline": "Hemat air dan siapkan pompa untuk vegetatif akhir",
      "steps": [
-      "Terapkan pengairan berselang (basah-kering) agar air cukup sampai fase bunting.",
-      "Inventarisasi pompa dan sumur dangkal di wilayah kelompok tani.",
+      "Hemat air agar cukup sampai fase bunting.",
+      "Terapkan pengairan berselang (basah-kering) dan sepakati jadwal gilir dengan P3A.",
       "Cek lapangan blok yang ditandai merah."
      ],
      "urgency": "3 hari ke depan"
     },
-    "rank": 6
+    "rank": 9
    }
   },
   "id3318110": {
@@ -3521,6 +3841,9 @@
     "active_ha": 2323.7,
     "hazard_index": 0.667,
     "ha_at_risk": 857.0,
+    "priority": 714.3,
+    "capacity_factor": 0.834,
+    "water_source": "campuran",
     "status": "Siaga",
     "class_ha": {
      "1": 26.8,
@@ -3543,7 +3866,8 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Blok irigasi: sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
+      "Blok tadah hujan: tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "3 hari ke depan"
@@ -3554,6 +3878,9 @@
     "active_ha": 2323.7,
     "hazard_index": 0.675,
     "ha_at_risk": 871.0,
+    "priority": 725.9,
+    "capacity_factor": 0.834,
+    "water_source": "campuran",
     "status": "Siaga",
     "class_ha": {
      "1": 26.8,
@@ -3576,17 +3903,21 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Blok irigasi: sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
+      "Blok tadah hujan: tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "3 hari ke depan"
     },
-    "rank": 4
+    "rank": 5
    },
    "2": {
     "active_ha": 2323.7,
     "hazard_index": 0.679,
     "ha_at_risk": 877.1,
+    "priority": 731.0,
+    "capacity_factor": 0.834,
+    "water_source": "campuran",
     "status": "Siaga",
     "class_ha": {
      "1": 26.8,
@@ -3609,17 +3940,21 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Blok irigasi: sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
+      "Blok tadah hujan: tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "3 hari ke depan"
     },
-    "rank": 4
+    "rank": 5
    },
    "3": {
     "active_ha": 2323.7,
     "hazard_index": 0.689,
     "ha_at_risk": 892.5,
+    "priority": 743.9,
+    "capacity_factor": 0.834,
+    "water_source": "campuran",
     "status": "Siaga",
     "class_ha": {
      "1": 26.8,
@@ -3642,17 +3977,21 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Blok irigasi: sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
+      "Blok tadah hujan: tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "3 hari ke depan"
     },
-    "rank": 4
+    "rank": 5
    },
    "4": {
     "active_ha": 2323.7,
     "hazard_index": 0.701,
     "ha_at_risk": 911.8,
+    "priority": 760.0,
+    "capacity_factor": 0.834,
+    "water_source": "campuran",
     "status": "Siaga",
     "class_ha": {
      "1": 26.8,
@@ -3675,17 +4014,21 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Blok irigasi: sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
+      "Blok tadah hujan: tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "3 hari ke depan"
     },
-    "rank": 4
+    "rank": 5
    },
    "5": {
     "active_ha": 2323.7,
     "hazard_index": 0.718,
     "ha_at_risk": 939.6,
+    "priority": 783.2,
+    "capacity_factor": 0.834,
+    "water_source": "campuran",
     "status": "Siaga",
     "class_ha": {
      "1": 26.8,
@@ -3708,7 +4051,8 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Blok irigasi: sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
+      "Blok tadah hujan: tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "3 hari ke depan"
@@ -3719,6 +4063,9 @@
     "active_ha": 2323.7,
     "hazard_index": 0.735,
     "ha_at_risk": 968.2,
+    "priority": 807.0,
+    "capacity_factor": 0.834,
+    "water_source": "campuran",
     "status": "Siaga",
     "class_ha": {
      "1": 26.8,
@@ -3741,7 +4088,8 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Blok irigasi: sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
+      "Blok tadah hujan: tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "3 hari ke depan"
@@ -3752,6 +4100,9 @@
     "active_ha": 2323.7,
     "hazard_index": 0.759,
     "ha_at_risk": 1009.7,
+    "priority": 841.6,
+    "capacity_factor": 0.834,
+    "water_source": "campuran",
     "status": "Awas",
     "class_ha": {
      "1": 26.8,
@@ -3774,7 +4125,8 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Blok irigasi: sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
+      "Blok tadah hujan: tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
@@ -3785,6 +4137,9 @@
     "active_ha": 2323.7,
     "hazard_index": 0.782,
     "ha_at_risk": 1049.6,
+    "priority": 874.9,
+    "capacity_factor": 0.834,
+    "water_source": "campuran",
     "status": "Awas",
     "class_ha": {
      "1": 26.8,
@@ -3807,17 +4162,21 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Blok irigasi: sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
+      "Blok tadah hujan: tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 3
+    "rank": 4
    },
    "9": {
     "active_ha": 2323.7,
     "hazard_index": 0.815,
     "ha_at_risk": 1108.4,
+    "priority": 923.8,
+    "capacity_factor": 0.834,
+    "water_source": "campuran",
     "status": "Awas",
     "class_ha": {
      "1": 26.8,
@@ -3840,12 +4199,13 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Blok irigasi: sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
+      "Blok tadah hujan: tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "segera"
     },
-    "rank": 3
+    "rank": 4
    }
   },
   "id3318120": {
@@ -3853,6 +4213,9 @@
     "active_ha": 1700.0,
     "hazard_index": 0.428,
     "ha_at_risk": 538.8,
+    "priority": 429.0,
+    "capacity_factor": 0.796,
+    "water_source": "campuran",
     "status": "Waspada",
     "class_ha": {
      "1": 0.2,
@@ -3875,7 +4238,8 @@
      "headline": "Prioritaskan air untuk padi fase reproduktif",
      "steps": [
       "Sekitar 163 ha padi fase bunting/berbunga mengalami cekaman kering kuat.",
-      "Koordinasikan gilir air irigasi atau pompa ke blok tersebut minggu ini.",
+      "Blok irigasi: koordinasikan gilir air dengan P3A / juru air agar blok bunting mendapat giliran minggu ini.",
+      "Blok tadah hujan: tidak ada air irigasi: siapkan pompa dari sumur dangkal atau embung untuk blok bunting minggu ini.",
       "Cek lapangan: pastikan lahan memang padi sawah (bukan jagung/tebu)."
      ],
      "urgency": "minggu ini"
@@ -3886,6 +4250,9 @@
     "active_ha": 1700.0,
     "hazard_index": 0.449,
     "ha_at_risk": 567.7,
+    "priority": 452.0,
+    "capacity_factor": 0.796,
+    "water_source": "campuran",
     "status": "Waspada",
     "class_ha": {
      "1": 0.2,
@@ -3908,17 +4275,21 @@
      "headline": "Prioritaskan air untuk padi fase reproduktif",
      "steps": [
       "Sekitar 182 ha padi fase bunting/berbunga mengalami cekaman kering kuat.",
-      "Koordinasikan gilir air irigasi atau pompa ke blok tersebut minggu ini.",
+      "Blok irigasi: koordinasikan gilir air dengan P3A / juru air agar blok bunting mendapat giliran minggu ini.",
+      "Blok tadah hujan: tidak ada air irigasi: siapkan pompa dari sumur dangkal atau embung untuk blok bunting minggu ini.",
       "Cek lapangan: pastikan lahan memang padi sawah (bukan jagung/tebu)."
      ],
      "urgency": "minggu ini"
     },
-    "rank": 10
+    "rank": 9
    },
    "2": {
     "active_ha": 1700.0,
     "hazard_index": 0.457,
     "ha_at_risk": 578.7,
+    "priority": 460.8,
+    "capacity_factor": 0.796,
+    "water_source": "campuran",
     "status": "Waspada",
     "class_ha": {
      "1": 0.2,
@@ -3941,17 +4312,21 @@
      "headline": "Prioritaskan air untuk padi fase reproduktif",
      "steps": [
       "Sekitar 201 ha padi fase bunting/berbunga mengalami cekaman kering kuat.",
-      "Koordinasikan gilir air irigasi atau pompa ke blok tersebut minggu ini.",
+      "Blok irigasi: koordinasikan gilir air dengan P3A / juru air agar blok bunting mendapat giliran minggu ini.",
+      "Blok tadah hujan: tidak ada air irigasi: siapkan pompa dari sumur dangkal atau embung untuk blok bunting minggu ini.",
       "Cek lapangan: pastikan lahan memang padi sawah (bukan jagung/tebu)."
      ],
      "urgency": "minggu ini"
     },
-    "rank": 10
+    "rank": 9
    },
    "3": {
     "active_ha": 1700.0,
     "hazard_index": 0.479,
     "ha_at_risk": 608.0,
+    "priority": 484.2,
+    "capacity_factor": 0.796,
+    "water_source": "campuran",
     "status": "Waspada",
     "class_ha": {
      "1": 0.2,
@@ -3974,17 +4349,21 @@
      "headline": "Prioritaskan air untuk padi fase reproduktif",
      "steps": [
       "Sekitar 222 ha padi fase bunting/berbunga mengalami cekaman kering kuat.",
-      "Koordinasikan gilir air irigasi atau pompa ke blok tersebut minggu ini.",
+      "Blok irigasi: koordinasikan gilir air dengan P3A / juru air agar blok bunting mendapat giliran minggu ini.",
+      "Blok tadah hujan: tidak ada air irigasi: siapkan pompa dari sumur dangkal atau embung untuk blok bunting minggu ini.",
       "Cek lapangan: pastikan lahan memang padi sawah (bukan jagung/tebu)."
      ],
      "urgency": "minggu ini"
     },
-    "rank": 10
+    "rank": 9
    },
    "4": {
     "active_ha": 1700.0,
     "hazard_index": 0.503,
     "ha_at_risk": 639.7,
+    "priority": 509.4,
+    "capacity_factor": 0.796,
+    "water_source": "campuran",
     "status": "Waspada",
     "class_ha": {
      "1": 0.2,
@@ -4007,17 +4386,21 @@
      "headline": "Prioritaskan air untuk padi fase reproduktif",
      "steps": [
       "Sekitar 242 ha padi fase bunting/berbunga mengalami cekaman kering kuat.",
-      "Koordinasikan gilir air irigasi atau pompa ke blok tersebut minggu ini.",
+      "Blok irigasi: koordinasikan gilir air dengan P3A / juru air agar blok bunting mendapat giliran minggu ini.",
+      "Blok tadah hujan: tidak ada air irigasi: siapkan pompa dari sumur dangkal atau embung untuk blok bunting minggu ini.",
       "Cek lapangan: pastikan lahan memang padi sawah (bukan jagung/tebu)."
      ],
      "urgency": "minggu ini"
     },
-    "rank": 10
+    "rank": 9
    },
    "5": {
     "active_ha": 1700.0,
     "hazard_index": 0.537,
     "ha_at_risk": 686.6,
+    "priority": 546.7,
+    "capacity_factor": 0.796,
+    "water_source": "campuran",
     "status": "Waspada",
     "class_ha": {
      "1": 0.2,
@@ -4040,17 +4423,21 @@
      "headline": "Prioritaskan air untuk padi fase reproduktif",
      "steps": [
       "Sekitar 287 ha padi fase bunting/berbunga mengalami cekaman kering kuat.",
-      "Koordinasikan gilir air irigasi atau pompa ke blok tersebut minggu ini.",
+      "Blok irigasi: koordinasikan gilir air dengan P3A / juru air agar blok bunting mendapat giliran minggu ini.",
+      "Blok tadah hujan: tidak ada air irigasi: siapkan pompa dari sumur dangkal atau embung untuk blok bunting minggu ini.",
       "Cek lapangan: pastikan lahan memang padi sawah (bukan jagung/tebu)."
      ],
      "urgency": "minggu ini"
     },
-    "rank": 10
+    "rank": 9
    },
    "6": {
     "active_ha": 1700.0,
     "hazard_index": 0.574,
     "ha_at_risk": 736.5,
+    "priority": 586.5,
+    "capacity_factor": 0.796,
+    "water_source": "campuran",
     "status": "Waspada",
     "class_ha": {
      "1": 0.2,
@@ -4073,17 +4460,21 @@
      "headline": "Prioritaskan air untuk padi fase reproduktif",
      "steps": [
       "Sekitar 334 ha padi fase bunting/berbunga mengalami cekaman kering kuat.",
-      "Koordinasikan gilir air irigasi atau pompa ke blok tersebut minggu ini.",
+      "Blok irigasi: koordinasikan gilir air dengan P3A / juru air agar blok bunting mendapat giliran minggu ini.",
+      "Blok tadah hujan: tidak ada air irigasi: siapkan pompa dari sumur dangkal atau embung untuk blok bunting minggu ini.",
       "Cek lapangan: pastikan lahan memang padi sawah (bukan jagung/tebu)."
      ],
      "urgency": "minggu ini"
     },
-    "rank": 10
+    "rank": 9
    },
    "7": {
     "active_ha": 1700.0,
     "hazard_index": 0.629,
     "ha_at_risk": 810.1,
+    "priority": 645.1,
+    "capacity_factor": 0.796,
+    "water_source": "campuran",
     "status": "Siaga",
     "class_ha": {
      "1": 0.2,
@@ -4106,7 +4497,8 @@
      "headline": "Prioritaskan air untuk padi fase reproduktif",
      "steps": [
       "Sekitar 396 ha padi fase bunting/berbunga mengalami cekaman kering kuat.",
-      "Koordinasikan gilir air irigasi atau pompa ke blok tersebut minggu ini.",
+      "Blok irigasi: koordinasikan gilir air dengan P3A / juru air agar blok bunting mendapat giliran minggu ini.",
+      "Blok tadah hujan: tidak ada air irigasi: siapkan pompa dari sumur dangkal atau embung untuk blok bunting minggu ini.",
       "Cek lapangan: pastikan lahan memang padi sawah (bukan jagung/tebu)."
      ],
      "urgency": "3 hari ke depan"
@@ -4117,6 +4509,9 @@
     "active_ha": 1700.0,
     "hazard_index": 0.676,
     "ha_at_risk": 874.3,
+    "priority": 696.2,
+    "capacity_factor": 0.796,
+    "water_source": "campuran",
     "status": "Siaga",
     "class_ha": {
      "1": 0.2,
@@ -4139,7 +4534,8 @@
      "headline": "Prioritaskan air untuk padi fase reproduktif",
      "steps": [
       "Sekitar 440 ha padi fase bunting/berbunga mengalami cekaman kering kuat.",
-      "Koordinasikan gilir air irigasi atau pompa ke blok tersebut minggu ini.",
+      "Blok irigasi: koordinasikan gilir air dengan P3A / juru air agar blok bunting mendapat giliran minggu ini.",
+      "Blok tadah hujan: tidak ada air irigasi: siapkan pompa dari sumur dangkal atau embung untuk blok bunting minggu ini.",
       "Cek lapangan: pastikan lahan memang padi sawah (bukan jagung/tebu)."
      ],
      "urgency": "3 hari ke depan"
@@ -4150,6 +4546,9 @@
     "active_ha": 1700.0,
     "hazard_index": 0.729,
     "ha_at_risk": 948.1,
+    "priority": 755.0,
+    "capacity_factor": 0.796,
+    "water_source": "campuran",
     "status": "Siaga",
     "class_ha": {
      "1": 0.2,
@@ -4172,7 +4571,8 @@
      "headline": "Prioritaskan air untuk padi fase reproduktif",
      "steps": [
       "Sekitar 484 ha padi fase bunting/berbunga mengalami cekaman kering kuat.",
-      "Koordinasikan gilir air irigasi atau pompa ke blok tersebut minggu ini.",
+      "Blok irigasi: koordinasikan gilir air dengan P3A / juru air agar blok bunting mendapat giliran minggu ini.",
+      "Blok tadah hujan: tidak ada air irigasi: siapkan pompa dari sumur dangkal atau embung untuk blok bunting minggu ini.",
       "Cek lapangan: pastikan lahan memang padi sawah (bukan jagung/tebu)."
      ],
      "urgency": "3 hari ke depan"
@@ -4185,6 +4585,9 @@
     "active_ha": 243.2,
     "hazard_index": 0.305,
     "ha_at_risk": 46.5,
+    "priority": 32.6,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 0.1,
@@ -4210,6 +4613,9 @@
     "active_ha": 243.2,
     "hazard_index": 0.339,
     "ha_at_risk": 52.0,
+    "priority": 36.4,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 0.1,
@@ -4235,6 +4641,9 @@
     "active_ha": 243.2,
     "hazard_index": 0.344,
     "ha_at_risk": 52.6,
+    "priority": 36.8,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 0.1,
@@ -4260,6 +4669,9 @@
     "active_ha": 243.2,
     "hazard_index": 0.383,
     "ha_at_risk": 58.9,
+    "priority": 41.2,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 0.1,
@@ -4285,6 +4697,9 @@
     "active_ha": 243.2,
     "hazard_index": 0.43,
     "ha_at_risk": 66.4,
+    "priority": 46.5,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Waspada",
     "class_ha": {
      "1": 0.1,
@@ -4307,7 +4722,7 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "minggu ini"
@@ -4318,6 +4733,9 @@
     "active_ha": 243.2,
     "hazard_index": 0.483,
     "ha_at_risk": 75.0,
+    "priority": 52.5,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Waspada",
     "class_ha": {
      "1": 0.1,
@@ -4340,7 +4758,7 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "minggu ini"
@@ -4351,6 +4769,9 @@
     "active_ha": 243.2,
     "hazard_index": 0.533,
     "ha_at_risk": 83.3,
+    "priority": 58.3,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Waspada",
     "class_ha": {
      "1": 0.1,
@@ -4373,7 +4794,7 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "minggu ini"
@@ -4384,6 +4805,9 @@
     "active_ha": 243.2,
     "hazard_index": 0.609,
     "ha_at_risk": 95.6,
+    "priority": 66.9,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Siaga",
     "class_ha": {
      "1": 0.1,
@@ -4406,7 +4830,7 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "3 hari ke depan"
@@ -4417,6 +4841,9 @@
     "active_ha": 243.2,
     "hazard_index": 0.684,
     "ha_at_risk": 108.0,
+    "priority": 75.6,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Siaga",
     "class_ha": {
      "1": 0.1,
@@ -4439,7 +4866,7 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "3 hari ke depan"
@@ -4450,6 +4877,9 @@
     "active_ha": 243.2,
     "hazard_index": 0.767,
     "ha_at_risk": 121.9,
+    "priority": 85.3,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Awas",
     "class_ha": {
      "1": 0.1,
@@ -4471,8 +4901,8 @@
     "action": {
      "headline": "Hemat air dan siapkan pompa untuk vegetatif akhir",
      "steps": [
-      "Terapkan pengairan berselang (basah-kering) agar air cukup sampai fase bunting.",
-      "Inventarisasi pompa dan sumur dangkal di wilayah kelompok tani.",
+      "Hemat air agar cukup sampai fase bunting.",
+      "Terapkan pengairan berselang (basah-kering) dan sepakati jadwal gilir dengan P3A.",
       "Cek lapangan blok yang ditandai merah."
      ],
      "urgency": "segera"
@@ -4485,6 +4915,9 @@
     "active_ha": 955.7,
     "hazard_index": 0.541,
     "ha_at_risk": 353.9,
+    "priority": 252.4,
+    "capacity_factor": 0.713,
+    "water_source": "irigasi",
     "status": "Waspada",
     "class_ha": {
      "1": 0.1,
@@ -4507,7 +4940,7 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "minggu ini"
@@ -4518,6 +4951,9 @@
     "active_ha": 955.7,
     "hazard_index": 0.567,
     "ha_at_risk": 371.2,
+    "priority": 264.8,
+    "capacity_factor": 0.713,
+    "water_source": "irigasi",
     "status": "Waspada",
     "class_ha": {
      "1": 0.1,
@@ -4540,7 +4976,7 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "minggu ini"
@@ -4551,6 +4987,9 @@
     "active_ha": 955.7,
     "hazard_index": 0.577,
     "ha_at_risk": 377.5,
+    "priority": 269.3,
+    "capacity_factor": 0.713,
+    "water_source": "irigasi",
     "status": "Waspada",
     "class_ha": {
      "1": 0.1,
@@ -4573,7 +5012,7 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "minggu ini"
@@ -4584,6 +5023,9 @@
     "active_ha": 955.7,
     "hazard_index": 0.604,
     "ha_at_risk": 395.0,
+    "priority": 281.7,
+    "capacity_factor": 0.713,
+    "water_source": "irigasi",
     "status": "Siaga",
     "class_ha": {
      "1": 0.1,
@@ -4606,7 +5048,7 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "3 hari ke depan"
@@ -4617,6 +5059,9 @@
     "active_ha": 955.7,
     "hazard_index": 0.632,
     "ha_at_risk": 413.7,
+    "priority": 295.0,
+    "capacity_factor": 0.713,
+    "water_source": "irigasi",
     "status": "Siaga",
     "class_ha": {
      "1": 0.1,
@@ -4639,7 +5084,7 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "3 hari ke depan"
@@ -4650,6 +5095,9 @@
     "active_ha": 955.7,
     "hazard_index": 0.672,
     "ha_at_risk": 439.8,
+    "priority": 313.7,
+    "capacity_factor": 0.713,
+    "water_source": "irigasi",
     "status": "Siaga",
     "class_ha": {
      "1": 0.1,
@@ -4672,7 +5120,7 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "3 hari ke depan"
@@ -4683,6 +5131,9 @@
     "active_ha": 955.7,
     "hazard_index": 0.714,
     "ha_at_risk": 468.5,
+    "priority": 334.1,
+    "capacity_factor": 0.713,
+    "water_source": "irigasi",
     "status": "Siaga",
     "class_ha": {
      "1": 0.1,
@@ -4705,7 +5156,7 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "3 hari ke depan"
@@ -4716,6 +5167,9 @@
     "active_ha": 955.7,
     "hazard_index": 0.779,
     "ha_at_risk": 512.1,
+    "priority": 365.3,
+    "capacity_factor": 0.713,
+    "water_source": "irigasi",
     "status": "Awas",
     "class_ha": {
      "1": 0.1,
@@ -4737,8 +5191,8 @@
     "action": {
      "headline": "Hemat air dan siapkan pompa untuk vegetatif akhir",
      "steps": [
-      "Terapkan pengairan berselang (basah-kering) agar air cukup sampai fase bunting.",
-      "Inventarisasi pompa dan sumur dangkal di wilayah kelompok tani.",
+      "Hemat air agar cukup sampai fase bunting.",
+      "Terapkan pengairan berselang (basah-kering) dan sepakati jadwal gilir dengan P3A.",
       "Cek lapangan blok yang ditandai merah."
      ],
      "urgency": "segera"
@@ -4749,6 +5203,9 @@
     "active_ha": 955.7,
     "hazard_index": 0.824,
     "ha_at_risk": 543.0,
+    "priority": 387.3,
+    "capacity_factor": 0.713,
+    "water_source": "irigasi",
     "status": "Awas",
     "class_ha": {
      "1": 0.1,
@@ -4770,8 +5227,8 @@
     "action": {
      "headline": "Hemat air dan siapkan pompa untuk vegetatif akhir",
      "steps": [
-      "Terapkan pengairan berselang (basah-kering) agar air cukup sampai fase bunting.",
-      "Inventarisasi pompa dan sumur dangkal di wilayah kelompok tani.",
+      "Hemat air agar cukup sampai fase bunting.",
+      "Terapkan pengairan berselang (basah-kering) dan sepakati jadwal gilir dengan P3A.",
       "Cek lapangan blok yang ditandai merah."
      ],
      "urgency": "segera"
@@ -4782,6 +5239,9 @@
     "active_ha": 955.7,
     "hazard_index": 0.864,
     "ha_at_risk": 570.9,
+    "priority": 407.1,
+    "capacity_factor": 0.713,
+    "water_source": "irigasi",
     "status": "Awas",
     "class_ha": {
      "1": 0.1,
@@ -4803,8 +5263,8 @@
     "action": {
      "headline": "Hemat air dan siapkan pompa untuk vegetatif akhir",
      "steps": [
-      "Terapkan pengairan berselang (basah-kering) agar air cukup sampai fase bunting.",
-      "Inventarisasi pompa dan sumur dangkal di wilayah kelompok tani.",
+      "Hemat air agar cukup sampai fase bunting.",
+      "Terapkan pengairan berselang (basah-kering) dan sepakati jadwal gilir dengan P3A.",
       "Cek lapangan blok yang ditandai merah."
      ],
      "urgency": "segera"
@@ -4817,6 +5277,9 @@
     "active_ha": 1197.2,
     "hazard_index": 0.483,
     "ha_at_risk": 383.1,
+    "priority": 268.2,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Waspada",
     "class_ha": {
      "1": 0.3,
@@ -4839,7 +5302,7 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "minggu ini"
@@ -4850,6 +5313,9 @@
     "active_ha": 1197.2,
     "hazard_index": 0.502,
     "ha_at_risk": 399.4,
+    "priority": 279.5,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Waspada",
     "class_ha": {
      "1": 0.3,
@@ -4872,7 +5338,7 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "minggu ini"
@@ -4883,6 +5349,9 @@
     "active_ha": 1197.2,
     "hazard_index": 0.51,
     "ha_at_risk": 405.8,
+    "priority": 284.0,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Waspada",
     "class_ha": {
      "1": 0.3,
@@ -4905,7 +5374,7 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "minggu ini"
@@ -4916,6 +5385,9 @@
     "active_ha": 1197.2,
     "hazard_index": 0.532,
     "ha_at_risk": 424.0,
+    "priority": 296.8,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Waspada",
     "class_ha": {
      "1": 0.3,
@@ -4938,7 +5410,7 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "minggu ini"
@@ -4949,6 +5421,9 @@
     "active_ha": 1197.2,
     "hazard_index": 0.556,
     "ha_at_risk": 444.7,
+    "priority": 311.3,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Waspada",
     "class_ha": {
      "1": 0.3,
@@ -4971,7 +5446,7 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "minggu ini"
@@ -4982,6 +5457,9 @@
     "active_ha": 1197.2,
     "hazard_index": 0.589,
     "ha_at_risk": 472.4,
+    "priority": 330.7,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Waspada",
     "class_ha": {
      "1": 0.3,
@@ -5004,7 +5482,7 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "minggu ini"
@@ -5015,6 +5493,9 @@
     "active_ha": 1197.2,
     "hazard_index": 0.626,
     "ha_at_risk": 503.9,
+    "priority": 352.7,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Siaga",
     "class_ha": {
      "1": 0.3,
@@ -5037,7 +5518,7 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "3 hari ke depan"
@@ -5048,6 +5529,9 @@
     "active_ha": 1197.2,
     "hazard_index": 0.677,
     "ha_at_risk": 548.5,
+    "priority": 383.9,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Siaga",
     "class_ha": {
      "1": 0.3,
@@ -5069,8 +5553,8 @@
     "action": {
      "headline": "Hemat air dan siapkan pompa untuk vegetatif akhir",
      "steps": [
-      "Terapkan pengairan berselang (basah-kering) agar air cukup sampai fase bunting.",
-      "Inventarisasi pompa dan sumur dangkal di wilayah kelompok tani.",
+      "Hemat air agar cukup sampai fase bunting.",
+      "Terapkan pengairan berselang (basah-kering) dan sepakati jadwal gilir dengan P3A.",
       "Cek lapangan blok yang ditandai merah."
      ],
      "urgency": "3 hari ke depan"
@@ -5081,6 +5565,9 @@
     "active_ha": 1197.2,
     "hazard_index": 0.721,
     "ha_at_risk": 587.0,
+    "priority": 410.9,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Siaga",
     "class_ha": {
      "1": 0.3,
@@ -5102,8 +5589,8 @@
     "action": {
      "headline": "Hemat air dan siapkan pompa untuk vegetatif akhir",
      "steps": [
-      "Terapkan pengairan berselang (basah-kering) agar air cukup sampai fase bunting.",
-      "Inventarisasi pompa dan sumur dangkal di wilayah kelompok tani.",
+      "Hemat air agar cukup sampai fase bunting.",
+      "Terapkan pengairan berselang (basah-kering) dan sepakati jadwal gilir dengan P3A.",
       "Cek lapangan blok yang ditandai merah."
      ],
      "urgency": "3 hari ke depan"
@@ -5114,6 +5601,9 @@
     "active_ha": 1197.2,
     "hazard_index": 0.768,
     "ha_at_risk": 629.4,
+    "priority": 440.6,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Awas",
     "class_ha": {
      "1": 0.3,
@@ -5135,8 +5625,8 @@
     "action": {
      "headline": "Hemat air dan siapkan pompa untuk vegetatif akhir",
      "steps": [
-      "Terapkan pengairan berselang (basah-kering) agar air cukup sampai fase bunting.",
-      "Inventarisasi pompa dan sumur dangkal di wilayah kelompok tani.",
+      "Hemat air agar cukup sampai fase bunting.",
+      "Terapkan pengairan berselang (basah-kering) dan sepakati jadwal gilir dengan P3A.",
       "Cek lapangan blok yang ditandai merah."
      ],
      "urgency": "segera"
@@ -5149,6 +5639,9 @@
     "active_ha": 928.1,
     "hazard_index": 0.342,
     "ha_at_risk": 207.2,
+    "priority": 145.1,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 0.7,
@@ -5168,12 +5661,15 @@
      "4": 25.1
     },
     "action": null,
-    "rank": 16
+    "rank": 17
    },
    "1": {
     "active_ha": 928.1,
     "hazard_index": 0.354,
     "ha_at_risk": 214.9,
+    "priority": 150.4,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 0.7,
@@ -5193,12 +5689,15 @@
      "4": 27.0
     },
     "action": null,
-    "rank": 16
+    "rank": 17
    },
    "2": {
     "active_ha": 928.1,
     "hazard_index": 0.359,
     "ha_at_risk": 218.0,
+    "priority": 152.6,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 0.7,
@@ -5218,12 +5717,15 @@
      "4": 29.9
     },
     "action": null,
-    "rank": 16
+    "rank": 17
    },
    "3": {
     "active_ha": 928.1,
     "hazard_index": 0.372,
     "ha_at_risk": 227.0,
+    "priority": 158.9,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 0.7,
@@ -5243,12 +5745,15 @@
      "4": 33.3
     },
     "action": null,
-    "rank": 16
+    "rank": 17
    },
    "4": {
     "active_ha": 928.1,
     "hazard_index": 0.387,
     "ha_at_risk": 236.4,
+    "priority": 165.5,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 0.7,
@@ -5268,12 +5773,15 @@
      "4": 35.8
     },
     "action": null,
-    "rank": 16
+    "rank": 17
    },
    "5": {
     "active_ha": 928.1,
     "hazard_index": 0.408,
     "ha_at_risk": 250.8,
+    "priority": 175.5,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Waspada",
     "class_ha": {
      "1": 0.7,
@@ -5296,17 +5804,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "minggu ini"
     },
-    "rank": 16
+    "rank": 17
    },
    "6": {
     "active_ha": 928.1,
     "hazard_index": 0.431,
     "ha_at_risk": 266.0,
+    "priority": 186.2,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Waspada",
     "class_ha": {
      "1": 0.7,
@@ -5329,17 +5840,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "minggu ini"
     },
-    "rank": 16
+    "rank": 17
    },
    "7": {
     "active_ha": 928.1,
     "hazard_index": 0.467,
     "ha_at_risk": 290.7,
+    "priority": 203.5,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Waspada",
     "class_ha": {
      "1": 0.7,
@@ -5362,17 +5876,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "minggu ini"
     },
-    "rank": 16
+    "rank": 17
    },
    "8": {
     "active_ha": 928.1,
     "hazard_index": 0.498,
     "ha_at_risk": 312.9,
+    "priority": 219.0,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Waspada",
     "class_ha": {
      "1": 0.7,
@@ -5395,17 +5912,20 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "minggu ini"
     },
-    "rank": 16
+    "rank": 17
    },
    "9": {
     "active_ha": 928.1,
     "hazard_index": 0.547,
     "ha_at_risk": 349.7,
+    "priority": 244.8,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Waspada",
     "class_ha": {
      "1": 0.7,
@@ -5428,12 +5948,12 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "minggu ini"
     },
-    "rank": 15
+    "rank": 16
    }
   },
   "id3318170": {
@@ -5441,6 +5961,9 @@
     "active_ha": 1114.4,
     "hazard_index": 0.212,
     "ha_at_risk": 157.0,
+    "priority": 111.8,
+    "capacity_factor": 0.712,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 0.1,
@@ -5466,6 +5989,9 @@
     "active_ha": 1114.4,
     "hazard_index": 0.224,
     "ha_at_risk": 165.3,
+    "priority": 117.7,
+    "capacity_factor": 0.712,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 0.1,
@@ -5491,6 +6017,9 @@
     "active_ha": 1114.4,
     "hazard_index": 0.226,
     "ha_at_risk": 167.1,
+    "priority": 119.0,
+    "capacity_factor": 0.712,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 0.1,
@@ -5516,6 +6045,9 @@
     "active_ha": 1114.4,
     "hazard_index": 0.238,
     "ha_at_risk": 176.1,
+    "priority": 125.4,
+    "capacity_factor": 0.712,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 0.1,
@@ -5541,6 +6073,9 @@
     "active_ha": 1114.4,
     "hazard_index": 0.253,
     "ha_at_risk": 187.5,
+    "priority": 133.5,
+    "capacity_factor": 0.712,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 0.1,
@@ -5566,6 +6101,9 @@
     "active_ha": 1114.4,
     "hazard_index": 0.273,
     "ha_at_risk": 202.4,
+    "priority": 144.1,
+    "capacity_factor": 0.712,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 0.1,
@@ -5591,6 +6129,9 @@
     "active_ha": 1114.4,
     "hazard_index": 0.296,
     "ha_at_risk": 220.0,
+    "priority": 156.6,
+    "capacity_factor": 0.712,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 0.1,
@@ -5616,6 +6157,9 @@
     "active_ha": 1114.4,
     "hazard_index": 0.335,
     "ha_at_risk": 249.5,
+    "priority": 177.7,
+    "capacity_factor": 0.712,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 0.1,
@@ -5635,12 +6179,15 @@
      "4": 25.7
     },
     "action": null,
-    "rank": 17
+    "rank": 18
    },
    "8": {
     "active_ha": 1114.4,
     "hazard_index": 0.378,
     "ha_at_risk": 283.4,
+    "priority": 201.8,
+    "capacity_factor": 0.712,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 0.1,
@@ -5660,12 +6207,15 @@
      "4": 29.9
     },
     "action": null,
-    "rank": 17
+    "rank": 18
    },
    "9": {
     "active_ha": 1114.4,
     "hazard_index": 0.452,
     "ha_at_risk": 342.6,
+    "priority": 243.9,
+    "capacity_factor": 0.712,
+    "water_source": "irigasi",
     "status": "Waspada",
     "class_ha": {
      "1": 0.1,
@@ -5687,13 +6237,13 @@
     "action": {
      "headline": "Hemat air dan siapkan pompa untuk vegetatif akhir",
      "steps": [
-      "Terapkan pengairan berselang (basah-kering) agar air cukup sampai fase bunting.",
-      "Inventarisasi pompa dan sumur dangkal di wilayah kelompok tani.",
+      "Hemat air agar cukup sampai fase bunting.",
+      "Terapkan pengairan berselang (basah-kering) dan sepakati jadwal gilir dengan P3A.",
       "Cek lapangan blok yang ditandai merah."
      ],
      "urgency": "minggu ini"
     },
-    "rank": 16
+    "rank": 17
    }
   },
   "id3318180": {
@@ -5701,6 +6251,9 @@
     "active_ha": 393.7,
     "hazard_index": 0.172,
     "ha_at_risk": 50.3,
+    "priority": 38.1,
+    "capacity_factor": 0.758,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 0.0,
@@ -5726,6 +6279,9 @@
     "active_ha": 393.7,
     "hazard_index": 0.191,
     "ha_at_risk": 55.6,
+    "priority": 42.1,
+    "capacity_factor": 0.758,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 0.0,
@@ -5751,6 +6307,9 @@
     "active_ha": 393.7,
     "hazard_index": 0.192,
     "ha_at_risk": 55.9,
+    "priority": 42.3,
+    "capacity_factor": 0.758,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 0.0,
@@ -5776,6 +6335,9 @@
     "active_ha": 393.7,
     "hazard_index": 0.216,
     "ha_at_risk": 63.1,
+    "priority": 47.8,
+    "capacity_factor": 0.758,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 0.0,
@@ -5801,6 +6363,9 @@
     "active_ha": 393.7,
     "hazard_index": 0.248,
     "ha_at_risk": 72.1,
+    "priority": 54.6,
+    "capacity_factor": 0.758,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 0.0,
@@ -5826,6 +6391,9 @@
     "active_ha": 393.7,
     "hazard_index": 0.289,
     "ha_at_risk": 83.9,
+    "priority": 63.5,
+    "capacity_factor": 0.758,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 0.0,
@@ -5851,6 +6419,9 @@
     "active_ha": 393.7,
     "hazard_index": 0.336,
     "ha_at_risk": 97.5,
+    "priority": 73.9,
+    "capacity_factor": 0.758,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 0.0,
@@ -5876,6 +6447,9 @@
     "active_ha": 393.7,
     "hazard_index": 0.404,
     "ha_at_risk": 117.5,
+    "priority": 89.0,
+    "capacity_factor": 0.758,
+    "water_source": "irigasi",
     "status": "Waspada",
     "class_ha": {
      "1": 0.0,
@@ -5897,8 +6471,8 @@
     "action": {
      "headline": "Hemat air dan siapkan pompa untuk vegetatif akhir",
      "steps": [
-      "Terapkan pengairan berselang (basah-kering) agar air cukup sampai fase bunting.",
-      "Inventarisasi pompa dan sumur dangkal di wilayah kelompok tani.",
+      "Hemat air agar cukup sampai fase bunting.",
+      "Terapkan pengairan berselang (basah-kering) dan sepakati jadwal gilir dengan P3A.",
       "Cek lapangan blok yang ditandai merah."
      ],
      "urgency": "minggu ini"
@@ -5909,6 +6483,9 @@
     "active_ha": 393.7,
     "hazard_index": 0.483,
     "ha_at_risk": 141.2,
+    "priority": 106.9,
+    "capacity_factor": 0.758,
+    "water_source": "irigasi",
     "status": "Waspada",
     "class_ha": {
      "1": 0.0,
@@ -5930,8 +6507,8 @@
     "action": {
      "headline": "Hemat air dan siapkan pompa untuk vegetatif akhir",
      "steps": [
-      "Terapkan pengairan berselang (basah-kering) agar air cukup sampai fase bunting.",
-      "Inventarisasi pompa dan sumur dangkal di wilayah kelompok tani.",
+      "Hemat air agar cukup sampai fase bunting.",
+      "Terapkan pengairan berselang (basah-kering) dan sepakati jadwal gilir dengan P3A.",
       "Cek lapangan blok yang ditandai merah."
      ],
      "urgency": "minggu ini"
@@ -5942,6 +6519,9 @@
     "active_ha": 393.7,
     "hazard_index": 0.589,
     "ha_at_risk": 172.4,
+    "priority": 130.6,
+    "capacity_factor": 0.758,
+    "water_source": "irigasi",
     "status": "Waspada",
     "class_ha": {
      "1": 0.0,
@@ -5963,8 +6543,8 @@
     "action": {
      "headline": "Hemat air dan siapkan pompa untuk vegetatif akhir",
      "steps": [
-      "Terapkan pengairan berselang (basah-kering) agar air cukup sampai fase bunting.",
-      "Inventarisasi pompa dan sumur dangkal di wilayah kelompok tani.",
+      "Hemat air agar cukup sampai fase bunting.",
+      "Terapkan pengairan berselang (basah-kering) dan sepakati jadwal gilir dengan P3A.",
       "Cek lapangan blok yang ditandai merah."
      ],
      "urgency": "minggu ini"
@@ -5977,6 +6557,9 @@
     "active_ha": 683.7,
     "hazard_index": 0.23,
     "ha_at_risk": 104.0,
+    "priority": 72.8,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 0.0,
@@ -6002,6 +6585,9 @@
     "active_ha": 683.7,
     "hazard_index": 0.251,
     "ha_at_risk": 113.6,
+    "priority": 79.5,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 0.0,
@@ -6027,6 +6613,9 @@
     "active_ha": 683.7,
     "hazard_index": 0.254,
     "ha_at_risk": 114.8,
+    "priority": 80.4,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 0.0,
@@ -6052,6 +6641,9 @@
     "active_ha": 683.7,
     "hazard_index": 0.276,
     "ha_at_risk": 125.3,
+    "priority": 87.7,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 0.0,
@@ -6077,6 +6669,9 @@
     "active_ha": 683.7,
     "hazard_index": 0.3,
     "ha_at_risk": 136.8,
+    "priority": 95.8,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 0.0,
@@ -6102,6 +6697,9 @@
     "active_ha": 683.7,
     "hazard_index": 0.334,
     "ha_at_risk": 153.0,
+    "priority": 107.1,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 0.0,
@@ -6127,6 +6725,9 @@
     "active_ha": 683.7,
     "hazard_index": 0.371,
     "ha_at_risk": 170.8,
+    "priority": 119.6,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 0.0,
@@ -6152,6 +6753,9 @@
     "active_ha": 683.7,
     "hazard_index": 0.427,
     "ha_at_risk": 197.7,
+    "priority": 138.4,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Waspada",
     "class_ha": {
      "1": 0.0,
@@ -6174,7 +6778,7 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "minggu ini"
@@ -6185,6 +6789,9 @@
     "active_ha": 683.7,
     "hazard_index": 0.487,
     "ha_at_risk": 228.0,
+    "priority": 159.6,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Waspada",
     "class_ha": {
      "1": 0.0,
@@ -6207,7 +6814,7 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "minggu ini"
@@ -6218,6 +6825,9 @@
     "active_ha": 683.7,
     "hazard_index": 0.569,
     "ha_at_risk": 269.5,
+    "priority": 188.6,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Waspada",
     "class_ha": {
      "1": 0.0,
@@ -6239,13 +6849,13 @@
     "action": {
      "headline": "Hemat air dan siapkan pompa untuk vegetatif akhir",
      "steps": [
-      "Terapkan pengairan berselang (basah-kering) agar air cukup sampai fase bunting.",
-      "Inventarisasi pompa dan sumur dangkal di wilayah kelompok tani.",
+      "Hemat air agar cukup sampai fase bunting.",
+      "Terapkan pengairan berselang (basah-kering) dan sepakati jadwal gilir dengan P3A.",
       "Cek lapangan blok yang ditandai merah."
      ],
      "urgency": "minggu ini"
     },
-    "rank": 18
+    "rank": 19
    }
   },
   "id3318200": {
@@ -6253,6 +6863,9 @@
     "active_ha": 1624.0,
     "hazard_index": 0.254,
     "ha_at_risk": 278.4,
+    "priority": 194.9,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 0.0,
@@ -6272,12 +6885,15 @@
      "4": 18.5
     },
     "action": null,
-    "rank": 14
+    "rank": 16
    },
    "1": {
     "active_ha": 1624.0,
     "hazard_index": 0.274,
     "ha_at_risk": 300.8,
+    "priority": 210.5,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 0.0,
@@ -6297,12 +6913,15 @@
      "4": 21.0
     },
     "action": null,
-    "rank": 14
+    "rank": 15
    },
    "2": {
     "active_ha": 1624.0,
     "hazard_index": 0.278,
     "ha_at_risk": 304.8,
+    "priority": 213.4,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 0.0,
@@ -6322,12 +6941,15 @@
      "4": 22.6
     },
     "action": null,
-    "rank": 14
+    "rank": 15
    },
    "3": {
     "active_ha": 1624.0,
     "hazard_index": 0.301,
     "ha_at_risk": 330.9,
+    "priority": 231.6,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 0.0,
@@ -6347,12 +6969,15 @@
      "4": 25.0
     },
     "action": null,
-    "rank": 14
+    "rank": 15
    },
    "4": {
     "active_ha": 1624.0,
     "hazard_index": 0.325,
     "ha_at_risk": 358.8,
+    "priority": 251.1,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 0.0,
@@ -6372,12 +6997,15 @@
      "4": 28.1
     },
     "action": null,
-    "rank": 14
+    "rank": 15
    },
    "5": {
     "active_ha": 1624.0,
     "hazard_index": 0.359,
     "ha_at_risk": 396.5,
+    "priority": 277.5,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 0.0,
@@ -6403,6 +7031,9 @@
     "active_ha": 1624.0,
     "hazard_index": 0.397,
     "ha_at_risk": 440.7,
+    "priority": 308.5,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Normal",
     "class_ha": {
      "1": 0.0,
@@ -6428,6 +7059,9 @@
     "active_ha": 1624.0,
     "hazard_index": 0.456,
     "ha_at_risk": 508.7,
+    "priority": 356.1,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Waspada",
     "class_ha": {
      "1": 0.0,
@@ -6449,8 +7083,8 @@
     "action": {
      "headline": "Hemat air dan siapkan pompa untuk vegetatif akhir",
      "steps": [
-      "Terapkan pengairan berselang (basah-kering) agar air cukup sampai fase bunting.",
-      "Inventarisasi pompa dan sumur dangkal di wilayah kelompok tani.",
+      "Hemat air agar cukup sampai fase bunting.",
+      "Terapkan pengairan berselang (basah-kering) dan sepakati jadwal gilir dengan P3A.",
       "Cek lapangan blok yang ditandai merah."
      ],
      "urgency": "minggu ini"
@@ -6461,6 +7095,9 @@
     "active_ha": 1624.0,
     "hazard_index": 0.523,
     "ha_at_risk": 585.5,
+    "priority": 409.8,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Waspada",
     "class_ha": {
      "1": 0.0,
@@ -6482,8 +7119,8 @@
     "action": {
      "headline": "Hemat air dan siapkan pompa untuk vegetatif akhir",
      "steps": [
-      "Terapkan pengairan berselang (basah-kering) agar air cukup sampai fase bunting.",
-      "Inventarisasi pompa dan sumur dangkal di wilayah kelompok tani.",
+      "Hemat air agar cukup sampai fase bunting.",
+      "Terapkan pengairan berselang (basah-kering) dan sepakati jadwal gilir dengan P3A.",
       "Cek lapangan blok yang ditandai merah."
      ],
      "urgency": "minggu ini"
@@ -6494,6 +7131,9 @@
     "active_ha": 1624.0,
     "hazard_index": 0.609,
     "ha_at_risk": 684.6,
+    "priority": 479.2,
+    "capacity_factor": 0.7,
+    "water_source": "irigasi",
     "status": "Siaga",
     "class_ha": {
      "1": 0.0,
@@ -6515,8 +7155,8 @@
     "action": {
      "headline": "Hemat air dan siapkan pompa untuk vegetatif akhir",
      "steps": [
-      "Terapkan pengairan berselang (basah-kering) agar air cukup sampai fase bunting.",
-      "Inventarisasi pompa dan sumur dangkal di wilayah kelompok tani.",
+      "Hemat air agar cukup sampai fase bunting.",
+      "Terapkan pengairan berselang (basah-kering) dan sepakati jadwal gilir dengan P3A.",
       "Cek lapangan blok yang ditandai merah."
      ],
      "urgency": "3 hari ke depan"
@@ -6529,6 +7169,9 @@
     "active_ha": 1750.6,
     "hazard_index": 0.375,
     "ha_at_risk": 418.4,
+    "priority": 335.7,
+    "capacity_factor": 0.802,
+    "water_source": "campuran",
     "status": "Normal",
     "class_ha": {
      "1": 0.2,
@@ -6554,6 +7197,9 @@
     "active_ha": 1750.6,
     "hazard_index": 0.392,
     "ha_at_risk": 438.8,
+    "priority": 352.1,
+    "capacity_factor": 0.802,
+    "water_source": "campuran",
     "status": "Normal",
     "class_ha": {
      "1": 0.2,
@@ -6579,6 +7225,9 @@
     "active_ha": 1750.6,
     "hazard_index": 0.399,
     "ha_at_risk": 446.0,
+    "priority": 357.8,
+    "capacity_factor": 0.802,
+    "water_source": "campuran",
     "status": "Normal",
     "class_ha": {
      "1": 0.2,
@@ -6604,6 +7253,9 @@
     "active_ha": 1750.6,
     "hazard_index": 0.417,
     "ha_at_risk": 468.1,
+    "priority": 375.6,
+    "capacity_factor": 0.802,
+    "water_source": "campuran",
     "status": "Waspada",
     "class_ha": {
      "1": 0.2,
@@ -6626,7 +7278,8 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Blok irigasi: sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
+      "Blok tadah hujan: tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "minggu ini"
@@ -6637,6 +7290,9 @@
     "active_ha": 1750.6,
     "hazard_index": 0.436,
     "ha_at_risk": 490.6,
+    "priority": 393.6,
+    "capacity_factor": 0.802,
+    "water_source": "campuran",
     "status": "Waspada",
     "class_ha": {
      "1": 0.2,
@@ -6659,7 +7315,8 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Blok irigasi: sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
+      "Blok tadah hujan: tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "minggu ini"
@@ -6670,6 +7327,9 @@
     "active_ha": 1750.6,
     "hazard_index": 0.465,
     "ha_at_risk": 526.8,
+    "priority": 422.6,
+    "capacity_factor": 0.802,
+    "water_source": "campuran",
     "status": "Waspada",
     "class_ha": {
      "1": 0.2,
@@ -6692,7 +7352,8 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Blok irigasi: sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
+      "Blok tadah hujan: tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "minggu ini"
@@ -6703,6 +7364,9 @@
     "active_ha": 1750.6,
     "hazard_index": 0.497,
     "ha_at_risk": 566.3,
+    "priority": 454.3,
+    "capacity_factor": 0.802,
+    "water_source": "campuran",
     "status": "Waspada",
     "class_ha": {
      "1": 0.2,
@@ -6725,7 +7389,8 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Blok irigasi: sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
+      "Blok tadah hujan: tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "minggu ini"
@@ -6736,6 +7401,9 @@
     "active_ha": 1750.6,
     "hazard_index": 0.545,
     "ha_at_risk": 627.2,
+    "priority": 503.2,
+    "capacity_factor": 0.802,
+    "water_source": "campuran",
     "status": "Waspada",
     "class_ha": {
      "1": 0.2,
@@ -6758,7 +7426,8 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Blok irigasi: sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
+      "Blok tadah hujan: tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "minggu ini"
@@ -6769,6 +7438,9 @@
     "active_ha": 1750.6,
     "hazard_index": 0.584,
     "ha_at_risk": 677.6,
+    "priority": 543.6,
+    "capacity_factor": 0.802,
+    "water_source": "campuran",
     "status": "Waspada",
     "class_ha": {
      "1": 0.2,
@@ -6791,7 +7463,8 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Blok irigasi: sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
+      "Blok tadah hujan: tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "minggu ini"
@@ -6802,6 +7475,9 @@
     "active_ha": 1750.6,
     "hazard_index": 0.63,
     "ha_at_risk": 738.5,
+    "priority": 592.5,
+    "capacity_factor": 0.802,
+    "water_source": "campuran",
     "status": "Siaga",
     "class_ha": {
      "1": 0.2,
@@ -6824,7 +7500,8 @@
      "headline": "Pertimbangkan tunda tanam / pantau persemaian",
      "steps": [
       "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
-      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Blok irigasi: sesuaikan jadwal tanam susulan dengan jadwal gilir air irigasi.",
+      "Blok tadah hujan: tunda tanam susulan sampai hujan cukup; siapkan benih varietas genjah.",
       "Pantau ulang setelah citra satelit berikutnya."
      ],
      "urgency": "3 hari ke depan"

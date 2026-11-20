@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-20T07:35:24+00:00",
+ "generated_at": "2026-11-20T10:07:11+00:00",
  "source": "server/siaga.db",
  "rules": {
   "exclude_min_reports": 2,
@@ -40,6 +40,12 @@
     "n": 0,
     "agree": 0,
     "judged": 0
+   },
+   "gagal_tanam": {
+    "label": "Gagal tanam / bibit mati karena kering",
+    "n": 0,
+    "agree": 0,
+    "judged": 0
    }
   },
   "reports": [
@@ -51,12 +57,13 @@
     "answer": "ok",
     "agrees": true,
     "map": {
-     "cropland_ha": 3763.3,
+     "cropland_ha": 3763.4,
      "active_ha": 1868.3,
      "stressed_share": 0.83,
      "inactive_share": 0.503,
      "excluded_ha": 0,
-     "puso_share": 0.437
+     "puso_share": 0.437,
+     "failed_share": 0.009
     }
    }
   ]
