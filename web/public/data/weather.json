@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-20T00:34:32+00:00",
+ "generated_at": "2026-11-20T02:22:38+00:00",
  "today": "2026-11-20",
  "source": "Open-Meteo forecast API (model best_match), titik label kecamatan",
  "dry_day_mm": 1.0,
@@ -97,18 +97,18 @@
      "end": "2026-12-11",
      "label": "Des I",
      "obs_mm": 0.0,
-     "fc_mm": 40.4,
+     "fc_mm": 39.1,
      "obs_days": 0,
-     "fc_days": 4,
+     "fc_days": 5,
      "days": 10,
      "complete": false
     }
    ],
    "hth": 0,
    "obs_30d_mm": 173.6,
-   "fc_mm": 162.6,
-   "fc_days": 14,
-   "fc_rain_days": 14,
+   "fc_mm": 161.2,
+   "fc_days": 15,
+   "fc_rain_days": 15,
    "hth_class": "Sangat pendek"
   },
   "id3318020": {
@@ -203,18 +203,18 @@
      "end": "2026-12-11",
      "label": "Des I",
      "obs_mm": 0.0,
-     "fc_mm": 29.7,
+     "fc_mm": 36.5,
      "obs_days": 0,
-     "fc_days": 4,
+     "fc_days": 5,
      "days": 10,
      "complete": false
     }
    ],
    "hth": 0,
    "obs_30d_mm": 153.2,
-   "fc_mm": 127.1,
-   "fc_days": 14,
-   "fc_rain_days": 14,
+   "fc_mm": 133.8,
+   "fc_days": 15,
+   "fc_rain_days": 15,
    "hth_class": "Sangat pendek"
   },
   "id3318030": {
@@ -309,18 +309,18 @@
      "end": "2026-12-11",
      "label": "Des I",
      "obs_mm": 0.0,
-     "fc_mm": 42.6,
+     "fc_mm": 54.7,
      "obs_days": 0,
-     "fc_days": 4,
+     "fc_days": 5,
      "days": 10,
      "complete": false
     }
    ],
    "hth": 0,
    "obs_30d_mm": 182.3,
-   "fc_mm": 143.7,
-   "fc_days": 14,
-   "fc_rain_days": 14,
+   "fc_mm": 155.8,
+   "fc_days": 15,
+   "fc_rain_days": 15,
    "hth_class": "Sangat pendek"
   },
   "id3318040": {
@@ -415,18 +415,18 @@
      "end": "2026-12-11",
      "label": "Des I",
      "obs_mm": 0.0,
-     "fc_mm": 44.1,
+     "fc_mm": 56.1,
      "obs_days": 0,
-     "fc_days": 4,
+     "fc_days": 5,
      "days": 10,
      "complete": false
     }
    ],
    "hth": 0,
    "obs_30d_mm": 187.5,
-   "fc_mm": 141.1,
-   "fc_days": 14,
-   "fc_rain_days": 14,
+   "fc_mm": 153.2,
+   "fc_days": 15,
+   "fc_rain_days": 15,
    "hth_class": "Sangat pendek"
   },
   "id3318050": {
@@ -521,18 +521,18 @@
      "end": "2026-12-11",
      "label": "Des I",
      "obs_mm": 0.0,
-     "fc_mm": 51.9,
+     "fc_mm": 61.9,
      "obs_days": 0,
-     "fc_days": 4,
+     "fc_days": 5,
      "days": 10,
      "complete": false
     }
    ],
    "hth": 0,
    "obs_30d_mm": 171.6,
-   "fc_mm": 156.9,
-   "fc_days": 14,
-   "fc_rain_days": 14,
+   "fc_mm": 166.9,
+   "fc_days": 15,
+   "fc_rain_days": 15,
    "hth_class": "Sangat pendek"
   },
   "id3318060": {
@@ -627,18 +627,18 @@
      "end": "2026-12-11",
      "label": "Des I",
      "obs_mm": 0.0,
-     "fc_mm": 37.6,
+     "fc_mm": 47.6,
      "obs_days": 0,
-     "fc_days": 4,
+     "fc_days": 5,
      "days": 10,
      "complete": false
     }
    ],
    "hth": 0,
    "obs_30d_mm": 184.1,
-   "fc_mm": 156.7,
-   "fc_days": 14,
-   "fc_rain_days": 14,
+   "fc_mm": 166.7,
+   "fc_days": 15,
+   "fc_rain_days": 15,
    "hth_class": "Sangat pendek"
   },
   "id3318070": {
@@ -733,18 +733,18 @@
      "end": "2026-12-11",
      "label": "Des I",
      "obs_mm": 0.0,
-     "fc_mm": 25.5,
+     "fc_mm": 29.0,
      "obs_days": 0,
-     "fc_days": 4,
+     "fc_days": 5,
      "days": 10,
      "complete": false
     }
    ],
    "hth": 0,
    "obs_30d_mm": 156.6,
-   "fc_mm": 124.5,
-   "fc_days": 14,
-   "fc_rain_days": 14,
+   "fc_mm": 128.0,
+   "fc_days": 15,
+   "fc_rain_days": 15,
    "hth_class": "Sangat pendek"
   },
   "id3318080": {
@@ -839,18 +839,18 @@
      "end": "2026-12-11",
      "label": "Des I",
      "obs_mm": 0.0,
-     "fc_mm": 21.4,
+     "fc_mm": 29.7,
      "obs_days": 0,
-     "fc_days": 4,
+     "fc_days": 5,
      "days": 10,
      "complete": false
     }
    ],
    "hth": 0,
    "obs_30d_mm": 168.4,
-   "fc_mm": 108.2,
-   "fc_days": 14,
-   "fc_rain_days": 14,
+   "fc_mm": 116.5,
+   "fc_days": 15,
+   "fc_rain_days": 15,
    "hth_class": "Sangat pendek"
   },
   "id3318090": {
@@ -945,18 +945,18 @@
      "end": "2026-12-11",
      "label": "Des I",
      "obs_mm": 0.0,
-     "fc_mm": 38.2,
+     "fc_mm": 46.4,
      "obs_days": 0,
-     "fc_days": 4,
+     "fc_days": 5,
      "days": 10,
      "complete": false
     }
    ],
    "hth": 0,
    "obs_30d_mm": 197.4,
-   "fc_mm": 148.2,
-   "fc_days": 14,
-   "fc_rain_days": 14,
+   "fc_mm": 156.4,
+   "fc_days": 15,
+   "fc_rain_days": 15,
    "hth_class": "Sangat pendek"
   },
   "id3318100": {
@@ -1051,18 +1051,18 @@
      "end": "2026-12-11",
      "label": "Des I",
      "obs_mm": 0.0,
-     "fc_mm": 24.4,
+     "fc_mm": 32.6,
      "obs_days": 0,
-     "fc_days": 4,
+     "fc_days": 5,
      "days": 10,
      "complete": false
     }
    ],
    "hth": 0,
    "obs_30d_mm": 148.6,
-   "fc_mm": 102.8,
-   "fc_days": 14,
-   "fc_rain_days": 14,
+   "fc_mm": 111.0,
+   "fc_days": 15,
+   "fc_rain_days": 15,
    "hth_class": "Sangat pendek"
   },
   "id3318110": {
@@ -1157,18 +1157,18 @@
      "end": "2026-12-11",
      "label": "Des I",
      "obs_mm": 0.0,
-     "fc_mm": 29.2,
+     "fc_mm": 41.3,
      "obs_days": 0,
-     "fc_days": 4,
+     "fc_days": 5,
      "days": 10,
      "complete": false
     }
    ],
    "hth": 0,
    "obs_30d_mm": 160.0,
-   "fc_mm": 118.5,
-   "fc_days": 14,
-   "fc_rain_days": 14,
+   "fc_mm": 130.6,
+   "fc_days": 15,
+   "fc_rain_days": 15,
    "hth_class": "Sangat pendek"
   },
   "id3318120": {
@@ -1263,18 +1263,18 @@
      "end": "2026-12-11",
      "label": "Des I",
      "obs_mm": 0.0,
-     "fc_mm": 19.2,
+     "fc_mm": 30.1,
      "obs_days": 0,
-     "fc_days": 4,
+     "fc_days": 5,
      "days": 10,
      "complete": false
     }
    ],
    "hth": 0,
    "obs_30d_mm": 138.3,
-   "fc_mm": 105.3,
-   "fc_days": 14,
-   "fc_rain_days": 14,
+   "fc_mm": 116.2,
+   "fc_days": 15,
+   "fc_rain_days": 15,
    "hth_class": "Sangat pendek"
   },
   "id3318130": {
@@ -1369,18 +1369,18 @@
      "end": "2026-12-11",
      "label": "Des I",
      "obs_mm": 0.0,
-     "fc_mm": 14.4,
+     "fc_mm": 22.0,
      "obs_days": 0,
-     "fc_days": 4,
+     "fc_days": 5,
      "days": 10,
      "complete": false
     }
    ],
    "hth": 0,
    "obs_30d_mm": 111.2,
-   "fc_mm": 87.0,
-   "fc_days": 14,
-   "fc_rain_days": 14,
+   "fc_mm": 94.7,
+   "fc_days": 15,
+   "fc_rain_days": 15,
    "hth_class": "Sangat pendek"
   },
   "id3318140": {
@@ -1475,18 +1475,18 @@
      "end": "2026-12-11",
      "label": "Des I",
      "obs_mm": 0.0,
-     "fc_mm": 17.7,
+     "fc_mm": 25.4,
      "obs_days": 0,
-     "fc_days": 4,
+     "fc_days": 5,
      "days": 10,
      "complete": false
     }
    ],
    "hth": 0,
    "obs_30d_mm": 121.6,
-   "fc_mm": 87.4,
-   "fc_days": 14,
-   "fc_rain_days": 14,
+   "fc_mm": 95.0,
+   "fc_days": 15,
+   "fc_rain_days": 15,
    "hth_class": "Sangat pendek"
   },
   "id3318150": {
@@ -1581,18 +1581,18 @@
      "end": "2026-12-11",
      "label": "Des I",
      "obs_mm": 0.0,
-     "fc_mm": 21.4,
+     "fc_mm": 29.7,
      "obs_days": 0,
-     "fc_days": 4,
+     "fc_days": 5,
      "days": 10,
      "complete": false
     }
    ],
    "hth": 0,
    "obs_30d_mm": 168.4,
-   "fc_mm": 108.2,
-   "fc_days": 14,
-   "fc_rain_days": 14,
+   "fc_mm": 116.5,
+   "fc_days": 15,
+   "fc_rain_days": 15,
    "hth_class": "Sangat pendek"
   },
   "id3318160": {
@@ -1687,18 +1687,18 @@
      "end": "2026-12-11",
      "label": "Des I",
      "obs_mm": 0.0,
-     "fc_mm": 24.4,
+     "fc_mm": 32.6,
      "obs_days": 0,
-     "fc_days": 4,
+     "fc_days": 5,
      "days": 10,
      "complete": false
     }
    ],
    "hth": 0,
    "obs_30d_mm": 148.6,
-   "fc_mm": 102.8,
-   "fc_days": 14,
-   "fc_rain_days": 14,
+   "fc_mm": 111.0,
+   "fc_days": 15,
+   "fc_rain_days": 15,
    "hth_class": "Sangat pendek"
   },
   "id3318170": {
@@ -1793,18 +1793,18 @@
      "end": "2026-12-11",
      "label": "Des I",
      "obs_mm": 0.0,
-     "fc_mm": 17.4,
+     "fc_mm": 25.6,
      "obs_days": 0,
-     "fc_days": 4,
+     "fc_days": 5,
      "days": 10,
      "complete": false
     }
    ],
    "hth": 0,
    "obs_30d_mm": 121.6,
-   "fc_mm": 87.1,
-   "fc_days": 14,
-   "fc_rain_days": 14,
+   "fc_mm": 95.3,
+   "fc_days": 15,
+   "fc_rain_days": 15,
    "hth_class": "Sangat pendek"
   },
   "id3318180": {
@@ -1899,18 +1899,18 @@
      "end": "2026-12-11",
      "label": "Des I",
      "obs_mm": 0.0,
-     "fc_mm": 15.9,
+     "fc_mm": 23.5,
      "obs_days": 0,
-     "fc_days": 4,
+     "fc_days": 5,
      "days": 10,
      "complete": false
     }
    ],
    "hth": 0,
    "obs_30d_mm": 102.2,
-   "fc_mm": 72.5,
-   "fc_days": 14,
-   "fc_rain_days": 13,
+   "fc_mm": 80.2,
+   "fc_days": 15,
+   "fc_rain_days": 14,
    "hth_class": "Sangat pendek"
   },
   "id3318190": {
@@ -2005,18 +2005,18 @@
      "end": "2026-12-11",
      "label": "Des I",
      "obs_mm": 0.0,
-     "fc_mm": 17.9,
+     "fc_mm": 20.5,
      "obs_days": 0,
-     "fc_days": 4,
+     "fc_days": 5,
      "days": 10,
      "complete": false
     }
    ],
    "hth": 0,
    "obs_30d_mm": 96.2,
-   "fc_mm": 83.2,
-   "fc_days": 14,
-   "fc_rain_days": 14,
+   "fc_mm": 86.0,
+   "fc_days": 15,
+   "fc_rain_days": 15,
    "hth_class": "Sangat pendek"
   },
   "id3318200": {
@@ -2111,18 +2111,18 @@
      "end": "2026-12-11",
      "label": "Des I",
      "obs_mm": 0.0,
-     "fc_mm": 17.9,
+     "fc_mm": 20.5,
      "obs_days": 0,
-     "fc_days": 4,
+     "fc_days": 5,
      "days": 10,
      "complete": false
     }
    ],
    "hth": 0,
    "obs_30d_mm": 96.2,
-   "fc_mm": 83.2,
-   "fc_days": 14,
-   "fc_rain_days": 14,
+   "fc_mm": 86.0,
+   "fc_days": 15,
+   "fc_rain_days": 15,
    "hth_class": "Sangat pendek"
   },
   "id3318210": {
@@ -2217,18 +2217,18 @@
      "end": "2026-12-11",
      "label": "Des I",
      "obs_mm": 0.0,
-     "fc_mm": 6.8,
+     "fc_mm": 9.5,
      "obs_days": 0,
-     "fc_days": 4,
+     "fc_days": 5,
      "days": 10,
      "complete": false
     }
    ],
    "hth": 0,
    "obs_30d_mm": 71.4,
-   "fc_mm": 42.0,
-   "fc_days": 14,
-   "fc_rain_days": 13,
+   "fc_mm": 44.7,
+   "fc_days": 15,
+   "fc_rain_days": 14,
    "hth_class": "Sangat pendek"
   }
  }
