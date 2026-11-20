@@ -225,6 +225,17 @@ export interface Feedback {
   };
 }
 
+/** anomaly.json (pipeline/anomaly.py, v2 5.2), optional. */
+export interface Anomaly {
+  generated_at: string;
+  baseline_years: [number, number];
+  min_years: number;
+  periods: Record<string, {
+    desa: Record<string, { nddi: number; base: number; diff: number; z: number; years: number }>;
+    kecamatan: Record<string, { diff: number; z: number; desa: number }>;
+  }>;
+}
+
 /** forecast.json (pipeline/forecast.py, v2 Phase 2), optional. */
 export interface ForecastStep { id: string; label: string; date: string; days: number }
 export interface ForecastReason { group: string; pp: number; up: boolean; text: string }

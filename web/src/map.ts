@@ -18,6 +18,8 @@ export interface MapApi {
   /** Redraw kecamatan styling from mutated feature properties (scenario). */
   refresh(): void;
   select(id: string | null, fly?: boolean): void;
+  /** v2 5.2: NDDI anomaly z per desa for the "anomaly" layer (null = none). */
+  setDesaValues(values: Record<string, number> | null): void;
   onSelect(cb: (id: string) => void): void;
 }
 
@@ -72,7 +74,7 @@ export async function createMap(
   map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "bottom-right");
   await new Promise<void>((r) => map.on("load", () => r()));
 
-  map.addSource("desa", { type: "geojson", data: desa });
+  map.addSource("desa", { type: "geojson", data: desa, promoteId: "id" });
   map.addSource("kec", { type: "geojson", data: kec, promoteId: "id" });
 
   map.addLayer({
@@ -95,6 +97,16 @@ export async function createMap(
     paint: {
       "fill-color": statusMatch,
       "fill-opacity": ["case", ["boolean", ["feature-state", "hover"], false], 0.72, 0.55],
+    },
+  });
+  // v2 5.2: desa choropleth of the NDDI anomaly (z), driven by feature-state
+  map.addLayer({
+    id: "desa-anom", type: "fill", source: "desa",
+    layout: { visibility: "none" },
+    paint: {
+      "fill-color": ["interpolate", ["linear"], ["coalesce", ["feature-state", "z"], 0],
+        -2, "#2b6cb0", -1, "#7fb3d5", -0.4, "#3a4150", 0.4, "#3a4150", 1, "#f4a261", 2, "#d64545", 3, "#8b0a1a"],
+      "fill-opacity": ["case", ["==", ["feature-state", "z"], null], 0, 0.8],
     },
   });
   map.addLayer({
@@ -129,10 +141,18 @@ export async function createMap(
   let layersDir: string | null = null;
   const imgCache = new Map<string, HTMLImageElement>();
 
+  let desaIds: string[] = [];
+  function setDesaValues(values: Record<string, number> | null) {
+    for (const id of desaIds) map.removeFeatureState({ source: "desa", id }, "z");
+    desaIds = values ? Object.keys(values) : [];
+    for (const id of desaIds) map.setFeatureState({ source: "desa", id }, { z: values![id] });
+  }
+
   async function setLayer(id: string) {
     current = id;
     const dir = layersDir;
-    if (id === "status") {
+    map.setLayoutProperty("desa-anom", "visibility", id === "anomaly" ? "visible" : "none");
+    if (id === "status" || id === "anomaly") {
       if (map.getLayer("overlay")) map.removeLayer("overlay");
       if (map.getSource("overlay")) map.removeSource("overlay");
     }
@@ -140,7 +160,7 @@ export async function createMap(
       id === "status"
         ? ["case", ["boolean", ["feature-state", "hover"], false], 0.72, 0.55]
         : ["case", ["boolean", ["feature-state", "hover"], false], 0.12, 0]);
-    if (id === "status") return;
+    if (id === "status" || id === "anomaly") return;
 
     const def = meta.layers.find((l) => l.id === id);
     if (!def) return;
@@ -237,5 +257,5 @@ export async function createMap(
     }
   }
 
-  return { map, setLayer, setOpacity, setPeriod, refresh, select, onSelect: (cb) => selectCbs.push(cb) };
+  return { map, setLayer, setOpacity, setPeriod, refresh, select, setDesaValues, onSelect: (cb) => selectCbs.push(cb) };
 }

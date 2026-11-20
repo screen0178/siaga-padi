@@ -7,7 +7,7 @@ import { daysSince, freshness, latestScene, renderFresh } from "./fresh";
 import { composeMessage } from "./message";
 import { renderStrip, renderTrend, shortLabel } from "./timeline";
 import { startTour, tourSeen, type TourStep } from "./tour";
-import { STAGE_COLOR, STATUS_COLOR, type Forecast, type KecFeature, type KecProps, type Meta, type Feedback, type Scenario, type Weather } from "./types";
+import { STAGE_COLOR, STATUS_COLOR, type Anomaly, type Forecast, type KecFeature, type KecProps, type Meta, type Feedback, type Scenario, type Weather } from "./types";
 import { renderRain, renderScenarioCurve } from "./weather";
 import {
   FEEDBACK, ROLE_LABEL, STEPS, addReport, advance, canReset, canStep, feedbackLabel, getActor, getMode, getReports,
@@ -37,13 +37,15 @@ let fb: Feedback | null = null; // Stage 3: field reports as seen by the last pi
 let forecast: Forecast | null = null; // v2 Phase 2, optional
 let fcStep: string | null = null; // forecast step on the map/ranking (null = observed)
 let reviews: Record<string, Review> = {}; // Dinas verdicts on the current forecast
+let anomaly: Anomaly | null = null; // v2 5.2, optional
+let layerId = "status";
 
 /** Optional data file: null when missing or malformed. */
 const optional = <T,>(file: string) =>
   fetch(`${DATA}/${file}`).then((r) => (r.ok ? (r.json() as Promise<T>) : null)).catch(() => null);
 
 async function boot() {
-  const [m, kec, desa, w, sc, f, fc] = await Promise.all([
+  const [m, kec, desa, w, sc, f, fc, an] = await Promise.all([
     fetch(`${DATA}/meta.json`).then((r) => r.json()),
     fetch(`${DATA}/kecamatan.json`).then((r) => r.json()),
     fetch(`${DATA}/desa.json`).then((r) => r.json()),
@@ -51,7 +53,9 @@ async function boot() {
     optional<Scenario>("scenario.json"),
     optional<Feedback>("feedback.json"),
     optional<Forecast>("forecast.json"),
+    optional<Anomaly>("anomaly.json"),
   ]);
+  anomaly = an;
   fb = f;
   meta = m;
   forecast = fc && meta.periods?.length ? fc : null;
@@ -204,6 +208,22 @@ async function setPeriod(id: string) {
   const f = selected ? feats.find((x) => x.properties.id === selected) : null;
   if (f) renderDetail(f.properties, false);
   await api.setPeriod(p.layers_dir);
+  if (layerId === "anomaly") { api.setDesaValues(anomalyZ()); renderLegend("anomaly"); }
+}
+
+// ---------------------------------------------------------------- NDDI anomaly (v2 5.2)
+const BULAN_PANJANG = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+const anomPeriod = () => (anomaly && periodId ? anomaly.periods[periodId] : undefined);
+function anomalyZ(): Record<string, number> | null {
+  const a = anomPeriod();
+  return a ? Object.fromEntries(Object.entries(a.desa).map(([k, v]) => [k, v.z])) : null;
+}
+function anomalyLine(p: KecProps) {
+  const a = anomPeriod()?.kecamatan[p.id];
+  if (!a || !periodId) return "";
+  const word = a.z >= 1 ? "lebih kering dari biasanya" : a.z <= -1 ? "lebih basah dari biasanya" : "mendekati biasanya";
+  const cls = a.z >= 1 ? "dry" : a.z <= -1 ? "wet" : "";
+  return `<p class="anom ${cls}" title="Rata-rata NDDI padi aktif bulan ini dibanding bulan yang sama ${anomaly!.baseline_years.join("–")} (${a.desa} desa dengan ≥ ${anomaly!.min_years} tahun data). z = selisih dibagi simpangan baku antar-tahun.">Dibanding ${BULAN_PANJANG[Number(periodId.slice(5, 7)) - 1]} ${anomaly!.baseline_years.join("–")}: <b>${word}</b> <span>z ${a.z > 0 ? "+" : ""}${fmt(a.z, 1)} · NDDI ${a.diff > 0 ? "+" : ""}${fmt(a.diff, 2)}</span></p>`;
 }
 
 function stepPeriod(dir: 1 | -1) {
@@ -557,6 +577,8 @@ function renderDetail(p: KecProps, resetScroll = true) {
       <div><span>Berisiko (terbobot)</span><b>${fmt(p.ha_at_risk)} <small>ha${obs ? ` · teramati ${fmt(obs.ha_at_risk)}` : ""}</small></b></div>
       <div><span>NDVI / NDMI</span><b>${fmt(p.mean_ndvi, 2)} / ${fmt(p.mean_ndmi, 2)}</b></div>
     </div>
+
+    ${anomalyLine(observed(p))}
 
     ${forecast && periodId === curPeriodId() ? forecastCard(forecast, p.id, observed(p).status, fcStep, reviews[p.id], {
       canReview: actor?.role === "dinas" && getMode() === "server", serverMode: getMode() === "server",
@@ -966,16 +988,19 @@ function startFreshClock() {
 
 // ---------------------------------------------------------------- layer bar
 function renderLayerbar() {
-  const layers = [{ id: "status", label: "Status wilayah" }, ...meta.layers];
+  const layers = [{ id: "status", label: "Status wilayah" }, ...meta.layers,
+    ...(anomaly ? [{ id: "anomaly", label: "Anomali vs biasanya" }] : [])];
   $("#layers").innerHTML = layers
     .map((l, i) => `<button data-layer="${l.id}" class="${i === 0 ? "on" : ""}">${l.label}</button>`)
     .join("");
   $("#layers").querySelectorAll("button").forEach((b) =>
     b.addEventListener("click", async () => {
       $("#layers").querySelectorAll("button").forEach((x) => x.classList.toggle("on", x === b));
-      renderLegend(b.dataset.layer!);
-      $("#opacity-wrap").hidden = b.dataset.layer === "status";
-      await api.setLayer(b.dataset.layer!);
+      layerId = b.dataset.layer!;
+      renderLegend(layerId);
+      $("#opacity-wrap").hidden = layerId === "status" || layerId === "anomaly";
+      if (layerId === "anomaly") api.setDesaValues(anomalyZ());
+      await api.setLayer(layerId);
     }),
   );
   ($("#opacity") as HTMLInputElement).oninput = (ev) =>
@@ -995,6 +1020,15 @@ function renderLegend(layerId: string) {
     el.innerHTML = meta.status_levels
       .map((s) => `<span class="sw"><i style="--c:${STATUS_COLOR[s]}"></i>${s}</span>`)
       .join("");
+    return;
+  }
+  if (layerId === "anomaly") {
+    const a = anomPeriod();
+    const stops: [number, string][] = [[-2, "#2b6cb0"], [-1, "#7fb3d5"], [-0.4, "#3a4150"], [0.4, "#3a4150"], [1, "#f4a261"], [2, "#d64545"], [3, "#8b0a1a"]];
+    const grad = stops.map(([v, c]) => `${c} ${(100 * (v + 2)) / 5}%`).join(",");
+    el.innerHTML = `<span class="ramp-l">z NDDI</span><span class="ramp" style="background:linear-gradient(90deg,${grad})">${[-2, -1, 0, 1, 2, 3]
+      .map((v) => `<em style="left:${(100 * (v + 2)) / 5}%">${v > 0 ? "+" : ""}${v}</em>`).join("")}</span>
+      <span class="anom-key">← lebih basah · <b>lebih kering</b> → dari ${periodId ? BULAN_PANJANG[Number(periodId.slice(5, 7)) - 1] : "bulan ini"} ${anomaly!.baseline_years.join("–")}${a ? "" : " · tidak ada data bulan ini"}</span>`;
     return;
   }
   const def = meta.layers.find((l) => l.id === layerId)!;
