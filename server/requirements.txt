@@ -1,0 +1,5 @@
+# Stage 3 backend; install into the pipeline venv (the scheduler runs the pipeline scripts)
+-r ../pipeline/requirements.txt
+fastapi>=0.115
+uvicorn[standard]>=0.30
+httpx  # tests (fastapi.testclient)
