@@ -5,3 +5,6 @@ scipy
 matplotlib
 pillow
 openpyxl
+# v2 Phase 2 forecast
+pandas
+scikit-learn

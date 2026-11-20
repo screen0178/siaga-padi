@@ -6,3 +6,9 @@ __pycache__/
 .DS_Store
 server/*.db
 server/*.db-*
+
+# v2 Phase 2: training data, rebuilt by pipeline/ml_dataset.py
+data/ml/*.csv
+data/ml/*.txt
+data/ml/*.parquet
+data/ml/*.log
