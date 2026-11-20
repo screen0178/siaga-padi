@@ -107,7 +107,7 @@ def month_ndvi(aoi, start, end):
     return ee.Image(ee.Algorithms.If(col.size().gt(0), ndvi.addBands(nddi).toFloat(), empty))
 
 
-def trajectory_stage(ndvi, history, nddi=None):
+def trajectory_stage(ndvi, history, nddi=None, cropland=None):
     """Growth stage from the NDVI trajectory (see config.TRAJECTORY).
     history: monthly NDVI+NDDI images before this period, oldest first."""
     t = TRAJECTORY
@@ -149,9 +149,18 @@ def trajectory_stage(ndvi, history, nddi=None):
         down = peak_idx.lt(k).And(win[k].lt(t["harvest_ndvi_max"])).unmask(0)
         dropped = dropped.where(down, k)
     early = dropped.subtract(greenup).lte(t["early_drop_months"]).And(greenup.lt(99))
+    # Gagal tanam? Never greened, but most cropland around it did
+    fallow = peak.lt(t["fallow_peak_max"])
+    failed = ee.Image(0)
+    if cropland is not None:
+        greened = peak.gte(t["harvest_peak_min"]).unmask(0).updateMask(cropland)
+        around = greened.reduceNeighborhood(
+            ee.Reducer.mean(), ee.Kernel.circle(t["neighbour_radius_m"], "meters"))
+        failed = fallow.And(around.gte(t["neighbour_green_min"])).unmask(0)
     stage = (stage.where(harvested, 7)
              .where(harvested.And(stressed.Or(early)), 9)
-             .where(peak.lt(t["fallow_peak_max"]), 6)
+             .where(fallow, 6)
+             .where(failed, 10)
              .where(ndvi.lt(-0.03), 1))  # open water / flooded, as in single-date mode
     return stage.updateMask(ndvi.mask()).rename("class").toByte()
 
@@ -173,7 +182,8 @@ def build(aoi, start, end, history=None, exclude=None):
     nddi = nddi.updateMask(nddi.abs().lt(NDDI_ABS_GUARD))  # null guard
 
     cropland = ee.ImageCollection("ESA/WorldCover/v200").first().eq(40)
-    stage = (trajectory_stage(ndvi, history, nddi) if history else classify(ndvi, PHENOLOGY_CLASSES))
+    stage = (trajectory_stage(ndvi, history, nddi, cropland) if history
+             else classify(ndvi, PHENOLOGY_CLASSES))
     stage = stage.updateMask(cropland).rename("stage")
     if exclude is not None:
         reported = ee.Image(0).paint(exclude, 1)
@@ -247,8 +257,8 @@ def export_layers(L, bbox, out):
 
     class_palette = [c[5].lstrip("#") for c in NDDI_CLASSES]
     # stages 2..9: veg awal, veg akhir, reproduktif, pematangan, bera, panen,
-    # bukan padi (field reports), panen atau puso?
-    stage_palette = ["c7e9a0", "6cc04a", "f2c94c", "a0785a", "5b6170", "d4b483", "b07cc6", "e0602b"]
+    # bukan padi (field reports), panen atau puso?, gagal tanam?
+    stage_palette = ["c7e9a0", "6cc04a", "f2c94c", "a0785a", "5b6170", "d4b483", "b07cc6", "e0602b", "d9468f"]
     vis = {
         "nddi_class": L["dclass"].visualize(min=1, max=5, palette=class_palette),
         "nddi": L["nddi"].updateMask(L["active"]).visualize(
@@ -258,7 +268,7 @@ def export_layers(L, bbox, out):
         "ndmi": L["ndmi"].updateMask(L["cropland"]).visualize(
             min=-0.8, max=0.6, palette=["8c3b1a", "e0a050", "f2efc7", "5bb0d9", "1f4e9c"]),
         "stage": L["stage"].updateMask(L["stage"].gte(2)).visualize(
-            min=2, max=9, palette=stage_palette),
+            min=2, max=10, palette=stage_palette),
     }
     for name, img in vis.items():
         url = img.getThumbURL({"region": region, "dimensions": THUMB_PX,

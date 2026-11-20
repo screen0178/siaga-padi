@@ -91,12 +91,18 @@ TRAJECTORY = {
     "puso_nddi_min": 1.25,
     "standing_ndvi_min": 0.25,
     "early_drop_months": 1,
+    # "Gagal tanam?" (stage 10): a never-greened field (rule 6) where most
+    # cropland within neighbour_radius_m did green (peak >= harvest_peak_min):
+    # the area was planted, so this field likely failed rather than lay fallow.
+    "neighbour_radius_m": 300,
+    "neighbour_green_min": 0.5,
 }
 # Extra, non-active stage classes that only exist in series mode
 TRAJECTORY_CLASSES = [
     (6, None, None, "Bera / tidak tumbuh", False),
     (7, None, None, "Panen / pasca-panen", False),
     (9, None, None, "Panen atau puso? (perlu cek)", False),
+    (10, None, None, "Gagal tanam? (perlu cek)", False),
 ]
 
 # --- Field reports back into the pipeline (Stage 3) -------------------------
@@ -121,6 +127,32 @@ FEEDBACK = {
     "stressed_share": 0.25,   # Kuat+Ekstrem share of active rice
     "inactive_share": 0.5,    # bera+panen(+excluded) share of cropland
 }
+# --- Water access / capacity (v2 Phase 3) ------------------------------------
+# Satellite proxy: cropland with a real rice canopy (monthly median NDVI >=
+# ndvi_min) in a month of the deep dry season had water from irrigation, a
+# pump or a well; Aug and Sep 2026 had 16 and 24 mm median rain. Validated per
+# kecamatan against the official 2024 tables (pipeline/irrigation.py).
+WATER_ACCESS = {
+    "months": [("2026-08-01", "2026-09-01"), ("2026-09-01", "2026-10-01")],
+    "ndvi_min": 0.45,
+    # Sensitivity variants reported by water_access.py, not used for scoring
+    "variants": {"Jul-Sep 0.45": ([("2026-07-01", "2026-08-01"), ("2026-08-01", "2026-09-01"),
+                                   ("2026-09-01", "2026-10-01")], 0.45),
+                 "Aug-Sep 0.40": (None, 0.40), "Aug-Sep 0.50": (None, 0.50)},
+}
+
+# Capacity in the ranking (status stays hazard-only):
+#   priority = ha_at_risk x (1 - weight x irrigated_share)
+# Source: official 2024 irrigated share (independent of the satellite data;
+# the NDVI proxy would count the drought evidence twice). Weight provisional:
+# irrigation buffers drought but fails in a long dry season (Sukolilo is 85 %
+# irrigated and still stressed), so it only discounts, never removes, risk.
+CAPACITY = {
+    "weight": 0.3,
+    "irrigated_min": 0.7,   # >= -> water source "irigasi"
+    "rainfed_min": 0.7,     # rainfed share >= -> "tadah hujan"; between -> "campuran"
+}
+
 FEEDBACK_CLASSES = [
     (8, None, None, "Bukan padi (laporan lapangan)", False),
 ]

@@ -52,3 +52,9 @@ def test_map_view_and_agreement():
 def test_check_skips_months_outside_the_window():
     out = feedback.check([rep(1, "ok", period="2025-01")], {}, {})
     assert out["reports"] == [] and out["summary"]["ok"]["n"] == 0
+
+
+def test_failed_planting_check():
+    v = feedback.map_view({"6": 40, "10": 60}, {})
+    assert v["failed_share"] == 0.6 and feedback.agrees("gagal_tanam", v) is True
+    assert feedback.agrees("gagal_tanam", feedback.map_view({"6": 90, "10": 10}, {})) is False

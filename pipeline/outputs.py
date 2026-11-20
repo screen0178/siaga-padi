@@ -24,6 +24,7 @@ from datetime import datetime, timezone
 
 from config import (BOUNDARY_DIR, NDDI_CLASSES, PHENOLOGY_CLASSES, REGION,
                     STATUS_THRESHOLDS, WEB_DATA_DIR)
+import irrigation
 from scoring import score
 
 CONTRACT_VERSION = 1
@@ -33,12 +34,29 @@ def _inf(v):
     return None if v in (float("inf"), float("-inf")) else v
 
 
+def water_info() -> dict[str, dict]:
+    """Official 2024 irrigation figures + the 2026 dry-season satellite proxy."""
+    import csv
+    from config import ROOT
+    out = {kid: {k: r[k] for k in ("irrigated_ha", "rainfed_ha", "sawah_ha", "irrigated_share", "rice3x_share")}
+           for kid, r in irrigation.load().items()}
+    proxy = ROOT / "data" / "irrigation" / "water_access_2026.csv"
+    if proxy.exists():
+        with proxy.open() as f:
+            for r in csv.DictReader(f):
+                if r["kec_id"] in out:
+                    out[r["kec_id"]]["dry_green_share"] = float(r["dry_green_share"])
+    return out
+
+
 def score_period(kec_features: list[dict], stats: dict[str, dict]) -> dict[str, dict]:
     """kec_id -> stats + scoring + rank for one period."""
     out = {}
+    water = irrigation.load()
     for f in kec_features:
         kid = f["properties"]["id"]
         s = stats.get(kid, {})
+        irr = water.get(kid, {}).get("irrigated_share")
         out[kid] = {
             "mean_nddi": s.get("mean_nddi"),
             "mean_ndvi": s.get("mean_ndvi"),
@@ -46,9 +64,10 @@ def score_period(kec_features: list[dict], stats: dict[str, dict]) -> dict[str, 
             "cropland_ha": s.get("cropland_ha"),
             # cropland ha per growth stage incl. non-active (6 bera, 7 panen)
             "cropland_stage_ha": s.get("cropland_stage_ha", {}),
-            **score(s.get("joint_ha", {})),
+            **score(s.get("joint_ha", {}), irr),
         }
-    for i, kid in enumerate(sorted(out, key=lambda k: -out[k]["ha_at_risk"]), 1):
+    # Rank by priority (ha at risk discounted by irrigation capacity)
+    for i, kid in enumerate(sorted(out, key=lambda k: -out[k]["priority"]), 1):
         out[kid]["rank"] = i
     return out
 
@@ -83,9 +102,12 @@ def write_run(*, mode: str, period: dict, source: dict, bounds: list,
 
     current = score_period(kec["features"], stats)
     series = {p["id"]: score_period(kec["features"], p["stats"]) for p in periods or []}
+    water = water_info()
     for f in kec["features"]:
         kid = f["properties"]["id"]
         f["properties"].update(current[kid])
+        if kid in water:
+            f["properties"]["water"] = water[kid]  # static capacity layer (v2 Phase 3)
         if series:
             f["properties"]["series"] = {pid: s[kid] for pid, s in series.items()}
 

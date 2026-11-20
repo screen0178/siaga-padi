@@ -38,7 +38,7 @@ DIST = ROOT / "web" / "dist"
 # Mirrors web/src/workflow.ts
 STEPS = ["open", "proposed", "approved", "sent", "done"]
 STEP_ROLE = {"proposed": "penyuluh", "approved": "dinas", "sent": "penyuluh", "done": "penyuluh"}
-ANSWERS = {"ok", "not_rice", "harvested", "irrigated", "puso"}
+ANSWERS = {"ok", "not_rice", "harvested", "irrigated", "puso", "gagal_tanam"}
 
 Role = Literal["penyuluh", "dinas"]
 

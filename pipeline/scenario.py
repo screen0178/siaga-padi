@@ -42,6 +42,7 @@ import ee
 import numpy as np
 
 import feedback
+import irrigation
 from config import NDDI_CLASSES, SCENARIO, WEB_DATA_DIR
 from gee_export import SCALE, build, load_kecamatan, trajectory_histories
 from scoring import score
@@ -161,7 +162,7 @@ def histograms(fc, L, nddi=None):
     return out
 
 
-def scenarios(hist, maps):
+def scenarios(hist, maps, irrigated_share=None):
     """{N: score dict} for one kecamatan; maps[k] is the NDDI transfer
     function of dry month k + 1. Stage and area held fixed."""
     x0 = LO + BIN * (np.arange(NBINS) + 0.5)  # bin centres
@@ -179,7 +180,7 @@ def scenarios(hist, maps):
                 v = float(ha[cls == c].sum())
                 if v > 0.05:
                     j[f"c{c}s{st}"] = v
-        out[n] = score(j)
+        out[n] = score(j, irrigated_share)
     return out
 
 
@@ -207,10 +208,12 @@ def main():
 
     print(f"Current NDDI histograms ({current}) ...")
     L = Ls[[p["id"] for p in periods].index(current)]
-    per_kec = {kid: scenarios(h, maps) for kid, h in histograms(fc, L).items()}
+    water = irrigation.load()
+    per_kec = {kid: scenarios(h, maps, water.get(kid, {}).get("irrigated_share"))
+               for kid, h in histograms(fc, L).items()}
     n_max = 3 * len(maps)
     for n in range(n_max + 1):  # rank within each scenario
-        order = sorted(per_kec, key=lambda k: -per_kec[k][n]["ha_at_risk"])
+        order = sorted(per_kec, key=lambda k: -per_kec[k][n]["priority"])
         for r, kid in enumerate(order, 1):
             per_kec[kid][n]["rank"] = r
 
