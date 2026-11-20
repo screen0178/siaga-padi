@@ -1,0 +1,64 @@
+{
+ "generated_at": "2026-11-20T07:35:24+00:00",
+ "source": "server/siaga.db",
+ "rules": {
+  "exclude_min_reports": 2,
+  "exclude_share": 0.5,
+  "stressed_share": 0.25,
+  "inactive_share": 0.5
+ },
+ "n_reports": 1,
+ "excluded_desa": [],
+ "check": {
+  "summary": {
+   "ok": {
+    "label": "Sesuai: padi tercekam kering",
+    "n": 1,
+    "agree": 1,
+    "judged": 1
+   },
+   "not_rice": {
+    "label": "Bukan padi",
+    "n": 0,
+    "agree": 0,
+    "judged": 0
+   },
+   "harvested": {
+    "label": "Sudah panen / bera",
+    "n": 0,
+    "agree": 0,
+    "judged": 0
+   },
+   "irrigated": {
+    "label": "Masih teririgasi baik",
+    "n": 0,
+    "agree": 0,
+    "judged": 0
+   },
+   "puso": {
+    "label": "Puso / gagal panen karena kering",
+    "n": 0,
+    "agree": 0,
+    "judged": 0
+   }
+  },
+  "reports": [
+   {
+    "id": 1,
+    "period_id": "2026-11",
+    "kec_id": "id3318060",
+    "desa_id": null,
+    "answer": "ok",
+    "agrees": true,
+    "map": {
+     "cropland_ha": 3763.3,
+     "active_ha": 1868.3,
+     "stressed_share": 0.83,
+     "inactive_share": 0.503,
+     "excluded_ha": 0,
+     "puso_share": 0.437
+    }
+   }
+  ]
+ }
+}
