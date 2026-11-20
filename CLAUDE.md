@@ -67,6 +67,14 @@ Ventusky is only the visual inspiration, not the product.
   Frontend `web/src/workflow.ts` falls back to localStorage when `/api` fails
   (4 s timeout); polls state 15 s, status 60 s. Vite proxies `/api` → :8000.
   No auth: name + role typed by the user.
+- v2 Phase 1 (frontend only): `web/src/fresh.ts` (data-age badge),
+  `web/src/tour.ts` + `tourSteps.ts` (guided tour "Pemandu"), "Hari ini"
+  marker and forecast steps in `timeline.ts`; the what-if lives in a bar
+  above the timeline, started from the detail panel.
+- v2 Phase 3 capacity: `pipeline/irrigation.py` (official 2024 XLSX →
+  `data/irrigation/irigasi_2024_per_kecamatan.csv`), `pipeline/water_access.py`
+  (dry-season satellite proxy, validation only), `scoring.score(..., irrigated_share)`
+  → priority, capacity_factor, water_source; `props.water`.
 - v2 Phase 2 forecast: `pipeline/ml_dataset.py` (EE, desa × Landsat date,
   git-ignored `data/ml/obs_*.csv`, `rain_daily.csv`, `desa_static.csv`),
   `ml_common.py` (features, shared), `ml_train.py` (→ committed
@@ -104,6 +112,11 @@ Ventusky is only the visual inspiration, not the product.
   markers (no glyph server). Both keep the app working offline / sandboxed.
 
 ## Status
+
+v2 roadmap (docs/ROADMAP-v2.md) complete on 2026-11-20, done in the order
+Phase 0 → 3 → 1 → 2 → 4 → 5. Tests: 10 server + 15 pipeline (`pytest server/tests
+pipeline/tests -q`). Field reports so far: 1, so nothing is calibrated from the
+field yet. Entries below are in the order the work happened.
 
 - Stage 0 done: map, 6 layers, ranked action list, detail panel, recommendation,
   WhatsApp text, action workflow + field report form (localStorage only).
@@ -325,31 +338,51 @@ Ventusky is only the visual inspiration, not the product.
 
 ## Next steps
 
-**Active plan: docs/ROADMAP-v2.md (phases 0-5). It supersedes the list below where they overlap.**
+The v2 roadmap is done; these remain, roughly in priority order.
 
-1. Read Adinda (2020) full text (PDF from the user, or once the journal site
-   is fixed) and set `PHENOLOGY_CLASSES` from its table. Sensitivity already
-   tested (see Status).
-2. Calibrate `TRAJECTORY` thresholds with field reports ("Sudah panen / bera"
-   answers); consider 16-day periods so harvest (abrupt) and drought
-   (gradual) can be told apart.
-3. Stage 2 follow-ups: rain from CHIRPS / BMKG stations instead of model
-   points; out-of-sample check of the what-if once the 2027 dry season exists;
-   stage aging in the scenario (vegetative → reproductive).
-4. Stage 3 follow-ups: real login (at least a PIN per role), deploy (one
-   small VM or container with EE service-account credentials), WhatsApp
-   delivery tracking. Once enough "Sudah panen / bera" reports exist, tune
-   `TRAJECTORY` from feedback.json agreement (now reported, not auto-tuned).
-   Stage 4: ML (rice vs dryland from field reports; NDDI forecast).
+1. Field reports are the bottleneck: collect real "Laporan cek lapangan"
+   (≥ 20 per answer type) and then calibrate `TRAJECTORY` thresholds, the
+   puso/gagal-tanam flags, scoring weights and the action-option efficacies
+   from feedback.json agreement (reported, not auto-tuned).
+2. Login (at least a PIN per role) and deployment (one small VM or container
+   with EE service-account credentials; `data/ml/obs_*.csv` must exist on the
+   server for the forecast, rebuilt by `ml_dataset.py`).
+3. Read Adinda (2020) full text and set `PHENOLOGY_CLASSES` from its table
+   (sensitivity already tested, see Status).
+4. Rain from CHIRPS / BMKG stations instead of model points; out-of-sample
+   checks once the 2027 dry season exists (what-if and forecast); stage aging
+   in the scenario; consider 16-day periods to separate harvest from drought.
+5. Forecast in rupiah (needs a forecast of ha at risk, not only Kuat+Ekstrem
+   ha); a rice-vs-dryland classifier from field reports (ESA cropland ≠ sawah);
+   WhatsApp delivery tracking.
+6. Open question: Tambakromo is not the highest mean NDDI in our Aug 2024
+   run (video says it is); likely boundaries or dates, not the method.
 
 ## Known limitations (keep visible in UI and slides)
 
 - ESA cropland ≠ wetland rice; southern Pati may be dryland crops → false drought.
 - Landsat revisit 16 days minus clouds; data always lags reality.
 - Scoring weights and status thresholds are provisional until calibrated.
+- Forecast: trained on single-date stages and observed rain (forecast rain at
+  run time); the wet-season onset after drought is rare in training, so
+  ranges are wide then. It forecasts an NDDI class, not crop loss.
+- Rupiah = production at risk (ha at risk × yield × price), not a loss;
+  option efficacies are assumptions.
+- Anomaly layer: per-date single-date masks from the ML data, a relative
+  signal; November baselines have fewer clear dates.
 
 ## Conventions
 
 - Developer: Python for data/ML, TypeScript for frontend.
 - UI text in Indonesian; code and comments in English.
 - Keep sample-data mode clearly labelled ("DATA SAMPEL" banner).
+- Commit every change; no co-author or attribution lines.
+- Any change that adds a visible feature updates the guided tour
+  (`web/src/tourSteps.ts`) and bumps `SEEN_KEY` in `tour.ts` when the steps
+  change materially.
+- Verify UI changes in the browser, not only with `tsc`: the app's browser
+  pane (map does not load while the pane is hidden; then use headless Chrome
+  `--dump-dom` / `--screenshot`), and phones with `tools/phone_check.py`.
+  Delete any test actions / reviews / reports from `server/siaga.db` after.
+- Every number shown as money or yield cites its source in `config.py` and
+  in the UI, and is shown as a range.
