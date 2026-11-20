@@ -167,6 +167,9 @@ forecast steps in rupiah (the forecast gives Kuat+Ekstrem ha, not ha at risk).
 ---------------------------------------------------------------------------
 ## Phase 5: verification and polish
 
+Status 2026-11-20: 5.1-5.3 done, results in CLAUDE.md. 5.2 uses the ML
+per-date observations (desa layer), not a new per-pixel EE baseline raster.
+
 5.1 Verification panel: forecast skill on the test years, hit/false alarm,
     agreement with field reports (feedback.json), video check (Aug 2024).
 5.2 NDDI anomaly vs the 2013-2025 same-month baseline as an extra layer

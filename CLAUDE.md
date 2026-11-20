@@ -84,6 +84,15 @@ Ventusky is only the visual inspiration, not the product.
   props = current period only. Called at the end of `outputs.write_run` and
   `scenario.py`. Frontend `web/src/impact.ts` (detail section), 
   `web/src/cockpit.ts` ("Dasbor Dinas" dialog, top-bar button, all roles).
+- v2 Phase 5: `pipeline/anomaly.py` (→ `anomaly.json`, desa/kec NDDI z vs
+  the same month 2013–2025 from `data/ml/obs_*.csv`, no EE) and
+  `pipeline/verification.py` (→ `verification.json`, gathers video check from
+  `config.VIDEO_CHECK`, capacity proxy, scenario hindcast, forecast metrics,
+  feedback). Both run in the weekly job. Frontend: map layer "anomaly" is a
+  desa fill driven by feature-state (`api.setDesaValues`), `web/src/verify.ts`
+  (page opened from the freshness badge, cockpit, detail). main.ts split:
+  `util.ts`, `sections.ts`, `tourSteps.ts`, `legend.ts`. Phone check:
+  `tools/phone_check.py` (Chrome DevTools Protocol, 390×844 mobile).
 - Reports → pipeline: `pipeline/feedback.py` (rules in `config.FEEDBACK`).
   gee_export loads reports (server/siaga.db or `--reports csv`), paints
   corrected desa to stage 8 in `build(exclude=)` for all periods, checks
@@ -269,6 +278,26 @@ Ventusky is only the visual inspiration, not the product.
   - Tour now 12 steps (+ "Dampak dan opsi tindakan", + "Dasbor Dinas"),
     seen key `siaga.tour.v3`. Verified in the browser at 1440×900 with a
     test proposal via the API (deleted afterwards); 15 pipeline tests pass.
+- v2 Phase 5 (2026-11-20), verification and polish:
+  - 5.2 anomaly: Jun–Sep 2026 near normal for the season (median desa z
+    +0.2 / +0.3 / −0.0 / +0.3), Oct +0.8 (40 % of desa z > 1), Nov +1.4
+    (69 %): the 2026 drought is unusual because it lasted into Oct–Nov, when
+    rice is normally green. Nov: Winong z +2.2 (NDDI +5.3), Gembong +2.3,
+    Jaken +1.8. Single-date stage masks as in the ML data (relative signal).
+  - 5.1 verification page: video 2/4 matched (Kuat, Cluwak lowest; Normal
+    tiny class, Tambakromo not matched), capacity ρ 0.62 + cropland~sawah r
+    0.97 (scatter), scenario hindcast beats "no change" in all 3 months,
+    forecast −28 % kec error vs persistence, reports 1 (needs ≥ 20).
+  - 5.3 phones: the timeline row (~760 px) made phones zoom the whole page
+    out (innerWidth 768 on a 390 px screen) and the map fit used a 380 px
+    desktop padding (showed the world). Fixed: scrolling timeline/layer rows,
+    caption hidden, bottom-sheet ranking, detail slides up, map padding by
+    width, tour card docks top/bottom away from its target. Checked with
+    tools/phone_check.py (true mobile emulation; the app's pane and plain
+    headless Chrome cannot): width 390, map fits Pati, detail, cockpit, tour.
+    main.ts 1,089 → 878 lines.
+  - Tour key `siaga.tour.v4` (layers step mentions the anomaly layer, summary
+    step the verification page).
 - Aug 2024 video-check run (single period) was done first; its data is in
   git history (commit 1d21c4f), not on disk.
 - Verification vs video (Aug 2024): Kuat 12,637 ha (video ≈ 11,000, OK);

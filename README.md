@@ -36,6 +36,9 @@ pipeline/                 Python: data + scoring (single source of truth)
   ml_train.py             quantile forecast, time split, baselines, model card
   forecast.py             today / +7 / +14 day forecast -> forecast.json
   impact.py               v2 Phase 4: tonnes / rupiah at risk + action options (no Earth Engine)
+  anomaly.py              v2 Phase 5: NDDI vs the same month 2013-2025 per desa (no Earth Engine)
+  verification.py         v2 Phase 5: all checks in one file for the app's verification page
+tools/phone_check.py      phone-size screenshots + overflow report (Chrome DevTools Protocol)
   tests/                  rule tests (no Earth Engine)
   outputs.py              writes the web data contract
 server/                   Stage 3: FastAPI backend (shared action log, field reports, scheduler)
@@ -187,6 +190,11 @@ python -m pytest server/tests -q                     # role / step / conflict ru
    part, delayed planting on rainfed fallow. "Dasbor Dinas" summarises the kabupaten
    and lists cases needing attention with owner and age.
 
+14. Anomaly and verification (v2 Phase 5): each desa's monthly NDDI on active rice
+   vs the same month 2013–2025 (z score) as a map layer; one verification page
+   with the video check, capacity proxy, scenario hindcast, forecast skill and
+   field-report agreement, including the checks that did not pass.
+
 ## Known limitations (state these in the presentation)
 
 - **Growth-stage NDVI thresholds are provisional** (`config.py`; Adinda 2020 full text
@@ -224,8 +232,8 @@ python -m pytest server/tests -q                     # role / step / conflict ru
 | 1 ✅ | Time slider: monthly dry-season series, NDDI trend per kecamatan |
 | 2 ✅ | Rainfall per dasarian + 16-day forecast (Open-Meteo); calibrated what-if "no rain for N dasarian" |
 | 3 ✅ | Backend (FastAPI + SQLite): shared action log with roles, field reports per desa, scheduled pipeline |
-| v2 | Phases 0–4 ✅ (see docs/ROADMAP-v2.md): puso/gagal tanam flags, timeline + tour + freshness, ML forecast with Dinas review, irrigation capacity, tonnes / rupiah + options + Dinas cockpit |
-| next | Phase 5 (verification panel, NDDI anomaly, mobile) |
+| v2 | Phases 0–5 ✅ (see docs/ROADMAP-v2.md): puso/gagal tanam flags, timeline + tour + freshness, ML forecast with Dinas review, irrigation capacity, tonnes / rupiah + options + Dinas cockpit |
+| next | Real field reports → calibration; login; deployment |
 
 ## Sources
 
