@@ -27,7 +27,8 @@ from datetime import date, timedelta
 
 import ee
 
-from config import (BOUNDARY_DIR, DEFAULT_END, DEFAULT_START, MAX_CLOUD_PCT,
+import feedback
+from config import (BOUNDARY_DIR, DEFAULT_END, DEFAULT_START, FEEDBACK_CLASSES, MAX_CLOUD_PCT,
                     NDDI_ABS_GUARD, NDDI_CLASSES, PHENOLOGY_CLASSES, TRAJECTORY,
                     TRAJECTORY_CLASSES, WEB_DATA_DIR)
 from outputs import write_run
@@ -131,10 +132,12 @@ def trajectory_stage(ndvi, history):
     return stage.updateMask(ndvi.mask()).rename("class").toByte()
 
 
-def build(aoi, start, end, history=None):
+def build(aoi, start, end, history=None, exclude=None):
     """history: previous monthly NDVI images (oldest first). When given, the
     growth stage comes from the NDVI trajectory; otherwise from single-date
-    NDVI thresholds (the video's method, used for the Aug 2024 check)."""
+    NDVI thresholds (the video's method, used for the Aug 2024 check).
+    exclude: ee.Geometry of desa that field reports say are not rice; their
+    cropland becomes stage 8 and leaves active rice (feedback.py)."""
     col = landsat(aoi, start, end)
     mosaic = col.map(cloud_mask_l89_toa).median().clip(aoi)
 
@@ -148,6 +151,9 @@ def build(aoi, start, end, history=None):
     cropland = ee.ImageCollection("ESA/WorldCover/v200").first().eq(40)
     stage = (trajectory_stage(ndvi, history) if history else classify(ndvi, PHENOLOGY_CLASSES))
     stage = stage.updateMask(cropland).rename("stage")
+    if exclude is not None:
+        reported = ee.Image(0).paint(exclude, 1)
+        stage = stage.where(reported.eq(1), 8).rename("stage")
     active = stage.gte(2).And(stage.lte(4))
 
     dclass = classify(nddi, NDDI_CLASSES).rename("dclass")
@@ -216,8 +222,9 @@ def export_layers(L, bbox, out):
     region = ee.Geometry.Rectangle(bbox, proj="EPSG:4326", geodesic=False)
 
     class_palette = [c[5].lstrip("#") for c in NDDI_CLASSES]
-    # stages 2..7: veg awal, veg akhir, reproduktif, pematangan, bera, panen
-    stage_palette = ["c7e9a0", "6cc04a", "f2c94c", "a0785a", "5b6170", "d4b483"]
+    # stages 2..8: veg awal, veg akhir, reproduktif, pematangan, bera, panen,
+    # bukan padi (field reports)
+    stage_palette = ["c7e9a0", "6cc04a", "f2c94c", "a0785a", "5b6170", "d4b483", "b07cc6"]
     vis = {
         "nddi_class": L["dclass"].visualize(min=1, max=5, palette=class_palette),
         "nddi": L["nddi"].updateMask(L["active"]).visualize(
@@ -227,7 +234,7 @@ def export_layers(L, bbox, out):
         "ndmi": L["ndmi"].updateMask(L["cropland"]).visualize(
             min=-0.8, max=0.6, palette=["8c3b1a", "e0a050", "f2efc7", "5bb0d9", "1f4e9c"]),
         "stage": L["stage"].updateMask(L["stage"].gte(2)).visualize(
-            min=2, max=7, palette=stage_palette),
+            min=2, max=8, palette=stage_palette),
     }
     for name, img in vis.items():
         url = img.getThumbURL({"region": region, "dimensions": THUMB_PX,
@@ -284,9 +291,26 @@ def trajectory_histories(aoi, plan):
     return [ndvi_by_month[i:i + n_ctx] for i in range(len(plan))]
 
 
-def run_period(fc, aoi, bbox, start, end, layers_out, history=None):
+def desa_fc(desa_ids):
+    """Reported desa as a collection keyed like kecamatan (kec_id = desa id),
+    so zonal_stats can be reused for the report check."""
+    feats = feedback.desa_features()
+    return ee.FeatureCollection([ee.Feature(feats[d]["geometry"], {"kec_id": d})
+                                 for d in sorted(desa_ids) if d in feats])
+
+
+def report_views(L, stats, period_id, reports):
+    """Map view per reported desa and per kecamatan for this period."""
+    mine = [r for r in reports if r["period_id"] == period_id]
+    desa_ids = {r["desa_id"] for r in mine if r["desa_id"]}
+    desa = zonal_stats(desa_fc(desa_ids), L) if desa_ids else {}
+    view = lambda s: feedback.map_view(s.get("cropland_stage_ha", {}), s.get("joint_ha", {}))  # noqa: E731
+    return ({d: view(s) for d, s in desa.items()}, {k: view(s) for k, s in stats.items()})
+
+
+def run_period(fc, aoi, bbox, start, end, layers_out, history=None, exclude=None):
     """Compute one composite: zonal stats + PNG layers. None if no scenes."""
-    L = build(aoi, start, end, history)
+    L = build(aoi, start, end, history, exclude)
     n = L["collection"].size().getInfo()
     if n == 0:
         return None
@@ -296,6 +320,7 @@ def run_period(fc, aoi, bbox, start, end, layers_out, history=None):
     stats = zonal_stats(fc, L)
     print("  raster layers ...")
     export_layers(L, bbox, layers_out)
+    stats["_L"] = L  # popped by the caller for the report check
     source = {"imagery": f"Landsat 8/9 TOA C2, {n} scene, awan <{MAX_CLOUD_PCT}%",
               "scenes": dates,
               "landcover": "ESA WorldCover v200 (peta 2021), kelas 40 Cropland",
@@ -315,12 +340,26 @@ def main():
                          "(operational mode; overrides --series and --start/--end)")
     ap.add_argument("--current", help="period id shown by default (series mode; "
                                       "default: last period with data)")
+    ap.add_argument("--reports", help="field reports CSV (default: server/siaga.db if present)")
     args = ap.parse_args()
 
     ee.Initialize(project=args.project)
     fc = load_kecamatan()
     aoi = fc.geometry()
     bbox = local_bbox()  # [west, south, east, north]
+
+    # Field reports: corrections applied to every period, checks per period
+    reports = feedback.load_reports(args.reports)
+    excluded = feedback.corrections(reports)
+    exclude = feedback.exclusion_geometry(excluded)
+    desa_views, kec_views = {}, {}
+    print(f"{len(reports)} field reports; {len(excluded)} desa corrected to 'bukan padi'"
+          + (f": {', '.join(e['name'] for e in excluded)}" if excluded else ""))
+
+    def take(pid, stats_p):
+        L = stats_p.pop("_L")
+        if reports:
+            desa_views[pid], kec_views[pid] = report_views(L, stats_p, pid, reports)
 
     periods = None
     current_id = None
@@ -331,11 +370,12 @@ def main():
         for (pid, start, end, label), history in zip(plan, histories):
             print(f"{label} ({start} .. {end})")
             layers_dir = f"periods/{pid}/layers"
-            res = run_period(fc, aoi, bbox, start, end, WEB_DATA_DIR / layers_dir, history)
+            res = run_period(fc, aoi, bbox, start, end, WEB_DATA_DIR / layers_dir, history, exclude)
             if res is None:
                 print("  no scenes, skipped")
                 continue
             stats_p, source_p = res
+            take(pid, stats_p)
             periods.append({"id": pid, "start": start, "end": end, "label": label,
                             "layers_dir": layers_dir, "source": source_p, "stats": stats_p})
         if not periods:
@@ -356,10 +396,11 @@ def main():
                 shutil.rmtree(d)
                 print(f"  removed old period {d.name}")
     else:
-        res = run_period(fc, aoi, bbox, args.start, args.end, WEB_DATA_DIR / "layers")
+        res = run_period(fc, aoi, bbox, args.start, args.end, WEB_DATA_DIR / "layers", exclude=exclude)
         if res is None:
             raise SystemExit("No Landsat scenes match; widen --start/--end or the cloud limit.")
         stats, source = res
+        take(args.start[:7], stats)
         period = {"start": args.start, "end": args.end, "label": f"{args.start} s.d. {args.end}"}
 
     layers = [
@@ -376,10 +417,17 @@ def main():
                *(["Fase tumbuh dari lintasan NDVI 4 bulan: lahan yang tidak pernah hijau dihitung "
                   "sebagai bera, yang sudah turun ke tanah terbuka setelah puncak sebagai panen. "
                   "Keduanya tidak dihitung sebagai padi aktif; mohon cek lapangan."] if periods else []),
-               "Lahan pertanian ESA tidak membedakan padi sawah dan palawija."],
+               "Lahan pertanian ESA tidak membedakan padi sawah dan palawija.",
+               *([f"{len(excluded)} desa dikeluarkan dari padi aktif karena laporan lapangan "
+                  f"\"bukan padi\": {', '.join(e['name'] for e in excluded)}."] if excluded else [])],
         periods=periods, current_period=current_id,
-        extra_stage_classes=TRAJECTORY_CLASSES if periods else None,
+        extra_stage_classes=[*(TRAJECTORY_CLASSES if periods else []), *(FEEDBACK_CLASSES if excluded else [])] or None,
     )
+    fb = feedback.write(reports, excluded, feedback.check(reports, desa_views, kec_views),
+                        args.reports or "server/siaga.db")
+    s = fb["check"]["summary"]
+    print("Field report check (map agrees / judged):",
+          ", ".join(f"{v['label']} {v['agree']}/{v['judged']}" for v in s.values() if v["n"]))
     if periods:
         print("\nPeriods:", ", ".join(f"{p['id']} ({len(p['source']['scenes'])} dates)" for p in periods),
               f"| current {current_id}")

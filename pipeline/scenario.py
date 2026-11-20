@@ -41,6 +41,7 @@ from datetime import datetime, timezone
 import ee
 import numpy as np
 
+import feedback
 from config import NDDI_CLASSES, SCENARIO, WEB_DATA_DIR
 from gee_export import SCALE, build, load_kecamatan, trajectory_histories
 from scoring import score
@@ -100,7 +101,11 @@ def transfer(before, after):
 def calibrate(fc, aoi, periods, rain):
     plan = [(p["id"], p["start"], p["end"], p["label"]) for p in periods]
     histories = trajectory_histories(aoi, plan)
-    Ls = [build(aoi, s, e, h) for (_, s, e, _), h in zip(plan, histories)]
+    # Exactly the corrections the export applied (not a fresh read of the
+    # reports, which may have changed since), so N=0 matches the map
+    fb = WEB_DATA_DIR / "feedback.json"
+    exclude = feedback.exclusion_geometry(json.loads(fb.read_text())["excluded_desa"] if fb.exists() else [])
+    Ls = [build(aoi, s, e, h, exclude) for (_, s, e, _), h in zip(plan, histories)]
     dry = []
     for i in range(len(plan) - 1):
         a, b = plan[i][0], plan[i + 1][0]

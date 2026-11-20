@@ -84,6 +84,32 @@ TRAJECTORY_CLASSES = [
     (7, None, None, "Panen / pasca-panen", False),
 ]
 
+# --- Field reports back into the pipeline (Stage 3) -------------------------
+# Officers' "Laporan cek lapangan" (server/siaga.db, or a CSV from
+# /api/reports.csv) correct the map in one way and are checked in another:
+#   correction  a desa with >= exclude_min_reports "Bukan padi" reports that
+#               make up >= exclude_share of its reports is taken out of active
+#               rice for the whole window (land use does not change monthly):
+#               its cropland becomes stage 8. Newer "Sesuai" reports can
+#               undo it. Whole-desa granularity is coarse on purpose: reports
+#               name a desa, not a field polygon.
+#   check       every report is compared with what the map said for that
+#               desa (or kecamatan) in that month, giving agreement rates per
+#               answer. "Sudah panen / bera" agreement is the calibration
+#               signal for TRAJECTORY; it is reported, not auto-tuned, until
+#               there are enough reports.
+FEEDBACK = {
+    "db": ROOT / "server" / "siaga.db",
+    "exclude_min_reports": 2,
+    "exclude_share": 0.5,
+    # What counts as "the map said so" when checking a report
+    "stressed_share": 0.25,   # Kuat+Ekstrem share of active rice
+    "inactive_share": 0.5,    # bera+panen(+excluded) share of cropland
+}
+FEEDBACK_CLASSES = [
+    (8, None, None, "Bukan padi (laporan lapangan)", False),
+]
+
 # --- Impact scoring (rule-based, Stage 0) -----------------------------------
 # Inspired by the H-MHEWS impact index (Susandi et al., 2018): hazard is
 # combined with exposure before a status is assigned. Weights are provisional

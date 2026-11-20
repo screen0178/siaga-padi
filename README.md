@@ -30,6 +30,8 @@ pipeline/                 Python: data + scoring (single source of truth)
   gee_export.py           Stage 0/1: real Landsat NDDI via Earth Engine
   weather.py              Stage 2: Open-Meteo rainfall per dasarian + forecast
   scenario.py             Stage 2: "no rain for N dasarian" what-if (Earth Engine)
+  feedback.py             Stage 3: field reports -> desa corrections + map-vs-report check
+  tests/                  rule tests (no Earth Engine)
   outputs.py              writes the web data contract
 server/                   Stage 3: FastAPI backend (shared action log, field reports, scheduler)
   app.py                  API + serves web/dist and the data contract
@@ -96,8 +98,17 @@ python -m pytest server/tests -q                     # role / step / conflict ru
   only Dinas approves or cancels an approved action. Two people acting on stale views
   get a conflict, not a silent overwrite. Actions are for the current month only;
   past months are read-only history.
-- Field reports carry an optional desa and are exported at `/api/reports.csv`
-  for calibrating the rice mask and `TRAJECTORY` thresholds.
+- Field reports carry an optional desa and are exported at `/api/reports.csv`.
+- **Reports flow back into the pipeline** (`pipeline/feedback.py`, run by every export):
+  - *correction*: a desa with ≥ 2 "Bukan padi" reports that are the majority of its
+    reports is taken out of active rice in every month (stage 8, purple in the stage
+    layer); later "Sesuai" reports undo it;
+  - *check*: each report is compared with the map for that desa (or kecamatan) and
+    month. The app marks each report "peta sesuai / berbeda", and
+    `feedback.json` holds agreement rates per answer, the evidence for tuning
+    `TRAJECTORY` (not auto-tuned yet: too few reports).
+  `python pipeline/feedback.py` is a dry run; `gee_export.py --reports file.csv`
+  uses a CSV export instead of `server/siaga.db`.
 - The scheduler reruns `weather.py` every 6 h and, when `SIAGA_EE_PROJECT` is set,
   `gee_export.py --last-months 6` + `scenario.py` weekly. Open pages see a
   "data baru" prompt. Dinas can trigger a refresh from the user dialog.
@@ -134,6 +145,8 @@ python -m pytest server/tests -q                     # role / step / conflict ru
    A pixel-level Markov chain on classes was tried first and rejected: pixels
    keep the Kuat class only 30–60 % of the time month to month, so the chain
    learned noise and predicted drought would *fall* without rain.
+10. Field reports (Stage 3, `feedback.py`): desa reported "bukan padi" (≥ 2 reports,
+   majority) leave active rice as stage 8; every report is checked against the map.
 
 ## Known limitations (state these in the presentation)
 

@@ -66,6 +66,12 @@ Ventusky is only the visual inspiration, not the product.
   Frontend `web/src/workflow.ts` falls back to localStorage when `/api` fails
   (4 s timeout); polls state 15 s, status 60 s. Vite proxies `/api` → :8000.
   No auth: name + role typed by the user.
+- Reports → pipeline: `pipeline/feedback.py` (rules in `config.FEEDBACK`).
+  gee_export loads reports (server/siaga.db or `--reports csv`), paints
+  corrected desa to stage 8 in `build(exclude=)` for all periods, checks
+  each report against desa/kec stats of its month (`report_views`), writes
+  `feedback.json` (optional contract file). scenario.py reuses the
+  exclusions listed in feedback.json, so N=0 still matches the map.
 - Data files are `.json` (not `.geojson`): the claude.ai preview host refuses `.geojson`.
 - Raster layers are drawn through a MapLibre canvas source; labels are HTML
   markers (no glyph server). Both keep the app working offline / sandboxed.
@@ -110,6 +116,14 @@ Ventusky is only the visual inspiration, not the product.
   pass; verified in the browser (propose → Dinas approve via API → page
   syncs; stale click → 409 + refreshed view; report with desa; Dinas
   "Perbarui sekarang" ran weather.py). Production: FastAPI serves web/dist.
+- Reports into pipeline done (2026-11-20): verified with 5 test reports in
+  Kayen on an Oct–Nov EE run (then restored the committed data, deleted the
+  test reports): Beketel 53.3 of 53.8 ha cropland → stage 8 (border pixels
+  stay), purple only inside Beketel in stage.png; check results ok 1/1,
+  not_rice 2/2, harvested 0/1 (map 16 % inactive), irrigated 0/1. The UI
+  detail panel was checked before the last two text tweaks (tooltip for
+  corrected desa, chip renamed "Sawah tidak aktif"); those were type-checked
+  only. No real reports yet, so committed data has no feedback.json.
 - Aug 2024 video-check run (single period) was done first; its data is in
   git history (commit 1d21c4f), not on disk.
 - Verification vs video (Aug 2024): Kuat 12,637 ha (video ≈ 11,000, OK);
@@ -149,8 +163,8 @@ Ventusky is only the visual inspiration, not the product.
    stage aging in the scenario (vegetative → reproductive).
 5. Stage 3 follow-ups: real login (at least a PIN per role), deploy (one
    small VM or container with EE service-account credentials), WhatsApp
-   delivery tracking. Use field reports to calibrate (feed `/api/reports.csv`
-   into the pipeline: exclude reported non-rice desa, tune `TRAJECTORY`).
+   delivery tracking. Once enough "Sudah panen / bera" reports exist, tune
+   `TRAJECTORY` from feedback.json agreement (now reported, not auto-tuned).
    Stage 4: ML (rice vs dryland from field reports; NDDI forecast).
 
 ## Known limitations (keep visible in UI and slides)

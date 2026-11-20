@@ -110,6 +110,7 @@ export const STAGE_COLOR: Record<string, string> = {
   "5": "#a0785a",
   "6": "#5b6170",
   "7": "#d4b483",
+  "8": "#b07cc6",
 };
 
 // ---------------------------------------------------------------- Stage 2
@@ -167,4 +168,24 @@ export interface Scenario {
   calibration: { rain_max_mm: number; months: ScenarioMonth[] };
   totals: Record<string, { class_ha: Record<string, number>; active_ha: number; ha_at_risk: number }>;
   kecamatan: Record<string, Record<string, ScenarioStats>>;
+}
+
+// ---------------------------------------------------------------- Stage 3
+/** feedback.json (pipeline/feedback.py via gee_export.py), optional. */
+export interface MapView {
+  cropland_ha: number;
+  active_ha: number;
+  stressed_share: number | null;
+  inactive_share: number | null;
+  excluded_ha: number;
+}
+export interface Feedback {
+  generated_at: string;
+  n_reports: number;
+  rules: { exclude_min_reports: number; exclude_share: number; stressed_share: number; inactive_share: number };
+  excluded_desa: { desa_id: string; name: string; kec_id: string; not_rice: number; reports: number }[];
+  check: {
+    summary: Record<string, { label: string; n: number; agree: number; judged: number }>;
+    reports: { id: number; period_id: string; kec_id: string; desa_id: string | null; answer: string; agrees: boolean | null; map: MapView }[];
+  };
 }
