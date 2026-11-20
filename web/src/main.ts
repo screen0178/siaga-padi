@@ -210,7 +210,7 @@ function renderTopbar() {
   const t = meta.totals.class_ha;
   const stressed = (t["4"] ?? 0) + (t["5"] ?? 0);
   const cs = meta.totals.cropland_stage_ha;
-  const inactive = cs && ("6" in cs || "7" in cs || "8" in cs) ? (cs["6"] ?? 0) + (cs["7"] ?? 0) + (cs["8"] ?? 0) : null;
+  const inactive = cs && ["6", "7", "8", "9"].some((k) => k in cs) ? ["6", "7", "8", "9"].reduce((a, k) => a + (cs[k] ?? 0), 0) : null;
   const count = (s: string) => feats.filter((f) => f.properties.status === s).length;
   $("#region").innerHTML = `${esc(meta.region.name)} · ${esc(meta.period.label)}${scenN > 0 ? ` <span class="scen-tag">Skenario: tanpa hujan ${scenN} dasarian</span>` : ""}`;
   $("#summary").innerHTML = `
@@ -254,6 +254,7 @@ function renderRanking() {
           <div class="r-meta"><span><b>${fmt(p.ha_at_risk)}</b> ha berisiko ${deltaHtml(p)}</span>
             <span class="r-step ${st.step}">${stepLabel}</span></div>
           ${p.action ? `<div class="r-act">${esc(p.action.headline)}</div>` : ""}
+          ${verifyHa(p) >= VERIFY_MIN_HA ? `<div class="r-verify" title="Lahan yang turun seperti panen, tetapi ada tanda kekeringan sebelumnya">⚠ ${fmt(verifyHa(p))} ha panen atau puso? perlu cek</div>` : ""}
         </div>
       </li>`;
     })
@@ -265,10 +266,29 @@ function renderRanking() {
 
 // ---------------------------------------------------------------- detail
 /** Sawah not counted as active rice (series mode): fallow and harvested. */
+// ---------------------------------------------------------------- verification (v2 0.2)
+const VERIFY_MIN_HA = 25; // below this a flag is noise on the priority list
+const verifyHa = (p: KecProps) => p.cropland_stage_ha?.["9"] ?? 0;
+
+/** Harvest-like drops that may be drought-killed crops: ask, do not hide. */
+function verifySection(p: KecProps) {
+  const ha = verifyHa(p);
+  if (ha <= 0) return "";
+  const harvested = p.cropland_stage_ha?.["7"] ?? 0;
+  return `
+    <section class="verify">
+      <h3>Perlu verifikasi</h3>
+      <ul class="legend-rows"><li><i style="--c:${STAGE_COLOR["9"]}"></i>Panen atau puso?<span>${fmt(ha)} ha</span></li></ul>
+      <p class="fine">Lahan ini turun seperti panen (${fmt(harvested)} ha lain terlihat panen biasa), tetapi sebelum turun sudah tercekam kuat, atau turunnya terlalu cepat setelah tanam. Bisa panen biasa, bisa juga puso karena kering. Tidak dihitung sebagai padi aktif, jadi tidak masuk peringkat: hanya cek lapangan yang bisa memastikan.</p>
+      <button class="ghost" id="d-verify">Isi laporan cek: panen atau puso?</button>
+    </section>`;
+}
+
 function inactiveSection(p: KecProps) {
   const cs = p.cropland_stage_ha;
   if (!cs || !("6" in cs || "7" in cs || "8" in cs)) return "";
-  const rows = meta.stage_classes.filter((s) => s.id >= 6 && (s.id !== 8 || (cs["8"] ?? 0) > 0));
+  // Stage 9 has its own "Perlu verifikasi" section
+  const rows = meta.stage_classes.filter((s) => s.id >= 6 && s.id !== 9 && (s.id !== 8 || (cs["8"] ?? 0) > 0));
   const ex = fb?.excluded_desa.filter((e) => e.kec_id === p.id) ?? [];
   return `
     <section>
@@ -376,6 +396,7 @@ function renderDetail(p: KecProps, resetScroll = true) {
         .join("")}</ul>
     </section>
 
+    ${verifySection(p)}
     ${inactiveSection(p)}
 
     <section>
@@ -425,6 +446,7 @@ function renderDetail(p: KecProps, resetScroll = true) {
       <h3>Laporan cek lapangan</h3>
       ${reportSummary(reps)}
       <form id="d-fb">
+        <p class="ask">Di lahan yang terlihat panen: <b>panen biasa</b> (pilih "Sudah panen / bera") atau <b>puso</b>?</p>
         ${FEEDBACK.map((o, i) => `<label class="radio"><input type="radio" name="fb" value="${o.id}" ${i === 0 ? "checked" : ""}> ${o.label}</label>`).join("")}
         <select name="desa"><option value="">Desa (opsional)</option>${(desaByKec[p.id] ?? []).map((d) => `<option value="${d.id}">${esc(d.name)}</option>`).join("")}</select>
         <input type="text" name="note" maxlength="1000" placeholder="Catatan (opsional): blok, komoditas, foto…" />
@@ -460,6 +482,13 @@ function renderDetail(p: KecProps, resetScroll = true) {
   if (adv) adv.onclick = () => act(adv, "d-wf-err", () => advance(p.id, actor!));
   const rst = document.getElementById("d-reset") as HTMLButtonElement | null;
   if (rst) rst.onclick = () => act(rst, "d-wf-err", () => resetStep(p.id, actor!));
+  const ver = document.getElementById("d-verify");
+  if (ver) ver.onclick = () => {
+    const f = $("#d-fb") as HTMLFormElement;
+    f.classList.add("ask-puso");
+    f.querySelectorAll<HTMLInputElement>("input[name=fb]").forEach((i) => (i.checked = false));
+    f.scrollIntoView({ behavior: "smooth", block: "center" });
+  };
   const who = document.getElementById("d-who");
   if (who) who.onclick = () => openWho();
   $("#d-copy").onclick = async (ev) => {

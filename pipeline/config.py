@@ -77,11 +77,26 @@ TRAJECTORY = {
     "harvest_drop": 0.25,
     "harvest_ndvi_max": 0.25,
     "trend_eps": 0.05,
+    # "Panen atau puso?" (stage 9): a harvest-like drop that may be a
+    # drought-killed crop. Flagged for a field check instead of silently
+    # leaving active rice. Either rule is enough:
+    #   stressed  NDDI >= puso_nddi_min (Kuat) in a month from the peak on,
+    #             while the crop still stood (NDVI >= standing_ndvi_min).
+    #             Bare months are skipped: bare soil itself reads as very
+    #             high NDDI, so it says nothing about the crop.
+    #   early     the drop came at most early_drop_months after green-up
+    #             (first month with NDVI >= fallow_peak_max after a month
+    #             below it). Monthly composites blur timing by +/- a month,
+    #             so only a drop in the month right after green-up counts.
+    "puso_nddi_min": 1.25,
+    "standing_ndvi_min": 0.25,
+    "early_drop_months": 1,
 }
 # Extra, non-active stage classes that only exist in series mode
 TRAJECTORY_CLASSES = [
     (6, None, None, "Bera / tidak tumbuh", False),
     (7, None, None, "Panen / pasca-panen", False),
+    (9, None, None, "Panen atau puso? (perlu cek)", False),
 ]
 
 # --- Field reports back into the pipeline (Stage 3) -------------------------

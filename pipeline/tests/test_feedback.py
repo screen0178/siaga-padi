@@ -42,6 +42,9 @@ def test_map_view_and_agreement():
     corrected = feedback.map_view({"8": 53.3, "2": 0.5}, {"c4s2": 0.1})
     assert feedback.agrees("not_rice", corrected) is True   # border pixels left
     assert feedback.agrees("not_rice", v) is False
+    drops = feedback.map_view({"7": 30, "9": 70, "2": 10}, {"c2s2": 10})
+    assert drops["puso_share"] == 0.7 and feedback.agrees("puso", drops) is True
+    assert feedback.agrees("puso", feedback.map_view({"2": 5}, {"c2s2": 5})) is None
     empty = feedback.map_view({}, {})
     assert feedback.agrees("ok", empty) is None
 

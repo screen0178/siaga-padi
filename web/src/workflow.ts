@@ -20,6 +20,7 @@ export const FEEDBACK = [
   { id: "not_rice", label: "Bukan padi (jagung/tebu/singkong)" },
   { id: "harvested", label: "Sudah panen / bera" },
   { id: "irrigated", label: "Masih teririgasi baik" },
+  { id: "puso", label: "Puso / gagal panen karena kering" },
 ] as const;
 
 export const feedbackLabel = (id: string) => FEEDBACK.find((f) => f.id === id)?.label ?? id;

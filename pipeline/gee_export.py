@@ -95,24 +95,30 @@ def landsat(aoi, start, end):
 
 
 def month_ndvi(aoi, start, end):
-    """Monthly median NDVI; fully masked if the month has no usable scene."""
+    """Monthly median NDVI and NDDI; fully masked if the month has no usable
+    scene. NDDI is used to tell a harvest from a drought-killed crop."""
     col = landsat(aoi, start, end).map(cloud_mask_l89_toa)
-    empty = ee.Image.constant(0).toFloat().updateMask(0).rename("NDVI")
-    ndvi = col.median().normalizedDifference(["B5", "B4"]).rename("NDVI").toFloat()
-    return ee.Image(ee.Algorithms.If(col.size().gt(0), ndvi, empty))
+    empty = ee.Image.constant([0, 0]).toFloat().updateMask(0).rename(["NDVI", "NDDI"])
+    m = col.median()
+    ndvi = m.normalizedDifference(["B5", "B4"]).rename("NDVI")
+    ndmi = m.normalizedDifference(["B5", "B6"])
+    nddi = m.expression("(V - M) / (V + M)", {"V": ndvi, "M": ndmi}).rename("NDDI")
+    nddi = nddi.updateMask(nddi.abs().lt(NDDI_ABS_GUARD))
+    return ee.Image(ee.Algorithms.If(col.size().gt(0), ndvi.addBands(nddi).toFloat(), empty))
 
 
-def trajectory_stage(ndvi, history):
+def trajectory_stage(ndvi, history, nddi=None):
     """Growth stage from the NDVI trajectory (see config.TRAJECTORY).
-    history: monthly NDVI images before this period, oldest first."""
+    history: monthly NDVI+NDDI images before this period, oldest first."""
     t = TRAJECTORY
-    win = [*history, ndvi.toFloat()]
+    hist_ndvi = [h.select("NDVI") for h in history]
+    win = [*hist_ndvi, ndvi.toFloat()]
     peak = ee.ImageCollection(win).max()
     # Which month held the peak (0 .. len(win)-1)
     peak_idx = ee.ImageCollection(
         [w.addBands(ee.Image.constant(k).toFloat().rename("k")) for k, w in enumerate(win)]
     ).qualityMosaic("NDVI").select("k")
-    prev = history[-1].unmask(ndvi)  # no data last month -> treat as flat
+    prev = hist_ndvi[-1].unmask(ndvi)  # no data last month -> treat as flat
     delta = ndvi.subtract(prev)
     rising = delta.gte(t["trend_eps"])
     falling = delta.lte(-t["trend_eps"]).And(peak.gte(t["harvest_peak_min"]))
@@ -126,7 +132,25 @@ def trajectory_stage(ndvi, history):
                  .And(peak_idx.lt(len(win) - 1))
                  .And(ndvi.lte(peak.subtract(t["harvest_drop"])))
                  .And(ndvi.lt(t["harvest_ndvi_max"])))
+    # Panen atau puso? Harvest-like drops with signs of drought before them
+    win_nddi = [*(h.select("NDDI") for h in history), (nddi if nddi is not None else ndvi.multiply(0)).toFloat()]
+    stressed = ee.Image(0)
+    for k, (v, d) in enumerate(zip(win, win_nddi)):
+        cond = (peak_idx.lte(k).And(v.gte(t["standing_ndvi_min"]))
+                .And(d.gte(t["puso_nddi_min"])))
+        stressed = stressed.Or(cond.unmask(0))
+    # Green-up month: first month at/above the fallow line after one below it
+    greenup = ee.Image(99)
+    dropped = ee.Image(99)
+    for k in range(len(win) - 1, 0, -1):
+        up = win[k].gte(t["fallow_peak_max"]).And(win[k - 1].lt(t["fallow_peak_max"])).unmask(0)
+        greenup = greenup.where(up, k)
+    for k in range(len(win) - 1, 0, -1):
+        down = peak_idx.lt(k).And(win[k].lt(t["harvest_ndvi_max"])).unmask(0)
+        dropped = dropped.where(down, k)
+    early = dropped.subtract(greenup).lte(t["early_drop_months"]).And(greenup.lt(99))
     stage = (stage.where(harvested, 7)
+             .where(harvested.And(stressed.Or(early)), 9)
              .where(peak.lt(t["fallow_peak_max"]), 6)
              .where(ndvi.lt(-0.03), 1))  # open water / flooded, as in single-date mode
     return stage.updateMask(ndvi.mask()).rename("class").toByte()
@@ -149,7 +173,7 @@ def build(aoi, start, end, history=None, exclude=None):
     nddi = nddi.updateMask(nddi.abs().lt(NDDI_ABS_GUARD))  # null guard
 
     cropland = ee.ImageCollection("ESA/WorldCover/v200").first().eq(40)
-    stage = (trajectory_stage(ndvi, history) if history else classify(ndvi, PHENOLOGY_CLASSES))
+    stage = (trajectory_stage(ndvi, history, nddi) if history else classify(ndvi, PHENOLOGY_CLASSES))
     stage = stage.updateMask(cropland).rename("stage")
     if exclude is not None:
         reported = ee.Image(0).paint(exclude, 1)
@@ -222,9 +246,9 @@ def export_layers(L, bbox, out):
     region = ee.Geometry.Rectangle(bbox, proj="EPSG:4326", geodesic=False)
 
     class_palette = [c[5].lstrip("#") for c in NDDI_CLASSES]
-    # stages 2..8: veg awal, veg akhir, reproduktif, pematangan, bera, panen,
-    # bukan padi (field reports)
-    stage_palette = ["c7e9a0", "6cc04a", "f2c94c", "a0785a", "5b6170", "d4b483", "b07cc6"]
+    # stages 2..9: veg awal, veg akhir, reproduktif, pematangan, bera, panen,
+    # bukan padi (field reports), panen atau puso?
+    stage_palette = ["c7e9a0", "6cc04a", "f2c94c", "a0785a", "5b6170", "d4b483", "b07cc6", "e0602b"]
     vis = {
         "nddi_class": L["dclass"].visualize(min=1, max=5, palette=class_palette),
         "nddi": L["nddi"].updateMask(L["active"]).visualize(
@@ -234,7 +258,7 @@ def export_layers(L, bbox, out):
         "ndmi": L["ndmi"].updateMask(L["cropland"]).visualize(
             min=-0.8, max=0.6, palette=["8c3b1a", "e0a050", "f2efc7", "5bb0d9", "1f4e9c"]),
         "stage": L["stage"].updateMask(L["stage"].gte(2)).visualize(
-            min=2, max=8, palette=stage_palette),
+            min=2, max=9, palette=stage_palette),
     }
     for name, img in vis.items():
         url = img.getThumbURL({"region": region, "dimensions": THUMB_PX,

@@ -305,3 +305,8 @@ body.scen-on #rank-list { background: repeating-linear-gradient(135deg, transpar
 .chk.ok { color: #3fb27f; border-color: rgba(63, 178, 127, 0.4); }
 .chk.no { color: #f2a33a; border-color: rgba(242, 163, 58, 0.4); }
 .chk.wait { font-style: italic; }
+/* v2 0.2: panen atau puso? */
+.r-verify { font-size: 11px; color: #f0a07a; margin-top: 3px; }
+section.verify { border-left: 3px solid #e0602b; padding-left: 10px; }
+#d-fb .ask { display: none; font-size: 12px; margin: 0 0 4px; color: #f0a07a; }
+#d-fb.ask-puso .ask { display: block; }

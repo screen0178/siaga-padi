@@ -24,6 +24,7 @@ ANSWER_LABEL = {
     "not_rice": "Bukan padi",
     "harvested": "Sudah panen / bera",
     "irrigated": "Masih teririgasi baik",
+    "puso": "Puso / gagal panen karena kering",
 }
 
 
@@ -91,13 +92,16 @@ def map_view(stage_ha: dict, joint_ha: dict) -> dict:
     crop = sum(stage_ha.values()) or 0.0
     active = sum(joint_ha.values()) or 0.0
     stressed = sum(v for k, v in joint_ha.items() if k[1] in "45")
-    inactive = sum(stage_ha.get(k, 0) for k in ("6", "7", "8"))
+    inactive = sum(stage_ha.get(k, 0) for k in ("6", "7", "8", "9"))
+    dropped = stage_ha.get("7", 0) + stage_ha.get("9", 0)
     return {
         "cropland_ha": round(crop, 1),
         "active_ha": round(active, 1),
         "stressed_share": round(stressed / active, 3) if active else None,
         "inactive_share": round(inactive / crop, 3) if crop else None,
         "excluded_ha": round(stage_ha.get("8", 0), 1),
+        # Of the harvest-like drops, the share the map flagged "panen atau puso?"
+        "puso_share": round(stage_ha.get("9", 0) / dropped, 3) if dropped else None,
     }
 
 
@@ -108,6 +112,9 @@ def agrees(answer: str, view: dict) -> bool | None:
         return None if s is None else s >= FEEDBACK["stressed_share"]
     if answer == "harvested":     # map should call it inactive (bera / panen)
         return None if i is None else i >= FEEDBACK["inactive_share"]
+    if answer == "puso":          # map should have flagged the drop as possible puso
+        p = view.get("puso_share")
+        return None if p is None else p >= 0.5
     if answer == "irrigated":     # map should NOT show stress
         return None if s is None else s < FEEDBACK["stressed_share"]
     if answer == "not_rice":      # right once corrected (border pixels may stay)
