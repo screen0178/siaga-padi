@@ -122,6 +122,9 @@ irrigation layer).
 ---------------------------------------------------------------------------
 ## Phase 3: irrigation capacity (risk = hazard x vulnerability / capacity)
 
+Status 2026-11-20: 3.1, 3.2, 3.3 done (except the ML feature, which waits for
+Phase 2), plus stage 10 from 0.2. Results in CLAUDE.md.
+
 3.1 Ingest official stats (data/irrigation/): sawah irigasi and sawah tadah
     hujan per kecamatan, 2024 XLSX from opendata.patikab.go.id (user
     downloads; 2022 totals already in sawah_irigasi_2022_per_kecamatan.csv).

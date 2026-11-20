@@ -148,6 +148,11 @@ python -m pytest server/tests -q                     # role / step / conflict ru
    A pixel-level Markov chain on classes was tried first and rejected: pixels
    keep the Kuat class only 30–60 % of the time month to month, so the chain
    learned noise and predicted drought would *fall* without rain.
+11. Irrigation capacity (v2 Phase 3): official 2024 irrigated / rainfed sawah per
+   kecamatan (`irrigation.py`), validated against a dry-season satellite proxy
+   (`water_access.py`, Spearman 0.62–0.67). Ranking = ha at risk × (1 − 0.3 ×
+   irrigated share); recommendations split by water source. Never-greened land
+   surrounded by green fields is flagged *gagal tanam? (perlu cek)*.
 10. Field reports (Stage 3, `feedback.py`): desa reported "bukan padi" (≥ 2 reports,
    majority) leave active rice as stage 8; every report is checked against the map.
 

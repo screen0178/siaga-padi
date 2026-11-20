@@ -146,6 +146,36 @@ Ventusky is only the visual inspiration, not the product.
     Stage 10 "gagal tanam?" waits for the Phase 3 irrigation layer.
   - Browser: priority-list badges verified; the detail section was only
     type-checked (pane hidden, map never loaded).
+- v2 Phase 3 (2026-11-20), irrigation capacity:
+  - 3.1 `pipeline/irrigation.py` parses the 2024 XLSX (user-downloaded) into
+    `data/irrigation/irigasi_2024_per_kecamatan.csv`; totals match the tables
+    (35,408.3 ha irrigated, 21,976.2 rainfed). Most rainfed: Pucakwangi 92 %,
+    Batangan 89 %, Jaken 86 %. Sukolilo (85 % irrigated) and Kayen (72 %)
+    grow 0 % rice 3x/year: "irrigated" ≠ dry-season water.
+  - 3.2 `pipeline/water_access.py`: share of ESA cropland with NDVI ≥ 0.45 in
+    Aug or Sep 2026 (rule fixed before validation). Spearman vs official
+    irrigated share 0.62, vs rice-3x share 0.67; variants (Jul–Sep, 0.40,
+    0.50) 0.60–0.74. Also ESA cropland vs official sawah per kec r = 0.97,
+    totals 59.3k vs 57.4k ha: the cropland mask matches sawah at kec level.
+  - 3.3 scoring: priority = ha_at_risk × (1 − 0.3 × official irrigated share);
+    status unchanged. Official share, not the proxy, because the proxy comes
+    from the same NDVI as the hazard (double counting). Nov ranking: Kayen,
+    Jaken (3→2), Tambakromo (5→3), Gabus, Sukolilo (2→5), Pucakwangi (8→6).
+    Recommendation water steps by source (irigasi: gilir air / P3A;
+    tadah hujan: pompa sumur dangkal / embung, tunda tanam, genjah;
+    campuran: both, labelled by block). Detail panel "Kapasitas air".
+  - Stage 10 "gagal tanam?": rule 6 (never greened) where ≥ 50 % of cropland
+    within 300 m greened (peak ≥ 0.45). Re-export: 6+10 = old 6 every month;
+    active, Kuat+Ekstrem, scenario totals unchanged. Small: Nov 518 ha (2 % of
+    never-green), Oct 1.1k (14 %). Mostly isolated fields in the irrigated
+    north (Tayu 41 %, Gunung Wungkal 50 %); ~0 in the dry SE because whole
+    areas never greened, so there are no green neighbours. It catches single
+    failed fields, not area-wide failure; Nov bera in rainfed areas is
+    expected anyway (planting waits for rain).
+  - New report answer "Gagal tanam / bibit mati karena kering"; 20 tests.
+  - Verified with headless Chrome (`--dump-dom` / `--screenshot` with
+    swiftshader), which works while the app's browser pane is hidden;
+    renders sometimes time out before the map loads, just rerun.
 - Aug 2024 video-check run (single period) was done first; its data is in
   git history (commit 1d21c4f), not on disk.
 - Verification vs video (Aug 2024): Kuat 12,637 ha (video ≈ 11,000, OK);
