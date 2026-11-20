@@ -143,4 +143,7 @@ def write_run(*, mode: str, period: dict, source: dict, bounds: list,
     (WEB_DATA_DIR / "kecamatan.json").write_text(json.dumps(kec))
     # Village outlines double as the offline basemap
     (WEB_DATA_DIR / "desa.json").write_text((BOUNDARY_DIR / "pati_desa.geojson").read_text())
+    # v2 Phase 4: tonnes / rupiah and action options, added to the files just written
+    import impact
+    meta, _ = impact.annotate()
     return meta

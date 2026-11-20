@@ -253,6 +253,8 @@ def main():
         "kecamatan": {kid: {str(n): s for n, s in sc.items()} for kid, sc in per_kec.items()},
     }
     (WEB_DATA_DIR / "scenario.json").write_text(json.dumps(out, indent=1))
+    import impact
+    impact.annotate()  # tonnes / rupiah per scenario step (v2 Phase 4)
 
     for k, d in enumerate(dry, 1):
         print(f"\nDry month {k}: {d['pair']} (median rain {d['rain_mm']} mm); per-kec hindcast "

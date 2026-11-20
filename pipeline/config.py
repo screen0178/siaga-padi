@@ -195,3 +195,39 @@ SCENARIO = {
     "calib_max_month_mm": 40,  # month counts as "no rain" below this total
     # slider range = 3 dasarian per dry month found in the series
 }
+
+# --- Impact in tonnes and rupiah (v2 Phase 4) ---------------------------------
+# Production at risk = ha at risk x yield. ha at risk already weighs each
+# hectare by drought class (CLASS_HAZARD) and growth-stage vulnerability, so it
+# is read as "hectare-equivalents of lost harvest": an expected-loss proxy, not
+# an observed loss. Always shown as a range, never as one exact number.
+IMPACT = {
+    # BPS Provinsi Jawa Tengah, "Luas Panen, Produktivitas, dan Produksi Padi
+    # menurut Kabupaten/Kota, 2024": Pati 54.63 ku/ha GKG (96,537 ha, 527,355 t).
+    "yield_t_ha": 5.463,
+    "yield_source": "BPS Jawa Tengah 2024: produktivitas padi Kab. Pati 54,63 ku/ha GKG",
+    # Season and field variation around the annual mean (assumption)
+    "yield_factor": (0.9, 1.1),
+    # GKG price, Rp/kg. Low: HPP GKG at the mill Rp 8,000 (Keputusan Kepala
+    # Bapanas No. 2/2025; HPP kept for 2026 by Inpres No. 4/2026). High: the
+    # market premium seen for GKP in 2026 (~Rp 7,000 vs HPP Rp 6,500, Bapanas
+    # July 2026) applied to GKG: 8,000 x 7,000 / 6,500 ~ Rp 8,600 (assumption).
+    "price_rp_kg": (8000, 8600),
+    "price_source": "HPP GKG Rp 8.000/kg (Kepbadan 2/2025, Inpres 4/2026); harga pasar 2026 ±8% di atas HPP",
+}
+
+# Action options with an estimated effect (v2 Phase 4). Simple, documented,
+# provisional assumptions; the UI shows them as ranges with these notes.
+ACTION_OPTIONS = {
+    # Pompanisasi: a 4-inch pump waters ~10 ha from one spot, ~30 ha when moved
+    # between blocks (Kementan pump aid, Indramayu, Mar 2024). Targets stressed
+    # (Kuat+Ekstrem) late-vegetative and reproductive rice on the rainfed part.
+    "pump": {"ha_per_pump": (10, 30), "efficacy": (0.5, 0.8), "stages": ["3", "4"]},
+    # Gilir air / P3A: redistributes limited canal water on the irrigated part;
+    # recovers less than added water (assumption).
+    "rotation": {"efficacy": (0.2, 0.4), "stages": ["2", "3", "4"]},
+    # Tunda tanam + varietas genjah on fallow / not-yet-planted rainfed land:
+    # avoids a failed planting; no rupiah estimate (nothing is planted yet).
+    "delay": {"stages": ["6", "10"]},
+    "min_ha": 25,  # options below this many target ha are not shown
+}
