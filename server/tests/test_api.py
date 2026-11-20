@@ -86,3 +86,29 @@ def test_status_and_refresh_gate():
 
 def test_serves_data_contract():
     assert c.get("/data/meta.json").json()["contract_version"] == 1
+
+
+def test_simultaneous_identical_steps_get_one_200_one_409(monkeypatch):
+    """Two officers click 'Diusulkan' at the same moment. Widen the window
+    between reading the current step and writing so the race is certain."""
+    import threading
+    import time
+
+    from server.app import store
+
+    k = sorted(kec_ids())[3]
+    real = store.current_step
+
+    def slow(c, period_id, kec_id):
+        s = real(c, period_id, kec_id)
+        time.sleep(0.3)
+        return s
+
+    monkeypatch.setattr(store, "current_step", slow)
+    codes = []
+    t = [threading.Thread(target=lambda: codes.append(step("open", "proposed", PENY, kec=k).status_code))
+         for _ in range(2)]
+    [x.start() for x in t]
+    [x.join() for x in t]
+    assert sorted(codes) == [200, 409]
+    assert [e["step"] for e in c.get("/api/state").json()["kecamatan"][k]["log"]] == ["proposed"]

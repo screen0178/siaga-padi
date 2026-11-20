@@ -153,17 +153,16 @@ Ventusky is only the visual inspiration, not the product.
 
 **Active plan: docs/ROADMAP-v2.md (phases 0-5). It supersedes the list below where they overlap.**
 
-1. Show limitations in the UI: `meta.notes` exists but is not rendered yet.
-2. Read Adinda (2020) full text (PDF from the user, or once the journal site
+1. Read Adinda (2020) full text (PDF from the user, or once the journal site
    is fixed) and set `PHENOLOGY_CLASSES` from its table. Sensitivity already
    tested (see Status).
-3. Calibrate `TRAJECTORY` thresholds with field reports ("Sudah panen / bera"
+2. Calibrate `TRAJECTORY` thresholds with field reports ("Sudah panen / bera"
    answers); consider 16-day periods so harvest (abrupt) and drought
    (gradual) can be told apart.
-4. Stage 2 follow-ups: rain from CHIRPS / BMKG stations instead of model
+3. Stage 2 follow-ups: rain from CHIRPS / BMKG stations instead of model
    points; out-of-sample check of the what-if once the 2027 dry season exists;
    stage aging in the scenario (vegetative → reproductive).
-5. Stage 3 follow-ups: real login (at least a PIN per role), deploy (one
+4. Stage 3 follow-ups: real login (at least a PIN per role), deploy (one
    small VM or container with EE service-account credentials), WhatsApp
    delivery tracking. Once enough "Sudah panen / bera" reports exist, tune
    `TRAJECTORY` from feedback.json agreement (now reported, not auto-tuned).

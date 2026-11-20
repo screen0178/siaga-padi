@@ -165,7 +165,7 @@ def take_step(body: StepIn):
     check_current(body.period_id)
     if body.to_step not in STEP_ROLE:
         raise HTTPException(422, f"langkah tidak dikenal: {body.to_step}")
-    with store.conn() as c:
+    with store.conn(write=True) as c:
         cur = store.current_step(c, body.period_id, body.kec_id)
         if cur != body.from_step:
             raise HTTPException(409, f"status sudah berubah menjadi '{cur}' oleh pengguna lain")
@@ -183,7 +183,7 @@ def take_step(body: StepIn):
 def reset(body: ResetIn):
     check_kec(body.kec_id)
     check_current(body.period_id)
-    with store.conn() as c:
+    with store.conn(write=True) as c:
         cur = store.current_step(c, body.period_id, body.kec_id)
         if cur == "open":
             raise HTTPException(409, "belum ada tindakan untuk diatur ulang")

@@ -55,20 +55,34 @@ def now() -> str:
 class Store:
     def __init__(self, path):
         self.path = str(path)
-        with self.conn() as c:
-            c.executescript(SCHEMA)
+        c = sqlite3.connect(self.path, timeout=10)
+        try:
+            c.executescript(SCHEMA)  # commits on its own
+        finally:
+            c.close()
+        with self.conn(write=True) as c:
             # A server killed mid-run leaves 'running' rows behind
             c.execute("UPDATE runs SET status='failed', finished_at=?, log_tail=coalesce(log_tail,'') || "
                       "'\n[server restarted during run]' WHERE status='running'", (now(),))
 
     @contextmanager
-    def conn(self):
-        c = sqlite3.connect(self.path, timeout=10)
+    def conn(self, write=False):
+        """write=True takes the write lock up front (BEGIN IMMEDIATE), so a
+        check-then-insert (read the current step, then add the next one) is
+        atomic: a second writer waits here and then sees the first one's row.
+        Python's default only begins the transaction at the INSERT, which let
+        two simultaneous clicks both pass the check."""
+        c = sqlite3.connect(self.path, timeout=10, isolation_level=None)
         c.row_factory = sqlite3.Row
-        c.execute("PRAGMA journal_mode=WAL")
         try:
-            with c:  # commit or roll back
+            c.execute("PRAGMA journal_mode=WAL")
+            c.execute("BEGIN IMMEDIATE" if write else "BEGIN")
+            try:
                 yield c
+            except BaseException:
+                c.execute("ROLLBACK")
+                raise
+            c.execute("COMMIT")
         finally:
             c.close()
 
