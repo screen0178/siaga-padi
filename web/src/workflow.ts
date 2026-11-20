@@ -230,7 +230,7 @@ export interface JobStatus {
   next_due: string | null;
 }
 export interface ServerStatus {
-  data: { meta: string | null; weather: string | null; scenario: string | null };
+  data: { meta: string | null; weather: string | null; scenario: string | null; forecast?: string | null };
   current_period: string;
   scheduler: boolean;
   jobs: Record<string, JobStatus>;
@@ -238,3 +238,24 @@ export interface ServerStatus {
 
 export const serverStatus = () => call<ServerStatus>("/status");
 export const requestRefresh = (job: "weather" | "full", actor: Actor) => call("/refresh", { job, actor });
+
+// ---------------------------------------------------------------- forecast review (v2 Phase 2)
+export interface Review {
+  kec_id: string;
+  verdict: "accept" | "reject";
+  note: string | null;
+  actor: string;
+  created_at: string;
+}
+/** Latest Dinas review per kecamatan for the forecast generated at `forecastAt`; {} without a server. */
+export async function getReviews(forecastAt: string): Promise<Record<string, Review>> {
+  if (getMode() !== "server") return {};
+  try {
+    const r = await call<{ forecast_at: string; reviews: Record<string, Review> }>("/forecast/reviews", undefined, 4000);
+    return r.forecast_at === forecastAt ? r.reviews : {};
+  } catch {
+    return {};
+  }
+}
+export const reviewForecast = (kecId: string, forecastAt: string, verdict: "accept" | "reject", note: string, actor: Actor) =>
+  call<Review>("/forecast/reviews", { kec_id: kecId, forecast_at: forecastAt, verdict, note: note || null, actor });

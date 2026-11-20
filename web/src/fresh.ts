@@ -1,6 +1,6 @@
 // v2 1.3: how old is each input? Satellite data always lags, so the age of the
 // latest scene is shown next to "today" everywhere it matters.
-import type { Meta, Weather } from "./types";
+import type { Forecast, Meta, Weather } from "./types";
 
 export type Level = "ok" | "old" | "stale";
 
@@ -40,7 +40,7 @@ function agoHours(h: number) {
 
 export interface Fresh { key: string; label: string; value: string; level: Level; title: string }
 
-export function freshness(meta: Meta, weather: Weather | null): Fresh[] {
+export function freshness(meta: Meta, weather: Weather | null, forecast: Forecast | null = null): Fresh[] {
   const out: Fresh[] = [];
   const s = latestScene(meta);
   if (s) {
@@ -55,6 +55,13 @@ export function freshness(meta: Meta, weather: Weather | null): Fresh[] {
     out.push({
       key: "rain", label: "Hujan", value: agoHours(h).replace(" lalu", ""), level: rainLevel(h),
       title: `Data hujan (${weather.source}) diperbarui ${agoHours(h)}. Hijau ≤ 12 jam, kuning ≤ 36 jam, merah lebih lama.`,
+    });
+  }
+  if (forecast) {
+    const h = hoursSince(forecast.generated_at);
+    out.push({
+      key: "forecast", label: "Model", value: agoHours(h).replace(" lalu", ""), level: rainLevel(h),
+      title: `Prakiraan model dihitung ${agoHours(h)} (dijalankan setelah data hujan diperbarui), dari citra sampai ${forecast.latest_obs ? dayMonth(forecast.latest_obs) : "-"}.`,
     });
   }
   return out;

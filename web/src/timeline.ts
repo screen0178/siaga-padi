@@ -27,34 +27,56 @@ export function renderStrip(
   onPick: (id: string) => void,
   onPlay: () => void,
   playing: boolean,
-  now?: { today: string; scene: string | null; days: number | null; level: string; onPick: () => void },
+  now?: {
+    today: string; scene: string | null; days: number | null; level: string; onPick: () => void;
+    /** v2 Phase 2: model steps; "now" is the Hari ini button itself. */
+    forecast?: { steps: { id: string; label: string; date: string; ha: [number, number, number] }[]; selected: string | null; onPick: (id: string) => void };
+  },
 ) {
   const periods = meta.periods!;
   const kuatColor = meta.nddi_classes.find((c) => c.id === 4)?.color ?? "#e8553d";
   const ekstColor = meta.nddi_classes.find((c) => c.id === 5)?.color ?? "#8b0a1a";
-  const max = Math.max(1, ...periods.map((p) => stressedHa(p.totals.class_ha)));
+  const fc = now?.forecast;
+  const fcSel = fc?.selected ? fc.steps.find((x) => x.id === fc.selected) : undefined;
+  const max = Math.max(1, ...periods.map((p) => stressedHa(p.totals.class_ha)), ...(fc?.steps.map((x) => x.ha[1]) ?? []));
   el.innerHTML = `
     <button class="tl-play" aria-label="${playing ? "Jeda" : "Putar"}" title="${playing ? "Jeda" : "Putar urutan bulan"}">${playing ? "❚❚" : "▶"}</button>
     <div class="tl-periods" role="radiogroup" aria-label="Periode">${periods
       .map((p) => {
         const k = p.totals.class_ha["4"] ?? 0, e = p.totals.class_ha["5"] ?? 0;
-        return `<button class="tl-p ${p.id === selected ? "on" : ""}" data-id="${p.id}" role="radio" aria-checked="${p.id === selected}"
+        return `<button class="tl-p ${p.id === selected && !fcSel ? "on" : ""}" data-id="${p.id}" role="radio" aria-checked="${p.id === selected}"
             aria-label="${p.label}: ${fmt(k + e)} ha cekaman kuat–ekstrem">
           <span class="tl-bar"><i style="height:${(100 * e) / max}%;background:${ekstColor}"></i><i style="height:${(100 * k) / max}%;background:${kuatColor}"></i></span>
           <span class="tl-l">${shortLabel(p)}</span>
         </button>`;
       })
       .join("")}</div>
-    ${now ? `<button class="tl-now ${now.level}" title="Data terbaru selalu tertinggal dari hari ini: peta bulan berjalan memakai citra sampai ${now.scene ? dayMonth(now.scene) : "-"}. Klik untuk melihat bulan berjalan.">
-      <span class="tl-now-k">Hari ini</span><b>${dayMonth(now.today)}</b>
+    ${now ? `<button class="tl-now ${now.level} ${fc && fc.selected === "now" ? "on" : ""}" title="${fc
+      ? `Prakiraan model untuk hari ini (nowcast): citra terakhir ${now.scene ? dayMonth(now.scene) : "-"} diproyeksikan ke hari ini dengan hujan sejak itu.`
+      : `Data terbaru selalu tertinggal dari hari ini: peta bulan berjalan memakai citra sampai ${now.scene ? dayMonth(now.scene) : "-"}. Klik untuk melihat bulan berjalan.`}">
+      <span class="tl-now-k">Hari ini${fc ? " · model" : ""}</span><b>${dayMonth(now.today)}</b>
       <small>${now.scene ? `citra terakhir ${dayMonth(now.scene)}${now.days ? `, ${now.days} hari lalu` : ""}` : "belum ada citra"}</small></button>` : ""}
-    <div class="tl-cap"><b>${periods.find((p) => p.id === selected)?.label ?? ""}</b><span>ha cekaman kuat–ekstrem per bulan</span></div>
+    ${fc ? `<div class="tl-fc" role="radiogroup" aria-label="Prakiraan">${fc.steps.filter((st) => st.id !== "now")
+      .map((st) => `<button class="tl-p fc ${st.id === fc.selected ? "on" : ""}" data-fc="${st.id}" role="radio" aria-checked="${st.id === fc.selected}"
+          aria-label="Prakiraan ${st.label}: ${fmt(st.ha[1])} ha cekaman kuat–ekstrem">
+          <span class="tl-bar"><i class="hatch" style="height:${(100 * Math.min(st.ha[1], max)) / max}%"></i></span>
+          <span class="tl-l">${st.label.replace(" hari", "h")}</span></button>`).join("")}</div>` : ""}
+    <div class="tl-cap">${fcSel
+      ? `<b>Prakiraan ${dayMonth(fcSel.date)}</b><span>${fmt(fcSel.ha[1])} ha (${fmt(fcSel.ha[0])}–${fmt(fcSel.ha[2])}) kuat–ekstrem · model</span>`
+      : `<b>${periods.find((p) => p.id === selected)?.label ?? ""}</b><span>ha cekaman kuat–ekstrem per bulan</span>`}</div>
     <div class="tl-tip" hidden></div>`;
   const tip = el.querySelector<HTMLElement>(".tl-tip")!;
   el.querySelector<HTMLButtonElement>(".tl-play")!.onclick = onPlay;
   const nowBtn = el.querySelector<HTMLButtonElement>(".tl-now");
-  if (nowBtn && now) nowBtn.onclick = now.onPick;
-  el.querySelectorAll<HTMLButtonElement>(".tl-p").forEach((b) => {
+  if (nowBtn && now) nowBtn.onclick = fc ? () => fc.onPick("now") : now.onPick;
+  el.querySelectorAll<HTMLButtonElement>(".tl-p.fc").forEach((b) => {
+    const st = fc!.steps.find((x) => x.id === b.dataset.fc)!;
+    b.onclick = () => fc!.onPick(st.id);
+    b.onmouseenter = () => tipAt(tip, el, b.getBoundingClientRect(),
+      `<b>Prakiraan ${st.label} (${dayMonth(st.date)})</b><br>Kuat–ekstrem ${fmt(st.ha[1])} ha<br>kisaran P10–P90 ${fmt(st.ha[0])}–${fmt(st.ha[2])} ha`);
+    b.onmouseleave = () => (tip.hidden = true);
+  });
+  el.querySelectorAll<HTMLButtonElement>(".tl-periods .tl-p").forEach((b) => {
     const p = periods.find((x) => x.id === b.dataset.id)!;
     b.onclick = () => onPick(p.id);
     b.onmouseenter = () => {

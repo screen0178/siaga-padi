@@ -1,15 +1,16 @@
 import "./style.css";
 import { createMap, type MapApi } from "./map";
+import { forecastCard, forecastSentence, modelPage, tgl } from "./forecast";
 import { daysSince, freshness, latestScene, renderFresh } from "./fresh";
 import { composeMessage } from "./message";
 import { renderStrip, renderTrend, shortLabel } from "./timeline";
 import { startTour, tourSeen, type TourStep } from "./tour";
-import { STAGE_COLOR, STATUS_COLOR, type KecFeature, type KecProps, type Meta, type Feedback, type Scenario, type Weather } from "./types";
+import { STAGE_COLOR, STATUS_COLOR, type Forecast, type KecFeature, type KecProps, type Meta, type Feedback, type Scenario, type Weather } from "./types";
 import { renderRain, renderScenarioCurve } from "./weather";
 import {
   FEEDBACK, ROLE_LABEL, STEPS, addReport, advance, canReset, canStep, feedbackLabel, getActor, getMode, getReports,
-  ApiError, getState, initStore, requestRefresh, resetStep, serverStatus, setActor, stepLabel, sync,
-  type Actor, type Role, type ServerStatus,
+  ApiError, getReviews, getState, initStore, requestRefresh, resetStep, reviewForecast, serverStatus, setActor, stepLabel, sync,
+  type Actor, type Review, type Role, type ServerStatus,
 } from "./workflow";
 
 const DATA = "./data";
@@ -31,22 +32,27 @@ let desaByKec: Record<string, { id: string; name: string }[]> = {};
 let actor: Actor | null = getActor();
 let status: ServerStatus | null = null; // Stage 3, server mode only
 let fb: Feedback | null = null; // Stage 3: field reports as seen by the last pipeline run
+let forecast: Forecast | null = null; // v2 Phase 2, optional
+let fcStep: string | null = null; // forecast step on the map/ranking (null = observed)
+let reviews: Record<string, Review> = {}; // Dinas verdicts on the current forecast
 
 /** Optional data file: null when missing or malformed. */
 const optional = <T,>(file: string) =>
   fetch(`${DATA}/${file}`).then((r) => (r.ok ? (r.json() as Promise<T>) : null)).catch(() => null);
 
 async function boot() {
-  const [m, kec, desa, w, sc, f] = await Promise.all([
+  const [m, kec, desa, w, sc, f, fc] = await Promise.all([
     fetch(`${DATA}/meta.json`).then((r) => r.json()),
     fetch(`${DATA}/kecamatan.json`).then((r) => r.json()),
     fetch(`${DATA}/desa.json`).then((r) => r.json()),
     optional<Weather>("weather.json"),
     optional<Scenario>("scenario.json"),
     optional<Feedback>("feedback.json"),
+    optional<Forecast>("forecast.json"),
   ]);
   fb = f;
   meta = m;
+  forecast = fc && meta.periods?.length ? fc : null;
   weather = w;
   // A scenario only makes sense for the period it was computed from
   scenario = sc && meta.periods?.some((p) => p.id === sc.period_id) ? sc : null;
@@ -56,13 +62,14 @@ async function boot() {
   Object.values(desaByKec).forEach((l) => l.sort((a, b) => a.name.localeCompare(b.name)));
   // Action log stays tied to the run's current month, not the month being viewed
   await initStore(meta.current_period ?? meta.period.start.slice(0, 7));
+  if (forecast) reviews = await getReviews(forecast.generated_at);
   if (meta.periods?.length) {
     periodId = meta.current_period ?? meta.periods[meta.periods.length - 1].id;
     document.body.classList.add("has-periods");
   }
 
   renderTopbar();
-  renderFresh($("#fresh"), freshness(meta, weather));
+  renderFresh($("#fresh"), freshness(meta, weather, forecast));
   renderScenarioControl();
   renderRanking();
   renderLayerbar();
@@ -96,7 +103,7 @@ function runTour() {
   const steps: TourStep[] = [
     {
       title: "Selamat datang di SIAGA-Padi",
-      body: `Sistem respons kekeringan padi pada musim berjalan untuk penyuluh ${esc(meta.region.name)}: citra satelit diubah menjadi tindakan lapangan yang diprioritaskan, disetujui Dinas, dilacak, lalu dikoreksi oleh laporan lapangan. Tur ini 8 langkah; bisa dijeda kapan saja.`,
+      body: `Sistem respons kekeringan padi pada musim berjalan untuk penyuluh ${esc(meta.region.name)}: citra satelit diubah menjadi tindakan lapangan yang diprioritaskan, disetujui Dinas, dilacak, lalu dikoreksi oleh laporan lapangan. Tur singkat; bisa dijeda kapan saja.`,
     },
     {
       title: "Peta dan lapisan",
@@ -108,6 +115,11 @@ function runTour() {
       body: "Enam bulan terakhir; tinggi batang = ha padi tercekam kuat–ekstrem. <b>Hari ini</b> mengingatkan bahwa peta memakai citra terakhir, bukan kondisi hari ini. ▶ memutar urutan bulan; tombol panah ← → juga bisa.",
       target: q("#timeline"),
     },
+    ...(forecast ? [{
+      title: "Prakiraan 14 hari",
+      body: "<b>Hari ini</b>, <b>+7h</b>, dan <b>+14h</b> adalah prakiraan model (pembelajaran mesin, dilatih pada citra Landsat sejak 2013 dan hujan harian): peta dan peringkat berganti ke status prakiraan, dengan kisaran P10–P90, tingkat keyakinan, dan alasan utama di panel detail. Dinas dapat <b>Terima</b> atau <b>Tolak</b> prakiraan per kecamatan.",
+      target: () => [document.querySelector("#timeline .tl-now"), document.querySelector("#timeline .tl-fc")],
+    }] : []),
     {
       title: "Ringkasan dan kesegaran data",
       body: "Luas padi aktif, luas tercekam, sawah yang tidak dihitung aktif (bera, panen, perlu cek), dan jumlah kecamatan per status: <b>Normal, Waspada, Siaga, Awas</b>. Titik hijau / kuning / merah di kanan menunjukkan umur citra dan data hujan.",
@@ -145,12 +157,19 @@ function runTour() {
 const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
 // ---------------------------------------------------------------- periods
+const curPeriodId = () => meta.current_period ?? meta.periods!.at(-1)!.id;
+
 async function setPeriod(id: string) {
   const p = meta.periods?.find((x) => x.id === id);
-  if (!p || id === periodId) return;
+  if (!p) return;
+  if (id === periodId) {
+    if (fcStep) setForecastStep(null); // clicking the month leaves the forecast view
+    return;
+  }
   periodId = id;
   scenN = 0; // the what-if belongs to one period; leaving it shows observed data
-  document.body.classList.remove("scen-on");
+  fcStep = null;
+  document.body.classList.remove("scen-on", "fc-on");
   meta.period = { start: p.start, end: p.end, label: p.label };
   meta.totals = p.totals;
   for (const f of feats) {
@@ -195,12 +214,16 @@ function renderTimeline() {
   if (!meta.periods?.length || !periodId) return;
   el.hidden = false;
   const scene = latestScene(meta);
-  const fr = freshness(meta, weather).find((f) => f.key === "scene");
+  const fr = freshness(meta, weather, forecast).find((f) => f.key === "scene");
   const d = new Date();
   const today = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
   renderStrip(el, meta, periodId, (id) => void setPeriod(id), togglePlay, playTimer != null, {
     today, scene, days: scene ? daysSince(scene) : null, level: fr?.level ?? "ok",
-    onPick: () => void setPeriod(meta.current_period ?? meta.periods!.at(-1)!.id),
+    onPick: () => void setPeriod(curPeriodId()),
+    forecast: forecast ? {
+      steps: forecast.steps.map((st) => ({ ...st, ha: forecast!.totals[st.id]?.ha ?? [0, 0, 0] })),
+      selected: fcStep, onPick: (id) => void setForecastStep(fcStep === id ? null : id),
+    } : undefined,
   });
 }
 
@@ -208,11 +231,13 @@ function renderTimeline() {
 const BULAN3 = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"];
 const monthName = (id: string) => BULAN3[Number(id.slice(5, 7)) - 1] ?? id;
 /** Observed values of the scenario's period (props are mutated in place). */
-const observed = (p: KecProps): KecProps => ({ ...p, ...(scenario ? p.series?.[scenario.period_id] : undefined) });
+const observed = (p: KecProps): KecProps => ({ ...p, ...(periodId ? p.series?.[periodId] : undefined) });
+const viewIsModel = () => scenN > 0 || fcStep != null;
 
 function setScenario(n: number) {
   if (!scenario || periodId !== scenario.period_id) return;
   scenN = Math.max(0, Math.min(scenario.max_dasarian, n));
+  if (scenN > 0 && fcStep) { fcStep = null; document.body.classList.remove("fc-on"); renderTimeline(); }
   const period = meta.periods!.find((p) => p.id === scenario!.period_id)!;
   for (const f of feats) {
     const p = f.properties;
@@ -261,8 +286,48 @@ function renderScenarioControl() {
   el.querySelector<HTMLButtonElement>("#scen-off")!.onclick = () => setScenario(0);
 }
 
+// ---------------------------------------------------------------- forecast view (v2 Phase 2)
+const fcOf = (p: KecProps) => (forecast && fcStep ? forecast.kecamatan[p.id]?.steps[fcStep] : undefined);
+
+/** Show a forecast step on the map and the ranking (null = back to observed).
+ * Only status, H and the order change; the detail panel keeps observed data. */
+function setForecastStep(id: string | null) {
+  if (!forecast || !meta.periods) return;
+  if (id && periodId !== curPeriodId()) void setPeriod(curPeriodId()); // forecasts start from the current month
+  if (scenN > 0) setScenario(0);
+  fcStep = id;
+  for (const f of feats) {
+    const p = f.properties;
+    Object.assign(p, p.series?.[periodId!]);
+    const s = fcOf(p);
+    if (s) { p.status = s.status; p.hazard_index = s.hazard[1]; }
+  }
+  if (id) {
+    // Rank by forecast Kuat+Ekstrem ha, discounted by irrigation as on the map
+    const key = (p: KecProps) => (fcOf(p)?.ha[1] ?? -1) * (p.capacity_factor ?? 1);
+    feats.sort((a, b) => key(b.properties) - key(a.properties));
+    feats.forEach((f, i) => (f.properties.rank = i + 1));
+  } else {
+    feats.sort((a, b) => a.properties.rank - b.properties.rank);
+  }
+  document.body.classList.toggle("fc-on", id != null);
+  renderTopbar();
+  renderRanking();
+  renderTimeline();
+  const f = selected ? feats.find((x) => x.properties.id === selected) : null;
+  if (f) renderDetail(f.properties, false);
+  api?.refresh();
+}
+
 /** Change in ha-at-risk versus the previous period, for the ranking list. */
 function deltaHtml(p: KecProps) {
+  const s = fcOf(p);
+  if (s) {
+    const obs = (p.class_ha["4"] ?? 0) + (p.class_ha["5"] ?? 0);
+    const d = s.ha[1] - obs;
+    if (Math.abs(d) < 0.5) return `<span class="delta">= vs peta</span>`;
+    return `<span class="delta ${d > 0 ? "up" : "down"}">${d > 0 ? "▲" : "▼"} ${fmt(Math.abs(d))} vs peta</span>`;
+  }
   if (scenN > 0 && scenario) {
     const obs = p.series?.[scenario.period_id];
     if (!obs) return "";
@@ -288,10 +353,13 @@ function renderTopbar() {
   const NA = ["6", "7", "8", "9", "10"];
   const inactive = cs && NA.some((k) => k in cs) ? NA.reduce((a, k) => a + (cs[k] ?? 0), 0) : null;
   const count = (s: string) => feats.filter((f) => f.properties.status === s).length;
-  $("#region").innerHTML = `${esc(meta.region.name)} · ${esc(meta.period.label)}${scenN > 0 ? ` <span class="scen-tag">Skenario: tanpa hujan ${scenN} dasarian</span>` : ""}`;
+  const fst = forecast && fcStep ? forecast.steps.find((x) => x.id === fcStep) : undefined;
+  $("#region").innerHTML = `${esc(meta.region.name)} · ${fst ? `<span class="fc-tag">PRAKIRAAN ${esc(fst.label)} · ${tgl(fst.date)}</span>` : esc(meta.period.label)}${scenN > 0 ? ` <span class="scen-tag">Skenario: tanpa hujan ${scenN} dasarian</span>` : ""}`;
+  const ft = fst ? forecast!.totals[fst.id] : undefined;
   $("#summary").innerHTML = `
     <div class="chip"><span class="k">Padi aktif</span><span class="v">${fmt(meta.totals.active_ha)} ha</span></div>
-    <div class="chip"><span class="k">Cekaman kuat–ekstrem</span><span class="v" style="color:#ff8a7a">${fmt(stressed)} ha</span></div>
+    ${ft ? `<div class="chip fc" title="Prakiraan model, kisaran P10–P90 ${fmt(ft.ha[0])}–${fmt(ft.ha[2])} ha (peta: ${fmt(stressed)} ha)"><span class="k">Kuat–ekstrem · prakiraan</span><span class="v" style="color:#ff8a7a">${fmt(ft.ha[1])} ha <small>${fmt(ft.ha[0])}–${fmt(ft.ha[2])}</small></span></div>`
+      : `<div class="chip"><span class="k">Cekaman kuat–ekstrem</span><span class="v" style="color:#ff8a7a">${fmt(stressed)} ha</span></div>`}
     ${inactive != null ? `<div class="chip" title="Sawah yang tidak dihitung sebagai padi aktif: bera / tidak tumbuh, sudah panen, atau bukan padi menurut laporan lapangan. Perlu cek lapangan."><span class="k">Sawah tidak aktif</span><span class="v">${fmt(inactive)} ha</span></div>` : ""}
     <div class="chip"><span class="k">Kecamatan</span><span class="v">
       <i style="--c:${STATUS_COLOR.Awas}"></i>${count("Awas")}
@@ -327,7 +395,7 @@ function renderRanking() {
           <div class="r-top"><span class="r-name">${esc(p.name)}</span>
             <span class="pill" style="--c:${STATUS_COLOR[p.status]}">${p.status}</span></div>
           ${classBar(p)}
-          <div class="r-meta"><span><b>${fmt(p.ha_at_risk)}</b> ha berisiko ${deltaHtml(p)}${p.water_source ? ` <span class="r-water ${p.water_source === "tadah hujan" ? "rf" : ""}" title="Sumber air dominan (data resmi 2024)">${p.water_source}</span>` : ""}</span>
+          <div class="r-meta"><span>${fcOf(p) ? `<b>${fmt(fcOf(p)!.ha[1])}</b> ha kuat–ekstrem <span class="r-conf">${fcOf(p)!.confidence}</span>` : `<b>${fmt(p.ha_at_risk)}</b> ha berisiko`} ${deltaHtml(p)}${p.water_source ? ` <span class="r-water ${p.water_source === "tadah hujan" ? "rf" : ""}" title="Sumber air dominan (data resmi 2024)">${p.water_source}</span>` : ""}</span>
             <span class="r-step ${st.step}">${stepLabel}</span></div>
           ${p.action ? `<div class="r-act">${esc(p.action.headline)}</div>` : ""}
           ${verifyHa(p) >= VERIFY_MIN_HA ? `<div class="r-verify" title="Panen atau puso? ${fmt(p.cropland_stage_ha?.["9"] ?? 0)} ha · gagal tanam? ${fmt(p.cropland_stage_ha?.["10"] ?? 0)} ha">⚠ ${fmt(verifyHa(p))} ha perlu cek lapangan (puso? / gagal tanam?)</div>` : ""}
@@ -440,23 +508,27 @@ function renderDetail(p: KecProps, resetScroll = true) {
   const stressed = p.stressed_stage_ha;
   const stressedTotal = Object.values(stressed).reduce((a, b) => a + b, 0) || 1;
   const kw = weather?.kecamatan[p.id];
-  // Messages to farmers always use observed data, never the what-if
-  const msg = composeMessage(scenN > 0 ? observed(p) : p, meta, kw);
+  // Messages to farmers always use observed data (never the what-if); a
+  // forecast sentence is added only when confident or accepted by Dinas
+  const obsP = viewIsModel() ? observed(p) : p;
+  const fcLine = forecast && periodId === curPeriodId() ? forecastSentence(forecast, p.id, reviews[p.id]) : null;
+  const msg = composeMessage(obsP, meta, kw, fcLine);
   const obs = scenN > 0 ? observed(p) : null;
+  const fs = fcOf(p);
   const totalClass = Object.values(p.class_ha).reduce((a, b) => a + b, 0) || 1;
   const reps = getReports(p.id);
 
   el.innerHTML = `
     <header>
       <div>
-        <div class="d-kicker">Kecamatan · peringkat ${p.rank} dari ${feats.length}${obs ? ` · skenario ${scenN} dasarian tanpa hujan` : ""}</div>
+        <div class="d-kicker">Kecamatan · peringkat ${p.rank} dari ${feats.length}${obs ? ` · skenario ${scenN} dasarian tanpa hujan` : ""}${fs ? ` · prakiraan ${forecast!.steps.find((x) => x.id === fcStep)!.label}` : ""}</div>
         <h2>${esc(p.name)}</h2>
       </div>
       <button class="icon" id="d-close" aria-label="Tutup">✕</button>
     </header>
     <div class="d-status" style="--c:${STATUS_COLOR[p.status]}">
       <span class="dot"></span><b>${p.status}</b>
-      <span class="d-why">indeks bahaya H = ${fmt(p.hazard_index, 2)}${obs ? ` · teramati ${obs.status} (${fmt(obs.hazard_index, 2)})` : ""}</span>
+      <span class="d-why">${fs ? `prakiraan model, H = ${fmt(fs.hazard[1], 2)} · keyakinan ${fs.confidence.toLowerCase()} · peta ${observed(p).status}` : `indeks bahaya H = ${fmt(p.hazard_index, 2)}`}${obs ? ` · teramati ${obs.status} (${fmt(obs.hazard_index, 2)})` : ""}</span>
     </div>
 
     <div class="kpis">
@@ -465,6 +537,11 @@ function renderDetail(p: KecProps, resetScroll = true) {
       <div><span>Berisiko (terbobot)</span><b>${fmt(p.ha_at_risk)} <small>ha${obs ? ` · teramati ${fmt(obs.ha_at_risk)}` : ""}</small></b></div>
       <div><span>NDVI / NDMI</span><b>${fmt(p.mean_ndvi, 2)} / ${fmt(p.mean_ndmi, 2)}</b></div>
     </div>
+
+    ${forecast && periodId === curPeriodId() ? forecastCard(forecast, p.id, observed(p).status, fcStep, reviews[p.id], {
+      canReview: actor?.role === "dinas" && getMode() === "server", serverMode: getMode() === "server",
+      obsLabel: curPeriodLabel().split(" (")[0],
+    }) : ""}
 
     ${periodId && p.series ? `
     <section>
@@ -582,6 +659,7 @@ function renderDetail(p: KecProps, resetScroll = true) {
   const sc = document.getElementById("d-scen");
   if (sc && scenario) renderScenarioCurve(sc, p.id, p.name, scenario, scenN, setScenario);
   $("#d-close").onclick = closeDetail;
+  bindForecastCard(p);
   const scOn = document.getElementById("d-scen-on");
   if (scOn) scOn.onclick = () => setScenario(3);
   const adv = document.getElementById("d-advance") as HTMLButtonElement | null;
@@ -615,6 +693,31 @@ function renderDetail(p: KecProps, resetScroll = true) {
     void act(form.querySelector("button")!, "d-fb-err", () =>
       addReport(p.id, String(fd.get("fb")), String(fd.get("note") || "").trim(), String(fd.get("desa") || "") || null, actor!));
   };
+}
+
+function bindForecastCard(p: KecProps) {
+  document.querySelectorAll<HTMLElement>(".fc-rows li[data-fc]").forEach((li) =>
+    (li.onclick = () => setForecastStep(li.dataset.fc!)));
+  const about = document.getElementById("fc-about");
+  if (about) about.onclick = openModelPage;
+  const send = (verdict: "accept" | "reject") => async (ev: Event) => {
+    const note = (document.getElementById("fc-note") as HTMLInputElement | null)?.value.trim() ?? "";
+    await act(ev.currentTarget as HTMLElement, "fc-err", async () => {
+      const r = await reviewForecast(p.id, forecast!.generated_at, verdict, note, actor!);
+      reviews[p.id] = r;
+    });
+  };
+  const ok = document.getElementById("fc-accept"), no = document.getElementById("fc-reject");
+  if (ok) ok.onclick = send("accept");
+  if (no) no.onclick = send("reject");
+}
+
+function openModelPage() {
+  if (!forecast) return;
+  const dlg = $("#model-dlg") as HTMLDialogElement;
+  dlg.innerHTML = modelPage(forecast);
+  dlg.showModal();
+  dlg.scrollTop = 0;
 }
 
 // ---------------------------------------------------------------- workflow (Stage 3)
@@ -779,7 +882,8 @@ async function pollStatus() {
     return;
   }
   // The pipeline wrote new files since this page loaded
-  const fresh = status.data.meta !== meta.generated_at || (weather && status.data.weather !== weather.generated_at);
+  const fresh = status.data.meta !== meta.generated_at || (weather && status.data.weather !== weather.generated_at)
+    || (forecast && status.data.forecast && status.data.forecast !== forecast.generated_at);
   $("#update").hidden = !fresh;
 }
 
@@ -791,7 +895,14 @@ function startSync() {
     if (document.hidden) return;
     try {
       // Do not redraw under someone typing a report
-      if ((await sync()) && !document.activeElement?.closest("#d-fb, dialog")) rerender();
+      const changed = await sync();
+      let revChanged = false;
+      if (forecast) {
+        const r = await getReviews(forecast.generated_at);
+        revChanged = JSON.stringify(r) !== JSON.stringify(reviews);
+        reviews = r;
+      }
+      if ((changed || revChanged) && !document.activeElement?.closest("#d-fb, .fc-act, dialog")) rerender();
     } catch { /* server went away; keep the last state */ }
   }, 15000);
   setInterval(() => { if (!document.hidden) void pollStatus(); }, 60000);
@@ -799,7 +910,7 @@ function startSync() {
 
 // Ages tick on even without a server
 function startFreshClock() {
-  setInterval(() => { if (!document.hidden) renderFresh($("#fresh"), freshness(meta, weather)); }, 60000);
+  setInterval(() => { if (!document.hidden) renderFresh($("#fresh"), freshness(meta, weather, forecast)); }, 60000);
 }
 
 // ---------------------------------------------------------------- layer bar
