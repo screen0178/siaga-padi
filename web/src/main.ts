@@ -1,6 +1,6 @@
 import "./style.css";
 import { createMap, type MapApi } from "./map";
-import { freshness, renderFresh } from "./fresh";
+import { daysSince, freshness, latestScene, renderFresh } from "./fresh";
 import { composeMessage } from "./message";
 import { renderStrip, renderTrend, shortLabel } from "./timeline";
 import { STAGE_COLOR, STATUS_COLOR, type KecFeature, type KecProps, type Meta, type Feedback, type Scenario, type Weather } from "./types";
@@ -66,6 +66,9 @@ async function boot() {
   renderRanking();
   renderLayerbar();
   renderTimeline();
+  // Side panels end above the bottom bar, whatever it currently holds
+  const lb = document.querySelector<HTMLElement>(".layerbar")!;
+  new ResizeObserver(() => document.documentElement.style.setProperty("--lb-h", `${lb.offsetHeight}px`)).observe(lb);
 
   api = await createMap($("#map"), meta, kec, desa, DATA);
   api.onSelect((id) => openDetail(id, false));
@@ -131,7 +134,14 @@ function renderTimeline() {
   const el = $("#timeline");
   if (!meta.periods?.length || !periodId) return;
   el.hidden = false;
-  renderStrip(el, meta, periodId, (id) => void setPeriod(id), togglePlay, playTimer != null);
+  const scene = latestScene(meta);
+  const fr = freshness(meta, weather).find((f) => f.key === "scene");
+  const d = new Date();
+  const today = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+  renderStrip(el, meta, periodId, (id) => void setPeriod(id), togglePlay, playTimer != null, {
+    today, scene, days: scene ? daysSince(scene) : null, level: fr?.level ?? "ok",
+    onPick: () => void setPeriod(meta.current_period ?? meta.periods!.at(-1)!.id),
+  });
 }
 
 // ---------------------------------------------------------------- what-if
@@ -162,12 +172,13 @@ function setScenario(n: number) {
   api?.refresh();
 }
 
+/** v2 1.1: the what-if is entered from the detail panel ("Uji skenario") and
+ * shown as a bar above the timeline while it is on, so it never looks like
+ * part of the observed data. */
 function renderScenarioControl() {
   const el = $("#scenario");
-  if (!scenario) { el.hidden = true; return; }
+  if (!scenario || scenN === 0 || periodId !== scenario.period_id) { el.hidden = true; el.innerHTML = ""; return; }
   el.hidden = false;
-  const live = periodId === scenario.period_id;
-  const period = meta.periods!.find((p) => p.id === scenario!.period_id)!;
   const max = scenario.max_dasarian;
   const months = scenario.calibration.months.map((m) => monthName(m.pair.split(">")[1]));
   const t0 = scenario.totals["0"], tn = scenario.totals[String(scenN)];
@@ -176,17 +187,18 @@ function renderScenarioControl() {
   const fcMed = fcVals.length ? fcVals[Math.floor(fcVals.length / 2)] : null;
   const fcDays = weather ? Object.values(weather.kecamatan)[0]?.fc_days : 0;
   el.innerHTML = `
-    <div class="scen-h"><b>Bagaimana jika tidak hujan?</b>
-      <span class="scen-v">${scenN === 0 ? "kondisi teramati" : `${scenN} dasarian (±${scenN * 10} hari)`}</span></div>
-    <input id="scen-range" type="range" min="0" max="${max}" step="1" value="${scenN}" ${live ? "" : "disabled"}
-      aria-label="Jumlah dasarian tanpa hujan" aria-valuetext="${scenN} dasarian" />
-    <div class="scen-ticks">${Array.from({ length: max / 3 + 1 }, (_, k) => `<span>${k === 0 ? "0" : `${k} bln`}</span>`).join("")}</div>
-    ${!live ? `<p class="fine">Skenario hanya untuk periode terbaru (${period.label.split(" (")[0]}).</p>`
-      : scenN > 0 ? `<p class="scen-eff">Cekaman kuat–ekstrem <b>${fmt(st(t0))} → ${fmt(st(tn))} ha</b> · ha berisiko ${fmt(t0.ha_at_risk)} → ${fmt(tn.ha_at_risk)}</p>
-        <p class="fine">Skenario uji, bukan prakiraan${fcMed != null ? `: prakiraan ${fcDays} hari ke depan justru ±${fmt(fcMed)} mm (median kecamatan)` : ""}. Laju pengeringan diulang dari bulan kering 2026 (${months.join(", ")}); fase tumbuh dan luas dianggap tetap. Peta raster tetap citra terakhir.</p>`
-      : `<p class="fine">Geser untuk melihat status dan peringkat jika hujan berhenti, memakai laju pengeringan musim kering 2026.</p>`}`;
+    <div class="scen-h"><b>Uji skenario: tanpa hujan</b>
+      <span class="scen-v">${scenN} dasarian (±${scenN * 10} hari)</span>
+      <button class="ghost" id="scen-off">✕ Kembali ke data teramati</button></div>
+    <div class="scen-row">
+      <input id="scen-range" type="range" min="1" max="${max}" step="1" value="${scenN}"
+        aria-label="Jumlah dasarian tanpa hujan" aria-valuetext="${scenN} dasarian" />
+      <p class="scen-eff">Cekaman kuat–ekstrem <b>${fmt(st(t0))} → ${fmt(st(tn))} ha</b> · ha berisiko ${fmt(t0.ha_at_risk)} → ${fmt(tn.ha_at_risk)}</p>
+    </div>
+    <p class="fine">Skenario uji, bukan prakiraan${fcMed != null ? `: prakiraan ${fcDays} hari ke depan justru ±${fmt(fcMed)} mm (median kecamatan)` : ""}. Laju pengeringan diulang dari bulan kering 2026 (${months.join(", ")}); fase tumbuh dan luas dianggap tetap. Peta raster tetap citra terakhir.</p>`;
   const r = el.querySelector<HTMLInputElement>("#scen-range")!;
   r.oninput = () => setScenario(Number(r.value));
+  el.querySelector<HTMLButtonElement>("#scen-off")!.onclick = () => setScenario(0);
 }
 
 /** Change in ha-at-risk versus the previous period, for the ranking list. */
@@ -416,6 +428,7 @@ function renderDetail(p: KecProps, resetScroll = true) {
       <h3>Jika tidak hujan <span class="h3-note">ha berisiko per dasarian · klik titik</span></h3>
       <div id="d-scen" class="trend"></div>
       <p class="fine">${scenarioSentence(p.id)}</p>
+      ${scenN === 0 ? `<button class="ghost" id="d-scen-on">Uji skenario untuk semua kecamatan</button>` : ""}
     </section>` : ""}
 
     <section>
@@ -509,6 +522,8 @@ function renderDetail(p: KecProps, resetScroll = true) {
   const sc = document.getElementById("d-scen");
   if (sc && scenario) renderScenarioCurve(sc, p.id, p.name, scenario, scenN, setScenario);
   $("#d-close").onclick = closeDetail;
+  const scOn = document.getElementById("d-scen-on");
+  if (scOn) scOn.onclick = () => setScenario(3);
   const adv = document.getElementById("d-advance") as HTMLButtonElement | null;
   if (adv) adv.onclick = () => act(adv, "d-wf-err", () => advance(p.id, actor!));
   const rst = document.getElementById("d-reset") as HTMLButtonElement | null;

@@ -1,4 +1,5 @@
 // Stage 1: period strip (time slider) and per-kecamatan NDDI trend chart.
+import { dayMonth } from "./fresh";
 import { STATUS_COLOR, type KecProps, type Meta, type Period } from "./types";
 
 const MONTH = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"];
@@ -26,6 +27,7 @@ export function renderStrip(
   onPick: (id: string) => void,
   onPlay: () => void,
   playing: boolean,
+  now?: { today: string; scene: string | null; days: number | null; level: string; onPick: () => void },
 ) {
   const periods = meta.periods!;
   const kuatColor = meta.nddi_classes.find((c) => c.id === 4)?.color ?? "#e8553d";
@@ -43,10 +45,15 @@ export function renderStrip(
         </button>`;
       })
       .join("")}</div>
+    ${now ? `<button class="tl-now ${now.level}" title="Data terbaru selalu tertinggal dari hari ini: peta bulan berjalan memakai citra sampai ${now.scene ? dayMonth(now.scene) : "-"}. Klik untuk melihat bulan berjalan.">
+      <span class="tl-now-k">Hari ini</span><b>${dayMonth(now.today)}</b>
+      <small>${now.scene ? `citra terakhir ${dayMonth(now.scene)}${now.days ? `, ${now.days} hari lalu` : ""}` : "belum ada citra"}</small></button>` : ""}
     <div class="tl-cap"><b>${periods.find((p) => p.id === selected)?.label ?? ""}</b><span>ha cekaman kuat–ekstrem per bulan</span></div>
     <div class="tl-tip" hidden></div>`;
   const tip = el.querySelector<HTMLElement>(".tl-tip")!;
   el.querySelector<HTMLButtonElement>(".tl-play")!.onclick = onPlay;
+  const nowBtn = el.querySelector<HTMLButtonElement>(".tl-now");
+  if (nowBtn && now) nowBtn.onclick = now.onPick;
   el.querySelectorAll<HTMLButtonElement>(".tl-p").forEach((b) => {
     const p = periods.find((x) => x.id === b.dataset.id)!;
     b.onclick = () => onPick(p.id);
