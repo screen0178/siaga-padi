@@ -1,0 +1,3455 @@
+{
+ "generated_at": "2026-11-20T13:04:10+00:00",
+ "today": "2026-11-20",
+ "steps": [
+  {
+   "id": "now",
+   "label": "Hari ini",
+   "date": "2026-11-20",
+   "days": 0
+  },
+  {
+   "id": "d7",
+   "label": "+7 hari",
+   "date": "2026-11-27",
+   "days": 7
+  },
+  {
+   "id": "d14",
+   "label": "+14 hari",
+   "date": "2026-12-04",
+   "days": 14
+  }
+ ],
+ "latest_obs": "2026-11-04",
+ "desa_used": 383,
+ "rain_source": "Open-Meteo: 92 hari terakhir + prakiraan 16 hari, titik label kecamatan",
+ "model": {
+  "run_id": "20261120-1302",
+  "trained_at": "2026-11-20T13:02:34+00:00",
+  "data": {
+   "dates": 631,
+   "first": "2013-04-14",
+   "last": "2026-11-04",
+   "desa": 396
+  },
+  "kind": "Gradient boosting kuantil (P10/P50/P90), scikit-learn",
+  "horizon_days": [
+   8,
+   40
+  ],
+  "n_pairs": {
+   "train": 79399,
+   "val": 45431,
+   "test": 91614
+  },
+  "test_period": [
+   "2024-01-06",
+   "2026-11-04"
+  ],
+  "test": {
+   "desa": {
+    "n": 91614,
+    "mae_share": {
+     "model": 0.06752295257780346,
+     "persistence": 0.08481758722543632,
+     "climatology": 0.0989527583326491
+    },
+    "pinball": {
+     "p10": 0.019069090885068873,
+     "p50": 0.03376147628890173,
+     "p90": 0.01821862875009808
+    },
+    "coverage_p10_p90": 0.8441067959045561,
+    "mean_width_p10_p90": 0.26687003063030706
+   },
+   "kecamatan": {
+    "n": 9136,
+    "mae_ha": {
+     "model": 89.00405575163452,
+     "persistence": 123.8761402252703,
+     "climatology": 143.34521866663152
+    },
+    "coverage_p10_p90": 0.9038966725043783,
+    "status_match": {
+     "model": 0.8892294220665499,
+     "persistence": 0.853984238178634
+    },
+    "siaga_or_awas": {
+     "model": {
+      "events": 745,
+      "hit_rate": 0.7718120805369127,
+      "false_alarm_ratio": 0.0959119496855346
+     },
+     "persistence": {
+      "events": 745,
+      "hit_rate": 0.5771812080536913,
+      "false_alarm_ratio": 0.15520628683693516
+     }
+    }
+   }
+  },
+  "test_rain_climatology": {
+   "desa": {
+    "n": 91614,
+    "mae_share": {
+     "model": 0.07124895793931829,
+     "persistence": 0.08481758722543632,
+     "climatology": 0.0989527583326491
+    },
+    "pinball": {
+     "p10": 0.019069090885068873,
+     "p50": 0.035624478969659146,
+     "p90": 0.019730162834232418
+    },
+    "coverage_p10_p90": 0.818794070775209,
+    "mean_width_p10_p90": 0.2587798031794822
+   },
+   "kecamatan": {
+    "n": 9136,
+    "mae_ha": {
+     "model": 96.57005988546507,
+     "persistence": 123.8761402252703,
+     "climatology": 143.34521866663152
+    },
+    "coverage_p10_p90": 0.8728108581436077,
+    "status_match": {
+     "model": 0.8794877408056042,
+     "persistence": 0.853984238178634
+    },
+    "siaga_or_awas": {
+     "model": {
+      "events": 745,
+      "hit_rate": 0.7449664429530202,
+      "false_alarm_ratio": 0.10628019323671498
+     },
+     "persistence": {
+      "events": 745,
+      "hit_rate": 0.5771812080536913,
+      "false_alarm_ratio": 0.15520628683693516
+     }
+    }
+   }
+  },
+  "test_by_horizon": {
+   "8-16": {
+    "n": 35694,
+    "mae_model": 0.05512780580416484,
+    "mae_persistence": 0.059232482095231916
+   },
+   "17-28": {
+    "n": 21595,
+    "mae_model": 0.06568624336767258,
+    "mae_persistence": 0.08410823370273678
+   },
+   "29-40": {
+    "n": 34325,
+    "mae_model": 0.08156799567557575,
+    "mae_persistence": 0.11186939296003834
+   }
+  },
+  "group_importance": {
+   "state": 0.12089391885584082,
+   "rain_past": 0.022758757967936638,
+   "water": 0.012286970240968406,
+   "rain_future": 0.008380856010035687,
+   "season": 0.0059855184337091055,
+   "horizon": 0.004377687285201978,
+   "trend": 0.004324054111783729,
+   "stage": 0.001742505920037954
+  }
+ },
+ "totals": {
+  "now": {
+   "ha": [
+    0,
+    12072,
+    16491
+   ],
+   "status_count": {
+    "Normal": 7,
+    "Waspada": 7,
+    "Siaga": 7
+   }
+  },
+  "d7": {
+   "ha": [
+    0,
+    7279,
+    14943
+   ],
+   "status_count": {
+    "Normal": 13,
+    "Waspada": 8
+   }
+  },
+  "d14": {
+   "ha": [
+    0,
+    5999,
+    14124
+   ],
+   "status_count": {
+    "Normal": 16,
+    "Waspada": 5
+   }
+  }
+ },
+ "kecamatan": {
+  "id3318010": {
+   "name": "Sukolilo",
+   "steps": {
+    "now": {
+     "share": [
+      0.0,
+      0.11,
+      0.168
+     ],
+     "ha": [
+      0.0,
+      495.1,
+      758.1
+     ],
+     "hazard": [
+      0.161,
+      0.225,
+      0.303
+     ],
+     "status": "Normal",
+     "status_range": [
+      "Normal",
+      "Normal"
+     ],
+     "confidence": "Sedang",
+     "coverage": 1.0,
+     "h_days": [
+      16,
+      16
+     ],
+     "rain_win_mm": 117.8,
+     "reasons": [
+      {
+       "group": "rain_future",
+       "pp": -10.7,
+       "up": false,
+       "text": "Hujan sampai 20 Nov cukup: ±118 mm"
+      },
+      {
+       "group": "state",
+       "pp": 10.5,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (23% kuat–ekstrem)"
+      },
+      {
+       "group": "rain_past",
+       "pp": 1.4,
+       "up": true,
+       "text": "Hujan 30 hari sebelum citra hanya 71 mm (1 hari tanpa hujan)"
+      }
+     ]
+    },
+    "d7": {
+     "share": [
+      0.0,
+      0.044,
+      0.158
+     ],
+     "ha": [
+      0.0,
+      199.1,
+      711.3
+     ],
+     "hazard": [
+      0.107,
+      0.156,
+      0.271
+     ],
+     "status": "Normal",
+     "status_range": [
+      "Normal",
+      "Normal"
+     ],
+     "confidence": "Sedang",
+     "coverage": 1.0,
+     "h_days": [
+      23,
+      23
+     ],
+     "rain_win_mm": 205.8,
+     "reasons": [
+      {
+       "group": "rain_future",
+       "pp": -15.3,
+       "up": false,
+       "text": "Hujan sampai 27 Nov cukup: ±206 mm"
+      },
+      {
+       "group": "state",
+       "pp": 4.3,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (23% kuat–ekstrem)"
+      },
+      {
+       "group": "season",
+       "pp": -1.6,
+       "up": false,
+       "text": "Musim: bulan ini biasanya basah"
+      }
+     ]
+    },
+    "d14": {
+     "share": [
+      0.0,
+      0.033,
+      0.105
+     ],
+     "ha": [
+      0.0,
+      146.5,
+      474.2
+     ],
+     "hazard": [
+      0.095,
+      0.127,
+      0.217
+     ],
+     "status": "Normal",
+     "status_range": [
+      "Normal",
+      "Normal"
+     ],
+     "confidence": "Tinggi",
+     "coverage": 1.0,
+     "h_days": [
+      30,
+      30
+     ],
+     "rain_win_mm": 276.0,
+     "reasons": [
+      {
+       "group": "rain_future",
+       "pp": -17.4,
+       "up": false,
+       "text": "Hujan sampai 4 Des cukup: ±276 mm"
+      },
+      {
+       "group": "state",
+       "pp": 3.2,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (23% kuat–ekstrem)"
+      },
+      {
+       "group": "rain_past",
+       "pp": 1.5,
+       "up": true,
+       "text": "Hujan 30 hari sebelum citra hanya 71 mm (1 hari tanpa hujan)"
+      }
+     ]
+    }
+   },
+   "obs_dates": [
+    "2026-11-04"
+   ]
+  },
+  "id3318020": {
+   "name": "Kayen",
+   "steps": {
+    "now": {
+     "share": [
+      0.0,
+      0.526,
+      0.649
+     ],
+     "ha": [
+      0.0,
+      1633.8,
+      2014.4
+     ],
+     "hazard": [
+      0.401,
+      0.539,
+      0.705
+     ],
+     "status": "Waspada",
+     "status_range": [
+      "Waspada",
+      "Siaga"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      16,
+      16
+     ],
+     "rain_win_mm": 106.8,
+     "reasons": [
+      {
+       "group": "state",
+       "pp": 50.6,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (69% kuat–ekstrem)"
+      },
+      {
+       "group": "rain_future",
+       "pp": -18.6,
+       "up": false,
+       "text": "Hujan sampai 20 Nov cukup: ±107 mm"
+      },
+      {
+       "group": "rain_past",
+       "pp": 10.7,
+       "up": true,
+       "text": "Hujan 30 hari sebelum citra hanya 70 mm (2 hari tanpa hujan)"
+      }
+     ]
+    },
+    "d7": {
+     "share": [
+      0.0,
+      0.285,
+      0.595
+     ],
+     "ha": [
+      0.0,
+      883.8,
+      1846.9
+     ],
+     "hazard": [
+      0.285,
+      0.382,
+      0.625
+     ],
+     "status": "Normal",
+     "status_range": [
+      "Normal",
+      "Siaga"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      23,
+      23
+     ],
+     "rain_win_mm": 179.0,
+     "reasons": [
+      {
+       "group": "rain_future",
+       "pp": -37.7,
+       "up": false,
+       "text": "Hujan sampai 27 Nov cukup: ±179 mm"
+      },
+      {
+       "group": "state",
+       "pp": 27.5,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (69% kuat–ekstrem)"
+      },
+      {
+       "group": "rain_past",
+       "pp": 10.6,
+       "up": true,
+       "text": "Hujan 30 hari sebelum citra hanya 70 mm (2 hari tanpa hujan)"
+      }
+     ]
+    },
+    "d14": {
+     "share": [
+      0.0,
+      0.23,
+      0.523
+     ],
+     "ha": [
+      0.0,
+      714.2,
+      1622.9
+     ],
+     "hazard": [
+      0.171,
+      0.297,
+      0.569
+     ],
+     "status": "Normal",
+     "status_range": [
+      "Normal",
+      "Waspada"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      30,
+      30
+     ],
+     "rain_win_mm": 234.5,
+     "reasons": [
+      {
+       "group": "rain_future",
+       "pp": -44.2,
+       "up": false,
+       "text": "Hujan sampai 4 Des cukup: ±235 mm"
+      },
+      {
+       "group": "state",
+       "pp": 22.5,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (69% kuat–ekstrem)"
+      },
+      {
+       "group": "rain_past",
+       "pp": 11.7,
+       "up": true,
+       "text": "Hujan 30 hari sebelum citra hanya 70 mm (2 hari tanpa hujan)"
+      }
+     ]
+    }
+   },
+   "obs_dates": [
+    "2026-11-04"
+   ]
+  },
+  "id3318030": {
+   "name": "Tambakromo",
+   "steps": {
+    "now": {
+     "share": [
+      0.0,
+      0.596,
+      0.79
+     ],
+     "ha": [
+      0.0,
+      1057.9,
+      1401.4
+     ],
+     "hazard": [
+      0.519,
+      0.642,
+      0.787
+     ],
+     "status": "Siaga",
+     "status_range": [
+      "Waspada",
+      "Awas"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      16,
+      16
+     ],
+     "rain_win_mm": 135.6,
+     "reasons": [
+      {
+       "group": "state",
+       "pp": 57.7,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (90% kuat–ekstrem)"
+      },
+      {
+       "group": "rain_future",
+       "pp": -30.1,
+       "up": false,
+       "text": "Hujan sampai 20 Nov cukup: ±136 mm"
+      },
+      {
+       "group": "rain_past",
+       "pp": 12.7,
+       "up": true,
+       "text": "Hujan 30 hari sebelum citra hanya 65 mm (2 hari tanpa hujan)"
+      }
+     ]
+    },
+    "d7": {
+     "share": [
+      0.0,
+      0.41,
+      0.755
+     ],
+     "ha": [
+      0.0,
+      727.8,
+      1339.7
+     ],
+     "hazard": [
+      0.266,
+      0.467,
+      0.762
+     ],
+     "status": "Waspada",
+     "status_range": [
+      "Normal",
+      "Awas"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      23,
+      23
+     ],
+     "rain_win_mm": 208.5,
+     "reasons": [
+      {
+       "group": "rain_future",
+       "pp": -43.6,
+       "up": false,
+       "text": "Hujan sampai 27 Nov cukup: ±208 mm"
+      },
+      {
+       "group": "state",
+       "pp": 40.2,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (90% kuat–ekstrem)"
+      },
+      {
+       "group": "rain_past",
+       "pp": 12.7,
+       "up": true,
+       "text": "Hujan 30 hari sebelum citra hanya 65 mm (2 hari tanpa hujan)"
+      }
+     ]
+    },
+    "d14": {
+     "share": [
+      0.0,
+      0.334,
+      0.706
+     ],
+     "ha": [
+      0.0,
+      593.0,
+      1253.0
+     ],
+     "hazard": [
+      0.222,
+      0.38,
+      0.711
+     ],
+     "status": "Normal",
+     "status_range": [
+      "Normal",
+      "Siaga"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      30,
+      30
+     ],
+     "rain_win_mm": 280.2,
+     "reasons": [
+      {
+       "group": "rain_future",
+       "pp": -51.4,
+       "up": false,
+       "text": "Hujan sampai 4 Des cukup: ±280 mm"
+      },
+      {
+       "group": "state",
+       "pp": 33.3,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (90% kuat–ekstrem)"
+      },
+      {
+       "group": "rain_past",
+       "pp": 13.9,
+       "up": true,
+       "text": "Hujan 30 hari sebelum citra hanya 65 mm (2 hari tanpa hujan)"
+      }
+     ]
+    }
+   },
+   "obs_dates": [
+    "2026-11-04"
+   ]
+  },
+  "id3318040": {
+   "name": "Winong",
+   "steps": {
+    "now": {
+     "share": [
+      0.0,
+      0.637,
+      0.833
+     ],
+     "ha": [
+      0.0,
+      968.2,
+      1266.5
+     ],
+     "hazard": [
+      0.539,
+      0.676,
+      0.817
+     ],
+     "status": "Siaga",
+     "status_range": [
+      "Waspada",
+      "Awas"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      16,
+      16
+     ],
+     "rain_win_mm": 137.1,
+     "reasons": [
+      {
+       "group": "state",
+       "pp": 61.8,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (93% kuat–ekstrem)"
+      },
+      {
+       "group": "rain_future",
+       "pp": -27.8,
+       "up": false,
+       "text": "Hujan sampai 20 Nov cukup: ±137 mm"
+      },
+      {
+       "group": "rain_past",
+       "pp": 12.7,
+       "up": true,
+       "text": "Hujan 30 hari sebelum citra hanya 72 mm (1 hari tanpa hujan)"
+      }
+     ]
+    },
+    "d7": {
+     "share": [
+      0.0,
+      0.436,
+      0.761
+     ],
+     "ha": [
+      0.0,
+      662.6,
+      1156.8
+     ],
+     "hazard": [
+      0.269,
+      0.491,
+      0.775
+     ],
+     "status": "Waspada",
+     "status_range": [
+      "Normal",
+      "Awas"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      23,
+      23
+     ],
+     "rain_win_mm": 213.5,
+     "reasons": [
+      {
+       "group": "rain_future",
+       "pp": -44.2,
+       "up": false,
+       "text": "Hujan sampai 27 Nov cukup: ±214 mm"
+      },
+      {
+       "group": "state",
+       "pp": 42.7,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (93% kuat–ekstrem)"
+      },
+      {
+       "group": "rain_past",
+       "pp": 12.7,
+       "up": true,
+       "text": "Hujan 30 hari sebelum citra hanya 72 mm (1 hari tanpa hujan)"
+      }
+     ]
+    },
+    "d14": {
+     "share": [
+      0.0,
+      0.391,
+      0.756
+     ],
+     "ha": [
+      0.0,
+      594.5,
+      1149.3
+     ],
+     "hazard": [
+      0.245,
+      0.435,
+      0.745
+     ],
+     "status": "Waspada",
+     "status_range": [
+      "Normal",
+      "Siaga"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      30,
+      30
+     ],
+     "rain_win_mm": 279.1,
+     "reasons": [
+      {
+       "group": "rain_future",
+       "pp": -48.8,
+       "up": false,
+       "text": "Hujan sampai 4 Des cukup: ±279 mm"
+      },
+      {
+       "group": "state",
+       "pp": 38.9,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (93% kuat–ekstrem)"
+      },
+      {
+       "group": "rain_past",
+       "pp": 13.9,
+       "up": true,
+       "text": "Hujan 30 hari sebelum citra hanya 72 mm (1 hari tanpa hujan)"
+      }
+     ]
+    }
+   },
+   "obs_dates": [
+    "2026-11-04"
+   ]
+  },
+  "id3318050": {
+   "name": "Pucakwangi",
+   "steps": {
+    "now": {
+     "share": [
+      0.0,
+      0.665,
+      0.806
+     ],
+     "ha": [
+      0.0,
+      987.3,
+      1197.2
+     ],
+     "hazard": [
+      0.52,
+      0.646,
+      0.792
+     ],
+     "status": "Siaga",
+     "status_range": [
+      "Waspada",
+      "Awas"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      16,
+      16
+     ],
+     "rain_win_mm": 122.6,
+     "reasons": [
+      {
+       "group": "state",
+       "pp": 65.0,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (92% kuat–ekstrem)"
+      },
+      {
+       "group": "rain_future",
+       "pp": -23.0,
+       "up": false,
+       "text": "Hujan sampai 20 Nov cukup: ±123 mm"
+      },
+      {
+       "group": "rain_past",
+       "pp": 13.2,
+       "up": true,
+       "text": "Hujan 30 hari sebelum citra hanya 67 mm (1 hari tanpa hujan)"
+      }
+     ]
+    },
+    "d7": {
+     "share": [
+      0.0,
+      0.428,
+      0.752
+     ],
+     "ha": [
+      0.0,
+      635.5,
+      1116.0
+     ],
+     "hazard": [
+      0.281,
+      0.463,
+      0.74
+     ],
+     "status": "Waspada",
+     "status_range": [
+      "Normal",
+      "Siaga"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      23,
+      23
+     ],
+     "rain_win_mm": 202.8,
+     "reasons": [
+      {
+       "group": "state",
+       "pp": 42.5,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (92% kuat–ekstrem)"
+      },
+      {
+       "group": "rain_future",
+       "pp": -42.5,
+       "up": false,
+       "text": "Hujan sampai 27 Nov cukup: ±203 mm"
+      },
+      {
+       "group": "rain_past",
+       "pp": 13.0,
+       "up": true,
+       "text": "Hujan 30 hari sebelum citra hanya 67 mm (1 hari tanpa hujan)"
+      }
+     ]
+    },
+    "d14": {
+     "share": [
+      0.0,
+      0.322,
+      0.689
+     ],
+     "ha": [
+      0.0,
+      478.8,
+      1023.5
+     ],
+     "hazard": [
+      0.228,
+      0.369,
+      0.687
+     ],
+     "status": "Normal",
+     "status_range": [
+      "Normal",
+      "Siaga"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      30,
+      30
+     ],
+     "rain_win_mm": 278.9,
+     "reasons": [
+      {
+       "group": "rain_future",
+       "pp": -53.4,
+       "up": false,
+       "text": "Hujan sampai 4 Des cukup: ±279 mm"
+      },
+      {
+       "group": "state",
+       "pp": 32.2,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (92% kuat–ekstrem)"
+      },
+      {
+       "group": "rain_past",
+       "pp": 13.7,
+       "up": true,
+       "text": "Hujan 30 hari sebelum citra hanya 67 mm (1 hari tanpa hujan)"
+      }
+     ]
+    }
+   },
+   "obs_dates": [
+    "2026-11-04"
+   ]
+  },
+  "id3318060": {
+   "name": "Jaken",
+   "steps": {
+    "now": {
+     "share": [
+      0.0,
+      0.581,
+      0.747
+     ],
+     "ha": [
+      0.0,
+      1085.0,
+      1395.1
+     ],
+     "hazard": [
+      0.51,
+      0.63,
+      0.76
+     ],
+     "status": "Siaga",
+     "status_range": [
+      "Waspada",
+      "Awas"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      16,
+      16
+     ],
+     "rain_win_mm": 123.1,
+     "reasons": [
+      {
+       "group": "state",
+       "pp": 56.9,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (90% kuat–ekstrem)"
+      },
+      {
+       "group": "rain_future",
+       "pp": -25.2,
+       "up": false,
+       "text": "Hujan sampai 20 Nov cukup: ±123 mm"
+      },
+      {
+       "group": "rain_past",
+       "pp": 5.3,
+       "up": true,
+       "text": "Hujan 30 hari sebelum citra hanya 86 mm (1 hari tanpa hujan)"
+      }
+     ]
+    },
+    "d7": {
+     "share": [
+      0.0,
+      0.266,
+      0.633
+     ],
+     "ha": [
+      0.0,
+      496.5,
+      1182.0
+     ],
+     "hazard": [
+      0.235,
+      0.4,
+      0.682
+     ],
+     "status": "Normal",
+     "status_range": [
+      "Normal",
+      "Siaga"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      23,
+      23
+     ],
+     "rain_win_mm": 219.7,
+     "reasons": [
+      {
+       "group": "rain_future",
+       "pp": -51.6,
+       "up": false,
+       "text": "Hujan sampai 27 Nov cukup: ±220 mm"
+      },
+      {
+       "group": "state",
+       "pp": 26.4,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (90% kuat–ekstrem)"
+      },
+      {
+       "group": "season",
+       "pp": -7.6,
+       "up": false,
+       "text": "Musim: bulan ini biasanya basah"
+      }
+     ]
+    },
+    "d14": {
+     "share": [
+      0.0,
+      0.229,
+      0.613
+     ],
+     "ha": [
+      0.0,
+      427.9,
+      1146.1
+     ],
+     "hazard": [
+      0.216,
+      0.345,
+      0.648
+     ],
+     "status": "Normal",
+     "status_range": [
+      "Normal",
+      "Siaga"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      30,
+      30
+     ],
+     "rain_win_mm": 279.1,
+     "reasons": [
+      {
+       "group": "rain_future",
+       "pp": -55.6,
+       "up": false,
+       "text": "Hujan sampai 4 Des cukup: ±279 mm"
+      },
+      {
+       "group": "state",
+       "pp": 22.9,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (90% kuat–ekstrem)"
+      },
+      {
+       "group": "season",
+       "pp": -7.8,
+       "up": false,
+       "text": "Musim: bulan ini biasanya basah"
+      }
+     ]
+    }
+   },
+   "obs_dates": [
+    "2026-11-04"
+   ]
+  },
+  "id3318070": {
+   "name": "Batangan",
+   "steps": {
+    "now": {
+     "share": [
+      0.0,
+      0.662,
+      0.816
+     ],
+     "ha": [
+      0.0,
+      298.7,
+      368.2
+     ],
+     "hazard": [
+      0.562,
+      0.723,
+      0.86
+     ],
+     "status": "Siaga",
+     "status_range": [
+      "Waspada",
+      "Awas"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      16,
+      16
+     ],
+     "rain_win_mm": 101.5,
+     "reasons": [
+      {
+       "group": "state",
+       "pp": 63.8,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (87% kuat–ekstrem)"
+      },
+      {
+       "group": "rain_future",
+       "pp": -15.0,
+       "up": false,
+       "text": "Hujan sampai 20 Nov cukup: ±101 mm"
+      },
+      {
+       "group": "stage",
+       "pp": 10.5,
+       "up": true,
+       "text": "Fase tumbuh rawan (NDVI rata-rata 0.22)"
+      }
+     ]
+    },
+    "d7": {
+     "share": [
+      0.0,
+      0.416,
+      0.738
+     ],
+     "ha": [
+      0.0,
+      187.8,
+      333.2
+     ],
+     "hazard": [
+      0.365,
+      0.522,
+      0.784
+     ],
+     "status": "Waspada",
+     "status_range": [
+      "Normal",
+      "Awas"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      23,
+      23
+     ],
+     "rain_win_mm": 183.1,
+     "reasons": [
+      {
+       "group": "state",
+       "pp": 40.6,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (87% kuat–ekstrem)"
+      },
+      {
+       "group": "rain_future",
+       "pp": -36.0,
+       "up": false,
+       "text": "Hujan sampai 27 Nov cukup: ±183 mm"
+      },
+      {
+       "group": "stage",
+       "pp": 12.1,
+       "up": true,
+       "text": "Fase tumbuh rawan (NDVI rata-rata 0.22)"
+      }
+     ]
+    },
+    "d14": {
+     "share": [
+      0.0,
+      0.352,
+      0.679
+     ],
+     "ha": [
+      0.0,
+      158.8,
+      306.6
+     ],
+     "hazard": [
+      0.24,
+      0.472,
+      0.741
+     ],
+     "status": "Waspada",
+     "status_range": [
+      "Normal",
+      "Siaga"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      30,
+      30
+     ],
+     "rain_win_mm": 225.2,
+     "reasons": [
+      {
+       "group": "rain_future",
+       "pp": -42.6,
+       "up": false,
+       "text": "Hujan sampai 4 Des cukup: ±225 mm"
+      },
+      {
+       "group": "state",
+       "pp": 34.6,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (87% kuat–ekstrem)"
+      },
+      {
+       "group": "stage",
+       "pp": 11.5,
+       "up": true,
+       "text": "Fase tumbuh rawan (NDVI rata-rata 0.22)"
+      }
+     ]
+    }
+   },
+   "obs_dates": [
+    "2026-11-04"
+   ]
+  },
+  "id3318080": {
+   "name": "Juwana",
+   "steps": {
+    "now": {
+     "share": [
+      0.0,
+      0.482,
+      0.631
+     ],
+     "ha": [
+      0.0,
+      286.8,
+      375.1
+     ],
+     "hazard": [
+      0.385,
+      0.558,
+      0.713
+     ],
+     "status": "Waspada",
+     "status_range": [
+      "Normal",
+      "Siaga"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      16,
+      16
+     ],
+     "rain_win_mm": 107.3,
+     "reasons": [
+      {
+       "group": "state",
+       "pp": 46.3,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (67% kuat–ekstrem)"
+      },
+      {
+       "group": "rain_future",
+       "pp": -16.2,
+       "up": false,
+       "text": "Hujan sampai 20 Nov cukup: ±107 mm"
+      },
+      {
+       "group": "stage",
+       "pp": 6.9,
+       "up": true,
+       "text": "Fase tumbuh rawan (NDVI rata-rata 0.24)"
+      }
+     ]
+    },
+    "d7": {
+     "share": [
+      0.0,
+      0.256,
+      0.576
+     ],
+     "ha": [
+      0.0,
+      152.4,
+      342.3
+     ],
+     "hazard": [
+      0.277,
+      0.419,
+      0.636
+     ],
+     "status": "Waspada",
+     "status_range": [
+      "Normal",
+      "Siaga"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      23,
+      23
+     ],
+     "rain_win_mm": 177.9,
+     "reasons": [
+      {
+       "group": "rain_future",
+       "pp": -34.7,
+       "up": false,
+       "text": "Hujan sampai 27 Nov cukup: ±178 mm"
+      },
+      {
+       "group": "state",
+       "pp": 24.5,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (67% kuat–ekstrem)"
+      },
+      {
+       "group": "stage",
+       "pp": 7.2,
+       "up": true,
+       "text": "Fase tumbuh rawan (NDVI rata-rata 0.24)"
+      }
+     ]
+    },
+    "d14": {
+     "share": [
+      0.0,
+      0.199,
+      0.536
+     ],
+     "ha": [
+      0.0,
+      118.4,
+      319.0
+     ],
+     "hazard": [
+      0.172,
+      0.347,
+      0.613
+     ],
+     "status": "Normal",
+     "status_range": [
+      "Normal",
+      "Siaga"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      30,
+      30
+     ],
+     "rain_win_mm": 216.9,
+     "reasons": [
+      {
+       "group": "rain_future",
+       "pp": -41.4,
+       "up": false,
+       "text": "Hujan sampai 4 Des cukup: ±217 mm"
+      },
+      {
+       "group": "state",
+       "pp": 19.1,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (67% kuat–ekstrem)"
+      },
+      {
+       "group": "stage",
+       "pp": 6.5,
+       "up": true,
+       "text": "Fase tumbuh rawan (NDVI rata-rata 0.24)"
+      }
+     ]
+    }
+   },
+   "obs_dates": [
+    "2026-11-04"
+   ]
+  },
+  "id3318090": {
+   "name": "Jakenan",
+   "steps": {
+    "now": {
+     "share": [
+      0.0,
+      0.575,
+      0.794
+     ],
+     "ha": [
+      0.0,
+      972.9,
+      1343.4
+     ],
+     "hazard": [
+      0.502,
+      0.673,
+      0.803
+     ],
+     "status": "Siaga",
+     "status_range": [
+      "Waspada",
+      "Awas"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      16,
+      16
+     ],
+     "rain_win_mm": 136.0,
+     "reasons": [
+      {
+       "group": "state",
+       "pp": 54.7,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (90% kuat–ekstrem)"
+      },
+      {
+       "group": "rain_future",
+       "pp": -28.3,
+       "up": false,
+       "text": "Hujan sampai 20 Nov cukup: ±136 mm"
+      },
+      {
+       "group": "stage",
+       "pp": 12.0,
+       "up": true,
+       "text": "Fase tumbuh rawan (NDVI rata-rata 0.23)"
+      }
+     ]
+    },
+    "d7": {
+     "share": [
+      0.0,
+      0.376,
+      0.705
+     ],
+     "ha": [
+      0.0,
+      636.4,
+      1192.4
+     ],
+     "hazard": [
+      0.25,
+      0.487,
+      0.74
+     ],
+     "status": "Waspada",
+     "status_range": [
+      "Normal",
+      "Siaga"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      23,
+      23
+     ],
+     "rain_win_mm": 221.8,
+     "reasons": [
+      {
+       "group": "rain_future",
+       "pp": -44.7,
+       "up": false,
+       "text": "Hujan sampai 27 Nov cukup: ±222 mm"
+      },
+      {
+       "group": "state",
+       "pp": 36.4,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (90% kuat–ekstrem)"
+      },
+      {
+       "group": "stage",
+       "pp": 12.4,
+       "up": true,
+       "text": "Fase tumbuh rawan (NDVI rata-rata 0.23)"
+      }
+     ]
+    },
+    "d14": {
+     "share": [
+      0.0,
+      0.332,
+      0.697
+     ],
+     "ha": [
+      0.0,
+      560.8,
+      1178.2
+     ],
+     "hazard": [
+      0.226,
+      0.438,
+      0.738
+     ],
+     "status": "Waspada",
+     "status_range": [
+      "Normal",
+      "Siaga"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      30,
+      30
+     ],
+     "rain_win_mm": 285.6,
+     "reasons": [
+      {
+       "group": "rain_future",
+       "pp": -49.5,
+       "up": false,
+       "text": "Hujan sampai 4 Des cukup: ±286 mm"
+      },
+      {
+       "group": "state",
+       "pp": 32.8,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (90% kuat–ekstrem)"
+      },
+      {
+       "group": "stage",
+       "pp": 12.3,
+       "up": true,
+       "text": "Fase tumbuh rawan (NDVI rata-rata 0.23)"
+      }
+     ]
+    }
+   },
+   "obs_dates": [
+    "2026-11-04"
+   ]
+  },
+  "id3318100": {
+   "name": "Pati",
+   "steps": {
+    "now": {
+     "share": [
+      0.0,
+      0.3,
+      0.454
+     ],
+     "ha": [
+      0.0,
+      519.4,
+      785.7
+     ],
+     "hazard": [
+      0.251,
+      0.414,
+      0.545
+     ],
+     "status": "Waspada",
+     "status_range": [
+      "Normal",
+      "Waspada"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      16,
+      16
+     ],
+     "rain_win_mm": 89.6,
+     "reasons": [
+      {
+       "group": "state",
+       "pp": 27.6,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (44% kuat–ekstrem)"
+      },
+      {
+       "group": "rain_future",
+       "pp": -9.3,
+       "up": false,
+       "text": "Hujan sampai 20 Nov cukup: ±90 mm"
+      },
+      {
+       "group": "water",
+       "pp": -2.4,
+       "up": false,
+       "text": "Sawah irigasi 95% meredam kekeringan"
+      }
+     ]
+    },
+    "d7": {
+     "share": [
+      0.0,
+      0.154,
+      0.411
+     ],
+     "ha": [
+      0.0,
+      266.4,
+      710.1
+     ],
+     "hazard": [
+      0.185,
+      0.275,
+      0.506
+     ],
+     "status": "Normal",
+     "status_range": [
+      "Normal",
+      "Waspada"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      23,
+      23
+     ],
+     "rain_win_mm": 151.2,
+     "reasons": [
+      {
+       "group": "rain_future",
+       "pp": -20.4,
+       "up": false,
+       "text": "Hujan sampai 27 Nov cukup: ±151 mm"
+      },
+      {
+       "group": "state",
+       "pp": 13.8,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (44% kuat–ekstrem)"
+      },
+      {
+       "group": "season",
+       "pp": -4.4,
+       "up": false,
+       "text": "Musim: bulan ini biasanya basah"
+      }
+     ]
+    },
+    "d14": {
+     "share": [
+      0.0,
+      0.093,
+      0.418
+     ],
+     "ha": [
+      0.0,
+      160.9,
+      723.3
+     ],
+     "hazard": [
+      0.122,
+      0.232,
+      0.496
+     ],
+     "status": "Normal",
+     "status_range": [
+      "Normal",
+      "Waspada"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      30,
+      30
+     ],
+     "rain_win_mm": 193.8,
+     "reasons": [
+      {
+       "group": "rain_future",
+       "pp": -26.7,
+       "up": false,
+       "text": "Hujan sampai 4 Des cukup: ±194 mm"
+      },
+      {
+       "group": "state",
+       "pp": 8.5,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (44% kuat–ekstrem)"
+      },
+      {
+       "group": "season",
+       "pp": -4.4,
+       "up": false,
+       "text": "Musim: bulan ini biasanya basah"
+      }
+     ]
+    }
+   },
+   "obs_dates": [
+    "2026-11-04"
+   ]
+  },
+  "id3318110": {
+   "name": "Gabus",
+   "steps": {
+    "now": {
+     "share": [
+      0.0,
+      0.531,
+      0.693
+     ],
+     "ha": [
+      0.0,
+      1234.3,
+      1609.3
+     ],
+     "hazard": [
+      0.428,
+      0.607,
+      0.748
+     ],
+     "status": "Siaga",
+     "status_range": [
+      "Waspada",
+      "Siaga"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      16,
+      16
+     ],
+     "rain_win_mm": 110.1,
+     "reasons": [
+      {
+       "group": "state",
+       "pp": 50.3,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (74% kuat–ekstrem)"
+      },
+      {
+       "group": "rain_future",
+       "pp": -20.0,
+       "up": false,
+       "text": "Hujan sampai 20 Nov cukup: ±110 mm"
+      },
+      {
+       "group": "stage",
+       "pp": 7.7,
+       "up": true,
+       "text": "Fase tumbuh rawan (NDVI rata-rata 0.27)"
+      }
+     ]
+    },
+    "d7": {
+     "share": [
+      0.0,
+      0.335,
+      0.657
+     ],
+     "ha": [
+      0.0,
+      778.0,
+      1526.2
+     ],
+     "hazard": [
+      0.33,
+      0.497,
+      0.703
+     ],
+     "status": "Waspada",
+     "status_range": [
+      "Normal",
+      "Siaga"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      23,
+      23
+     ],
+     "rain_win_mm": 180.6,
+     "reasons": [
+      {
+       "group": "rain_future",
+       "pp": -36.3,
+       "up": false,
+       "text": "Hujan sampai 27 Nov cukup: ±181 mm"
+      },
+      {
+       "group": "state",
+       "pp": 32.1,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (74% kuat–ekstrem)"
+      },
+      {
+       "group": "stage",
+       "pp": 8.7,
+       "up": true,
+       "text": "Fase tumbuh rawan (NDVI rata-rata 0.27)"
+      }
+     ]
+    },
+    "d14": {
+     "share": [
+      0.0,
+      0.289,
+      0.601
+     ],
+     "ha": [
+      0.0,
+      670.5,
+      1395.5
+     ],
+     "hazard": [
+      0.198,
+      0.418,
+      0.65
+     ],
+     "status": "Waspada",
+     "status_range": [
+      "Normal",
+      "Siaga"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      30,
+      30
+     ],
+     "rain_win_mm": 229.5,
+     "reasons": [
+      {
+       "group": "rain_future",
+       "pp": -41.8,
+       "up": false,
+       "text": "Hujan sampai 4 Des cukup: ±230 mm"
+      },
+      {
+       "group": "state",
+       "pp": 27.7,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (74% kuat–ekstrem)"
+      },
+      {
+       "group": "stage",
+       "pp": 7.2,
+       "up": true,
+       "text": "Fase tumbuh rawan (NDVI rata-rata 0.27)"
+      }
+     ]
+    }
+   },
+   "obs_dates": [
+    "2026-11-04"
+   ]
+  },
+  "id3318120": {
+   "name": "Margorejo",
+   "steps": {
+    "now": {
+     "share": [
+      0.0,
+      0.235,
+      0.42
+     ],
+     "ha": [
+      0.0,
+      400.2,
+      713.3
+     ],
+     "hazard": [
+      0.238,
+      0.378,
+      0.53
+     ],
+     "status": "Normal",
+     "status_range": [
+      "Normal",
+      "Waspada"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      16,
+      16
+     ],
+     "rain_win_mm": 92.7,
+     "reasons": [
+      {
+       "group": "state",
+       "pp": 21.1,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (35% kuat–ekstrem)"
+      },
+      {
+       "group": "rain_future",
+       "pp": -13.3,
+       "up": false,
+       "text": "Hujan sampai 20 Nov cukup: ±93 mm"
+      },
+      {
+       "group": "rain_past",
+       "pp": 5.3,
+       "up": true,
+       "text": "Hujan 30 hari sebelum citra hanya 72 mm (1 hari tanpa hujan)"
+      }
+     ]
+    },
+    "d7": {
+     "share": [
+      0.0,
+      0.147,
+      0.342
+     ],
+     "ha": [
+      0.0,
+      249.9,
+      581.6
+     ],
+     "hazard": [
+      0.172,
+      0.264,
+      0.472
+     ],
+     "status": "Normal",
+     "status_range": [
+      "Normal",
+      "Waspada"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      23,
+      23
+     ],
+     "rain_win_mm": 161.4,
+     "reasons": [
+      {
+       "group": "rain_future",
+       "pp": -18.2,
+       "up": false,
+       "text": "Hujan sampai 27 Nov cukup: ±161 mm"
+      },
+      {
+       "group": "state",
+       "pp": 13.6,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (35% kuat–ekstrem)"
+      },
+      {
+       "group": "rain_past",
+       "pp": 4.7,
+       "up": true,
+       "text": "Hujan 30 hari sebelum citra hanya 72 mm (1 hari tanpa hujan)"
+      }
+     ]
+    },
+    "d14": {
+     "share": [
+      0.0,
+      0.097,
+      0.368
+     ],
+     "ha": [
+      0.0,
+      164.8,
+      625.5
+     ],
+     "hazard": [
+      0.13,
+      0.203,
+      0.474
+     ],
+     "status": "Normal",
+     "status_range": [
+      "Normal",
+      "Waspada"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      30,
+      30
+     ],
+     "rain_win_mm": 198.7,
+     "reasons": [
+      {
+       "group": "rain_future",
+       "pp": -24.7,
+       "up": false,
+       "text": "Hujan sampai 4 Des cukup: ±199 mm"
+      },
+      {
+       "group": "state",
+       "pp": 8.9,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (35% kuat–ekstrem)"
+      },
+      {
+       "group": "rain_past",
+       "pp": 4.7,
+       "up": true,
+       "text": "Hujan 30 hari sebelum citra hanya 72 mm (1 hari tanpa hujan)"
+      }
+     ]
+    }
+   },
+   "obs_dates": [
+    "2026-11-04"
+   ]
+  },
+  "id3318130": {
+   "name": "Gembong",
+   "steps": {
+    "now": {
+     "share": [
+      0.0,
+      0.164,
+      0.311
+     ],
+     "ha": [
+      0.0,
+      39.8,
+      75.7
+     ],
+     "hazard": [
+      0.234,
+      0.371,
+      0.477
+     ],
+     "status": "Normal",
+     "status_range": [
+      "Normal",
+      "Waspada"
+     ],
+     "confidence": "Rendah",
+     "coverage": 0.97,
+     "h_days": [
+      16,
+      16
+     ],
+     "rain_win_mm": 69.9,
+     "reasons": [
+      {
+       "group": "state",
+       "pp": 14.5,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (20% kuat–ekstrem)"
+      },
+      {
+       "group": "rain_future",
+       "pp": -5.7,
+       "up": false,
+       "text": "Hujan sampai 20 Nov cukup: ±70 mm"
+      },
+      {
+       "group": "rain_past",
+       "pp": 2.5,
+       "up": true,
+       "text": "Hujan 30 hari sebelum citra hanya 54 mm (1 hari tanpa hujan)"
+      }
+     ]
+    },
+    "d7": {
+     "share": [
+      0.0,
+      0.091,
+      0.248
+     ],
+     "ha": [
+      0.0,
+      22.1,
+      60.2
+     ],
+     "hazard": [
+      0.168,
+      0.244,
+      0.409
+     ],
+     "status": "Normal",
+     "status_range": [
+      "Normal",
+      "Waspada"
+     ],
+     "confidence": "Sedang",
+     "coverage": 0.97,
+     "h_days": [
+      23,
+      23
+     ],
+     "rain_win_mm": 127.5,
+     "reasons": [
+      {
+       "group": "rain_future",
+       "pp": -10.4,
+       "up": false,
+       "text": "Hujan sampai 27 Nov cukup: ±127 mm"
+      },
+      {
+       "group": "state",
+       "pp": 8.6,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (20% kuat–ekstrem)"
+      },
+      {
+       "group": "season",
+       "pp": -2.7,
+       "up": false,
+       "text": "Musim: bulan ini biasanya basah"
+      }
+     ]
+    },
+    "d14": {
+     "share": [
+      0.0,
+      0.084,
+      0.276
+     ],
+     "ha": [
+      0.0,
+      20.4,
+      67.1
+     ],
+     "hazard": [
+      0.148,
+      0.217,
+      0.412
+     ],
+     "status": "Normal",
+     "status_range": [
+      "Normal",
+      "Waspada"
+     ],
+     "confidence": "Sedang",
+     "coverage": 0.97,
+     "h_days": [
+      30,
+      30
+     ],
+     "rain_win_mm": 157.8,
+     "reasons": [
+      {
+       "group": "rain_future",
+       "pp": -11.7,
+       "up": false,
+       "text": "Hujan sampai 4 Des cukup: ±158 mm"
+      },
+      {
+       "group": "state",
+       "pp": 8.3,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (20% kuat–ekstrem)"
+      },
+      {
+       "group": "season",
+       "pp": -3.4,
+       "up": false,
+       "text": "Musim: bulan ini biasanya basah"
+      }
+     ]
+    }
+   },
+   "obs_dates": [
+    "2026-11-04"
+   ]
+  },
+  "id3318140": {
+   "name": "Tlogowungu",
+   "steps": {
+    "now": {
+     "share": [
+      0.0,
+      0.366,
+      0.54
+     ],
+     "ha": [
+      0.0,
+      350.2,
+      515.6
+     ],
+     "hazard": [
+      0.354,
+      0.523,
+      0.617
+     ],
+     "status": "Waspada",
+     "status_range": [
+      "Normal",
+      "Siaga"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      16,
+      16
+     ],
+     "rain_win_mm": 69.0,
+     "reasons": [
+      {
+       "group": "state",
+       "pp": 34.9,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (46% kuat–ekstrem)"
+      },
+      {
+       "group": "rain_future",
+       "pp": -9.5,
+       "up": false,
+       "text": "Hujan sampai 20 Nov cukup: ±69 mm"
+      },
+      {
+       "group": "water",
+       "pp": -2.7,
+       "up": false,
+       "text": "Sawah irigasi 96% meredam kekeringan"
+      }
+     ]
+    },
+    "d7": {
+     "share": [
+      0.0,
+      0.223,
+      0.465
+     ],
+     "ha": [
+      0.0,
+      213.4,
+      444.0
+     ],
+     "hazard": [
+      0.252,
+      0.374,
+      0.563
+     ],
+     "status": "Normal",
+     "status_range": [
+      "Normal",
+      "Waspada"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      23,
+      23
+     ],
+     "rain_win_mm": 124.3,
+     "reasons": [
+      {
+       "group": "state",
+       "pp": 21.7,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (46% kuat–ekstrem)"
+      },
+      {
+       "group": "rain_future",
+       "pp": -19.1,
+       "up": false,
+       "text": "Hujan sampai 27 Nov cukup: ±124 mm"
+      },
+      {
+       "group": "season",
+       "pp": -6.8,
+       "up": false,
+       "text": "Musim: bulan ini biasanya basah"
+      }
+     ]
+    },
+    "d14": {
+     "share": [
+      0.0,
+      0.163,
+      0.459
+     ],
+     "ha": [
+      0.0,
+      155.9,
+      438.6
+     ],
+     "hazard": [
+      0.192,
+      0.312,
+      0.542
+     ],
+     "status": "Normal",
+     "status_range": [
+      "Normal",
+      "Waspada"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      30,
+      30
+     ],
+     "rain_win_mm": 157.3,
+     "reasons": [
+      {
+       "group": "rain_future",
+       "pp": -25.7,
+       "up": false,
+       "text": "Hujan sampai 4 Des cukup: ±157 mm"
+      },
+      {
+       "group": "state",
+       "pp": 16.2,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (46% kuat–ekstrem)"
+      },
+      {
+       "group": "season",
+       "pp": -6.9,
+       "up": false,
+       "text": "Musim: bulan ini biasanya basah"
+      }
+     ]
+    }
+   },
+   "obs_dates": [
+    "2026-11-04"
+   ]
+  },
+  "id3318150": {
+   "name": "Wedarijaksa",
+   "steps": {
+    "now": {
+     "share": [
+      0.0,
+      0.268,
+      0.424
+     ],
+     "ha": [
+      0.0,
+      320.4,
+      507.7
+     ],
+     "hazard": [
+      0.238,
+      0.406,
+      0.541
+     ],
+     "status": "Waspada",
+     "status_range": [
+      "Normal",
+      "Waspada"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      16,
+      16
+     ],
+     "rain_win_mm": 107.3,
+     "reasons": [
+      {
+       "group": "state",
+       "pp": 25.1,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (48% kuat–ekstrem)"
+      },
+      {
+       "group": "rain_future",
+       "pp": -18.4,
+       "up": false,
+       "text": "Hujan sampai 20 Nov cukup: ±107 mm"
+      },
+      {
+       "group": "season",
+       "pp": -2.0,
+       "up": false,
+       "text": "Musim: bulan ini biasanya basah"
+      }
+     ]
+    },
+    "d7": {
+     "share": [
+      0.0,
+      0.087,
+      0.37
+     ],
+     "ha": [
+      0.0,
+      103.7,
+      443.3
+     ],
+     "hazard": [
+      0.172,
+      0.275,
+      0.47
+     ],
+     "status": "Normal",
+     "status_range": [
+      "Normal",
+      "Waspada"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      23,
+      23
+     ],
+     "rain_win_mm": 177.9,
+     "reasons": [
+      {
+       "group": "rain_future",
+       "pp": -32.9,
+       "up": false,
+       "text": "Hujan sampai 27 Nov cukup: ±178 mm"
+      },
+      {
+       "group": "state",
+       "pp": 7.7,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (48% kuat–ekstrem)"
+      },
+      {
+       "group": "season",
+       "pp": -5.4,
+       "up": false,
+       "text": "Musim: bulan ini biasanya basah"
+      }
+     ]
+    },
+    "d14": {
+     "share": [
+      0.0,
+      0.059,
+      0.346
+     ],
+     "ha": [
+      0.0,
+      70.8,
+      414.5
+     ],
+     "hazard": [
+      0.094,
+      0.22,
+      0.455
+     ],
+     "status": "Normal",
+     "status_range": [
+      "Normal",
+      "Waspada"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      30,
+      30
+     ],
+     "rain_win_mm": 216.9,
+     "reasons": [
+      {
+       "group": "rain_future",
+       "pp": -36.1,
+       "up": false,
+       "text": "Hujan sampai 4 Des cukup: ±217 mm"
+      },
+      {
+       "group": "state",
+       "pp": 5.3,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (48% kuat–ekstrem)"
+      },
+      {
+       "group": "season",
+       "pp": -5.1,
+       "up": false,
+       "text": "Musim: bulan ini biasanya basah"
+      }
+     ]
+    }
+   },
+   "obs_dates": [
+    "2026-11-04"
+   ]
+  },
+  "id3318160": {
+   "name": "Trangkil",
+   "steps": {
+    "now": {
+     "share": [
+      0.0,
+      0.281,
+      0.401
+     ],
+     "ha": [
+      0.0,
+      261.0,
+      372.1
+     ],
+     "hazard": [
+      0.257,
+      0.41,
+      0.502
+     ],
+     "status": "Waspada",
+     "status_range": [
+      "Normal",
+      "Waspada"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      16,
+      16
+     ],
+     "rain_win_mm": 89.6,
+     "reasons": [
+      {
+       "group": "state",
+       "pp": 26.1,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (38% kuat–ekstrem)"
+      },
+      {
+       "group": "rain_future",
+       "pp": -8.7,
+       "up": false,
+       "text": "Hujan sampai 20 Nov cukup: ±90 mm"
+      },
+      {
+       "group": "season",
+       "pp": -2.5,
+       "up": false,
+       "text": "Musim: bulan ini biasanya basah"
+      }
+     ]
+    },
+    "d7": {
+     "share": [
+      0.0,
+      0.137,
+      0.346
+     ],
+     "ha": [
+      0.0,
+      127.4,
+      321.1
+     ],
+     "hazard": [
+      0.183,
+      0.251,
+      0.459
+     ],
+     "status": "Normal",
+     "status_range": [
+      "Normal",
+      "Waspada"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      23,
+      23
+     ],
+     "rain_win_mm": 151.2,
+     "reasons": [
+      {
+       "group": "rain_future",
+       "pp": -20.1,
+       "up": false,
+       "text": "Hujan sampai 27 Nov cukup: ±151 mm"
+      },
+      {
+       "group": "state",
+       "pp": 12.2,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (38% kuat–ekstrem)"
+      },
+      {
+       "group": "season",
+       "pp": -5.3,
+       "up": false,
+       "text": "Musim: bulan ini biasanya basah"
+      }
+     ]
+    },
+    "d14": {
+     "share": [
+      0.0,
+      0.076,
+      0.362
+     ],
+     "ha": [
+      0.0,
+      70.9,
+      335.5
+     ],
+     "hazard": [
+      0.136,
+      0.211,
+      0.444
+     ],
+     "status": "Normal",
+     "status_range": [
+      "Normal",
+      "Waspada"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      30,
+      30
+     ],
+     "rain_win_mm": 193.8,
+     "reasons": [
+      {
+       "group": "rain_future",
+       "pp": -26.5,
+       "up": false,
+       "text": "Hujan sampai 4 Des cukup: ±194 mm"
+      },
+      {
+       "group": "state",
+       "pp": 6.9,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (38% kuat–ekstrem)"
+      },
+      {
+       "group": "season",
+       "pp": -5.8,
+       "up": false,
+       "text": "Musim: bulan ini biasanya basah"
+      }
+     ]
+    }
+   },
+   "obs_dates": [
+    "2026-11-04"
+   ]
+  },
+  "id3318170": {
+   "name": "Margoyoso",
+   "steps": {
+    "now": {
+     "share": [
+      0.0,
+      0.13,
+      0.262
+     ],
+     "ha": [
+      0.0,
+      144.8,
+      292.3
+     ],
+     "hazard": [
+      0.198,
+      0.301,
+      0.386
+     ],
+     "status": "Normal",
+     "status_range": [
+      "Normal",
+      "Normal"
+     ],
+     "confidence": "Sedang",
+     "coverage": 1.0,
+     "h_days": [
+      16,
+      16
+     ],
+     "rain_win_mm": 69.0,
+     "reasons": [
+      {
+       "group": "state",
+       "pp": 10.6,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (19% kuat–ekstrem)"
+      },
+      {
+       "group": "rain_future",
+       "pp": -4.5,
+       "up": false,
+       "text": "Hujan sampai 20 Nov cukup: ±69 mm"
+      },
+      {
+       "group": "water",
+       "pp": -1.6,
+       "up": false,
+       "text": "Sawah irigasi 96% meredam kekeringan"
+      }
+     ]
+    },
+    "d7": {
+     "share": [
+      0.0,
+      0.082,
+      0.224
+     ],
+     "ha": [
+      0.0,
+      91.7,
+      249.1
+     ],
+     "hazard": [
+      0.155,
+      0.222,
+      0.35
+     ],
+     "status": "Normal",
+     "status_range": [
+      "Normal",
+      "Normal"
+     ],
+     "confidence": "Sedang",
+     "coverage": 1.0,
+     "h_days": [
+      23,
+      23
+     ],
+     "rain_win_mm": 124.3,
+     "reasons": [
+      {
+       "group": "state",
+       "pp": 7.2,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (19% kuat–ekstrem)"
+      },
+      {
+       "group": "rain_future",
+       "pp": -7.1,
+       "up": false,
+       "text": "Hujan sampai 27 Nov cukup: ±124 mm"
+      },
+      {
+       "group": "season",
+       "pp": -2.2,
+       "up": false,
+       "text": "Musim: bulan ini biasanya basah"
+      }
+     ]
+    },
+    "d14": {
+     "share": [
+      0.0,
+      0.068,
+      0.222
+     ],
+     "ha": [
+      0.0,
+      76.0,
+      247.6
+     ],
+     "hazard": [
+      0.14,
+      0.204,
+      0.34
+     ],
+     "status": "Normal",
+     "status_range": [
+      "Normal",
+      "Normal"
+     ],
+     "confidence": "Sedang",
+     "coverage": 1.0,
+     "h_days": [
+      30,
+      30
+     ],
+     "rain_win_mm": 157.4,
+     "reasons": [
+      {
+       "group": "rain_future",
+       "pp": -8.9,
+       "up": false,
+       "text": "Hujan sampai 4 Des cukup: ±157 mm"
+      },
+      {
+       "group": "state",
+       "pp": 6.4,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (19% kuat–ekstrem)"
+      },
+      {
+       "group": "season",
+       "pp": -2.7,
+       "up": false,
+       "text": "Musim: bulan ini biasanya basah"
+      }
+     ]
+    }
+   },
+   "obs_dates": [
+    "2026-11-04"
+   ]
+  },
+  "id3318180": {
+   "name": "Gunung Wungkal",
+   "steps": {
+    "now": {
+     "share": [
+      0.0,
+      0.029,
+      0.085
+     ],
+     "ha": [
+      0.0,
+      11.5,
+      33.5
+     ],
+     "hazard": [
+      0.128,
+      0.192,
+      0.247
+     ],
+     "status": "Normal",
+     "status_range": [
+      "Normal",
+      "Normal"
+     ],
+     "confidence": "Tinggi",
+     "coverage": 0.99,
+     "h_days": [
+      16,
+      16
+     ],
+     "rain_win_mm": 54.4,
+     "reasons": [
+      {
+       "group": "water",
+       "pp": -2.3,
+       "up": false,
+       "text": "Sawah irigasi 81% meredam kekeringan"
+      },
+      {
+       "group": "season",
+       "pp": 1.0,
+       "up": true,
+       "text": "Musim: bulan ini biasanya kering"
+      },
+      {
+       "group": "rain_future",
+       "pp": -0.7,
+       "up": false,
+       "text": "Hujan sampai 20 Nov cukup: ±54 mm"
+      }
+     ]
+    },
+    "d7": {
+     "share": [
+      0.0,
+      0.013,
+      0.071
+     ],
+     "ha": [
+      0.0,
+      4.9,
+      27.9
+     ],
+     "hazard": [
+      0.117,
+      0.148,
+      0.228
+     ],
+     "status": "Normal",
+     "status_range": [
+      "Normal",
+      "Normal"
+     ],
+     "confidence": "Tinggi",
+     "coverage": 0.99,
+     "h_days": [
+      23,
+      23
+     ],
+     "rain_win_mm": 100.8,
+     "reasons": [
+      {
+       "group": "water",
+       "pp": -1.6,
+       "up": false,
+       "text": "Sawah irigasi 81% meredam kekeringan"
+      },
+      {
+       "group": "rain_future",
+       "pp": -1.4,
+       "up": false,
+       "text": "Hujan sampai 27 Nov cukup: ±101 mm"
+      },
+      {
+       "group": "state",
+       "pp": 0.5,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (3% kuat–ekstrem)"
+      }
+     ]
+    },
+    "d14": {
+     "share": [
+      0.0,
+      0.004,
+      0.07
+     ],
+     "ha": [
+      0.0,
+      1.7,
+      27.7
+     ],
+     "hazard": [
+      0.11,
+      0.129,
+      0.224
+     ],
+     "status": "Normal",
+     "status_range": [
+      "Normal",
+      "Normal"
+     ],
+     "confidence": "Tinggi",
+     "coverage": 0.99,
+     "h_days": [
+      30,
+      30
+     ],
+     "rain_win_mm": 127.8,
+     "reasons": [
+      {
+       "group": "rain_future",
+       "pp": -2.3,
+       "up": false,
+       "text": "Hujan sampai 4 Des cukup: ±128 mm"
+      },
+      {
+       "group": "water",
+       "pp": -2.3,
+       "up": false,
+       "text": "Sawah irigasi 81% meredam kekeringan"
+      },
+      {
+       "group": "season",
+       "pp": -0.9,
+       "up": false,
+       "text": "Musim: bulan ini biasanya basah"
+      }
+     ]
+    }
+   },
+   "obs_dates": [
+    "2026-11-04"
+   ]
+  },
+  "id3318190": {
+   "name": "Cluwak",
+   "steps": {
+    "now": {
+     "share": [
+      0.0,
+      0.099,
+      0.187
+     ],
+     "ha": [
+      0.0,
+      67.6,
+      127.9
+     ],
+     "hazard": [
+      0.177,
+      0.304,
+      0.373
+     ],
+     "status": "Normal",
+     "status_range": [
+      "Normal",
+      "Normal"
+     ],
+     "confidence": "Sedang",
+     "coverage": 1.0,
+     "h_days": [
+      16,
+      16
+     ],
+     "rain_win_mm": 58.5,
+     "reasons": [
+      {
+       "group": "state",
+       "pp": 6.3,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (10% kuat–ekstrem)"
+      },
+      {
+       "group": "rain_future",
+       "pp": -2.5,
+       "up": false,
+       "text": "Hujan sampai 20 Nov cukup: ±59 mm"
+      },
+      {
+       "group": "season",
+       "pp": 2.0,
+       "up": true,
+       "text": "Musim: bulan ini biasanya kering"
+      }
+     ]
+    },
+    "d7": {
+     "share": [
+      0.0,
+      0.047,
+      0.163
+     ],
+     "ha": [
+      0.0,
+      32.1,
+      111.6
+     ],
+     "hazard": [
+      0.137,
+      0.208,
+      0.328
+     ],
+     "status": "Normal",
+     "status_range": [
+      "Normal",
+      "Normal"
+     ],
+     "confidence": "Sedang",
+     "coverage": 1.0,
+     "h_days": [
+      23,
+      23
+     ],
+     "rain_win_mm": 107.1,
+     "reasons": [
+      {
+       "group": "rain_future",
+       "pp": -5.5,
+       "up": false,
+       "text": "Hujan sampai 27 Nov cukup: ±107 mm"
+      },
+      {
+       "group": "state",
+       "pp": 3.3,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (10% kuat–ekstrem)"
+      },
+      {
+       "group": "season",
+       "pp": -1.4,
+       "up": false,
+       "text": "Musim: bulan ini biasanya basah"
+      }
+     ]
+    },
+    "d14": {
+     "share": [
+      0.0,
+      0.031,
+      0.154
+     ],
+     "ha": [
+      0.0,
+      20.9,
+      105.5
+     ],
+     "hazard": [
+      0.122,
+      0.184,
+      0.31
+     ],
+     "status": "Normal",
+     "status_range": [
+      "Normal",
+      "Normal"
+     ],
+     "confidence": "Sedang",
+     "coverage": 1.0,
+     "h_days": [
+      30,
+      30
+     ],
+     "rain_win_mm": 141.8,
+     "reasons": [
+      {
+       "group": "rain_future",
+       "pp": -7.4,
+       "up": false,
+       "text": "Hujan sampai 4 Des cukup: ±142 mm"
+      },
+      {
+       "group": "state",
+       "pp": 2.5,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (10% kuat–ekstrem)"
+      },
+      {
+       "group": "season",
+       "pp": -2.3,
+       "up": false,
+       "text": "Musim: bulan ini biasanya basah"
+      }
+     ]
+    }
+   },
+   "obs_dates": [
+    "2026-11-04"
+   ]
+  },
+  "id3318200": {
+   "name": "Tayu",
+   "steps": {
+    "now": {
+     "share": [
+      0.0,
+      0.122,
+      0.245
+     ],
+     "ha": [
+      0.0,
+      198.9,
+      397.3
+     ],
+     "hazard": [
+      0.183,
+      0.318,
+      0.417
+     ],
+     "status": "Normal",
+     "status_range": [
+      "Normal",
+      "Waspada"
+     ],
+     "confidence": "Sedang",
+     "coverage": 1.0,
+     "h_days": [
+      16,
+      16
+     ],
+     "rain_win_mm": 58.5,
+     "reasons": [
+      {
+       "group": "state",
+       "pp": 7.9,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (16% kuat–ekstrem)"
+      },
+      {
+       "group": "season",
+       "pp": 2.5,
+       "up": true,
+       "text": "Musim: bulan ini biasanya kering"
+      },
+      {
+       "group": "rain_future",
+       "pp": -2.2,
+       "up": false,
+       "text": "Hujan sampai 20 Nov cukup: ±59 mm"
+      }
+     ]
+    },
+    "d7": {
+     "share": [
+      0.0,
+      0.079,
+      0.207
+     ],
+     "ha": [
+      0.0,
+      128.0,
+      336.5
+     ],
+     "hazard": [
+      0.142,
+      0.23,
+      0.356
+     ],
+     "status": "Normal",
+     "status_range": [
+      "Normal",
+      "Normal"
+     ],
+     "confidence": "Sedang",
+     "coverage": 1.0,
+     "h_days": [
+      23,
+      23
+     ],
+     "rain_win_mm": 107.1,
+     "reasons": [
+      {
+       "group": "state",
+       "pp": 6.0,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (16% kuat–ekstrem)"
+      },
+      {
+       "group": "rain_future",
+       "pp": -4.8,
+       "up": false,
+       "text": "Hujan sampai 27 Nov cukup: ±107 mm"
+      },
+      {
+       "group": "water",
+       "pp": -1.8,
+       "up": false,
+       "text": "Sawah irigasi 100% meredam kekeringan"
+      }
+     ]
+    },
+    "d14": {
+     "share": [
+      0.0,
+      0.064,
+      0.203
+     ],
+     "ha": [
+      0.0,
+      104.4,
+      330.4
+     ],
+     "hazard": [
+      0.128,
+      0.208,
+      0.343
+     ],
+     "status": "Normal",
+     "status_range": [
+      "Normal",
+      "Normal"
+     ],
+     "confidence": "Sedang",
+     "coverage": 1.0,
+     "h_days": [
+      30,
+      30
+     ],
+     "rain_win_mm": 141.8,
+     "reasons": [
+      {
+       "group": "rain_future",
+       "pp": -6.5,
+       "up": false,
+       "text": "Hujan sampai 4 Des cukup: ±142 mm"
+      },
+      {
+       "group": "state",
+       "pp": 5.4,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (16% kuat–ekstrem)"
+      },
+      {
+       "group": "water",
+       "pp": -2.0,
+       "up": false,
+       "text": "Sawah irigasi 100% meredam kekeringan"
+      }
+     ]
+    }
+   },
+   "obs_dates": [
+    "2026-11-04"
+   ]
+  },
+  "id3318210": {
+   "name": "Dukuhseti",
+   "steps": {
+    "now": {
+     "share": [
+      0.0,
+      0.422,
+      0.538
+     ],
+     "ha": [
+      0.0,
+      738.2,
+      941.0
+     ],
+     "hazard": [
+      0.354,
+      0.553,
+      0.607
+     ],
+     "status": "Waspada",
+     "status_range": [
+      "Normal",
+      "Siaga"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      16,
+      16
+     ],
+     "rain_win_mm": 38.0,
+     "reasons": [
+      {
+       "group": "state",
+       "pp": 35.3,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (45% kuat–ekstrem)"
+      },
+      {
+       "group": "season",
+       "pp": 5.1,
+       "up": true,
+       "text": "Musim: bulan ini biasanya kering"
+      },
+      {
+       "group": "water",
+       "pp": 1.9,
+       "up": true,
+       "text": "Irigasi minim (66% sawah irigasi)"
+      }
+     ]
+    },
+    "d7": {
+     "share": [
+      0.0,
+      0.388,
+      0.52
+     ],
+     "ha": [
+      0.0,
+      679.3,
+      910.4
+     ],
+     "hazard": [
+      0.297,
+      0.512,
+      0.585
+     ],
+     "status": "Waspada",
+     "status_range": [
+      "Normal",
+      "Waspada"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      23,
+      23
+     ],
+     "rain_win_mm": 66.2,
+     "reasons": [
+      {
+       "group": "state",
+       "pp": 32.8,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (45% kuat–ekstrem)"
+      },
+      {
+       "group": "season",
+       "pp": 2.5,
+       "up": true,
+       "text": "Musim: bulan ini biasanya kering"
+      },
+      {
+       "group": "water",
+       "pp": 1.9,
+       "up": true,
+       "text": "Irigasi minim (66% sawah irigasi)"
+      }
+     ]
+    },
+    "d14": {
+     "share": [
+      0.0,
+      0.393,
+      0.537
+     ],
+     "ha": [
+      0.0,
+      688.5,
+      939.6
+     ],
+     "hazard": [
+      0.281,
+      0.509,
+      0.589
+     ],
+     "status": "Waspada",
+     "status_range": [
+      "Normal",
+      "Waspada"
+     ],
+     "confidence": "Rendah",
+     "coverage": 1.0,
+     "h_days": [
+      30,
+      30
+     ],
+     "rain_win_mm": 80.0,
+     "reasons": [
+      {
+       "group": "state",
+       "pp": 31.7,
+       "up": true,
+       "text": "Cekaman sudah tinggi pada citra terakhir (45% kuat–ekstrem)"
+      },
+      {
+       "group": "water",
+       "pp": 3.1,
+       "up": true,
+       "text": "Irigasi minim (66% sawah irigasi)"
+      },
+      {
+       "group": "season",
+       "pp": 2.4,
+       "up": true,
+       "text": "Musim: bulan ini biasanya kering"
+      }
+     ]
+    }
+   },
+   "obs_dates": [
+    "2026-11-04"
+   ]
+  }
+ }
+}
