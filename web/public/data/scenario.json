@@ -1,0 +1,6836 @@
+{
+ "generated_at": "2026-11-20T00:44:41+00:00",
+ "period_id": "2026-11",
+ "max_dasarian": 9,
+ "method": "quantile_mapping",
+ "calibration": {
+  "rain_max_mm": 40,
+  "months": [
+   {
+    "pair": "2026-06>2026-07",
+    "rain_mm": 8.4,
+    "kec_mae_ha": 134,
+    "kec_bias_ha": 19,
+    "persist_mae_ha": 166,
+    "kec_mean_ha": 332,
+    "percentiles": [
+     10,
+     20,
+     30,
+     40,
+     50,
+     60,
+     70,
+     80,
+     90
+    ],
+    "before": [
+     0.233,
+     0.284,
+     0.34,
+     0.407,
+     0.497,
+     0.62,
+     0.765,
+     0.949,
+     1.201
+    ],
+    "after": [
+     0.293,
+     0.357,
+     0.42,
+     0.494,
+     0.587,
+     0.705,
+     0.854,
+     1.05,
+     1.358
+    ]
+   },
+   {
+    "pair": "2026-07>2026-08",
+    "rain_mm": 15.7,
+    "kec_mae_ha": 153,
+    "kec_bias_ha": 24,
+    "persist_mae_ha": 261,
+    "kec_mean_ha": 537,
+    "percentiles": [
+     10,
+     20,
+     30,
+     40,
+     50,
+     60,
+     70,
+     80,
+     90
+    ],
+    "before": [
+     0.289,
+     0.353,
+     0.413,
+     0.483,
+     0.57,
+     0.682,
+     0.824,
+     1.011,
+     1.299
+    ],
+    "after": [
+     0.301,
+     0.408,
+     0.512,
+     0.619,
+     0.739,
+     0.881,
+     1.06,
+     1.305,
+     1.695
+    ]
+   },
+   {
+    "pair": "2026-08>2026-09",
+    "rain_mm": 24.4,
+    "kec_mae_ha": 225,
+    "kec_bias_ha": 28,
+    "persist_mae_ha": 507,
+    "kec_mean_ha": 879,
+    "percentiles": [
+     10,
+     20,
+     30,
+     40,
+     50,
+     60,
+     70,
+     80,
+     90
+    ],
+    "before": [
+     0.269,
+     0.361,
+     0.457,
+     0.555,
+     0.663,
+     0.793,
+     0.957,
+     1.183,
+     1.547
+    ],
+    "after": [
+     0.337,
+     0.512,
+     0.674,
+     0.845,
+     1.05,
+     1.296,
+     1.588,
+     1.952,
+     2.501
+    ]
+   }
+  ]
+ },
+ "totals": {
+  "0": {
+   "class_ha": {
+    "1": 117.2,
+    "2": 11115.2,
+    "3": 5893.5,
+    "4": 8100.3,
+    "5": 6410.7
+   },
+   "active_ha": 31637.0,
+   "ha_at_risk": 10497.5
+  },
+  "1": {
+   "class_ha": {
+    "1": 117.2,
+    "2": 10449.0,
+    "3": 6132.9,
+    "4": 8164.9,
+    "5": 6772.6
+   },
+   "active_ha": 31637.0,
+   "ha_at_risk": 10823.2
+  },
+  "2": {
+   "class_ha": {
+    "1": 117.2,
+    "2": 10449.0,
+    "3": 5684.2,
+    "4": 8214.3,
+    "5": 7172.4
+   },
+   "active_ha": 31637.0,
+   "ha_at_risk": 10966.4
+  },
+  "3": {
+   "class_ha": {
+    "1": 117.1,
+    "2": 9763.8,
+    "3": 5908.1,
+    "4": 8228.6,
+    "5": 7619.4
+   },
+   "active_ha": 31636.9,
+   "ha_at_risk": 11315.1
+  },
+  "4": {
+   "class_ha": {
+    "1": 117.1,
+    "2": 9087.2,
+    "3": 6088.2,
+    "4": 7876.8,
+    "5": 8467.9
+   },
+   "active_ha": 31636.9,
+   "ha_at_risk": 11707.0
+  },
+  "5": {
+   "class_ha": {
+    "1": 117.1,
+    "2": 8400.0,
+    "3": 5721.3,
+    "4": 7925.0,
+    "5": 9473.3
+   },
+   "active_ha": 31637.0,
+   "ha_at_risk": 12259.3
+  },
+  "6": {
+   "class_ha": {
+    "1": 117.1,
+    "2": 7733.7,
+    "3": 5254.2,
+    "4": 8096.9,
+    "5": 10434.9
+   },
+   "active_ha": 31637.0,
+   "ha_at_risk": 12830.2
+  },
+  "7": {
+   "class_ha": {
+    "1": 117.1,
+    "2": 7040.2,
+    "3": 4075.0,
+    "4": 8180.8,
+    "5": 12224.0
+   },
+   "active_ha": 31637.0,
+   "ha_at_risk": 13688.0
+  },
+  "8": {
+   "class_ha": {
+    "1": 117.1,
+    "2": 6230.8,
+    "3": 3533.0,
+    "4": 8452.5,
+    "5": 13303.7
+   },
+   "active_ha": 31636.9,
+   "ha_at_risk": 14388.5
+  },
+  "9": {
+   "class_ha": {
+    "1": 117.1,
+    "2": 5091.2,
+    "3": 3308.7,
+    "4": 8608.8,
+    "5": 14511.4
+   },
+   "active_ha": 31636.9,
+   "ha_at_risk": 15213.0
+  }
+ },
+ "kecamatan": {
+  "id3318010": {
+   "0": {
+    "active_ha": 4505.5,
+    "hazard_index": 0.315,
+    "ha_at_risk": 936.6,
+    "status": "Normal",
+    "class_ha": {
+     "1": 1.5,
+     "2": 2844.0,
+     "3": 850.0,
+     "4": 654.4,
+     "5": 155.7
+    },
+    "stage_ha": {
+     "2": 2103.8,
+     "3": 2002.5,
+     "4": 399.2
+    },
+    "stressed_stage_ha": {
+     "2": 412.2,
+     "3": 234.9,
+     "4": 162.9
+    },
+    "action": null,
+    "rank": 2
+   },
+   "1": {
+    "active_ha": 4505.5,
+    "hazard_index": 0.33,
+    "ha_at_risk": 982.5,
+    "status": "Normal",
+    "class_ha": {
+     "1": 1.5,
+     "2": 2721.1,
+     "3": 931.3,
+     "4": 677.8,
+     "5": 173.8
+    },
+    "stage_ha": {
+     "2": 2103.8,
+     "3": 2002.5,
+     "4": 399.2
+    },
+    "stressed_stage_ha": {
+     "2": 421.8,
+     "3": 262.4,
+     "4": 167.4
+    },
+    "action": null,
+    "rank": 2
+   },
+   "2": {
+    "active_ha": 4505.5,
+    "hazard_index": 0.335,
+    "ha_at_risk": 998.6,
+    "status": "Normal",
+    "class_ha": {
+     "1": 1.5,
+     "2": 2721.1,
+     "3": 873.9,
+     "4": 715.4,
+     "5": 193.5
+    },
+    "stage_ha": {
+     "2": 2103.8,
+     "3": 2002.5,
+     "4": 399.2
+    },
+    "stressed_stage_ha": {
+     "2": 432.1,
+     "3": 302.4,
+     "4": 174.4
+    },
+    "action": null,
+    "rank": 2
+   },
+   "3": {
+    "active_ha": 4505.5,
+    "hazard_index": 0.352,
+    "ha_at_risk": 1050.5,
+    "status": "Normal",
+    "class_ha": {
+     "1": 1.4,
+     "2": 2591.8,
+     "3": 950.0,
+     "4": 739.6,
+     "5": 222.6
+    },
+    "stage_ha": {
+     "2": 2103.8,
+     "3": 2002.5,
+     "4": 399.2
+    },
+    "stressed_stage_ha": {
+     "2": 440.8,
+     "3": 342.4,
+     "4": 179.0
+    },
+    "action": null,
+    "rank": 2
+   },
+   "4": {
+    "active_ha": 4505.5,
+    "hazard_index": 0.369,
+    "ha_at_risk": 1103.5,
+    "status": "Normal",
+    "class_ha": {
+     "1": 1.4,
+     "2": 2474.2,
+     "3": 1007.4,
+     "4": 742.5,
+     "5": 280.0
+    },
+    "stage_ha": {
+     "2": 2103.8,
+     "3": 2002.5,
+     "4": 399.2
+    },
+    "stressed_stage_ha": {
+     "2": 451.0,
+     "3": 386.4,
+     "4": 185.1
+    },
+    "action": null,
+    "rank": 2
+   },
+   "5": {
+    "active_ha": 4505.5,
+    "hazard_index": 0.393,
+    "ha_at_risk": 1178.0,
+    "status": "Normal",
+    "class_ha": {
+     "1": 1.4,
+     "2": 2360.9,
+     "3": 976.3,
+     "4": 812.4,
+     "5": 354.5
+    },
+    "stage_ha": {
+     "2": 2103.8,
+     "3": 2002.5,
+     "4": 399.2
+    },
+    "stressed_stage_ha": {
+     "2": 468.9,
+     "3": 500.1,
+     "4": 198.0
+    },
+    "action": null,
+    "rank": 2
+   },
+   "6": {
+    "active_ha": 4505.5,
+    "hazard_index": 0.417,
+    "ha_at_risk": 1254.7,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 1.4,
+     "2": 2260.5,
+     "3": 910.2,
+     "4": 901.4,
+     "5": 432.0
+    },
+    "stage_ha": {
+     "2": 2103.8,
+     "3": 2002.5,
+     "4": 399.2
+    },
+    "stressed_stage_ha": {
+     "2": 489.3,
+     "3": 635.3,
+     "4": 208.8
+    },
+    "action": {
+     "headline": "Hemat air dan siapkan pompa untuk vegetatif akhir",
+     "steps": [
+      "Terapkan pengairan berselang (basah-kering) agar air cukup sampai fase bunting.",
+      "Inventarisasi pompa dan sumur dangkal di wilayah kelompok tani.",
+      "Cek lapangan blok yang ditandai merah."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 2
+   },
+   "7": {
+    "active_ha": 4505.5,
+    "hazard_index": 0.456,
+    "ha_at_risk": 1376.2,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 1.4,
+     "2": 2169.7,
+     "3": 674.4,
+     "4": 1072.4,
+     "5": 587.7
+    },
+    "stage_ha": {
+     "2": 2103.8,
+     "3": 2002.5,
+     "4": 399.2
+    },
+    "stressed_stage_ha": {
+     "2": 522.1,
+     "3": 909.2,
+     "4": 228.7
+    },
+    "action": {
+     "headline": "Hemat air dan siapkan pompa untuk vegetatif akhir",
+     "steps": [
+      "Terapkan pengairan berselang (basah-kering) agar air cukup sampai fase bunting.",
+      "Inventarisasi pompa dan sumur dangkal di wilayah kelompok tani.",
+      "Cek lapangan blok yang ditandai merah."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 2
+   },
+   "8": {
+    "active_ha": 4505.5,
+    "hazard_index": 0.486,
+    "ha_at_risk": 1471.0,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 1.4,
+     "2": 2086.6,
+     "3": 505.2,
+     "4": 1223.0,
+     "5": 689.3
+    },
+    "stage_ha": {
+     "2": 2103.8,
+     "3": 2002.5,
+     "4": 399.2
+    },
+    "stressed_stage_ha": {
+     "2": 550.9,
+     "3": 1114.9,
+     "4": 246.5
+    },
+    "action": {
+     "headline": "Hemat air dan siapkan pompa untuk vegetatif akhir",
+     "steps": [
+      "Terapkan pengairan berselang (basah-kering) agar air cukup sampai fase bunting.",
+      "Inventarisasi pompa dan sumur dangkal di wilayah kelompok tani.",
+      "Cek lapangan blok yang ditandai merah."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 2
+   },
+   "9": {
+    "active_ha": 4505.5,
+    "hazard_index": 0.516,
+    "ha_at_risk": 1564.5,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 1.4,
+     "2": 1995.3,
+     "3": 365.6,
+     "4": 1333.2,
+     "5": 810.0
+    },
+    "stage_ha": {
+     "2": 2103.8,
+     "3": 2002.5,
+     "4": 399.2
+    },
+    "stressed_stage_ha": {
+     "2": 582.7,
+     "3": 1295.3,
+     "4": 265.2
+    },
+    "action": {
+     "headline": "Hemat air dan siapkan pompa untuk vegetatif akhir",
+     "steps": [
+      "Terapkan pengairan berselang (basah-kering) agar air cukup sampai fase bunting.",
+      "Inventarisasi pompa dan sumur dangkal di wilayah kelompok tani.",
+      "Cek lapangan blok yang ditandai merah."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 2
+   }
+  },
+  "id3318020": {
+   "0": {
+    "active_ha": 3103.9,
+    "hazard_index": 0.65,
+    "ha_at_risk": 1219.1,
+    "status": "Siaga",
+    "class_ha": {
+     "1": 4.8,
+     "2": 640.4,
+     "3": 671.6,
+     "4": 1120.9,
+     "5": 666.2
+    },
+    "stage_ha": {
+     "2": 1554.2,
+     "3": 1299.6,
+     "4": 250.1
+    },
+    "stressed_stage_ha": {
+     "2": 1221.7,
+     "3": 435.0,
+     "4": 130.5
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "3 hari ke depan"
+    },
+    "rank": 1
+   },
+   "1": {
+    "active_ha": 3103.9,
+    "hazard_index": 0.666,
+    "ha_at_risk": 1252.0,
+    "status": "Siaga",
+    "class_ha": {
+     "1": 4.8,
+     "2": 584.2,
+     "3": 677.5,
+     "4": 1114.7,
+     "5": 722.8
+    },
+    "stage_ha": {
+     "2": 1554.2,
+     "3": 1299.6,
+     "4": 250.1
+    },
+    "stressed_stage_ha": {
+     "2": 1228.3,
+     "3": 474.0,
+     "4": 135.2
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "3 hari ke depan"
+    },
+    "rank": 1
+   },
+   "2": {
+    "active_ha": 3103.9,
+    "hazard_index": 0.675,
+    "ha_at_risk": 1270.0,
+    "status": "Siaga",
+    "class_ha": {
+     "1": 4.8,
+     "2": 584.2,
+     "3": 625.4,
+     "4": 1103.3,
+     "5": 786.3
+    },
+    "stage_ha": {
+     "2": 1554.2,
+     "3": 1299.6,
+     "4": 250.1
+    },
+    "stressed_stage_ha": {
+     "2": 1234.9,
+     "3": 514.4,
+     "4": 140.3
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "3 hari ke depan"
+    },
+    "rank": 1
+   },
+   "3": {
+    "active_ha": 3103.9,
+    "hazard_index": 0.692,
+    "ha_at_risk": 1305.4,
+    "status": "Siaga",
+    "class_ha": {
+     "1": 4.8,
+     "2": 529.5,
+     "3": 621.5,
+     "4": 1094.5,
+     "5": 853.7
+    },
+    "stage_ha": {
+     "2": 1554.2,
+     "3": 1299.6,
+     "4": 250.1
+    },
+    "stressed_stage_ha": {
+     "2": 1242.0,
+     "3": 560.7,
+     "4": 145.5
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "3 hari ke depan"
+    },
+    "rank": 1
+   },
+   "4": {
+    "active_ha": 3103.9,
+    "hazard_index": 0.712,
+    "ha_at_risk": 1346.1,
+    "status": "Siaga",
+    "class_ha": {
+     "1": 4.8,
+     "2": 478.5,
+     "3": 609.0,
+     "4": 1033.3,
+     "5": 978.5
+    },
+    "stage_ha": {
+     "2": 1554.2,
+     "3": 1299.6,
+     "4": 250.1
+    },
+    "stressed_stage_ha": {
+     "2": 1248.1,
+     "3": 612.7,
+     "4": 150.9
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "3 hari ke depan"
+    },
+    "rank": 1
+   },
+   "5": {
+    "active_ha": 3103.9,
+    "hazard_index": 0.739,
+    "ha_at_risk": 1403.5,
+    "status": "Siaga",
+    "class_ha": {
+     "1": 4.8,
+     "2": 425.8,
+     "3": 539.9,
+     "4": 1009.6,
+     "5": 1123.8
+    },
+    "stage_ha": {
+     "2": 1554.2,
+     "3": 1299.6,
+     "4": 250.1
+    },
+    "stressed_stage_ha": {
+     "2": 1259.9,
+     "3": 714.2,
+     "4": 159.4
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "3 hari ke depan"
+    },
+    "rank": 1
+   },
+   "6": {
+    "active_ha": 3103.9,
+    "hazard_index": 0.767,
+    "ha_at_risk": 1462.1,
+    "status": "Awas",
+    "class_ha": {
+     "1": 4.8,
+     "2": 379.6,
+     "3": 454.0,
+     "4": 1004.0,
+     "5": 1261.6
+    },
+    "stage_ha": {
+     "2": 1554.2,
+     "3": 1299.6,
+     "4": 250.1
+    },
+    "stressed_stage_ha": {
+     "2": 1273.3,
+     "3": 821.2,
+     "4": 171.2
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 1
+   },
+   "7": {
+    "active_ha": 3103.9,
+    "hazard_index": 0.805,
+    "ha_at_risk": 1544.9,
+    "status": "Awas",
+    "class_ha": {
+     "1": 4.8,
+     "2": 337.4,
+     "3": 303.0,
+     "4": 963.5,
+     "5": 1495.3
+    },
+    "stage_ha": {
+     "2": 1554.2,
+     "3": 1299.6,
+     "4": 250.1
+    },
+    "stressed_stage_ha": {
+     "2": 1291.3,
+     "3": 980.2,
+     "4": 187.3
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 1
+   },
+   "8": {
+    "active_ha": 3103.9,
+    "hazard_index": 0.829,
+    "ha_at_risk": 1597.4,
+    "status": "Awas",
+    "class_ha": {
+     "1": 4.8,
+     "2": 298.8,
+     "3": 230.6,
+     "4": 939.5,
+     "5": 1630.2
+    },
+    "stage_ha": {
+     "2": 1554.2,
+     "3": 1299.6,
+     "4": 250.1
+    },
+    "stressed_stage_ha": {
+     "2": 1304.2,
+     "3": 1067.3,
+     "4": 198.2
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 1
+   },
+   "9": {
+    "active_ha": 3103.9,
+    "hazard_index": 0.854,
+    "ha_at_risk": 1650.7,
+    "status": "Awas",
+    "class_ha": {
+     "1": 4.8,
+     "2": 258.7,
+     "3": 167.2,
+     "4": 886.2,
+     "5": 1787.2
+    },
+    "stage_ha": {
+     "2": 1554.2,
+     "3": 1299.6,
+     "4": 250.1
+    },
+    "stressed_stage_ha": {
+     "2": 1319.8,
+     "3": 1143.4,
+     "4": 210.2
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 1
+   }
+  },
+  "id3318030": {
+   "0": {
+    "active_ha": 1773.5,
+    "hazard_index": 0.852,
+    "ha_at_risk": 845.3,
+    "status": "Awas",
+    "class_ha": {
+     "1": 7.7,
+     "2": 28.4,
+     "3": 280.4,
+     "4": 595.6,
+     "5": 861.3
+    },
+    "stage_ha": {
+     "2": 1121.3,
+     "3": 643.0,
+     "4": 9.2
+    },
+    "stressed_stage_ha": {
+     "2": 1108.6,
+     "3": 340.7,
+     "4": 7.7
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 5
+   },
+   "1": {
+    "active_ha": 1773.5,
+    "hazard_index": 0.862,
+    "ha_at_risk": 856.9,
+    "status": "Awas",
+    "class_ha": {
+     "1": 7.7,
+     "2": 19.2,
+     "3": 261.5,
+     "4": 596.1,
+     "5": 888.9
+    },
+    "stage_ha": {
+     "2": 1121.3,
+     "3": 643.0,
+     "4": 9.2
+    },
+    "stressed_stage_ha": {
+     "2": 1108.7,
+     "3": 368.4,
+     "4": 7.9
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 5
+   },
+   "2": {
+    "active_ha": 1773.5,
+    "hazard_index": 0.871,
+    "ha_at_risk": 867.1,
+    "status": "Awas",
+    "class_ha": {
+     "1": 7.7,
+     "2": 19.2,
+     "3": 230.0,
+     "4": 595.2,
+     "5": 921.3
+    },
+    "stage_ha": {
+     "2": 1121.3,
+     "3": 643.0,
+     "4": 9.2
+    },
+    "stressed_stage_ha": {
+     "2": 1109.3,
+     "3": 399.2,
+     "4": 8.1
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 5
+   },
+   "3": {
+    "active_ha": 1773.5,
+    "hazard_index": 0.881,
+    "ha_at_risk": 879.1,
+    "status": "Awas",
+    "class_ha": {
+     "1": 7.7,
+     "2": 10.7,
+     "3": 211.5,
+     "4": 584.3,
+     "5": 959.2
+    },
+    "stage_ha": {
+     "2": 1121.3,
+     "3": 643.0,
+     "4": 9.2
+    },
+    "stressed_stage_ha": {
+     "2": 1109.6,
+     "3": 425.7,
+     "4": 8.2
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 5
+   },
+   "4": {
+    "active_ha": 1773.5,
+    "hazard_index": 0.892,
+    "ha_at_risk": 891.4,
+    "status": "Awas",
+    "class_ha": {
+     "1": 7.7,
+     "2": 7.7,
+     "3": 187.5,
+     "4": 551.1,
+     "5": 1019.5
+    },
+    "stage_ha": {
+     "2": 1121.3,
+     "3": 643.0,
+     "4": 9.2
+    },
+    "stressed_stage_ha": {
+     "2": 1110.3,
+     "3": 452.0,
+     "4": 8.3
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 5
+   },
+   "5": {
+    "active_ha": 1773.5,
+    "hazard_index": 0.911,
+    "ha_at_risk": 913.3,
+    "status": "Awas",
+    "class_ha": {
+     "1": 7.7,
+     "2": 4.7,
+     "3": 131.3,
+     "4": 534.2,
+     "5": 1095.6
+    },
+    "stage_ha": {
+     "2": 1121.3,
+     "3": 643.0,
+     "4": 9.2
+    },
+    "stressed_stage_ha": {
+     "2": 1110.8,
+     "3": 510.6,
+     "4": 8.4
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 5
+   },
+   "6": {
+    "active_ha": 1773.5,
+    "hazard_index": 0.927,
+    "ha_at_risk": 932.6,
+    "status": "Awas",
+    "class_ha": {
+     "1": 7.7,
+     "2": 3.1,
+     "3": 83.0,
+     "4": 512.0,
+     "5": 1167.7
+    },
+    "stage_ha": {
+     "2": 1121.3,
+     "3": 643.0,
+     "4": 9.2
+    },
+    "stressed_stage_ha": {
+     "2": 1111.0,
+     "3": 560.3,
+     "4": 8.4
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 5
+   },
+   "7": {
+    "active_ha": 1773.5,
+    "hazard_index": 0.95,
+    "ha_at_risk": 959.5,
+    "status": "Awas",
+    "class_ha": {
+     "1": 7.7,
+     "2": 2.1,
+     "3": 26.3,
+     "4": 442.7,
+     "5": 1294.6
+    },
+    "stage_ha": {
+     "2": 1121.3,
+     "3": 643.0,
+     "4": 9.2
+    },
+    "stressed_stage_ha": {
+     "2": 1111.3,
+     "3": 617.6,
+     "4": 8.4
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 5
+   },
+   "8": {
+    "active_ha": 1773.5,
+    "hazard_index": 0.96,
+    "ha_at_risk": 971.8,
+    "status": "Awas",
+    "class_ha": {
+     "1": 7.7,
+     "2": 1.9,
+     "3": 8.8,
+     "4": 383.8,
+     "5": 1371.2
+    },
+    "stage_ha": {
+     "2": 1121.3,
+     "3": 643.0,
+     "4": 9.2
+    },
+    "stressed_stage_ha": {
+     "2": 1111.8,
+     "3": 634.6,
+     "4": 8.7
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 5
+   },
+   "9": {
+    "active_ha": 1773.5,
+    "hazard_index": 0.968,
+    "ha_at_risk": 982.3,
+    "status": "Awas",
+    "class_ha": {
+     "1": 7.7,
+     "2": 1.4,
+     "3": 3.3,
+     "4": 304.2,
+     "5": 1456.9
+    },
+    "stage_ha": {
+     "2": 1121.3,
+     "3": 643.0,
+     "4": 9.2
+    },
+    "stressed_stage_ha": {
+     "2": 1111.9,
+     "3": 640.4,
+     "4": 8.7
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 5
+   }
+  },
+  "id3318040": {
+   "0": {
+    "active_ha": 1520.2,
+    "hazard_index": 0.861,
+    "ha_at_risk": 725.3,
+    "status": "Awas",
+    "class_ha": {
+     "1": 19.6,
+     "2": 22.5,
+     "3": 200.4,
+     "4": 472.8,
+     "5": 804.9
+    },
+    "stage_ha": {
+     "2": 1012.8,
+     "3": 501.4,
+     "4": 6.0
+    },
+    "stressed_stage_ha": {
+     "2": 990.5,
+     "3": 282.9,
+     "4": 4.3
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 7
+   },
+   "1": {
+    "active_ha": 1520.2,
+    "hazard_index": 0.87,
+    "ha_at_risk": 734.5,
+    "status": "Awas",
+    "class_ha": {
+     "1": 19.6,
+     "2": 14.6,
+     "3": 187.9,
+     "4": 468.7,
+     "5": 829.4
+    },
+    "stage_ha": {
+     "2": 1012.8,
+     "3": 501.4,
+     "4": 6.0
+    },
+    "stressed_stage_ha": {
+     "2": 990.8,
+     "3": 302.6,
+     "4": 4.7
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 7
+   },
+   "2": {
+    "active_ha": 1520.2,
+    "hazard_index": 0.879,
+    "ha_at_risk": 742.9,
+    "status": "Awas",
+    "class_ha": {
+     "1": 19.6,
+     "2": 14.6,
+     "3": 162.9,
+     "4": 465.6,
+     "5": 857.6
+    },
+    "stage_ha": {
+     "2": 1012.8,
+     "3": 501.4,
+     "4": 6.0
+    },
+    "stressed_stage_ha": {
+     "2": 990.8,
+     "3": 327.3,
+     "4": 5.0
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 7
+   },
+   "3": {
+    "active_ha": 1520.2,
+    "hazard_index": 0.888,
+    "ha_at_risk": 751.7,
+    "status": "Awas",
+    "class_ha": {
+     "1": 19.6,
+     "2": 9.6,
+     "3": 147.1,
+     "4": 457.0,
+     "5": 886.9
+    },
+    "stage_ha": {
+     "2": 1012.8,
+     "3": 501.4,
+     "4": 6.0
+    },
+    "stressed_stage_ha": {
+     "2": 990.8,
+     "3": 347.7,
+     "4": 5.4
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 7
+   },
+   "4": {
+    "active_ha": 1520.2,
+    "hazard_index": 0.899,
+    "ha_at_risk": 762.4,
+    "status": "Awas",
+    "class_ha": {
+     "1": 19.6,
+     "2": 6.0,
+     "3": 128.7,
+     "4": 426.7,
+     "5": 939.1
+    },
+    "stage_ha": {
+     "2": 1012.8,
+     "3": 501.4,
+     "4": 6.0
+    },
+    "stressed_stage_ha": {
+     "2": 991.1,
+     "3": 369.3,
+     "4": 5.5
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 7
+   },
+   "5": {
+    "active_ha": 1520.2,
+    "hazard_index": 0.915,
+    "ha_at_risk": 777.8,
+    "status": "Awas",
+    "class_ha": {
+     "1": 19.6,
+     "2": 3.9,
+     "3": 91.3,
+     "4": 407.6,
+     "5": 997.8
+    },
+    "stage_ha": {
+     "2": 1012.8,
+     "3": 501.4,
+     "4": 6.0
+    },
+    "stressed_stage_ha": {
+     "2": 991.4,
+     "3": 408.4,
+     "4": 5.6
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 7
+   },
+   "6": {
+    "active_ha": 1520.2,
+    "hazard_index": 0.928,
+    "ha_at_risk": 791.8,
+    "status": "Awas",
+    "class_ha": {
+     "1": 19.6,
+     "2": 2.8,
+     "3": 57.9,
+     "4": 386.2,
+     "5": 1053.7
+    },
+    "stage_ha": {
+     "2": 1012.8,
+     "3": 501.4,
+     "4": 6.0
+    },
+    "stressed_stage_ha": {
+     "2": 991.6,
+     "3": 442.6,
+     "4": 5.7
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 7
+   },
+   "7": {
+    "active_ha": 1520.2,
+    "hazard_index": 0.947,
+    "ha_at_risk": 811.2,
+    "status": "Awas",
+    "class_ha": {
+     "1": 19.6,
+     "2": 2.0,
+     "3": 20.5,
+     "4": 326.5,
+     "5": 1151.6
+    },
+    "stage_ha": {
+     "2": 1012.8,
+     "3": 501.4,
+     "4": 6.0
+    },
+    "stressed_stage_ha": {
+     "2": 991.7,
+     "3": 480.7,
+     "4": 5.7
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 8
+   },
+   "8": {
+    "active_ha": 1520.2,
+    "hazard_index": 0.956,
+    "ha_at_risk": 820.7,
+    "status": "Awas",
+    "class_ha": {
+     "1": 19.6,
+     "2": 1.6,
+     "3": 8.0,
+     "4": 279.1,
+     "5": 1211.9
+    },
+    "stage_ha": {
+     "2": 1012.8,
+     "3": 501.4,
+     "4": 6.0
+    },
+    "stressed_stage_ha": {
+     "2": 991.7,
+     "3": 493.5,
+     "4": 5.8
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 9
+   },
+   "9": {
+    "active_ha": 1520.2,
+    "hazard_index": 0.964,
+    "ha_at_risk": 829.1,
+    "status": "Awas",
+    "class_ha": {
+     "1": 19.6,
+     "2": 1.3,
+     "3": 2.6,
+     "4": 219.0,
+     "5": 1277.7
+    },
+    "stage_ha": {
+     "2": 1012.8,
+     "3": 501.4,
+     "4": 6.0
+    },
+    "stressed_stage_ha": {
+     "2": 991.8,
+     "3": 499.0,
+     "4": 5.9
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 10
+   }
+  },
+  "id3318050": {
+   "0": {
+    "active_ha": 1484.8,
+    "hazard_index": 0.81,
+    "ha_at_risk": 680.3,
+    "status": "Awas",
+    "class_ha": {
+     "1": 5.1,
+     "2": 53.8,
+     "3": 269.4,
+     "4": 629.6,
+     "5": 526.9
+    },
+    "stage_ha": {
+     "2": 891.7,
+     "3": 569.5,
+     "4": 23.6
+    },
+    "stressed_stage_ha": {
+     "2": 881.9,
+     "3": 258.8,
+     "4": 15.8
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 8
+   },
+   "1": {
+    "active_ha": 1484.8,
+    "hazard_index": 0.825,
+    "ha_at_risk": 695.3,
+    "status": "Awas",
+    "class_ha": {
+     "1": 5.1,
+     "2": 36.9,
+     "3": 257.3,
+     "4": 617.8,
+     "5": 567.7
+    },
+    "stage_ha": {
+     "2": 891.7,
+     "3": 569.5,
+     "4": 23.6
+    },
+    "stressed_stage_ha": {
+     "2": 883.3,
+     "3": 285.8,
+     "4": 16.4
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 8
+   },
+   "2": {
+    "active_ha": 1484.8,
+    "hazard_index": 0.835,
+    "ha_at_risk": 704.6,
+    "status": "Awas",
+    "class_ha": {
+     "1": 5.1,
+     "2": 36.9,
+     "3": 232.2,
+     "4": 603.0,
+     "5": 607.6
+    },
+    "stage_ha": {
+     "2": 891.7,
+     "3": 569.5,
+     "4": 23.6
+    },
+    "stressed_stage_ha": {
+     "2": 884.4,
+     "3": 309.3,
+     "4": 16.9
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 8
+   },
+   "3": {
+    "active_ha": 1484.8,
+    "hazard_index": 0.849,
+    "ha_at_risk": 718.3,
+    "status": "Awas",
+    "class_ha": {
+     "1": 5.1,
+     "2": 22.5,
+     "3": 221.1,
+     "4": 585.0,
+     "5": 651.0
+    },
+    "stage_ha": {
+     "2": 891.7,
+     "3": 569.5,
+     "4": 23.6
+    },
+    "stressed_stage_ha": {
+     "2": 885.4,
+     "3": 333.4,
+     "4": 17.3
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 8
+   },
+   "4": {
+    "active_ha": 1484.8,
+    "hazard_index": 0.866,
+    "ha_at_risk": 733.9,
+    "status": "Awas",
+    "class_ha": {
+     "1": 5.1,
+     "2": 14.1,
+     "3": 202.8,
+     "4": 530.3,
+     "5": 732.5
+    },
+    "stage_ha": {
+     "2": 891.7,
+     "3": 569.5,
+     "4": 23.6
+    },
+    "stressed_stage_ha": {
+     "2": 886.0,
+     "3": 359.2,
+     "4": 17.5
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 8
+   },
+   "5": {
+    "active_ha": 1484.8,
+    "hazard_index": 0.889,
+    "ha_at_risk": 755.9,
+    "status": "Awas",
+    "class_ha": {
+     "1": 5.1,
+     "2": 8.0,
+     "3": 156.7,
+     "4": 494.9,
+     "5": 820.1
+    },
+    "stage_ha": {
+     "2": 891.7,
+     "3": 569.5,
+     "4": 23.6
+    },
+    "stressed_stage_ha": {
+     "2": 886.3,
+     "3": 410.7,
+     "4": 18.1
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 8
+   },
+   "6": {
+    "active_ha": 1484.8,
+    "hazard_index": 0.91,
+    "ha_at_risk": 776.6,
+    "status": "Awas",
+    "class_ha": {
+     "1": 5.1,
+     "2": 2.6,
+     "3": 111.2,
+     "4": 470.7,
+     "5": 895.2
+    },
+    "stage_ha": {
+     "2": 891.7,
+     "3": 569.5,
+     "4": 23.6
+    },
+    "stressed_stage_ha": {
+     "2": 886.4,
+     "3": 460.7,
+     "4": 18.8
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 8
+   },
+   "7": {
+    "active_ha": 1484.8,
+    "hazard_index": 0.937,
+    "ha_at_risk": 803.4,
+    "status": "Awas",
+    "class_ha": {
+     "1": 5.1,
+     "2": 0.7,
+     "3": 53.1,
+     "4": 409.5,
+     "5": 1016.3
+    },
+    "stage_ha": {
+     "2": 891.7,
+     "3": 569.5,
+     "4": 23.6
+    },
+    "stressed_stage_ha": {
+     "2": 886.5,
+     "3": 519.9,
+     "4": 19.6
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 10
+   },
+   "8": {
+    "active_ha": 1484.8,
+    "hazard_index": 0.951,
+    "ha_at_risk": 817.8,
+    "status": "Awas",
+    "class_ha": {
+     "1": 5.1,
+     "2": 0.4,
+     "3": 22.1,
+     "4": 376.0,
+     "5": 1081.2
+    },
+    "stage_ha": {
+     "2": 891.7,
+     "3": 569.5,
+     "4": 23.6
+    },
+    "stressed_stage_ha": {
+     "2": 886.5,
+     "3": 549.5,
+     "4": 21.3
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 10
+   },
+   "9": {
+    "active_ha": 1484.8,
+    "hazard_index": 0.962,
+    "ha_at_risk": 829.3,
+    "status": "Awas",
+    "class_ha": {
+     "1": 5.1,
+     "2": 0.2,
+     "3": 7.8,
+     "4": 315.2,
+     "5": 1156.5
+    },
+    "stage_ha": {
+     "2": 891.7,
+     "3": 569.5,
+     "4": 23.6
+    },
+    "stressed_stage_ha": {
+     "2": 886.5,
+     "3": 562.7,
+     "4": 22.5
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 9
+   }
+  },
+  "id3318060": {
+   "0": {
+    "active_ha": 1868.3,
+    "hazard_index": 0.829,
+    "ha_at_risk": 873.3,
+    "status": "Awas",
+    "class_ha": {
+     "1": 6.2,
+     "2": 57.7,
+     "3": 254.1,
+     "4": 897.1,
+     "5": 653.2
+    },
+    "stage_ha": {
+     "2": 1270.9,
+     "3": 497.1,
+     "4": 100.3
+    },
+    "stressed_stage_ha": {
+     "2": 1253.0,
+     "3": 224.7,
+     "4": 72.6
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 3
+   },
+   "1": {
+    "active_ha": 1868.3,
+    "hazard_index": 0.842,
+    "ha_at_risk": 888.5,
+    "status": "Awas",
+    "class_ha": {
+     "1": 6.2,
+     "2": 43.5,
+     "3": 240.3,
+     "4": 869.5,
+     "5": 708.7
+    },
+    "stage_ha": {
+     "2": 1270.9,
+     "3": 497.1,
+     "4": 100.3
+    },
+    "stressed_stage_ha": {
+     "2": 1256.0,
+     "3": 247.6,
+     "4": 74.6
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 3
+   },
+   "2": {
+    "active_ha": 1868.3,
+    "hazard_index": 0.851,
+    "ha_at_risk": 899.6,
+    "status": "Awas",
+    "class_ha": {
+     "1": 6.2,
+     "2": 43.5,
+     "3": 213.3,
+     "4": 839.3,
+     "5": 765.9
+    },
+    "stage_ha": {
+     "2": 1270.9,
+     "3": 497.1,
+     "4": 100.3
+    },
+    "stressed_stage_ha": {
+     "2": 1258.7,
+     "3": 270.0,
+     "4": 76.6
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 3
+   },
+   "3": {
+    "active_ha": 1868.2,
+    "hazard_index": 0.865,
+    "ha_at_risk": 915.9,
+    "status": "Awas",
+    "class_ha": {
+     "1": 6.2,
+     "2": 29.9,
+     "3": 197.2,
+     "4": 804.4,
+     "5": 830.5
+    },
+    "stage_ha": {
+     "2": 1270.9,
+     "3": 497.1,
+     "4": 100.3
+    },
+    "stressed_stage_ha": {
+     "2": 1260.9,
+     "3": 295.4,
+     "4": 78.7
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 3
+   },
+   "4": {
+    "active_ha": 1868.2,
+    "hazard_index": 0.882,
+    "ha_at_risk": 935.3,
+    "status": "Awas",
+    "class_ha": {
+     "1": 6.2,
+     "2": 18.4,
+     "3": 183.6,
+     "4": 710.5,
+     "5": 949.6
+    },
+    "stage_ha": {
+     "2": 1270.9,
+     "3": 497.1,
+     "4": 100.3
+    },
+    "stressed_stage_ha": {
+     "2": 1261.9,
+     "3": 315.9,
+     "4": 82.2
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 3
+   },
+   "5": {
+    "active_ha": 1868.3,
+    "hazard_index": 0.903,
+    "ha_at_risk": 960.9,
+    "status": "Awas",
+    "class_ha": {
+     "1": 6.2,
+     "2": 10.8,
+     "3": 141.4,
+     "4": 629.8,
+     "5": 1079.9
+    },
+    "stage_ha": {
+     "2": 1270.9,
+     "3": 497.1,
+     "4": 100.3
+    },
+    "stressed_stage_ha": {
+     "2": 1263.2,
+     "3": 359.8,
+     "4": 86.8
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 3
+   },
+   "6": {
+    "active_ha": 1868.3,
+    "hazard_index": 0.921,
+    "ha_at_risk": 982.8,
+    "status": "Awas",
+    "class_ha": {
+     "1": 6.2,
+     "2": 5.5,
+     "3": 105.8,
+     "4": 555.1,
+     "5": 1195.7
+    },
+    "stage_ha": {
+     "2": 1270.9,
+     "3": 497.1,
+     "4": 100.3
+    },
+    "stressed_stage_ha": {
+     "2": 1263.7,
+     "3": 397.5,
+     "4": 89.5
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 3
+   },
+   "7": {
+    "active_ha": 1868.3,
+    "hazard_index": 0.946,
+    "ha_at_risk": 1013.8,
+    "status": "Awas",
+    "class_ha": {
+     "1": 6.2,
+     "2": 2.1,
+     "3": 55.6,
+     "4": 428.7,
+     "5": 1375.6
+    },
+    "stage_ha": {
+     "2": 1270.9,
+     "3": 497.1,
+     "4": 100.3
+    },
+    "stressed_stage_ha": {
+     "2": 1264.4,
+     "3": 446.8,
+     "4": 93.2
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 3
+   },
+   "8": {
+    "active_ha": 1868.2,
+    "hazard_index": 0.959,
+    "ha_at_risk": 1029.5,
+    "status": "Awas",
+    "class_ha": {
+     "1": 6.2,
+     "2": 0.8,
+     "3": 29.1,
+     "4": 371.9,
+     "5": 1460.3
+    },
+    "stage_ha": {
+     "2": 1270.9,
+     "3": 497.1,
+     "4": 100.3
+    },
+    "stressed_stage_ha": {
+     "2": 1264.7,
+     "3": 472.7,
+     "4": 94.8
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 4
+   },
+   "9": {
+    "active_ha": 1868.3,
+    "hazard_index": 0.97,
+    "ha_at_risk": 1043.9,
+    "status": "Awas",
+    "class_ha": {
+     "1": 6.2,
+     "2": 0.3,
+     "3": 10.5,
+     "4": 300.9,
+     "5": 1550.3
+    },
+    "stage_ha": {
+     "2": 1270.9,
+     "3": 497.1,
+     "4": 100.3
+    },
+    "stressed_stage_ha": {
+     "2": 1264.7,
+     "3": 488.8,
+     "4": 97.7
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 4
+   }
+  },
+  "id3318070": {
+   "0": {
+    "active_ha": 451.3,
+    "hazard_index": 0.823,
+    "ha_at_risk": 202.3,
+    "status": "Awas",
+    "class_ha": {
+     "1": 21.5,
+     "2": 13.4,
+     "3": 46.9,
+     "4": 153.2,
+     "5": 216.3
+    },
+    "stage_ha": {
+     "2": 334.2,
+     "3": 108.5,
+     "4": 8.6
+    },
+    "stressed_stage_ha": {
+     "2": 311.1,
+     "3": 52.3,
+     "4": 6.1
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 17
+   },
+   "1": {
+    "active_ha": 451.3,
+    "hazard_index": 0.832,
+    "ha_at_risk": 205.0,
+    "status": "Awas",
+    "class_ha": {
+     "1": 21.5,
+     "2": 10.8,
+     "3": 44.8,
+     "4": 147.7,
+     "5": 226.4
+    },
+    "stage_ha": {
+     "2": 334.2,
+     "3": 108.5,
+     "4": 8.6
+    },
+    "stressed_stage_ha": {
+     "2": 311.8,
+     "3": 56.3,
+     "4": 6.1
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 17
+   },
+   "2": {
+    "active_ha": 451.3,
+    "hazard_index": 0.84,
+    "ha_at_risk": 207.1,
+    "status": "Awas",
+    "class_ha": {
+     "1": 21.5,
+     "2": 10.8,
+     "3": 39.7,
+     "4": 141.9,
+     "5": 237.4
+    },
+    "stage_ha": {
+     "2": 334.2,
+     "3": 108.5,
+     "4": 8.6
+    },
+    "stressed_stage_ha": {
+     "2": 311.9,
+     "3": 61.3,
+     "4": 6.1
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 17
+   },
+   "3": {
+    "active_ha": 451.3,
+    "hazard_index": 0.848,
+    "ha_at_risk": 209.5,
+    "status": "Awas",
+    "class_ha": {
+     "1": 21.5,
+     "2": 9.1,
+     "3": 36.8,
+     "4": 135.1,
+     "5": 248.8
+    },
+    "stage_ha": {
+     "2": 334.2,
+     "3": 108.5,
+     "4": 8.6
+    },
+    "stressed_stage_ha": {
+     "2": 312.5,
+     "3": 65.2,
+     "4": 6.2
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 17
+   },
+   "4": {
+    "active_ha": 451.3,
+    "hazard_index": 0.861,
+    "ha_at_risk": 212.8,
+    "status": "Awas",
+    "class_ha": {
+     "1": 21.5,
+     "2": 7.4,
+     "3": 34.0,
+     "4": 117.7,
+     "5": 270.5
+    },
+    "stage_ha": {
+     "2": 334.2,
+     "3": 108.5,
+     "4": 8.6
+    },
+    "stressed_stage_ha": {
+     "2": 312.5,
+     "3": 69.6,
+     "4": 6.2
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 17
+   },
+   "5": {
+    "active_ha": 451.3,
+    "hazard_index": 0.876,
+    "ha_at_risk": 217.1,
+    "status": "Awas",
+    "class_ha": {
+     "1": 21.5,
+     "2": 6.6,
+     "3": 25.4,
+     "4": 106.4,
+     "5": 291.4
+    },
+    "stage_ha": {
+     "2": 334.2,
+     "3": 108.5,
+     "4": 8.6
+    },
+    "stressed_stage_ha": {
+     "2": 312.6,
+     "3": 79.0,
+     "4": 6.2
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 17
+   },
+   "6": {
+    "active_ha": 451.3,
+    "hazard_index": 0.889,
+    "ha_at_risk": 221.2,
+    "status": "Awas",
+    "class_ha": {
+     "1": 21.5,
+     "2": 4.8,
+     "3": 19.1,
+     "4": 96.6,
+     "5": 309.1
+    },
+    "stage_ha": {
+     "2": 334.2,
+     "3": 108.5,
+     "4": 8.6
+    },
+    "stressed_stage_ha": {
+     "2": 312.6,
+     "3": 86.8,
+     "4": 6.4
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 17
+   },
+   "7": {
+    "active_ha": 451.3,
+    "hazard_index": 0.909,
+    "ha_at_risk": 226.9,
+    "status": "Awas",
+    "class_ha": {
+     "1": 21.5,
+     "2": 3.6,
+     "3": 9.8,
+     "4": 77.0,
+     "5": 339.4
+    },
+    "stage_ha": {
+     "2": 334.2,
+     "3": 108.5,
+     "4": 8.6
+    },
+    "stressed_stage_ha": {
+     "2": 312.6,
+     "3": 97.1,
+     "4": 6.7
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 18
+   },
+   "8": {
+    "active_ha": 451.3,
+    "hazard_index": 0.918,
+    "ha_at_risk": 229.9,
+    "status": "Awas",
+    "class_ha": {
+     "1": 21.5,
+     "2": 2.4,
+     "3": 6.7,
+     "4": 65.7,
+     "5": 354.9
+    },
+    "stage_ha": {
+     "2": 334.2,
+     "3": 108.5,
+     "4": 8.6
+    },
+    "stressed_stage_ha": {
+     "2": 312.6,
+     "3": 101.0,
+     "4": 7.0
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 18
+   },
+   "9": {
+    "active_ha": 451.2,
+    "hazard_index": 0.925,
+    "ha_at_risk": 232.1,
+    "status": "Awas",
+    "class_ha": {
+     "1": 21.5,
+     "2": 2.1,
+     "3": 4.5,
+     "4": 53.7,
+     "5": 369.5
+    },
+    "stage_ha": {
+     "2": 334.1,
+     "3": 108.5,
+     "4": 8.6
+    },
+    "stressed_stage_ha": {
+     "2": 312.7,
+     "3": 103.0,
+     "4": 7.4
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 19
+   }
+  },
+  "id3318080": {
+   "0": {
+    "active_ha": 594.7,
+    "hazard_index": 0.721,
+    "ha_at_risk": 251.2,
+    "status": "Siaga",
+    "class_ha": {
+     "1": 3.0,
+     "2": 72.7,
+     "3": 127.2,
+     "4": 225.8,
+     "5": 166.0
+    },
+    "stage_ha": {
+     "2": 302.4,
+     "3": 269.2,
+     "4": 23.2
+    },
+    "stressed_stage_ha": {
+     "2": 286.0,
+     "3": 87.2,
+     "4": 18.7
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "3 hari ke depan"
+    },
+    "rank": 15
+   },
+   "1": {
+    "active_ha": 594.7,
+    "hazard_index": 0.738,
+    "ha_at_risk": 258.1,
+    "status": "Siaga",
+    "class_ha": {
+     "1": 3.0,
+     "2": 61.2,
+     "3": 126.9,
+     "4": 227.1,
+     "5": 176.5
+    },
+    "stage_ha": {
+     "2": 302.4,
+     "3": 269.2,
+     "4": 23.2
+    },
+    "stressed_stage_ha": {
+     "2": 287.7,
+     "3": 97.1,
+     "4": 18.8
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "3 hari ke depan"
+    },
+    "rank": 15
+   },
+   "2": {
+    "active_ha": 594.7,
+    "hazard_index": 0.747,
+    "ha_at_risk": 261.5,
+    "status": "Siaga",
+    "class_ha": {
+     "1": 3.0,
+     "2": 61.2,
+     "3": 116.7,
+     "4": 225.7,
+     "5": 188.2
+    },
+    "stage_ha": {
+     "2": 302.4,
+     "3": 269.2,
+     "4": 23.2
+    },
+    "stressed_stage_ha": {
+     "2": 288.8,
+     "3": 106.1,
+     "4": 19.0
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "3 hari ke depan"
+    },
+    "rank": 15
+   },
+   "3": {
+    "active_ha": 594.7,
+    "hazard_index": 0.764,
+    "ha_at_risk": 268.1,
+    "status": "Awas",
+    "class_ha": {
+     "1": 3.0,
+     "2": 50.8,
+     "3": 115.8,
+     "4": 224.4,
+     "5": 200.7
+    },
+    "stage_ha": {
+     "2": 302.4,
+     "3": 269.2,
+     "4": 23.2
+    },
+    "stressed_stage_ha": {
+     "2": 290.4,
+     "3": 115.6,
+     "4": 19.2
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 15
+   },
+   "4": {
+    "active_ha": 594.7,
+    "hazard_index": 0.784,
+    "ha_at_risk": 275.7,
+    "status": "Awas",
+    "class_ha": {
+     "1": 3.0,
+     "2": 41.1,
+     "3": 114.2,
+     "4": 209.9,
+     "5": 226.5
+    },
+    "stage_ha": {
+     "2": 302.4,
+     "3": 269.2,
+     "4": 23.2
+    },
+    "stressed_stage_ha": {
+     "2": 290.9,
+     "3": 126.3,
+     "4": 19.2
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 15
+   },
+   "5": {
+    "active_ha": 594.7,
+    "hazard_index": 0.811,
+    "ha_at_risk": 286.5,
+    "status": "Awas",
+    "class_ha": {
+     "1": 3.0,
+     "2": 33.5,
+     "3": 97.8,
+     "4": 201.6,
+     "5": 258.8
+    },
+    "stage_ha": {
+     "2": 302.4,
+     "3": 269.2,
+     "4": 23.2
+    },
+    "stressed_stage_ha": {
+     "2": 292.2,
+     "3": 148.8,
+     "4": 19.4
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 15
+   },
+   "6": {
+    "active_ha": 594.7,
+    "hazard_index": 0.836,
+    "ha_at_risk": 296.3,
+    "status": "Awas",
+    "class_ha": {
+     "1": 3.0,
+     "2": 26.5,
+     "3": 82.1,
+     "4": 197.2,
+     "5": 286.0
+    },
+    "stage_ha": {
+     "2": 302.4,
+     "3": 269.2,
+     "4": 23.2
+    },
+    "stressed_stage_ha": {
+     "2": 292.9,
+     "3": 170.7,
+     "4": 19.6
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 15
+   },
+   "7": {
+    "active_ha": 594.7,
+    "hazard_index": 0.874,
+    "ha_at_risk": 311.8,
+    "status": "Awas",
+    "class_ha": {
+     "1": 3.0,
+     "2": 19.7,
+     "3": 53.0,
+     "4": 183.1,
+     "5": 335.9
+    },
+    "stage_ha": {
+     "2": 302.4,
+     "3": 269.2,
+     "4": 23.2
+    },
+    "stressed_stage_ha": {
+     "2": 293.8,
+     "3": 205.1,
+     "4": 20.1
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 15
+   },
+   "8": {
+    "active_ha": 594.7,
+    "hazard_index": 0.898,
+    "ha_at_risk": 321.5,
+    "status": "Awas",
+    "class_ha": {
+     "1": 3.0,
+     "2": 14.0,
+     "3": 36.8,
+     "4": 177.6,
+     "5": 363.3
+    },
+    "stage_ha": {
+     "2": 302.4,
+     "3": 269.2,
+     "4": 23.2
+    },
+    "stressed_stage_ha": {
+     "2": 294.3,
+     "3": 226.2,
+     "4": 20.4
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 15
+   },
+   "9": {
+    "active_ha": 594.7,
+    "hazard_index": 0.918,
+    "ha_at_risk": 329.7,
+    "status": "Awas",
+    "class_ha": {
+     "1": 3.0,
+     "2": 10.3,
+     "3": 23.1,
+     "4": 166.4,
+     "5": 391.9
+    },
+    "stage_ha": {
+     "2": 302.4,
+     "3": 269.2,
+     "4": 23.2
+    },
+    "stressed_stage_ha": {
+     "2": 295.0,
+     "3": 242.1,
+     "4": 21.1
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 17
+   }
+  },
+  "id3318090": {
+   "0": {
+    "active_ha": 1691.2,
+    "hazard_index": 0.839,
+    "ha_at_risk": 760.1,
+    "status": "Awas",
+    "class_ha": {
+     "1": 18.7,
+     "2": 134.9,
+     "3": 131.5,
+     "4": 444.9,
+     "5": 961.1
+    },
+    "stage_ha": {
+     "2": 1322.5,
+     "3": 276.6,
+     "4": 92.1
+    },
+    "stressed_stage_ha": {
+     "2": 1279.1,
+     "3": 86.3,
+     "4": 40.6
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 6
+   },
+   "1": {
+    "active_ha": 1691.2,
+    "hazard_index": 0.847,
+    "ha_at_risk": 769.2,
+    "status": "Awas",
+    "class_ha": {
+     "1": 18.7,
+     "2": 124.5,
+     "3": 129.0,
+     "4": 420.2,
+     "5": 998.7
+    },
+    "stage_ha": {
+     "2": 1322.5,
+     "3": 276.6,
+     "4": 92.1
+    },
+    "stressed_stage_ha": {
+     "2": 1281.4,
+     "3": 95.1,
+     "4": 42.5
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 6
+   },
+   "2": {
+    "active_ha": 1691.2,
+    "hazard_index": 0.853,
+    "ha_at_risk": 775.7,
+    "status": "Awas",
+    "class_ha": {
+     "1": 18.7,
+     "2": 124.5,
+     "3": 114.5,
+     "4": 399.7,
+     "5": 1033.7
+    },
+    "stage_ha": {
+     "2": 1322.5,
+     "3": 276.6,
+     "4": 92.1
+    },
+    "stressed_stage_ha": {
+     "2": 1283.0,
+     "3": 104.9,
+     "4": 45.5
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 6
+   },
+   "3": {
+    "active_ha": 1691.2,
+    "hazard_index": 0.861,
+    "ha_at_risk": 783.6,
+    "status": "Awas",
+    "class_ha": {
+     "1": 18.7,
+     "2": 116.2,
+     "3": 113.1,
+     "4": 372.0,
+     "5": 1071.2
+    },
+    "stage_ha": {
+     "2": 1322.5,
+     "3": 276.6,
+     "4": 92.1
+    },
+    "stressed_stage_ha": {
+     "2": 1284.3,
+     "3": 112.1,
+     "4": 46.8
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 6
+   },
+   "4": {
+    "active_ha": 1691.2,
+    "hazard_index": 0.872,
+    "ha_at_risk": 795.7,
+    "status": "Awas",
+    "class_ha": {
+     "1": 18.7,
+     "2": 106.9,
+     "3": 106.9,
+     "4": 320.4,
+     "5": 1138.4
+    },
+    "stage_ha": {
+     "2": 1322.5,
+     "3": 276.6,
+     "4": 92.1
+    },
+    "stressed_stage_ha": {
+     "2": 1286.1,
+     "3": 123.4,
+     "4": 49.3
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 6
+   },
+   "5": {
+    "active_ha": 1691.2,
+    "hazard_index": 0.885,
+    "ha_at_risk": 810.3,
+    "status": "Awas",
+    "class_ha": {
+     "1": 18.7,
+     "2": 97.5,
+     "3": 91.5,
+     "4": 278.9,
+     "5": 1204.6
+    },
+    "stage_ha": {
+     "2": 1322.5,
+     "3": 276.6,
+     "4": 92.1
+    },
+    "stressed_stage_ha": {
+     "2": 1287.9,
+     "3": 141.9,
+     "4": 53.7
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 6
+   },
+   "6": {
+    "active_ha": 1691.2,
+    "hazard_index": 0.897,
+    "ha_at_risk": 823.4,
+    "status": "Awas",
+    "class_ha": {
+     "1": 18.7,
+     "2": 89.5,
+     "3": 74.3,
+     "4": 255.0,
+     "5": 1253.7
+    },
+    "stage_ha": {
+     "2": 1322.5,
+     "3": 276.6,
+     "4": 92.1
+    },
+    "stressed_stage_ha": {
+     "2": 1290.1,
+     "3": 160.6,
+     "4": 58.0
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 6
+   },
+   "7": {
+    "active_ha": 1691.2,
+    "hazard_index": 0.912,
+    "ha_at_risk": 841.6,
+    "status": "Awas",
+    "class_ha": {
+     "1": 18.7,
+     "2": 78.2,
+     "3": 56.8,
+     "4": 204.2,
+     "5": 1333.4
+    },
+    "stage_ha": {
+     "2": 1322.5,
+     "3": 276.6,
+     "4": 92.1
+    },
+    "stressed_stage_ha": {
+     "2": 1293.2,
+     "3": 181.8,
+     "4": 62.5
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 6
+   },
+   "8": {
+    "active_ha": 1691.2,
+    "hazard_index": 0.922,
+    "ha_at_risk": 853.1,
+    "status": "Awas",
+    "class_ha": {
+     "1": 18.7,
+     "2": 68.1,
+     "3": 48.1,
+     "4": 186.0,
+     "5": 1370.4
+    },
+    "stage_ha": {
+     "2": 1322.5,
+     "3": 276.6,
+     "4": 92.1
+    },
+    "stressed_stage_ha": {
+     "2": 1295.1,
+     "3": 195.7,
+     "4": 65.5
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 8
+   },
+   "9": {
+    "active_ha": 1691.2,
+    "hazard_index": 0.932,
+    "ha_at_risk": 865.3,
+    "status": "Awas",
+    "class_ha": {
+     "1": 18.7,
+     "2": 56.3,
+     "3": 41.2,
+     "4": 168.9,
+     "5": 1406.1
+    },
+    "stage_ha": {
+     "2": 1322.5,
+     "3": 276.6,
+     "4": 92.1
+    },
+    "stressed_stage_ha": {
+     "2": 1296.0,
+     "3": 209.3,
+     "4": 69.7
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 8
+   }
+  },
+  "id3318100": {
+   "0": {
+    "active_ha": 1729.3,
+    "hazard_index": 0.48,
+    "ha_at_risk": 609.4,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.6,
+     "2": 699.5,
+     "3": 360.1,
+     "4": 592.6,
+     "5": 76.5
+    },
+    "stage_ha": {
+     "2": 371.8,
+     "3": 617.2,
+     "4": 740.4
+    },
+    "stressed_stage_ha": {
+     "2": 327.4,
+     "3": 107.1,
+     "4": 234.5
+    },
+    "action": {
+     "headline": "Prioritaskan air untuk padi fase reproduktif",
+     "steps": [
+      "Sekitar 235 ha padi fase bunting/berbunga mengalami cekaman kering kuat.",
+      "Koordinasikan gilir air irigasi atau pompa ke blok tersebut minggu ini.",
+      "Cek lapangan: pastikan lahan memang padi sawah (bukan jagung/tebu)."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 9
+   },
+   "1": {
+    "active_ha": 1729.3,
+    "hazard_index": 0.497,
+    "ha_at_risk": 630.9,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.6,
+     "2": 659.7,
+     "3": 370.3,
+     "4": 607.2,
+     "5": 91.4
+    },
+    "stage_ha": {
+     "2": 371.8,
+     "3": 617.2,
+     "4": 740.4
+    },
+    "stressed_stage_ha": {
+     "2": 332.1,
+     "3": 122.4,
+     "4": 244.2
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 9
+   },
+   "2": {
+    "active_ha": 1729.3,
+    "hazard_index": 0.504,
+    "ha_at_risk": 641.0,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.6,
+     "2": 659.7,
+     "3": 340.8,
+     "4": 614.1,
+     "5": 114.1
+    },
+    "stage_ha": {
+     "2": 371.8,
+     "3": 617.2,
+     "4": 740.4
+    },
+    "stressed_stage_ha": {
+     "2": 334.5,
+     "3": 139.5,
+     "4": 254.2
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 9
+   },
+   "3": {
+    "active_ha": 1729.3,
+    "hazard_index": 0.522,
+    "ha_at_risk": 664.1,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.6,
+     "2": 617.8,
+     "3": 355.6,
+     "4": 615.8,
+     "5": 139.5
+    },
+    "stage_ha": {
+     "2": 371.8,
+     "3": 617.2,
+     "4": 740.4
+    },
+    "stressed_stage_ha": {
+     "2": 337.1,
+     "3": 153.9,
+     "4": 264.3
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 9
+   },
+   "4": {
+    "active_ha": 1729.3,
+    "hazard_index": 0.543,
+    "ha_at_risk": 691.7,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.6,
+     "2": 574.2,
+     "3": 365.9,
+     "4": 599.5,
+     "5": 189.1
+    },
+    "stage_ha": {
+     "2": 371.8,
+     "3": 617.2,
+     "4": 740.4
+    },
+    "stressed_stage_ha": {
+     "2": 339.1,
+     "3": 172.9,
+     "4": 276.6
+    },
+    "action": {
+     "headline": "Prioritaskan air untuk padi fase reproduktif",
+     "steps": [
+      "Sekitar 277 ha padi fase bunting/berbunga mengalami cekaman kering kuat.",
+      "Koordinasikan gilir air irigasi atau pompa ke blok tersebut minggu ini.",
+      "Cek lapangan: pastikan lahan memang padi sawah (bukan jagung/tebu)."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 9
+   },
+   "5": {
+    "active_ha": 1729.3,
+    "hazard_index": 0.572,
+    "ha_at_risk": 729.2,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.6,
+     "2": 527.9,
+     "3": 349.6,
+     "4": 598.1,
+     "5": 253.2
+    },
+    "stage_ha": {
+     "2": 371.8,
+     "3": 617.2,
+     "4": 740.4
+    },
+    "stressed_stage_ha": {
+     "2": 343.3,
+     "3": 213.6,
+     "4": 294.4
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 9
+   },
+   "6": {
+    "active_ha": 1729.3,
+    "hazard_index": 0.6,
+    "ha_at_risk": 767.0,
+    "status": "Siaga",
+    "class_ha": {
+     "1": 0.6,
+     "2": 485.9,
+     "3": 326.6,
+     "4": 598.3,
+     "5": 317.9
+    },
+    "stage_ha": {
+     "2": 371.8,
+     "3": 617.2,
+     "4": 740.4
+    },
+    "stressed_stage_ha": {
+     "2": 347.5,
+     "3": 256.1,
+     "4": 312.7
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "3 hari ke depan"
+    },
+    "rank": 9
+   },
+   "7": {
+    "active_ha": 1729.3,
+    "hazard_index": 0.648,
+    "ha_at_risk": 831.4,
+    "status": "Siaga",
+    "class_ha": {
+     "1": 0.6,
+     "2": 437.7,
+     "3": 261.8,
+     "4": 557.2,
+     "5": 472.0
+    },
+    "stage_ha": {
+     "2": 371.8,
+     "3": 617.2,
+     "4": 740.4
+    },
+    "stressed_stage_ha": {
+     "2": 352.0,
+     "3": 332.2,
+     "4": 345.0
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "3 hari ke depan"
+    },
+    "rank": 7
+   },
+   "8": {
+    "active_ha": 1729.3,
+    "hazard_index": 0.686,
+    "ha_at_risk": 885.3,
+    "status": "Siaga",
+    "class_ha": {
+     "1": 0.6,
+     "2": 380.9,
+     "3": 236.9,
+     "4": 537.7,
+     "5": 573.2
+    },
+    "stage_ha": {
+     "2": 371.8,
+     "3": 617.2,
+     "4": 740.4
+    },
+    "stressed_stage_ha": {
+     "2": 354.1,
+     "3": 387.3,
+     "4": 369.5
+    },
+    "action": {
+     "headline": "Hemat air dan siapkan pompa untuk vegetatif akhir",
+     "steps": [
+      "Terapkan pengairan berselang (basah-kering) agar air cukup sampai fase bunting.",
+      "Inventarisasi pompa dan sumur dangkal di wilayah kelompok tani.",
+      "Cek lapangan blok yang ditandai merah."
+     ],
+     "urgency": "3 hari ke depan"
+    },
+    "rank": 6
+   },
+   "9": {
+    "active_ha": 1729.3,
+    "hazard_index": 0.732,
+    "ha_at_risk": 950.1,
+    "status": "Siaga",
+    "class_ha": {
+     "1": 0.6,
+     "2": 299.9,
+     "3": 227.9,
+     "4": 531.7,
+     "5": 669.1
+    },
+    "stage_ha": {
+     "2": 371.8,
+     "3": 617.2,
+     "4": 740.4
+    },
+    "stressed_stage_ha": {
+     "2": 356.7,
+     "3": 447.7,
+     "4": 396.3
+    },
+    "action": {
+     "headline": "Hemat air dan siapkan pompa untuk vegetatif akhir",
+     "steps": [
+      "Terapkan pengairan berselang (basah-kering) agar air cukup sampai fase bunting.",
+      "Inventarisasi pompa dan sumur dangkal di wilayah kelompok tani.",
+      "Cek lapangan blok yang ditandai merah."
+     ],
+     "urgency": "3 hari ke depan"
+    },
+    "rank": 6
+   }
+  },
+  "id3318110": {
+   "0": {
+    "active_ha": 2323.7,
+    "hazard_index": 0.667,
+    "ha_at_risk": 857.0,
+    "status": "Siaga",
+    "class_ha": {
+     "1": 26.8,
+     "2": 634.7,
+     "3": 222.4,
+     "4": 436.3,
+     "5": 1003.3
+    },
+    "stage_ha": {
+     "2": 1363.0,
+     "3": 723.6,
+     "4": 237.1
+    },
+    "stressed_stage_ha": {
+     "2": 1275.6,
+     "3": 120.8,
+     "4": 43.2
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "3 hari ke depan"
+    },
+    "rank": 4
+   },
+   "1": {
+    "active_ha": 2323.7,
+    "hazard_index": 0.675,
+    "ha_at_risk": 871.0,
+    "status": "Siaga",
+    "class_ha": {
+     "1": 26.8,
+     "2": 609.8,
+     "3": 229.2,
+     "4": 427.9,
+     "5": 1030.0
+    },
+    "stage_ha": {
+     "2": 1363.0,
+     "3": 723.6,
+     "4": 237.1
+    },
+    "stressed_stage_ha": {
+     "2": 1278.7,
+     "3": 134.3,
+     "4": 44.9
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "3 hari ke depan"
+    },
+    "rank": 4
+   },
+   "2": {
+    "active_ha": 2323.7,
+    "hazard_index": 0.679,
+    "ha_at_risk": 877.1,
+    "status": "Siaga",
+    "class_ha": {
+     "1": 26.8,
+     "2": 609.8,
+     "3": 213.7,
+     "4": 415.4,
+     "5": 1058.0
+    },
+    "stage_ha": {
+     "2": 1363.0,
+     "3": 723.6,
+     "4": 237.1
+    },
+    "stressed_stage_ha": {
+     "2": 1280.6,
+     "3": 146.1,
+     "4": 46.8
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "3 hari ke depan"
+    },
+    "rank": 4
+   },
+   "3": {
+    "active_ha": 2323.7,
+    "hazard_index": 0.689,
+    "ha_at_risk": 892.5,
+    "status": "Siaga",
+    "class_ha": {
+     "1": 26.8,
+     "2": 580.8,
+     "3": 224.9,
+     "4": 405.6,
+     "5": 1085.6
+    },
+    "stage_ha": {
+     "2": 1363.0,
+     "3": 723.6,
+     "4": 237.1
+    },
+    "stressed_stage_ha": {
+     "2": 1282.9,
+     "3": 159.6,
+     "4": 48.6
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "3 hari ke depan"
+    },
+    "rank": 4
+   },
+   "4": {
+    "active_ha": 2323.7,
+    "hazard_index": 0.701,
+    "ha_at_risk": 911.8,
+    "status": "Siaga",
+    "class_ha": {
+     "1": 26.8,
+     "2": 548.6,
+     "3": 238.7,
+     "4": 365.2,
+     "5": 1144.4
+    },
+    "stage_ha": {
+     "2": 1363.0,
+     "3": 723.6,
+     "4": 237.1
+    },
+    "stressed_stage_ha": {
+     "2": 1284.9,
+     "3": 172.7,
+     "4": 52.0
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "3 hari ke depan"
+    },
+    "rank": 4
+   },
+   "5": {
+    "active_ha": 2323.7,
+    "hazard_index": 0.718,
+    "ha_at_risk": 939.6,
+    "status": "Siaga",
+    "class_ha": {
+     "1": 26.8,
+     "2": 510.9,
+     "3": 233.6,
+     "4": 345.2,
+     "5": 1207.1
+    },
+    "stage_ha": {
+     "2": 1363.0,
+     "3": 723.6,
+     "4": 237.1
+    },
+    "stressed_stage_ha": {
+     "2": 1288.7,
+     "3": 203.6,
+     "4": 60.1
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "3 hari ke depan"
+    },
+    "rank": 4
+   },
+   "6": {
+    "active_ha": 2323.7,
+    "hazard_index": 0.735,
+    "ha_at_risk": 968.2,
+    "status": "Siaga",
+    "class_ha": {
+     "1": 26.8,
+     "2": 468.4,
+     "3": 234.6,
+     "4": 335.4,
+     "5": 1258.5
+    },
+    "stage_ha": {
+     "2": 1363.0,
+     "3": 723.6,
+     "4": 237.1
+    },
+    "stressed_stage_ha": {
+     "2": 1290.9,
+     "3": 233.7,
+     "4": 69.3
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "3 hari ke depan"
+    },
+    "rank": 4
+   },
+   "7": {
+    "active_ha": 2323.7,
+    "hazard_index": 0.759,
+    "ha_at_risk": 1009.7,
+    "status": "Awas",
+    "class_ha": {
+     "1": 26.8,
+     "2": 419.5,
+     "3": 215.2,
+     "4": 315.8,
+     "5": 1346.3
+    },
+    "stage_ha": {
+     "2": 1363.0,
+     "3": 723.6,
+     "4": 237.1
+    },
+    "stressed_stage_ha": {
+     "2": 1295.5,
+     "3": 280.4,
+     "4": 86.2
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 4
+   },
+   "8": {
+    "active_ha": 2323.7,
+    "hazard_index": 0.782,
+    "ha_at_risk": 1049.6,
+    "status": "Awas",
+    "class_ha": {
+     "1": 26.8,
+     "2": 350.6,
+     "3": 230.2,
+     "4": 323.8,
+     "5": 1392.2
+    },
+    "stage_ha": {
+     "2": 1363.0,
+     "3": 723.6,
+     "4": 237.1
+    },
+    "stressed_stage_ha": {
+     "2": 1299.0,
+     "3": 319.1,
+     "4": 98.0
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 3
+   },
+   "9": {
+    "active_ha": 2323.7,
+    "hazard_index": 0.815,
+    "ha_at_risk": 1108.4,
+    "status": "Awas",
+    "class_ha": {
+     "1": 26.8,
+     "2": 237.4,
+     "3": 273.5,
+     "4": 346.3,
+     "5": 1439.7
+    },
+    "stage_ha": {
+     "2": 1363.0,
+     "3": 723.6,
+     "4": 237.1
+    },
+    "stressed_stage_ha": {
+     "2": 1302.3,
+     "3": 369.6,
+     "4": 114.1
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 3
+   }
+  },
+  "id3318120": {
+   "0": {
+    "active_ha": 1700.0,
+    "hazard_index": 0.428,
+    "ha_at_risk": 538.8,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.2,
+     "2": 732.5,
+     "3": 502.4,
+     "4": 417.2,
+     "5": 47.8
+    },
+    "stage_ha": {
+     "2": 428.4,
+     "3": 559.2,
+     "4": 712.5
+    },
+    "stressed_stage_ha": {
+     "2": 265.4,
+     "3": 36.1,
+     "4": 163.4
+    },
+    "action": {
+     "headline": "Prioritaskan air untuk padi fase reproduktif",
+     "steps": [
+      "Sekitar 163 ha padi fase bunting/berbunga mengalami cekaman kering kuat.",
+      "Koordinasikan gilir air irigasi atau pompa ke blok tersebut minggu ini.",
+      "Cek lapangan: pastikan lahan memang padi sawah (bukan jagung/tebu)."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 10
+   },
+   "1": {
+    "active_ha": 1700.0,
+    "hazard_index": 0.449,
+    "ha_at_risk": 567.7,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.2,
+     "2": 675.9,
+     "3": 522.3,
+     "4": 446.6,
+     "5": 55.0
+    },
+    "stage_ha": {
+     "2": 428.4,
+     "3": 559.2,
+     "4": 712.5
+    },
+    "stressed_stage_ha": {
+     "2": 276.4,
+     "3": 43.0,
+     "4": 182.2
+    },
+    "action": {
+     "headline": "Prioritaskan air untuk padi fase reproduktif",
+     "steps": [
+      "Sekitar 182 ha padi fase bunting/berbunga mengalami cekaman kering kuat.",
+      "Koordinasikan gilir air irigasi atau pompa ke blok tersebut minggu ini.",
+      "Cek lapangan: pastikan lahan memang padi sawah (bukan jagung/tebu)."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 10
+   },
+   "2": {
+    "active_ha": 1700.0,
+    "hazard_index": 0.457,
+    "ha_at_risk": 578.7,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.2,
+     "2": 675.9,
+     "3": 485.8,
+     "4": 474.5,
+     "5": 63.6
+    },
+    "stage_ha": {
+     "2": 428.4,
+     "3": 559.2,
+     "4": 712.5
+    },
+    "stressed_stage_ha": {
+     "2": 284.7,
+     "3": 52.5,
+     "4": 200.9
+    },
+    "action": {
+     "headline": "Prioritaskan air untuk padi fase reproduktif",
+     "steps": [
+      "Sekitar 201 ha padi fase bunting/berbunga mengalami cekaman kering kuat.",
+      "Koordinasikan gilir air irigasi atau pompa ke blok tersebut minggu ini.",
+      "Cek lapangan: pastikan lahan memang padi sawah (bukan jagung/tebu)."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 10
+   },
+   "3": {
+    "active_ha": 1700.0,
+    "hazard_index": 0.479,
+    "ha_at_risk": 608.0,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.2,
+     "2": 621.8,
+     "3": 500.7,
+     "4": 503.0,
+     "5": 74.4
+    },
+    "stage_ha": {
+     "2": 428.4,
+     "3": 559.2,
+     "4": 712.5
+    },
+    "stressed_stage_ha": {
+     "2": 292.3,
+     "3": 63.6,
+     "4": 221.5
+    },
+    "action": {
+     "headline": "Prioritaskan air untuk padi fase reproduktif",
+     "steps": [
+      "Sekitar 222 ha padi fase bunting/berbunga mengalami cekaman kering kuat.",
+      "Koordinasikan gilir air irigasi atau pompa ke blok tersebut minggu ini.",
+      "Cek lapangan: pastikan lahan memang padi sawah (bukan jagung/tebu)."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 10
+   },
+   "4": {
+    "active_ha": 1700.0,
+    "hazard_index": 0.503,
+    "ha_at_risk": 639.7,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.2,
+     "2": 566.5,
+     "3": 514.7,
+     "4": 520.1,
+     "5": 98.5
+    },
+    "stage_ha": {
+     "2": 428.4,
+     "3": 559.2,
+     "4": 712.5
+    },
+    "stressed_stage_ha": {
+     "2": 299.8,
+     "3": 76.8,
+     "4": 242.0
+    },
+    "action": {
+     "headline": "Prioritaskan air untuk padi fase reproduktif",
+     "steps": [
+      "Sekitar 242 ha padi fase bunting/berbunga mengalami cekaman kering kuat.",
+      "Koordinasikan gilir air irigasi atau pompa ke blok tersebut minggu ini.",
+      "Cek lapangan: pastikan lahan memang padi sawah (bukan jagung/tebu)."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 10
+   },
+   "5": {
+    "active_ha": 1700.0,
+    "hazard_index": 0.537,
+    "ha_at_risk": 686.6,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.2,
+     "2": 515.1,
+     "3": 472.2,
+     "4": 577.6,
+     "5": 134.9
+    },
+    "stage_ha": {
+     "2": 428.4,
+     "3": 559.2,
+     "4": 712.5
+    },
+    "stressed_stage_ha": {
+     "2": 314.7,
+     "3": 110.5,
+     "4": 287.3
+    },
+    "action": {
+     "headline": "Prioritaskan air untuk padi fase reproduktif",
+     "steps": [
+      "Sekitar 287 ha padi fase bunting/berbunga mengalami cekaman kering kuat.",
+      "Koordinasikan gilir air irigasi atau pompa ke blok tersebut minggu ini.",
+      "Cek lapangan: pastikan lahan memang padi sawah (bukan jagung/tebu)."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 10
+   },
+   "6": {
+    "active_ha": 1700.0,
+    "hazard_index": 0.574,
+    "ha_at_risk": 736.5,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.2,
+     "2": 461.9,
+     "3": 427.5,
+     "4": 630.0,
+     "5": 180.4
+    },
+    "stage_ha": {
+     "2": 428.4,
+     "3": 559.2,
+     "4": 712.5
+    },
+    "stressed_stage_ha": {
+     "2": 327.2,
+     "3": 149.6,
+     "4": 333.6
+    },
+    "action": {
+     "headline": "Prioritaskan air untuk padi fase reproduktif",
+     "steps": [
+      "Sekitar 334 ha padi fase bunting/berbunga mengalami cekaman kering kuat.",
+      "Koordinasikan gilir air irigasi atau pompa ke blok tersebut minggu ini.",
+      "Cek lapangan: pastikan lahan memang padi sawah (bukan jagung/tebu)."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 10
+   },
+   "7": {
+    "active_ha": 1700.0,
+    "hazard_index": 0.629,
+    "ha_at_risk": 810.1,
+    "status": "Siaga",
+    "class_ha": {
+     "1": 0.2,
+     "2": 405.7,
+     "3": 326.7,
+     "4": 678.8,
+     "5": 288.5
+    },
+    "stage_ha": {
+     "2": 428.4,
+     "3": 559.2,
+     "4": 712.5
+    },
+    "stressed_stage_ha": {
+     "2": 345.9,
+     "3": 225.6,
+     "4": 395.9
+    },
+    "action": {
+     "headline": "Prioritaskan air untuk padi fase reproduktif",
+     "steps": [
+      "Sekitar 396 ha padi fase bunting/berbunga mengalami cekaman kering kuat.",
+      "Koordinasikan gilir air irigasi atau pompa ke blok tersebut minggu ini.",
+      "Cek lapangan: pastikan lahan memang padi sawah (bukan jagung/tebu)."
+     ],
+     "urgency": "3 hari ke depan"
+    },
+    "rank": 9
+   },
+   "8": {
+    "active_ha": 1700.0,
+    "hazard_index": 0.676,
+    "ha_at_risk": 874.3,
+    "status": "Siaga",
+    "class_ha": {
+     "1": 0.2,
+     "2": 334.1,
+     "3": 287.7,
+     "4": 709.5,
+     "5": 368.6
+    },
+    "stage_ha": {
+     "2": 428.4,
+     "3": 559.2,
+     "4": 712.5
+    },
+    "stressed_stage_ha": {
+     "2": 356.9,
+     "3": 281.5,
+     "4": 439.7
+    },
+    "action": {
+     "headline": "Prioritaskan air untuk padi fase reproduktif",
+     "steps": [
+      "Sekitar 440 ha padi fase bunting/berbunga mengalami cekaman kering kuat.",
+      "Koordinasikan gilir air irigasi atau pompa ke blok tersebut minggu ini.",
+      "Cek lapangan: pastikan lahan memang padi sawah (bukan jagung/tebu)."
+     ],
+     "urgency": "3 hari ke depan"
+    },
+    "rank": 7
+   },
+   "9": {
+    "active_ha": 1700.0,
+    "hazard_index": 0.729,
+    "ha_at_risk": 948.1,
+    "status": "Siaga",
+    "class_ha": {
+     "1": 0.2,
+     "2": 237.4,
+     "3": 277.7,
+     "4": 719.7,
+     "5": 465.0
+    },
+    "stage_ha": {
+     "2": 428.4,
+     "3": 559.2,
+     "4": 712.5
+    },
+    "stressed_stage_ha": {
+     "2": 363.9,
+     "3": 336.5,
+     "4": 484.3
+    },
+    "action": {
+     "headline": "Prioritaskan air untuk padi fase reproduktif",
+     "steps": [
+      "Sekitar 484 ha padi fase bunting/berbunga mengalami cekaman kering kuat.",
+      "Koordinasikan gilir air irigasi atau pompa ke blok tersebut minggu ini.",
+      "Cek lapangan: pastikan lahan memang padi sawah (bukan jagung/tebu)."
+     ],
+     "urgency": "3 hari ke depan"
+    },
+    "rank": 7
+   }
+  },
+  "id3318130": {
+   "0": {
+    "active_ha": 243.2,
+    "hazard_index": 0.305,
+    "ha_at_risk": 46.5,
+    "status": "Normal",
+    "class_ha": {
+     "1": 0.1,
+     "2": 142.4,
+     "3": 73.8,
+     "4": 25.7,
+     "5": 1.2
+    },
+    "stage_ha": {
+     "2": 78.3,
+     "3": 138.8,
+     "4": 26.0
+    },
+    "stressed_stage_ha": {
+     "2": 22.2,
+     "3": 1.7,
+     "4": 3.0
+    },
+    "action": null,
+    "rank": 21
+   },
+   "1": {
+    "active_ha": 243.2,
+    "hazard_index": 0.339,
+    "ha_at_risk": 52.0,
+    "status": "Normal",
+    "class_ha": {
+     "1": 0.1,
+     "2": 124.1,
+     "3": 89.2,
+     "4": 28.1,
+     "5": 1.6
+    },
+    "stage_ha": {
+     "2": 78.3,
+     "3": 138.8,
+     "4": 26.0
+    },
+    "stressed_stage_ha": {
+     "2": 24.2,
+     "3": 2.3,
+     "4": 3.2
+    },
+    "action": null,
+    "rank": 21
+   },
+   "2": {
+    "active_ha": 243.2,
+    "hazard_index": 0.344,
+    "ha_at_risk": 52.6,
+    "status": "Normal",
+    "class_ha": {
+     "1": 0.1,
+     "2": 124.1,
+     "3": 86.3,
+     "4": 30.6,
+     "5": 2.1
+    },
+    "stage_ha": {
+     "2": 78.3,
+     "3": 138.8,
+     "4": 26.0
+    },
+    "stressed_stage_ha": {
+     "2": 26.4,
+     "3": 2.7,
+     "4": 3.7
+    },
+    "action": null,
+    "rank": 21
+   },
+   "3": {
+    "active_ha": 243.2,
+    "hazard_index": 0.383,
+    "ha_at_risk": 58.9,
+    "status": "Normal",
+    "class_ha": {
+     "1": 0.1,
+     "2": 103.3,
+     "3": 103.7,
+     "4": 33.5,
+     "5": 2.6
+    },
+    "stage_ha": {
+     "2": 78.3,
+     "3": 138.8,
+     "4": 26.0
+    },
+    "stressed_stage_ha": {
+     "2": 28.7,
+     "3": 3.4,
+     "4": 4.0
+    },
+    "action": null,
+    "rank": 21
+   },
+   "4": {
+    "active_ha": 243.2,
+    "hazard_index": 0.43,
+    "ha_at_risk": 66.4,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.1,
+     "2": 79.7,
+     "3": 122.6,
+     "4": 36.7,
+     "5": 4.1
+    },
+    "stage_ha": {
+     "2": 78.3,
+     "3": 138.8,
+     "4": 26.0
+    },
+    "stressed_stage_ha": {
+     "2": 31.9,
+     "3": 4.4,
+     "4": 4.6
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 21
+   },
+   "5": {
+    "active_ha": 243.2,
+    "hazard_index": 0.483,
+    "ha_at_risk": 75.0,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.1,
+     "2": 57.7,
+     "3": 133.9,
+     "4": 44.8,
+     "5": 6.7
+    },
+    "stage_ha": {
+     "2": 78.3,
+     "3": 138.8,
+     "4": 26.0
+    },
+    "stressed_stage_ha": {
+     "2": 38.1,
+     "3": 7.7,
+     "4": 5.6
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 21
+   },
+   "6": {
+    "active_ha": 243.2,
+    "hazard_index": 0.533,
+    "ha_at_risk": 83.3,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.1,
+     "2": 40.5,
+     "3": 136.9,
+     "4": 56.5,
+     "5": 9.2
+    },
+    "stage_ha": {
+     "2": 78.3,
+     "3": 138.8,
+     "4": 26.0
+    },
+    "stressed_stage_ha": {
+     "2": 45.1,
+     "3": 13.7,
+     "4": 6.9
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 21
+   },
+   "7": {
+    "active_ha": 243.2,
+    "hazard_index": 0.609,
+    "ha_at_risk": 95.6,
+    "status": "Siaga",
+    "class_ha": {
+     "1": 0.1,
+     "2": 28.0,
+     "3": 114.4,
+     "4": 84.7,
+     "5": 16.0
+    },
+    "stage_ha": {
+     "2": 78.3,
+     "3": 138.8,
+     "4": 26.0
+    },
+    "stressed_stage_ha": {
+     "2": 57.1,
+     "3": 33.8,
+     "4": 9.8
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "3 hari ke depan"
+    },
+    "rank": 21
+   },
+   "8": {
+    "active_ha": 243.2,
+    "hazard_index": 0.684,
+    "ha_at_risk": 108.0,
+    "status": "Siaga",
+    "class_ha": {
+     "1": 0.1,
+     "2": 18.2,
+     "3": 85.1,
+     "4": 118.7,
+     "5": 21.1
+    },
+    "stage_ha": {
+     "2": 78.3,
+     "3": 138.8,
+     "4": 26.0
+    },
+    "stressed_stage_ha": {
+     "2": 67.2,
+     "3": 60.6,
+     "4": 12.0
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "3 hari ke depan"
+    },
+    "rank": 21
+   },
+   "9": {
+    "active_ha": 243.2,
+    "hazard_index": 0.767,
+    "ha_at_risk": 121.9,
+    "status": "Awas",
+    "class_ha": {
+     "1": 0.1,
+     "2": 10.1,
+     "3": 47.7,
+     "4": 158.4,
+     "5": 26.9
+    },
+    "stage_ha": {
+     "2": 78.3,
+     "3": 138.8,
+     "4": 26.0
+    },
+    "stressed_stage_ha": {
+     "2": 74.7,
+     "3": 96.1,
+     "4": 14.5
+    },
+    "action": {
+     "headline": "Hemat air dan siapkan pompa untuk vegetatif akhir",
+     "steps": [
+      "Terapkan pengairan berselang (basah-kering) agar air cukup sampai fase bunting.",
+      "Inventarisasi pompa dan sumur dangkal di wilayah kelompok tani.",
+      "Cek lapangan blok yang ditandai merah."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 21
+   }
+  },
+  "id3318140": {
+   "0": {
+    "active_ha": 955.7,
+    "hazard_index": 0.541,
+    "ha_at_risk": 353.9,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.1,
+     "2": 242.3,
+     "3": 344.5,
+     "4": 319.6,
+     "5": 49.3
+    },
+    "stage_ha": {
+     "2": 287.0,
+     "3": 497.3,
+     "4": 171.3
+    },
+    "stressed_stage_ha": {
+     "2": 209.2,
+     "3": 43.5,
+     "4": 116.2
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 13
+   },
+   "1": {
+    "active_ha": 955.7,
+    "hazard_index": 0.567,
+    "ha_at_risk": 371.2,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.1,
+     "2": 203.1,
+     "3": 360.0,
+     "4": 337.0,
+     "5": 55.5
+    },
+    "stage_ha": {
+     "2": 287.0,
+     "3": 497.3,
+     "4": 171.3
+    },
+    "stressed_stage_ha": {
+     "2": 217.0,
+     "3": 53.6,
+     "4": 122.0
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 13
+   },
+   "2": {
+    "active_ha": 955.7,
+    "hazard_index": 0.577,
+    "ha_at_risk": 377.5,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.1,
+     "2": 203.1,
+     "3": 335.5,
+     "4": 354.6,
+     "5": 62.4
+    },
+    "stage_ha": {
+     "2": 287.0,
+     "3": 497.3,
+     "4": 171.3
+    },
+    "stressed_stage_ha": {
+     "2": 227.1,
+     "3": 63.9,
+     "4": 126.0
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 13
+   },
+   "3": {
+    "active_ha": 955.7,
+    "hazard_index": 0.604,
+    "ha_at_risk": 395.0,
+    "status": "Siaga",
+    "class_ha": {
+     "1": 0.1,
+     "2": 166.8,
+     "3": 344.5,
+     "4": 374.3,
+     "5": 70.0
+    },
+    "stage_ha": {
+     "2": 287.0,
+     "3": 497.3,
+     "4": 171.3
+    },
+    "stressed_stage_ha": {
+     "2": 236.6,
+     "3": 76.7,
+     "4": 131.0
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "3 hari ke depan"
+    },
+    "rank": 13
+   },
+   "4": {
+    "active_ha": 955.7,
+    "hazard_index": 0.632,
+    "ha_at_risk": 413.7,
+    "status": "Siaga",
+    "class_ha": {
+     "1": 0.1,
+     "2": 132.6,
+     "3": 348.5,
+     "4": 384.6,
+     "5": 89.9
+    },
+    "stage_ha": {
+     "2": 287.0,
+     "3": 497.3,
+     "4": 171.3
+    },
+    "stressed_stage_ha": {
+     "2": 245.2,
+     "3": 94.5,
+     "4": 134.8
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "3 hari ke depan"
+    },
+    "rank": 13
+   },
+   "5": {
+    "active_ha": 955.7,
+    "hazard_index": 0.672,
+    "ha_at_risk": 439.8,
+    "status": "Siaga",
+    "class_ha": {
+     "1": 0.1,
+     "2": 102.2,
+     "3": 318.5,
+     "4": 415.6,
+     "5": 119.3
+    },
+    "stage_ha": {
+     "2": 287.0,
+     "3": 497.3,
+     "4": 171.3
+    },
+    "stressed_stage_ha": {
+     "2": 258.3,
+     "3": 135.9,
+     "4": 140.7
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "3 hari ke depan"
+    },
+    "rank": 13
+   },
+   "6": {
+    "active_ha": 955.7,
+    "hazard_index": 0.714,
+    "ha_at_risk": 468.5,
+    "status": "Siaga",
+    "class_ha": {
+     "1": 0.1,
+     "2": 72.4,
+     "3": 282.0,
+     "4": 444.3,
+     "5": 156.9
+    },
+    "stage_ha": {
+     "2": 287.0,
+     "3": 497.3,
+     "4": 171.3
+    },
+    "stressed_stage_ha": {
+     "2": 267.9,
+     "3": 187.6,
+     "4": 145.8
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "3 hari ke depan"
+    },
+    "rank": 13
+   },
+   "7": {
+    "active_ha": 955.7,
+    "hazard_index": 0.779,
+    "ha_at_risk": 512.1,
+    "status": "Awas",
+    "class_ha": {
+     "1": 0.1,
+     "2": 47.7,
+     "3": 194.6,
+     "4": 473.8,
+     "5": 239.6
+    },
+    "stage_ha": {
+     "2": 287.0,
+     "3": 497.3,
+     "4": 171.3
+    },
+    "stressed_stage_ha": {
+     "2": 277.9,
+     "3": 282.8,
+     "4": 152.7
+    },
+    "action": {
+     "headline": "Hemat air dan siapkan pompa untuk vegetatif akhir",
+     "steps": [
+      "Terapkan pengairan berselang (basah-kering) agar air cukup sampai fase bunting.",
+      "Inventarisasi pompa dan sumur dangkal di wilayah kelompok tani.",
+      "Cek lapangan blok yang ditandai merah."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 13
+   },
+   "8": {
+    "active_ha": 955.7,
+    "hazard_index": 0.824,
+    "ha_at_risk": 543.0,
+    "status": "Awas",
+    "class_ha": {
+     "1": 0.1,
+     "2": 29.5,
+     "3": 137.3,
+     "4": 487.3,
+     "5": 301.5
+    },
+    "stage_ha": {
+     "2": 287.0,
+     "3": 497.3,
+     "4": 171.3
+    },
+    "stressed_stage_ha": {
+     "2": 282.7,
+     "3": 349.8,
+     "4": 156.3
+    },
+    "action": {
+     "headline": "Hemat air dan siapkan pompa untuk vegetatif akhir",
+     "steps": [
+      "Terapkan pengairan berselang (basah-kering) agar air cukup sampai fase bunting.",
+      "Inventarisasi pompa dan sumur dangkal di wilayah kelompok tani.",
+      "Cek lapangan blok yang ditandai merah."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 14
+   },
+   "9": {
+    "active_ha": 955.7,
+    "hazard_index": 0.864,
+    "ha_at_risk": 570.9,
+    "status": "Awas",
+    "class_ha": {
+     "1": 0.1,
+     "2": 14.4,
+     "3": 87.7,
+     "4": 484.6,
+     "5": 368.8
+    },
+    "stage_ha": {
+     "2": 287.0,
+     "3": 497.3,
+     "4": 171.3
+    },
+    "stressed_stage_ha": {
+     "2": 285.0,
+     "3": 409.0,
+     "4": 159.4
+    },
+    "action": {
+     "headline": "Hemat air dan siapkan pompa untuk vegetatif akhir",
+     "steps": [
+      "Terapkan pengairan berselang (basah-kering) agar air cukup sampai fase bunting.",
+      "Inventarisasi pompa dan sumur dangkal di wilayah kelompok tani.",
+      "Cek lapangan blok yang ditandai merah."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 14
+   }
+  },
+  "id3318150": {
+   "0": {
+    "active_ha": 1197.2,
+    "hazard_index": 0.483,
+    "ha_at_risk": 383.1,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.3,
+     "2": 469.1,
+     "3": 288.6,
+     "4": 349.5,
+     "5": 89.7
+    },
+    "stage_ha": {
+     "2": 293.1,
+     "3": 682.8,
+     "4": 221.3
+    },
+    "stressed_stage_ha": {
+     "2": 264.6,
+     "3": 94.2,
+     "4": 80.5
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 12
+   },
+   "1": {
+    "active_ha": 1197.2,
+    "hazard_index": 0.502,
+    "ha_at_risk": 399.4,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.3,
+     "2": 435.2,
+     "3": 300.3,
+     "4": 361.0,
+     "5": 100.4
+    },
+    "stage_ha": {
+     "2": 293.1,
+     "3": 682.8,
+     "4": 221.3
+    },
+    "stressed_stage_ha": {
+     "2": 269.4,
+     "3": 108.1,
+     "4": 83.9
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 12
+   },
+   "2": {
+    "active_ha": 1197.2,
+    "hazard_index": 0.51,
+    "ha_at_risk": 405.8,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.3,
+     "2": 435.2,
+     "3": 279.0,
+     "4": 368.9,
+     "5": 113.9
+    },
+    "stage_ha": {
+     "2": 293.1,
+     "3": 682.8,
+     "4": 221.3
+    },
+    "stressed_stage_ha": {
+     "2": 273.7,
+     "3": 122.0,
+     "4": 87.1
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 12
+   },
+   "3": {
+    "active_ha": 1197.2,
+    "hazard_index": 0.532,
+    "ha_at_risk": 424.0,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.3,
+     "2": 396.4,
+     "3": 293.9,
+     "4": 378.6,
+     "5": 128.1
+    },
+    "stage_ha": {
+     "2": 293.1,
+     "3": 682.8,
+     "4": 221.3
+    },
+    "stressed_stage_ha": {
+     "2": 279.0,
+     "3": 137.1,
+     "4": 90.5
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 12
+   },
+   "4": {
+    "active_ha": 1197.2,
+    "hazard_index": 0.556,
+    "ha_at_risk": 444.7,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.3,
+     "2": 355.3,
+     "3": 309.3,
+     "4": 376.5,
+     "5": 155.9
+    },
+    "stage_ha": {
+     "2": 293.1,
+     "3": 682.8,
+     "4": 221.3
+    },
+    "stressed_stage_ha": {
+     "2": 282.3,
+     "3": 157.2,
+     "4": 92.9
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 12
+   },
+   "5": {
+    "active_ha": 1197.2,
+    "hazard_index": 0.589,
+    "ha_at_risk": 472.4,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.3,
+     "2": 317.5,
+     "3": 295.9,
+     "4": 384.1,
+     "5": 199.5
+    },
+    "stage_ha": {
+     "2": 293.1,
+     "3": 682.8,
+     "4": 221.3
+    },
+    "stressed_stage_ha": {
+     "2": 287.1,
+     "3": 198.1,
+     "4": 98.3
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 12
+   },
+   "6": {
+    "active_ha": 1197.2,
+    "hazard_index": 0.626,
+    "ha_at_risk": 503.9,
+    "status": "Siaga",
+    "class_ha": {
+     "1": 0.3,
+     "2": 274.1,
+     "3": 283.0,
+     "4": 394.7,
+     "5": 245.1
+    },
+    "stage_ha": {
+     "2": 293.1,
+     "3": 682.8,
+     "4": 221.3
+    },
+    "stressed_stage_ha": {
+     "2": 289.9,
+     "3": 246.3,
+     "4": 103.7
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "3 hari ke depan"
+    },
+    "rank": 12
+   },
+   "7": {
+    "active_ha": 1197.2,
+    "hazard_index": 0.677,
+    "ha_at_risk": 548.5,
+    "status": "Siaga",
+    "class_ha": {
+     "1": 0.3,
+     "2": 229.0,
+     "3": 240.1,
+     "4": 398.9,
+     "5": 329.0
+    },
+    "stage_ha": {
+     "2": 293.1,
+     "3": 682.8,
+     "4": 221.3
+    },
+    "stressed_stage_ha": {
+     "2": 291.9,
+     "3": 324.8,
+     "4": 111.2
+    },
+    "action": {
+     "headline": "Hemat air dan siapkan pompa untuk vegetatif akhir",
+     "steps": [
+      "Terapkan pengairan berselang (basah-kering) agar air cukup sampai fase bunting.",
+      "Inventarisasi pompa dan sumur dangkal di wilayah kelompok tani.",
+      "Cek lapangan blok yang ditandai merah."
+     ],
+     "urgency": "3 hari ke depan"
+    },
+    "rank": 12
+   },
+   "8": {
+    "active_ha": 1197.2,
+    "hazard_index": 0.721,
+    "ha_at_risk": 587.0,
+    "status": "Siaga",
+    "class_ha": {
+     "1": 0.3,
+     "2": 180.9,
+     "3": 215.6,
+     "4": 422.1,
+     "5": 378.5
+    },
+    "stage_ha": {
+     "2": 293.1,
+     "3": 682.8,
+     "4": 221.3
+    },
+    "stressed_stage_ha": {
+     "2": 292.1,
+     "3": 391.9,
+     "4": 116.5
+    },
+    "action": {
+     "headline": "Hemat air dan siapkan pompa untuk vegetatif akhir",
+     "steps": [
+      "Terapkan pengairan berselang (basah-kering) agar air cukup sampai fase bunting.",
+      "Inventarisasi pompa dan sumur dangkal di wilayah kelompok tani.",
+      "Cek lapangan blok yang ditandai merah."
+     ],
+     "urgency": "3 hari ke depan"
+    },
+    "rank": 12
+   },
+   "9": {
+    "active_ha": 1197.2,
+    "hazard_index": 0.768,
+    "ha_at_risk": 629.4,
+    "status": "Awas",
+    "class_ha": {
+     "1": 0.3,
+     "2": 131.1,
+     "3": 186.4,
+     "4": 440.3,
+     "5": 439.3
+    },
+    "stage_ha": {
+     "2": 293.1,
+     "3": 682.8,
+     "4": 221.3
+    },
+    "stressed_stage_ha": {
+     "2": 292.4,
+     "3": 463.2,
+     "4": 123.9
+    },
+    "action": {
+     "headline": "Hemat air dan siapkan pompa untuk vegetatif akhir",
+     "steps": [
+      "Terapkan pengairan berselang (basah-kering) agar air cukup sampai fase bunting.",
+      "Inventarisasi pompa dan sumur dangkal di wilayah kelompok tani.",
+      "Cek lapangan blok yang ditandai merah."
+     ],
+     "urgency": "segera"
+    },
+    "rank": 13
+   }
+  },
+  "id3318160": {
+   "0": {
+    "active_ha": 928.1,
+    "hazard_index": 0.342,
+    "ha_at_risk": 207.2,
+    "status": "Normal",
+    "class_ha": {
+     "1": 0.7,
+     "2": 565.7,
+     "3": 157.8,
+     "4": 145.9,
+     "5": 58.0
+    },
+    "stage_ha": {
+     "2": 205.3,
+     "3": 411.0,
+     "4": 311.8
+    },
+    "stressed_stage_ha": {
+     "2": 164.0,
+     "3": 14.7,
+     "4": 25.1
+    },
+    "action": null,
+    "rank": 16
+   },
+   "1": {
+    "active_ha": 928.1,
+    "hazard_index": 0.354,
+    "ha_at_risk": 214.9,
+    "status": "Normal",
+    "class_ha": {
+     "1": 0.7,
+     "2": 550.0,
+     "3": 161.8,
+     "4": 153.9,
+     "5": 61.6
+    },
+    "stage_ha": {
+     "2": 205.3,
+     "3": 411.0,
+     "4": 311.8
+    },
+    "stressed_stage_ha": {
+     "2": 169.7,
+     "3": 18.9,
+     "4": 27.0
+    },
+    "action": null,
+    "rank": 16
+   },
+   "2": {
+    "active_ha": 928.1,
+    "hazard_index": 0.359,
+    "ha_at_risk": 218.0,
+    "status": "Normal",
+    "class_ha": {
+     "1": 0.7,
+     "2": 550.0,
+     "3": 150.7,
+     "4": 160.4,
+     "5": 66.3
+    },
+    "stage_ha": {
+     "2": 205.3,
+     "3": 411.0,
+     "4": 311.8
+    },
+    "stressed_stage_ha": {
+     "2": 173.8,
+     "3": 23.0,
+     "4": 29.9
+    },
+    "action": null,
+    "rank": 16
+   },
+   "3": {
+    "active_ha": 928.1,
+    "hazard_index": 0.372,
+    "ha_at_risk": 227.0,
+    "status": "Normal",
+    "class_ha": {
+     "1": 0.7,
+     "2": 532.0,
+     "3": 156.2,
+     "4": 166.9,
+     "5": 72.3
+    },
+    "stage_ha": {
+     "2": 205.3,
+     "3": 411.0,
+     "4": 311.8
+    },
+    "stressed_stage_ha": {
+     "2": 178.0,
+     "3": 27.8,
+     "4": 33.3
+    },
+    "action": null,
+    "rank": 16
+   },
+   "4": {
+    "active_ha": 928.1,
+    "hazard_index": 0.387,
+    "ha_at_risk": 236.4,
+    "status": "Normal",
+    "class_ha": {
+     "1": 0.7,
+     "2": 514.7,
+     "3": 160.7,
+     "4": 167.2,
+     "5": 84.7
+    },
+    "stage_ha": {
+     "2": 205.3,
+     "3": 411.0,
+     "4": 311.8
+    },
+    "stressed_stage_ha": {
+     "2": 182.8,
+     "3": 33.4,
+     "4": 35.8
+    },
+    "action": null,
+    "rank": 16
+   },
+   "5": {
+    "active_ha": 928.1,
+    "hazard_index": 0.408,
+    "ha_at_risk": 250.8,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.7,
+     "2": 494.4,
+     "3": 153.0,
+     "4": 180.2,
+     "5": 99.7
+    },
+    "stage_ha": {
+     "2": 205.3,
+     "3": 411.0,
+     "4": 311.8
+    },
+    "stressed_stage_ha": {
+     "2": 191.5,
+     "3": 47.9,
+     "4": 40.6
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 16
+   },
+   "6": {
+    "active_ha": 928.1,
+    "hazard_index": 0.431,
+    "ha_at_risk": 266.0,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.7,
+     "2": 475.8,
+     "3": 140.5,
+     "4": 193.3,
+     "5": 117.8
+    },
+    "stage_ha": {
+     "2": 205.3,
+     "3": 411.0,
+     "4": 311.8
+    },
+    "stressed_stage_ha": {
+     "2": 197.1,
+     "3": 68.6,
+     "4": 45.5
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 16
+   },
+   "7": {
+    "active_ha": 928.1,
+    "hazard_index": 0.467,
+    "ha_at_risk": 290.7,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.7,
+     "2": 449.9,
+     "3": 115.7,
+     "4": 207.9,
+     "5": 153.8
+    },
+    "stage_ha": {
+     "2": 205.3,
+     "3": 411.0,
+     "4": 311.8
+    },
+    "stressed_stage_ha": {
+     "2": 202.6,
+     "3": 105.8,
+     "4": 53.2
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 16
+   },
+   "8": {
+    "active_ha": 928.1,
+    "hazard_index": 0.498,
+    "ha_at_risk": 312.9,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.7,
+     "2": 416.9,
+     "3": 115.1,
+     "4": 217.0,
+     "5": 178.4
+    },
+    "stage_ha": {
+     "2": 205.3,
+     "3": 411.0,
+     "4": 311.8
+    },
+    "stressed_stage_ha": {
+     "2": 203.9,
+     "3": 131.8,
+     "4": 59.7
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 16
+   },
+   "9": {
+    "active_ha": 928.1,
+    "hazard_index": 0.547,
+    "ha_at_risk": 349.7,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.7,
+     "2": 344.6,
+     "3": 149.8,
+     "4": 229.1,
+     "5": 203.9
+    },
+    "stage_ha": {
+     "2": 205.3,
+     "3": 411.0,
+     "4": 311.8
+    },
+    "stressed_stage_ha": {
+     "2": 204.2,
+     "3": 159.3,
+     "4": 69.5
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 15
+   }
+  },
+  "id3318170": {
+   "0": {
+    "active_ha": 1114.4,
+    "hazard_index": 0.212,
+    "ha_at_risk": 157.0,
+    "status": "Normal",
+    "class_ha": {
+     "1": 0.1,
+     "2": 885.8,
+     "3": 136.5,
+     "4": 80.3,
+     "5": 11.6
+    },
+    "stage_ha": {
+     "2": 158.1,
+     "3": 765.8,
+     "4": 190.5
+    },
+    "stressed_stage_ha": {
+     "2": 72.7,
+     "3": 8.6,
+     "4": 10.6
+    },
+    "action": null,
+    "rank": 18
+   },
+   "1": {
+    "active_ha": 1114.4,
+    "hazard_index": 0.224,
+    "ha_at_risk": 165.3,
+    "status": "Normal",
+    "class_ha": {
+     "1": 0.1,
+     "2": 861.9,
+     "3": 152.4,
+     "4": 87.1,
+     "5": 12.9
+    },
+    "stage_ha": {
+     "2": 158.1,
+     "3": 765.8,
+     "4": 190.5
+    },
+    "stressed_stage_ha": {
+     "2": 78.0,
+     "3": 10.5,
+     "4": 11.5
+    },
+    "action": null,
+    "rank": 18
+   },
+   "2": {
+    "active_ha": 1114.4,
+    "hazard_index": 0.226,
+    "ha_at_risk": 167.1,
+    "status": "Normal",
+    "class_ha": {
+     "1": 0.1,
+     "2": 861.9,
+     "3": 145.0,
+     "4": 92.1,
+     "5": 15.3
+    },
+    "stage_ha": {
+     "2": 158.1,
+     "3": 765.8,
+     "4": 190.5
+    },
+    "stressed_stage_ha": {
+     "2": 82.5,
+     "3": 12.2,
+     "4": 12.7
+    },
+    "action": null,
+    "rank": 18
+   },
+   "3": {
+    "active_ha": 1114.4,
+    "hazard_index": 0.238,
+    "ha_at_risk": 176.1,
+    "status": "Normal",
+    "class_ha": {
+     "1": 0.1,
+     "2": 836.8,
+     "3": 162.0,
+     "4": 96.3,
+     "5": 19.1
+    },
+    "stage_ha": {
+     "2": 158.1,
+     "3": 765.8,
+     "4": 190.5
+    },
+    "stressed_stage_ha": {
+     "2": 86.9,
+     "3": 14.6,
+     "4": 14.0
+    },
+    "action": null,
+    "rank": 18
+   },
+   "4": {
+    "active_ha": 1114.4,
+    "hazard_index": 0.253,
+    "ha_at_risk": 187.5,
+    "status": "Normal",
+    "class_ha": {
+     "1": 0.1,
+     "2": 805.4,
+     "3": 184.0,
+     "4": 99.3,
+     "5": 25.5
+    },
+    "stage_ha": {
+     "2": 158.1,
+     "3": 765.8,
+     "4": 190.5
+    },
+    "stressed_stage_ha": {
+     "2": 91.5,
+     "3": 17.5,
+     "4": 15.8
+    },
+    "action": null,
+    "rank": 18
+   },
+   "5": {
+    "active_ha": 1114.4,
+    "hazard_index": 0.273,
+    "ha_at_risk": 202.4,
+    "status": "Normal",
+    "class_ha": {
+     "1": 0.1,
+     "2": 771.0,
+     "3": 198.9,
+     "4": 111.1,
+     "5": 33.3
+    },
+    "stage_ha": {
+     "2": 158.1,
+     "3": 765.8,
+     "4": 190.5
+    },
+    "stressed_stage_ha": {
+     "2": 99.4,
+     "3": 26.3,
+     "4": 18.7
+    },
+    "action": null,
+    "rank": 18
+   },
+   "6": {
+    "active_ha": 1114.4,
+    "hazard_index": 0.296,
+    "ha_at_risk": 220.0,
+    "status": "Normal",
+    "class_ha": {
+     "1": 0.1,
+     "2": 733.7,
+     "3": 208.0,
+     "4": 131.9,
+     "5": 40.6
+    },
+    "stage_ha": {
+     "2": 158.1,
+     "3": 765.8,
+     "4": 190.5
+    },
+    "stressed_stage_ha": {
+     "2": 111.1,
+     "3": 39.7,
+     "4": 21.7
+    },
+    "action": null,
+    "rank": 18
+   },
+   "7": {
+    "active_ha": 1114.4,
+    "hazard_index": 0.335,
+    "ha_at_risk": 249.5,
+    "status": "Normal",
+    "class_ha": {
+     "1": 0.1,
+     "2": 683.1,
+     "3": 202.7,
+     "4": 167.7,
+     "5": 60.7
+    },
+    "stage_ha": {
+     "2": 158.1,
+     "3": 765.8,
+     "4": 190.5
+    },
+    "stressed_stage_ha": {
+     "2": 126.6,
+     "3": 76.1,
+     "4": 25.7
+    },
+    "action": null,
+    "rank": 17
+   },
+   "8": {
+    "active_ha": 1114.4,
+    "hazard_index": 0.378,
+    "ha_at_risk": 283.4,
+    "status": "Normal",
+    "class_ha": {
+     "1": 0.1,
+     "2": 611.5,
+     "3": 225.4,
+     "4": 202.4,
+     "5": 75.0
+    },
+    "stage_ha": {
+     "2": 158.1,
+     "3": 765.8,
+     "4": 190.5
+    },
+    "stressed_stage_ha": {
+     "2": 136.6,
+     "3": 110.9,
+     "4": 29.9
+    },
+    "action": null,
+    "rank": 17
+   },
+   "9": {
+    "active_ha": 1114.4,
+    "hazard_index": 0.452,
+    "ha_at_risk": 342.6,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.1,
+     "2": 469.5,
+     "3": 301.5,
+     "4": 251.4,
+     "5": 91.9
+    },
+    "stage_ha": {
+     "2": 158.1,
+     "3": 765.8,
+     "4": 190.5
+    },
+    "stressed_stage_ha": {
+     "2": 145.4,
+     "3": 162.9,
+     "4": 34.9
+    },
+    "action": {
+     "headline": "Hemat air dan siapkan pompa untuk vegetatif akhir",
+     "steps": [
+      "Terapkan pengairan berselang (basah-kering) agar air cukup sampai fase bunting.",
+      "Inventarisasi pompa dan sumur dangkal di wilayah kelompok tani.",
+      "Cek lapangan blok yang ditandai merah."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 16
+   }
+  },
+  "id3318180": {
+   "0": {
+    "active_ha": 393.7,
+    "hazard_index": 0.172,
+    "ha_at_risk": 50.3,
+    "status": "Normal",
+    "class_ha": {
+     "1": 0.0,
+     "2": 328.4,
+     "3": 58.6,
+     "4": 6.5,
+     "5": 0.2
+    },
+    "stage_ha": {
+     "2": 52.0,
+     "3": 242.1,
+     "4": 99.6
+    },
+    "stressed_stage_ha": {
+     "2": 2.1,
+     "3": 1.0,
+     "4": 3.6
+    },
+    "action": null,
+    "rank": 20
+   },
+   "1": {
+    "active_ha": 393.7,
+    "hazard_index": 0.191,
+    "ha_at_risk": 55.6,
+    "status": "Normal",
+    "class_ha": {
+     "1": 0.0,
+     "2": 311.9,
+     "3": 73.5,
+     "4": 8.0,
+     "5": 0.3
+    },
+    "stage_ha": {
+     "2": 52.0,
+     "3": 242.1,
+     "4": 99.6
+    },
+    "stressed_stage_ha": {
+     "2": 2.8,
+     "3": 1.3,
+     "4": 4.2
+    },
+    "action": null,
+    "rank": 20
+   },
+   "2": {
+    "active_ha": 393.7,
+    "hazard_index": 0.192,
+    "ha_at_risk": 55.9,
+    "status": "Normal",
+    "class_ha": {
+     "1": 0.0,
+     "2": 311.9,
+     "3": 72.3,
+     "4": 8.9,
+     "5": 0.6
+    },
+    "stage_ha": {
+     "2": 52.0,
+     "3": 242.1,
+     "4": 99.6
+    },
+    "stressed_stage_ha": {
+     "2": 3.6,
+     "3": 1.5,
+     "4": 4.4
+    },
+    "action": null,
+    "rank": 20
+   },
+   "3": {
+    "active_ha": 393.7,
+    "hazard_index": 0.216,
+    "ha_at_risk": 63.1,
+    "status": "Normal",
+    "class_ha": {
+     "1": 0.0,
+     "2": 289.3,
+     "3": 93.2,
+     "4": 10.6,
+     "5": 0.6
+    },
+    "stage_ha": {
+     "2": 52.0,
+     "3": 242.1,
+     "4": 99.6
+    },
+    "stressed_stage_ha": {
+     "2": 4.6,
+     "3": 2.1,
+     "4": 4.5
+    },
+    "action": null,
+    "rank": 20
+   },
+   "4": {
+    "active_ha": 393.7,
+    "hazard_index": 0.248,
+    "ha_at_risk": 72.1,
+    "status": "Normal",
+    "class_ha": {
+     "1": 0.0,
+     "2": 261.0,
+     "3": 118.7,
+     "4": 13.2,
+     "5": 0.8
+    },
+    "stage_ha": {
+     "2": 52.0,
+     "3": 242.1,
+     "4": 99.6
+    },
+    "stressed_stage_ha": {
+     "2": 6.3,
+     "3": 2.3,
+     "4": 5.3
+    },
+    "action": null,
+    "rank": 20
+   },
+   "5": {
+    "active_ha": 393.7,
+    "hazard_index": 0.289,
+    "ha_at_risk": 83.9,
+    "status": "Normal",
+    "class_ha": {
+     "1": 0.0,
+     "2": 226.3,
+     "3": 146.6,
+     "4": 19.5,
+     "5": 1.2
+    },
+    "stage_ha": {
+     "2": 52.0,
+     "3": 242.1,
+     "4": 99.6
+    },
+    "stressed_stage_ha": {
+     "2": 10.5,
+     "3": 4.0,
+     "4": 6.2
+    },
+    "action": null,
+    "rank": 20
+   },
+   "6": {
+    "active_ha": 393.7,
+    "hazard_index": 0.336,
+    "ha_at_risk": 97.5,
+    "status": "Normal",
+    "class_ha": {
+     "1": 0.0,
+     "2": 189.9,
+     "3": 171.9,
+     "4": 30.2,
+     "5": 1.6
+    },
+    "stage_ha": {
+     "2": 52.0,
+     "3": 242.1,
+     "4": 99.6
+    },
+    "stressed_stage_ha": {
+     "2": 13.8,
+     "3": 8.8,
+     "4": 9.3
+    },
+    "action": null,
+    "rank": 20
+   },
+   "7": {
+    "active_ha": 393.7,
+    "hazard_index": 0.404,
+    "ha_at_risk": 117.5,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.0,
+     "2": 153.1,
+     "3": 175.3,
+     "4": 61.8,
+     "5": 3.5
+    },
+    "stage_ha": {
+     "2": 52.0,
+     "3": 242.1,
+     "4": 99.6
+    },
+    "stressed_stage_ha": {
+     "2": 22.2,
+     "3": 23.3,
+     "4": 19.7
+    },
+    "action": {
+     "headline": "Hemat air dan siapkan pompa untuk vegetatif akhir",
+     "steps": [
+      "Terapkan pengairan berselang (basah-kering) agar air cukup sampai fase bunting.",
+      "Inventarisasi pompa dan sumur dangkal di wilayah kelompok tani.",
+      "Cek lapangan blok yang ditandai merah."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 20
+   },
+   "8": {
+    "active_ha": 393.7,
+    "hazard_index": 0.483,
+    "ha_at_risk": 141.2,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.0,
+     "2": 110.1,
+     "3": 179.1,
+     "4": 99.1,
+     "5": 5.3
+    },
+    "stage_ha": {
+     "2": 52.0,
+     "3": 242.1,
+     "4": 99.6
+    },
+    "stressed_stage_ha": {
+     "2": 29.3,
+     "3": 44.1,
+     "4": 31.0
+    },
+    "action": {
+     "headline": "Hemat air dan siapkan pompa untuk vegetatif akhir",
+     "steps": [
+      "Terapkan pengairan berselang (basah-kering) agar air cukup sampai fase bunting.",
+      "Inventarisasi pompa dan sumur dangkal di wilayah kelompok tani.",
+      "Cek lapangan blok yang ditandai merah."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 20
+   },
+   "9": {
+    "active_ha": 393.7,
+    "hazard_index": 0.589,
+    "ha_at_risk": 172.4,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.0,
+     "2": 61.2,
+     "3": 165.1,
+     "4": 160.7,
+     "5": 6.7
+    },
+    "stage_ha": {
+     "2": 52.0,
+     "3": 242.1,
+     "4": 99.6
+    },
+    "stressed_stage_ha": {
+     "2": 37.3,
+     "3": 86.0,
+     "4": 44.1
+    },
+    "action": {
+     "headline": "Hemat air dan siapkan pompa untuk vegetatif akhir",
+     "steps": [
+      "Terapkan pengairan berselang (basah-kering) agar air cukup sampai fase bunting.",
+      "Inventarisasi pompa dan sumur dangkal di wilayah kelompok tani.",
+      "Cek lapangan blok yang ditandai merah."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 20
+   }
+  },
+  "id3318190": {
+   "0": {
+    "active_ha": 683.7,
+    "hazard_index": 0.23,
+    "ha_at_risk": 104.0,
+    "status": "Normal",
+    "class_ha": {
+     "1": 0.0,
+     "2": 497.5,
+     "3": 145.1,
+     "4": 40.5,
+     "5": 0.7
+    },
+    "stage_ha": {
+     "2": 130.9,
+     "3": 408.0,
+     "4": 144.8
+    },
+    "stressed_stage_ha": {
+     "2": 34.5,
+     "3": 5.3,
+     "4": 1.3
+    },
+    "action": null,
+    "rank": 19
+   },
+   "1": {
+    "active_ha": 683.7,
+    "hazard_index": 0.251,
+    "ha_at_risk": 113.6,
+    "status": "Normal",
+    "class_ha": {
+     "1": 0.0,
+     "2": 467.9,
+     "3": 168.7,
+     "4": 46.0,
+     "5": 1.2
+    },
+    "stage_ha": {
+     "2": 130.9,
+     "3": 408.0,
+     "4": 144.8
+    },
+    "stressed_stage_ha": {
+     "2": 38.3,
+     "3": 6.8,
+     "4": 2.0
+    },
+    "action": null,
+    "rank": 19
+   },
+   "2": {
+    "active_ha": 683.7,
+    "hazard_index": 0.254,
+    "ha_at_risk": 114.8,
+    "status": "Normal",
+    "class_ha": {
+     "1": 0.0,
+     "2": 467.9,
+     "3": 162.7,
+     "4": 51.5,
+     "5": 1.7
+    },
+    "stage_ha": {
+     "2": 130.9,
+     "3": 408.0,
+     "4": 144.8
+    },
+    "stressed_stage_ha": {
+     "2": 42.4,
+     "3": 8.3,
+     "4": 2.5
+    },
+    "action": null,
+    "rank": 19
+   },
+   "3": {
+    "active_ha": 683.7,
+    "hazard_index": 0.276,
+    "ha_at_risk": 125.3,
+    "status": "Normal",
+    "class_ha": {
+     "1": 0.0,
+     "2": 436.7,
+     "3": 186.1,
+     "4": 58.3,
+     "5": 2.7
+    },
+    "stage_ha": {
+     "2": 130.9,
+     "3": 408.0,
+     "4": 144.8
+    },
+    "stressed_stage_ha": {
+     "2": 47.9,
+     "3": 9.9,
+     "4": 3.2
+    },
+    "action": null,
+    "rank": 19
+   },
+   "4": {
+    "active_ha": 683.7,
+    "hazard_index": 0.3,
+    "ha_at_risk": 136.8,
+    "status": "Normal",
+    "class_ha": {
+     "1": 0.0,
+     "2": 403.3,
+     "3": 211.2,
+     "4": 65.1,
+     "5": 4.2
+    },
+    "stage_ha": {
+     "2": 130.9,
+     "3": 408.0,
+     "4": 144.8
+    },
+    "stressed_stage_ha": {
+     "2": 53.3,
+     "3": 11.7,
+     "4": 4.3
+    },
+    "action": null,
+    "rank": 19
+   },
+   "5": {
+    "active_ha": 683.7,
+    "hazard_index": 0.334,
+    "ha_at_risk": 153.0,
+    "status": "Normal",
+    "class_ha": {
+     "1": 0.0,
+     "2": 364.2,
+     "3": 229.7,
+     "4": 84.0,
+     "5": 5.8
+    },
+    "stage_ha": {
+     "2": 130.9,
+     "3": 408.0,
+     "4": 144.8
+    },
+    "stressed_stage_ha": {
+     "2": 64.3,
+     "3": 18.3,
+     "4": 7.2
+    },
+    "action": null,
+    "rank": 19
+   },
+   "6": {
+    "active_ha": 683.7,
+    "hazard_index": 0.371,
+    "ha_at_risk": 170.8,
+    "status": "Normal",
+    "class_ha": {
+     "1": 0.0,
+     "2": 330.6,
+     "3": 230.2,
+     "4": 114.1,
+     "5": 8.8
+    },
+    "stage_ha": {
+     "2": 130.9,
+     "3": 408.0,
+     "4": 144.8
+    },
+    "stressed_stage_ha": {
+     "2": 81.3,
+     "3": 29.7,
+     "4": 12.0
+    },
+    "action": null,
+    "rank": 19
+   },
+   "7": {
+    "active_ha": 683.7,
+    "hazard_index": 0.427,
+    "ha_at_risk": 197.7,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.0,
+     "2": 294.6,
+     "3": 202.9,
+     "4": 166.7,
+     "5": 19.6
+    },
+    "stage_ha": {
+     "2": 130.9,
+     "3": 408.0,
+     "4": 144.8
+    },
+    "stressed_stage_ha": {
+     "2": 102.7,
+     "3": 61.6,
+     "4": 22.0
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 19
+   },
+   "8": {
+    "active_ha": 683.7,
+    "hazard_index": 0.487,
+    "ha_at_risk": 228.0,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.0,
+     "2": 248.3,
+     "3": 188.4,
+     "4": 218.6,
+     "5": 28.4
+    },
+    "stage_ha": {
+     "2": 130.9,
+     "3": 408.0,
+     "4": 144.8
+    },
+    "stressed_stage_ha": {
+     "2": 113.4,
+     "3": 104.4,
+     "4": 29.3
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 19
+   },
+   "9": {
+    "active_ha": 683.7,
+    "hazard_index": 0.569,
+    "ha_at_risk": 269.5,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.0,
+     "2": 177.2,
+     "3": 187.0,
+     "4": 278.3,
+     "5": 41.2
+    },
+    "stage_ha": {
+     "2": 130.9,
+     "3": 408.0,
+     "4": 144.8
+    },
+    "stressed_stage_ha": {
+     "2": 122.2,
+     "3": 155.4,
+     "4": 41.9
+    },
+    "action": {
+     "headline": "Hemat air dan siapkan pompa untuk vegetatif akhir",
+     "steps": [
+      "Terapkan pengairan berselang (basah-kering) agar air cukup sampai fase bunting.",
+      "Inventarisasi pompa dan sumur dangkal di wilayah kelompok tani.",
+      "Cek lapangan blok yang ditandai merah."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 18
+   }
+  },
+  "id3318200": {
+   "0": {
+    "active_ha": 1624.0,
+    "hazard_index": 0.254,
+    "ha_at_risk": 278.4,
+    "status": "Normal",
+    "class_ha": {
+     "1": 0.0,
+     "2": 1134.8,
+     "3": 333.5,
+     "4": 152.1,
+     "5": 3.6
+    },
+    "stage_ha": {
+     "2": 177.3,
+     "3": 1293.8,
+     "4": 153.0
+    },
+    "stressed_stage_ha": {
+     "2": 102.2,
+     "3": 35.0,
+     "4": 18.5
+    },
+    "action": null,
+    "rank": 14
+   },
+   "1": {
+    "active_ha": 1624.0,
+    "hazard_index": 0.274,
+    "ha_at_risk": 300.8,
+    "status": "Normal",
+    "class_ha": {
+     "1": 0.0,
+     "2": 1067.6,
+     "3": 387.1,
+     "4": 164.4,
+     "5": 4.9
+    },
+    "stage_ha": {
+     "2": 177.3,
+     "3": 1293.8,
+     "4": 153.0
+    },
+    "stressed_stage_ha": {
+     "2": 106.0,
+     "3": 42.4,
+     "4": 21.0
+    },
+    "action": null,
+    "rank": 14
+   },
+   "2": {
+    "active_ha": 1624.0,
+    "hazard_index": 0.278,
+    "ha_at_risk": 304.8,
+    "status": "Normal",
+    "class_ha": {
+     "1": 0.0,
+     "2": 1067.6,
+     "3": 370.3,
+     "4": 179.2,
+     "5": 6.8
+    },
+    "stage_ha": {
+     "2": 177.3,
+     "3": 1293.8,
+     "4": 153.0
+    },
+    "stressed_stage_ha": {
+     "2": 111.8,
+     "3": 51.7,
+     "4": 22.6
+    },
+    "action": null,
+    "rank": 14
+   },
+   "3": {
+    "active_ha": 1624.0,
+    "hazard_index": 0.301,
+    "ha_at_risk": 330.9,
+    "status": "Normal",
+    "class_ha": {
+     "1": 0.0,
+     "2": 993.4,
+     "3": 424.0,
+     "4": 196.4,
+     "5": 10.2
+    },
+    "stage_ha": {
+     "2": 177.3,
+     "3": 1293.8,
+     "4": 153.0
+    },
+    "stressed_stage_ha": {
+     "2": 118.8,
+     "3": 62.8,
+     "4": 25.0
+    },
+    "action": null,
+    "rank": 14
+   },
+   "4": {
+    "active_ha": 1624.0,
+    "hazard_index": 0.325,
+    "ha_at_risk": 358.8,
+    "status": "Normal",
+    "class_ha": {
+     "1": 0.0,
+     "2": 915.4,
+     "3": 480.9,
+     "4": 209.1,
+     "5": 18.7
+    },
+    "stage_ha": {
+     "2": 177.3,
+     "3": 1293.8,
+     "4": 153.0
+    },
+    "stressed_stage_ha": {
+     "2": 125.9,
+     "3": 73.8,
+     "4": 28.1
+    },
+    "action": null,
+    "rank": 14
+   },
+   "5": {
+    "active_ha": 1624.0,
+    "hazard_index": 0.359,
+    "ha_at_risk": 396.5,
+    "status": "Normal",
+    "class_ha": {
+     "1": 0.0,
+     "2": 832.4,
+     "3": 510.9,
+     "4": 247.6,
+     "5": 33.1
+    },
+    "stage_ha": {
+     "2": 177.3,
+     "3": 1293.8,
+     "4": 153.0
+    },
+    "stressed_stage_ha": {
+     "2": 137.2,
+     "3": 109.6,
+     "4": 33.9
+    },
+    "action": null,
+    "rank": 14
+   },
+   "6": {
+    "active_ha": 1624.0,
+    "hazard_index": 0.397,
+    "ha_at_risk": 440.7,
+    "status": "Normal",
+    "class_ha": {
+     "1": 0.0,
+     "2": 740.9,
+     "3": 535.3,
+     "4": 297.5,
+     "5": 50.3
+    },
+    "stage_ha": {
+     "2": 177.3,
+     "3": 1293.8,
+     "4": 153.0
+    },
+    "stressed_stage_ha": {
+     "2": 148.9,
+     "3": 158.8,
+     "4": 40.1
+    },
+    "action": null,
+    "rank": 14
+   },
+   "7": {
+    "active_ha": 1624.0,
+    "hazard_index": 0.456,
+    "ha_at_risk": 508.7,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.0,
+     "2": 640.8,
+     "3": 494.0,
+     "4": 396.8,
+     "5": 92.5
+    },
+    "stage_ha": {
+     "2": 177.3,
+     "3": 1293.8,
+     "4": 153.0
+    },
+    "stressed_stage_ha": {
+     "2": 157.3,
+     "3": 282.0,
+     "4": 49.9
+    },
+    "action": {
+     "headline": "Hemat air dan siapkan pompa untuk vegetatif akhir",
+     "steps": [
+      "Terapkan pengairan berselang (basah-kering) agar air cukup sampai fase bunting.",
+      "Inventarisasi pompa dan sumur dangkal di wilayah kelompok tani.",
+      "Cek lapangan blok yang ditandai merah."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 14
+   },
+   "8": {
+    "active_ha": 1624.0,
+    "hazard_index": 0.523,
+    "ha_at_risk": 585.5,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.0,
+     "2": 504.8,
+     "3": 488.6,
+     "4": 509.9,
+     "5": 120.7
+    },
+    "stage_ha": {
+     "2": 177.3,
+     "3": 1293.8,
+     "4": 153.0
+    },
+    "stressed_stage_ha": {
+     "2": 162.3,
+     "3": 412.0,
+     "4": 56.4
+    },
+    "action": {
+     "headline": "Hemat air dan siapkan pompa untuk vegetatif akhir",
+     "steps": [
+      "Terapkan pengairan berselang (basah-kering) agar air cukup sampai fase bunting.",
+      "Inventarisasi pompa dan sumur dangkal di wilayah kelompok tani.",
+      "Cek lapangan blok yang ditandai merah."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 13
+   },
+   "9": {
+    "active_ha": 1624.0,
+    "hazard_index": 0.609,
+    "ha_at_risk": 684.6,
+    "status": "Siaga",
+    "class_ha": {
+     "1": 0.0,
+     "2": 309.7,
+     "3": 522.7,
+     "4": 635.9,
+     "5": 155.7
+    },
+    "stage_ha": {
+     "2": 177.3,
+     "3": 1293.8,
+     "4": 153.0
+    },
+    "stressed_stage_ha": {
+     "2": 165.9,
+     "3": 560.6,
+     "4": 65.1
+    },
+    "action": {
+     "headline": "Hemat air dan siapkan pompa untuk vegetatif akhir",
+     "steps": [
+      "Terapkan pengairan berselang (basah-kering) agar air cukup sampai fase bunting.",
+      "Inventarisasi pompa dan sumur dangkal di wilayah kelompok tani.",
+      "Cek lapangan blok yang ditandai merah."
+     ],
+     "urgency": "3 hari ke depan"
+    },
+    "rank": 12
+   }
+  },
+  "id3318210": {
+   "0": {
+    "active_ha": 1750.6,
+    "hazard_index": 0.375,
+    "ha_at_risk": 418.4,
+    "status": "Normal",
+    "class_ha": {
+     "1": 0.2,
+     "2": 914.7,
+     "3": 438.7,
+     "4": 339.8,
+     "5": 57.2
+    },
+    "stage_ha": {
+     "2": 489.2,
+     "3": 788.0,
+     "4": 473.4
+    },
+    "stressed_stage_ha": {
+     "2": 342.5,
+     "3": 23.1,
+     "4": 31.4
+    },
+    "action": null,
+    "rank": 11
+   },
+   "1": {
+    "active_ha": 1750.6,
+    "hazard_index": 0.392,
+    "ha_at_risk": 438.8,
+    "status": "Normal",
+    "class_ha": {
+     "1": 0.2,
+     "2": 865.9,
+     "3": 461.6,
+     "4": 358.1,
+     "5": 64.9
+    },
+    "stage_ha": {
+     "2": 489.2,
+     "3": 788.0,
+     "4": 473.4
+    },
+    "stressed_stage_ha": {
+     "2": 358.7,
+     "3": 29.1,
+     "4": 35.2
+    },
+    "action": null,
+    "rank": 11
+   },
+   "2": {
+    "active_ha": 1750.6,
+    "hazard_index": 0.399,
+    "ha_at_risk": 446.0,
+    "status": "Normal",
+    "class_ha": {
+     "1": 0.2,
+     "2": 865.9,
+     "3": 433.5,
+     "4": 375.0,
+     "5": 76.1
+    },
+    "stage_ha": {
+     "2": 489.2,
+     "3": 788.0,
+     "4": 473.4
+    },
+    "stressed_stage_ha": {
+     "2": 373.9,
+     "3": 38.2,
+     "4": 38.9
+    },
+    "action": null,
+    "rank": 11
+   },
+   "3": {
+    "active_ha": 1750.6,
+    "hazard_index": 0.417,
+    "ha_at_risk": 468.1,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.2,
+     "2": 818.6,
+     "3": 449.2,
+     "4": 393.0,
+     "5": 89.7
+    },
+    "stage_ha": {
+     "2": 489.2,
+     "3": 788.0,
+     "4": 473.4
+    },
+    "stressed_stage_ha": {
+     "2": 390.8,
+     "3": 47.2,
+     "4": 44.7
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 11
+   },
+   "4": {
+    "active_ha": 1750.6,
+    "hazard_index": 0.436,
+    "ha_at_risk": 490.6,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.2,
+     "2": 776.2,
+     "3": 458.9,
+     "4": 397.9,
+     "5": 117.5
+    },
+    "stage_ha": {
+     "2": 489.2,
+     "3": 788.0,
+     "4": 473.4
+    },
+    "stressed_stage_ha": {
+     "2": 404.9,
+     "3": 59.2,
+     "4": 51.3
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 11
+   },
+   "5": {
+    "active_ha": 1750.6,
+    "hazard_index": 0.465,
+    "ha_at_risk": 526.8,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.2,
+     "2": 728.7,
+     "3": 426.9,
+     "4": 441.8,
+     "5": 153.0
+    },
+    "stage_ha": {
+     "2": 489.2,
+     "3": 788.0,
+     "4": 473.4
+    },
+    "stressed_stage_ha": {
+     "2": 433.3,
+     "3": 94.2,
+     "4": 67.3
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 11
+   },
+   "6": {
+    "active_ha": 1750.6,
+    "hazard_index": 0.497,
+    "ha_at_risk": 566.3,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.2,
+     "2": 684.7,
+     "3": 380.1,
+     "4": 492.5,
+     "5": 193.1
+    },
+    "stage_ha": {
+     "2": 489.2,
+     "3": 788.0,
+     "4": 473.4
+    },
+    "stressed_stage_ha": {
+     "2": 456.4,
+     "3": 141.1,
+     "4": 88.2
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 11
+   },
+   "7": {
+    "active_ha": 1750.6,
+    "hazard_index": 0.545,
+    "ha_at_risk": 627.2,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.2,
+     "2": 635.6,
+     "3": 279.1,
+     "4": 563.1,
+     "5": 272.7
+    },
+    "stage_ha": {
+     "2": 489.2,
+     "3": 788.0,
+     "4": 473.4
+    },
+    "stressed_stage_ha": {
+     "2": 478.6,
+     "3": 234.4,
+     "4": 122.8
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 11
+   },
+   "8": {
+    "active_ha": 1750.6,
+    "hazard_index": 0.584,
+    "ha_at_risk": 677.6,
+    "status": "Waspada",
+    "class_ha": {
+     "1": 0.2,
+     "2": 570.4,
+     "3": 248.2,
+     "4": 603.8,
+     "5": 328.1
+    },
+    "stage_ha": {
+     "2": 489.2,
+     "3": 788.0,
+     "4": 473.4
+    },
+    "stressed_stage_ha": {
+     "2": 485.0,
+     "3": 309.3,
+     "4": 137.7
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "minggu ini"
+    },
+    "rank": 11
+   },
+   "9": {
+    "active_ha": 1750.6,
+    "hazard_index": 0.63,
+    "ha_at_risk": 738.5,
+    "status": "Siaga",
+    "class_ha": {
+     "1": 0.2,
+     "2": 472.8,
+     "3": 255.9,
+     "4": 624.7,
+     "5": 397.1
+    },
+    "stage_ha": {
+     "2": 489.2,
+     "3": 788.0,
+     "4": 473.4
+    },
+    "stressed_stage_ha": {
+     "2": 487.8,
+     "3": 380.9,
+     "4": 153.1
+    },
+    "action": {
+     "headline": "Pertimbangkan tunda tanam / pantau persemaian",
+     "steps": [
+      "Tanaman masih muda; cekaman sekarang berisiko berlanjut ke fase bunting.",
+      "Diskusikan dengan Gapoktan opsi menunda tanam susulan satu dasarian.",
+      "Pantau ulang setelah citra satelit berikutnya."
+     ],
+     "urgency": "3 hari ke depan"
+    },
+    "rank": 11
+   }
+  }
+ }
+}

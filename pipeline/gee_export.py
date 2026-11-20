@@ -270,6 +270,20 @@ def last_months(n, today=None):
     return out
 
 
+def trajectory_histories(aoi, plan):
+    """For each period in plan: the monthly NDVI images of the preceding
+    window_months - 1 months (oldest first), incl. context months before the
+    plan's first period. Lazy EE objects, nothing is computed here."""
+    n_ctx = TRAJECTORY["window_months"] - 1
+    y, m = map(int, plan[0][0].split("-"))
+    m -= n_ctx
+    while m < 1:
+        y, m = y - 1, m + 12
+    ctx = month_periods(f"{y}-{m:02d}:{plan[0][0]}")[:-1]
+    ndvi_by_month = [month_ndvi(aoi, s, e) for _, s, e, _ in ctx + plan]
+    return [ndvi_by_month[i:i + n_ctx] for i in range(len(plan))]
+
+
 def run_period(fc, aoi, bbox, start, end, layers_out, history=None):
     """Compute one composite: zonal stats + PNG layers. None if no scenes."""
     L = build(aoi, start, end, history)
@@ -313,19 +327,10 @@ def main():
     if args.last_months or args.series:
         plan = last_months(args.last_months) if args.last_months else month_periods(args.series)
         periods = []
-        # Monthly NDVI for the trajectory window: context months before the
-        # first period (not exported) + every period in the plan
-        n_ctx = TRAJECTORY["window_months"] - 1
-        y, m = map(int, plan[0][0].split("-"))
-        m -= n_ctx
-        while m < 1:
-            y, m = y - 1, m + 12
-        ctx = month_periods(f"{y}-{m:02d}:{plan[0][0]}")[:-1]
-        ndvi_by_month = [month_ndvi(aoi, s, e) for _, s, e, _ in ctx + plan]
-        for i, (pid, start, end, label) in enumerate(plan):
+        histories = trajectory_histories(aoi, plan)
+        for (pid, start, end, label), history in zip(plan, histories):
             print(f"{label} ({start} .. {end})")
             layers_dir = f"periods/{pid}/layers"
-            history = ndvi_by_month[i:i + n_ctx]
             res = run_period(fc, aoi, bbox, start, end, WEB_DATA_DIR / layers_dir, history)
             if res is None:
                 print("  no scenes, skipped")

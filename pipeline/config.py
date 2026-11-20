@@ -100,3 +100,25 @@ STATUS_THRESHOLDS = [  # on the hazard index H in [0, 1]
     (0.75, "Siaga"),
     (float("inf"), "Awas"),
 ]
+
+# --- Weather (Stage 2, Open-Meteo) ------------------------------------------
+WEATHER = {
+    "past_days": 92,          # forecast API history window
+    "forecast_days": 16,      # Open-Meteo maximum
+    "obs_dasarian": 6,        # dasarian shown before (and incl.) the current one
+    "dry_day_mm": 1.0,        # BMKG: a day without rain has < 1 mm
+    "dry_dasarian_mm": 50,    # BMKG season criterion: dasarian < 50 mm is dry
+    "archive_lag_days": 6,    # ERA5 archive lags ~5 days
+    # BMKG classes for consecutive days without rain (HTH): (max days, label)
+    "hth_classes": [(5, "Sangat pendek"), (10, "Pendek"), (20, "Menengah"),
+                    (30, "Panjang"), (60, "Sangat panjang"),
+                    (float("inf"), "Kekeringan ekstrem")],
+}
+
+# --- What-if scenario "no rain for N dasarian" (Stage 2) --------------------
+# NDDI quantile maps calibrated on month pairs of our own series whose second
+# month was nearly dry (see scenario.py). Provisional: one dry season only.
+SCENARIO = {
+    "calib_max_month_mm": 40,  # month counts as "no rain" below this total
+    # slider range = 3 dasarian per dry month found in the series
+}
