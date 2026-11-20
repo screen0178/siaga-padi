@@ -53,8 +53,9 @@ Ventusky is only the visual inspiration, not the product.
   dasarian rain obs/forecast, HTH, forecast sum; `pipeline/weather.py`) and
   `scenario.json` (per kecamatan score for N = 0..9 dasarian without rain,
   calibration diagnostics; `pipeline/scenario.py`). Frontend:
-  `web/src/weather.ts` (rain bars, scenario curve); the slider lives in the
-  ranking panel and mutates props like period switching; messages to
+  `web/src/weather.ts` (rain bars, scenario curve); the what-if starts from
+  "Uji skenario" in the detail panel, its slider sits in a yellow bar above
+  the timeline while on, and it mutates props like period switching; messages to
   Gapoktan always use observed data. Scenario only for `current_period`.
 - Stage 3 backend: `server/` FastAPI + SQLite (`app.py`, `store.py`, `jobs.py`).
   Append-only events (step/reset) per (period, kec); state derived. Server
@@ -176,6 +177,24 @@ Ventusky is only the visual inspiration, not the product.
   - Verified with headless Chrome (`--dump-dom` / `--screenshot` with
     swiftshader), which works while the app's browser pane is hidden;
     renders sometimes time out before the map loads, just rerun.
+- v2 Phase 1 (2026-11-20), frontend only, no contract change:
+  - 1.3 freshness badge (`web/src/fresh.ts`): latest scene date and age
+    (green ≤ 16 d, amber ≤ 32 d, red beyond) and rain update age (≤ 12 h /
+    ≤ 36 h); re-rendered every minute. Now: scene 4 Nov, 16 days.
+  - 1.1 timeline: "Hari ini" marker after the months ("citra terakhir 4 Nov,
+    16 hari lalu", coloured by scene age, click = current month). The
+    what-if left the ranking panel (see Architecture). Side panels now end
+    above the bottom bar via a measured `--lb-h`. Forecast segment, P10-P90
+    and the forecast sentence in messages wait for Phase 2 forecast.json.
+  - 1.2 guided tour (`web/src/tour.ts`): 8 steps (welcome, layers, timeline,
+    summary + freshness, priorities, detail, workflow, reports + identity),
+    auto-starts on first visit unless the URL has a kecamatan hash, "Pemandu"
+    button in the top bar, ←/→/Esc, localStorage `siaga.tour.v1`. Add a
+    forecast step in Phase 2.
+  - Verified in the app's browser pane at 1440×900 (all 8 steps, scenario
+    on/off, Hari ini jump). Phone width not verified: the pane's mobile
+    emulation misrenders and headless Chrome cannot go below ~500 px; the
+    timeline already overflowed phones before (Phase 5.3).
 - Aug 2024 video-check run (single period) was done first; its data is in
   git history (commit 1d21c4f), not on disk.
 - Verification vs video (Aug 2024): Kuat 12,637 ha (video ≈ 11,000, OK);

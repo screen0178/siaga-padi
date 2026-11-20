@@ -47,6 +47,10 @@ irrigation layer).
 ---------------------------------------------------------------------------
 ## Phase 1: one timeline + guided tour
 
+Status 2026-11-20: 1.2 and 1.3 done; 1.1 done except the parts that need
+Phase 2 (forecast steps, P10-P90, forecast sentence in messages). Results in
+CLAUDE.md.
+
 1.1 Unified timeline (replaces the separate month strip + what-if slider)
   - Bottom bar: monthly observed periods ... | "Hari ini" | +7 d | +14 d.
   - Observed periods: as now. Forecast steps: from forecast.json (Phase 2);
