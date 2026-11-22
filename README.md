@@ -133,6 +133,33 @@ python -m pytest server/tests -q                     # role / step / conflict ru
   "data baru" prompt. Dinas can trigger a refresh from the user dialog.
 - Without the server (static hosting) the app falls back to browser storage and says so.
 
+### Deploy on a server (Docker)
+
+One container runs the API, the built web app and the scheduler. Any Linux VM
+with Docker works (1 vCPU / 2 GB RAM is enough).
+
+```bash
+git clone <repo> siaga-padi && cd siaga-padi
+# from your laptop: the forecast's training observations are git-ignored
+rsync -av data/ml/*.csv data/ml/obs_done.txt user@server:siaga-padi/data/ml/
+docker compose up -d --build            # -> http://<server-ip>:8000
+docker compose logs -f                  # scheduler runs rain + forecast on start
+```
+
+- Open port 8000 in the VM's firewall / cloud security group
+  (`SIAGA_PORT=80 docker compose up -d` to use another port).
+- No satellite rerun is needed: the committed `web/public/data/` is served as is.
+  Without `data/ml/*.csv` the app still works, but the forecast stays frozen.
+- Bind mounts keep state on the host: `web/public/data/` (rewritten by the
+  scheduler), `data/ml/`, and `var/siaga.db` (actions, reports, reviews; back it up).
+  Before `git pull`, `git stash` the rewritten data files.
+- Weekly Landsat refresh: set `SIAGA_EE_PROJECT` (e.g. in `.env`) and mount an
+  Earth Engine login (`~/.config/earthengine`, commented in `docker-compose.yml`).
+  Not tested inside the container yet.
+- No login yet: anyone with the URL can act as Dinas. Share the address only
+  with testers, or put it behind a reverse proxy with basic auth + HTTPS.
+- One worker only (the scheduler lives in the app process).
+
 ## Method
 
 1. Landsat 8/9 TOA (C2), cloud cover < 30 %, QA_PIXEL cloud/shadow mask, median mosaic.

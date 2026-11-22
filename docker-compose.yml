@@ -1,0 +1,21 @@
+# docker compose up -d --build   ->  http://<server-ip>:${SIAGA_PORT:-8000}
+services:
+  siaga:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "${SIAGA_PORT:-8000}:8000"
+    environment:
+      # Optional: weekly Landsat refresh. Needs Earth Engine credentials
+      # mounted below; leave empty to keep the committed satellite data.
+      SIAGA_EE_PROJECT: ${SIAGA_EE_PROJECT:-}
+    volumes:
+      # Pipeline output, rewritten by the scheduler (rain 6 h, forecast)
+      - ./web/public/data:/app/web/public/data
+      # Training observations (git-ignored, copy them in) and models
+      - ./data/ml:/app/data/ml
+      # Actions, reports, forecast reviews (SQLite)
+      - ./var:/app/var
+      # Earth Engine login (from `earthengine authenticate`), only if
+      # SIAGA_EE_PROJECT is set:
+      # - ~/.config/earthengine:/root/.config/earthengine:ro

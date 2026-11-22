@@ -12,3 +12,6 @@ data/ml/*.csv
 data/ml/*.txt
 data/ml/*.parquet
 data/ml/*.log
+
+# Docker deploy: SQLite lives here
+var/

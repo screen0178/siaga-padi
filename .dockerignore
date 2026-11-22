@@ -1,0 +1,12 @@
+.git
+.venv
+.claude
+**/node_modules
+**/__pycache__
+web/dist
+server/*.db
+server/*.db-*
+var
+data/ml/*.csv
+data/ml/*.txt
+data/ml/*.log
